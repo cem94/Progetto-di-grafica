@@ -18,8 +18,6 @@
 				</Compiler>
 				<Linker>
 					<Add library="../../GraphicEngine/bin/Debug/libGraphicEngine.so" />
-					<Add library="../../../../../../../usr/lib/x86_64-linux-gnu/libglut.so" />
-					<Add library="../../../../../../../usr/lib/x86_64-linux-gnu/libGL.so" />
 				</Linker>
 			</Target>
 			<Target title="Release">

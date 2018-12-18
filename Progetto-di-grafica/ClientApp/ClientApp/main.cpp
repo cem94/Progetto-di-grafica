@@ -5,7 +5,7 @@ int main(int argc, char * argv[])
 {
     std::cout << "Client application starts"<<std::endl;
     //TODO sistemare dipendenze
-    //engine->initEngine(1920,1080);
+    engine->initEngine(1920,1080);
     //engine->renderMain(argc,argv);
     //engine->startLoop();
     //TODO: set alla Callback
