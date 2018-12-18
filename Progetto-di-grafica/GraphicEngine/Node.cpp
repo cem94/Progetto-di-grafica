@@ -13,7 +13,7 @@ Node::~Node()
 
 Node * Node::getParent()
 {
-	return nullptr;
+    return nullptr;
 }
 
 void Node::setParent(Node * parent)
@@ -22,7 +22,7 @@ void Node::setParent(Node * parent)
 
 Node * Node::getChildren()
 {
-	return nullptr;
+    return nullptr;
 }
 
 void Node::setChildren(Node * children)

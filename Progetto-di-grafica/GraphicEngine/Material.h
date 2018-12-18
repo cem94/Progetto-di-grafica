@@ -4,9 +4,9 @@
 class Material : public Object
 {
 public:
-	Material();
-	virtual ~Material();
+    Material();
+    virtual ~Material();
 
-	//TODO
+    //TODO
 };
 

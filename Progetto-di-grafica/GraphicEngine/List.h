@@ -4,15 +4,15 @@
 class List : public Object
 {
 public:
-	List();
-	virtual ~List();
+    List();
+    virtual ~List();
 
-	std::vector<Object> getList();
-	void addObject(Object obj);
-	void removeObject(Object obj);
-	void renderList();
+    std::vector<Object> getList();
+    void addObject(Object obj);
+    void removeObject(Object obj);
+    void renderList();
 
 private:
-	std::vector<Object> list;
+    std::vector<Object> objects;
 };
 

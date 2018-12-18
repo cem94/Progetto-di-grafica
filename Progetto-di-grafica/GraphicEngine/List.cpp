@@ -13,7 +13,7 @@ List::~List()
 
 std::vector<Object> List::getList()
 {
-	return std::vector<Object>();
+    return std::vector<Object>();
 }
 
 void List::addObject(Object obj)
