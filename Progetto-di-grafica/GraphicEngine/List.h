@@ -1,18 +1,18 @@
 #pragma once
-#include "EngineObject.h"
+#include "Object.h"
 
-class List : public EngineObject
+class List : public Object
 {
 public:
 	List();
 	virtual ~List();
 
-	vector<EngineObject> getList();
-	void addObject(EngineObject obj);
-	void removeObject(EngineObject obj);
+	std::vector<Object> getList();
+	void addObject(Object obj);
+	void removeObject(Object obj);
 	void renderList();
 
 private:
-	vector<EngineObject> list;
+	std::vector<Object> list;
 };
 

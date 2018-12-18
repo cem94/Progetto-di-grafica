@@ -1,10 +1,11 @@
 // GLM:
 #define GLM_FORCE_RADIANS
-#include <glm.hpp>
-#include <gtc/matrix_transform.hpp>
-#include <gtc/type_ptr.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
-// FreeGLUT:   
+// FreeGLUT:
+#include <GL/gl.h>
 #include <GL/freeglut.h>
 
 void initEngine(int width, int height) {
@@ -18,13 +19,13 @@ void renderMain(int argc, char *argv[]) {
 	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 
 	//TODO: set alla Callback
-	glutDisplayFunc(displayCallback);
-	glutReshapeFunc(reshapeCallback);
-	glutSpecialFunc(specialCallback);
-	glutKeyboardFunc(specialCallback);
-	glutMouseFunc(mouseCallback);
-	glutMotionFunc(dragCallback);
-	
+//	glutDisplayFunc(displayCallback);
+//	glutReshapeFunc(reshapeCallback);
+//	glutSpecialFunc(specialCallback);
+//	glutKeyboardFunc(specialCallback);
+//	glutMouseFunc(mouseCallback);
+//	glutMotionFunc(dragCallback);
+
 	glutMainLoop();
 }
 

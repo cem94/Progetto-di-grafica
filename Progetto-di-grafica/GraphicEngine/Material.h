@@ -1,7 +1,7 @@
 #pragma once
-#include "EngineObject.h"
+#include "Object.h"
 
-class Material : public EngineObject
+class Material : public Object
 {
 public:
 	Material();

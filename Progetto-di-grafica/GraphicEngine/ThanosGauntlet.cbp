@@ -13,7 +13,13 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="../../../../Documents/glm" />
+					<Add directory="../dependencies/freeglut/include/GL" />
 				</Compiler>
+				<Linker>
+					<Add library="../../../../../../usr/lib/x86_64-linux-gnu/libGL.so" />
+					<Add library="../../../../../../usr/lib/x86_64-linux-gnu/libglut.so" />
+				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/ThanosGauntlet" prefix_auto="1" extension_auto="1" />
@@ -34,10 +40,6 @@
 		<Unit filename="Camera.cpp" />
 		<Unit filename="Camera.h" />
 		<Unit filename="Engine.cpp" />
-		<Unit filename="EngineNode.cpp" />
-		<Unit filename="EngineNode.h" />
-		<Unit filename="EngineObject.cpp" />
-		<Unit filename="EngineObject.h" />
 		<Unit filename="Light.cpp" />
 		<Unit filename="Light.h" />
 		<Unit filename="List.cpp" />
@@ -46,8 +48,13 @@
 		<Unit filename="Material.h" />
 		<Unit filename="Mesh.cpp" />
 		<Unit filename="Mesh.h" />
+		<Unit filename="Node.cpp" />
+		<Unit filename="Node.h" />
+		<Unit filename="Object.cpp" />
+		<Unit filename="Object.h" />
 		<Unit filename="Texture.cpp" />
 		<Unit filename="Texture.h" />
+		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

@@ -1,7 +1,7 @@
 #pragma once
-#include "EngineNode.h"
+#include "Node.h"
 
-class Light : public EngineNode
+class Light : public Node
 {
 public:
 	Light();

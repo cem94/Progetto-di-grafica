@@ -11,16 +11,16 @@ List::~List()
 {
 }
 
-vector<EngineObject> List::getList()
+std::vector<Object> List::getList()
 {
-	return vector<EngineObject>();
+	return std::vector<Object>();
 }
 
-void List::addObject(EngineObject obj)
+void List::addObject(Object obj)
 {
 }
 
-void List::removeObject(EngineObject obj)
+void List::removeObject(Object obj)
 {
 }
 

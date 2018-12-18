@@ -1,7 +1,7 @@
 #pragma once
-#include "EngineObject.h"
+#include "Object.h"
 
-class Texture : public EngineObject
+class Texture : public Object
 {
 public:
 	Texture();

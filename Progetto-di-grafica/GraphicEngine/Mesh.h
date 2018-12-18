@@ -1,12 +1,12 @@
 #pragma once
-#include "EngineNode.h"
+#include "Node.h"
 
-class Mesh : EngineNode
+class Mesh : Node
 {
 public:
 	Mesh();
 	virtual ~Mesh();
-	
+
 	vector<glm::vec4> getVertexes();
 	void renderMesh();
 	//TODO: getUsedMaterials
