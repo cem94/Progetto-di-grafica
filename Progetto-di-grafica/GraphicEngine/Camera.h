@@ -1,7 +1,7 @@
 #pragma once
-#include "EngineNode.h"
+#include "Node.h"
 
-class Camera : public EngineNode
+class Camera : public Node
 {
 public:
 	Camera();
@@ -17,7 +17,7 @@ public:
 	// Ereditato tramite EngineNode
 	virtual glm::vec4 getPosition() override;
 
-private: 
+private:
 	glm::vec4 position;
 };
 
