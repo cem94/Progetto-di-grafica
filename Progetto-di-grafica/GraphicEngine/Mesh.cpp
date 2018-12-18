@@ -13,7 +13,7 @@ Mesh::~Mesh()
 
 vector<glm::vec4> Mesh::getVertexes()
 {
-	return vector<glm::vec4>();
+    return vector<glm::vec4>();
 }
 
 void Mesh::renderMesh()
@@ -22,5 +22,5 @@ void Mesh::renderMesh()
 
 glm::vec4 Mesh::getPosition()
 {
-	return glm::vec4();
+    return glm::vec4();
 }

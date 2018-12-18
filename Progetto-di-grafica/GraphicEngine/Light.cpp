@@ -13,7 +13,7 @@ Light::~Light()
 
 short Light::getIntensity()
 {
-	return 0;
+    return 0;
 }
 
 void Light::setIntensity(short intensity)
@@ -30,5 +30,5 @@ void Light::typeLight()
 
 glm::vec4 Light::getPosition()
 {
-	return glm::vec4();
+    return glm::vec4();
 }

@@ -4,20 +4,20 @@
 class Camera : public Node
 {
 public:
-	Camera();
-	virtual ~Camera();
+    Camera();
+    virtual ~Camera();
 
-	void createCamera();
-	void moveCamera(glm::mat4 matrix);
-	void zoomCamera(const int zoom);
-	void inverseCamera();
-	//TODO: capire come si fa
-	void typeCamera();
+    void createCamera();
+    void moveCamera(glm::mat4 matrix);
+    void zoomCamera(const int zoom);
+    void inverseCamera();
+    //TODO: capire come si fa
+    void typeCamera();
 
-	// Ereditato tramite EngineNode
-	virtual glm::vec4 getPosition() override;
+    // Ereditato tramite EngineNode
+    virtual glm::vec4 getPosition() override;
 
 private:
-	glm::vec4 position;
+    glm::vec4 position;
 };
 

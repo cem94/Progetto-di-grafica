@@ -32,5 +32,5 @@ void Camera::typeCamera()
 
 glm::vec4 Camera::getPosition()
 {
-	return glm::vec4();
+    return glm::vec4();
 }

@@ -4,17 +4,17 @@
 class Mesh : Node
 {
 public:
-	Mesh();
-	virtual ~Mesh();
+    Mesh();
+    virtual ~Mesh();
 
-	vector<glm::vec4> getVertexes();
-	void renderMesh();
-	//TODO: getUsedMaterials
+    vector<glm::vec4> getVertexes();
+    void renderMesh();
+    //TODO: getUsedMaterials
 
-	// Ereditato tramite EngineNode
-	virtual glm::vec4 getPosition() override;
+    // Ereditato tramite EngineNode
+    virtual glm::vec4 getPosition() override;
 
 private:
-	vector<glm::vec4> vertexes;
+    vector<glm::vec4> vertexes;
 };
 
