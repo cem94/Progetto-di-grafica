@@ -21,12 +21,6 @@
     <ClCompile Include="Camera.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
-    <ClCompile Include="EngineNode.cpp">
-      <Filter>File di origine</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineObject.cpp">
-      <Filter>File di origine</Filter>
-    </ClCompile>
     <ClCompile Include="Light.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
@@ -40,6 +34,12 @@
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="Material.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>
@@ -66,6 +66,12 @@
       <Filter>File di intestazione</Filter>
     </ClInclude>
     <ClInclude Include="Material.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
   </ItemGroup>
