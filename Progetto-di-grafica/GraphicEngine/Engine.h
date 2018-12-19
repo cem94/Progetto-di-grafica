@@ -18,9 +18,7 @@ class LIB_API Engine
 {
 public:
 
-	void  initEngine(int width, int height);
-
-	void renderMain(int argc, char *argv[]);
+	void  init(int argc, char *argv[]);
 
 	void loadMatrix(glm::mat4 matrix);
 
@@ -43,4 +41,18 @@ public:
 	void loadFile();
 
 	void redisplay();
+
+	void reshape(void (*reshapeCallback)(int,int));
+	
+	void display(void (*displayCallback)());
+	
+	void timer(void callback(int));
+	
+	void keyboard(void (*keyboardCallBack)(unsigned char, int,int));
+	
+	void setViewport(int x, int y, int width, int height);
+	
+	void clearBuffers();
+	
+	void swapBuffers();
 };

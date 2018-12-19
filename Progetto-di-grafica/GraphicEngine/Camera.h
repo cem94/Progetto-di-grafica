@@ -14,7 +14,7 @@ public:
     //TODO: capire come si fa
     void typeCamera();
 
-    // Ereditato tramite EngineNode
+    // Ereditato tramite Node
     virtual glm::vec4 getPosition() override;
 
 private:
