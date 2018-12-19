@@ -8,7 +8,7 @@
 #endif
 #else
 #define LIB_API
-#endif // _WINDOWS
+#endif
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>

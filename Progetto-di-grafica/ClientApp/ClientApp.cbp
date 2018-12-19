@@ -13,11 +13,11 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="../../../../../Documents/glm" />
-					<Add directory="../../GraphicEngine" />
+					<Add directory="../GraphicEngine" />
+					<Add directory="../dependencies/glm/include/glm" />
 				</Compiler>
 				<Linker>
-					<Add library="../../GraphicEngine/bin/Debug/libGraphicEngine.so" />
+					<Add library="../GraphicEngine/bin/Debug/libGraphicEngine.so" />
 				</Linker>
 			</Target>
 			<Target title="Release">

@@ -3,11 +3,10 @@
 	<iostream>
 	"Engine.h"
 
-1545174322 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Engine.h
+1545236180 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Engine.h
 	<glm/glm.hpp>
 	<glm/gtc/matrix_transform.hpp>
 	<glm/gtc/type_ptr.hpp>
-	<GL/freeglut.h>
 
 1535966586 /home/greg/Documents/glm/glm/glm.hpp
 	"detail/_fixes.hpp"
@@ -886,4 +885,8 @@
 
 1533818822 /home/greg/Documents/glm/glm/gtc/type_ptr.inl
 	<cstring>
+
+1545235659 source:/home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/ClientApp/main.cpp
+	<iostream>
+	"Engine.h"
 

@@ -15,7 +15,7 @@
 				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="../dependencies/glm" />
+					<Add directory="../dependencies/glm/include/glm" />
 				</Compiler>
 				<Linker>
 					<Add library="../../../../../../../usr/lib/x86_64-linux-gnu/libGL.so" />

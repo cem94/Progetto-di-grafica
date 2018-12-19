@@ -2,6 +2,6 @@
 <CodeBlocks_workspace_file>
 	<Workspace title="Workspace">
 		<Project filename="GraphicEngine/GraphicEngine.cbp" />
-		<Project filename="ClientApp/ClientApp/ClientApp.cbp" />
+		<Project filename="ClientApp/ClientApp.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>
