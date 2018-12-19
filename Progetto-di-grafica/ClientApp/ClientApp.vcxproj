@@ -44,12 +44,12 @@
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\meyer\source\repos\Progetto\Progetto-di-grafica\Progetto-di-grafica\dependencies\glm\include;C:\Users\meyer\source\repos\Progetto\Progetto-di-grafica\Progetto-di-grafica\dependencies\freeglut\include;C:\Users\meyer\source\repos\Progetto\Progetto-di-grafica\Progetto-di-grafica\GraphicEngine;../dependencies/freeglut/include;../GraphicEngine;../dependencies/glm/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../GraphicEngine;../dependencies/glm/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WINDOWS</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>C:\Users\meyer\source\repos\Progetto\Progetto-di-grafica\Progetto-di-grafica\dependencies\freeglut\lib\x64\Debug;C:\Users\meyer\source\repos\Progetto\Progetto-di-grafica\Progetto-di-grafica\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freeglut_staticd.lib; GraphicEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../x64/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>GraphicEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -58,12 +58,12 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\meyer\source\repos\Progetto\Progetto-di-grafica\Progetto-di-grafica\dependencies\glm\include;C:\Users\meyer\source\repos\Progetto\Progetto-di-grafica\Progetto-di-grafica\dependencies\freeglut\include;C:\Users\meyer\source\repos\Progetto\Progetto-di-grafica\Progetto-di-grafica\GraphicEngine;C:\Users\meyer\source\repos\Progetto\Progetto-di-grafica\Progetto-di-grafica\dependencies\glm;C:\Users\meyer\source\repos\Progetto\Progetto-di-grafica\Progetto-di-grafica\GraphicEngine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../GraphicEngine;../dependencies/glm/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WINDOWS</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>C:\Users\meyer\source\repos\Progetto\Progetto-di-grafica\Progetto-di-grafica\dependencies\freeglut\lib\x64\Debug;C:\Users\meyer\source\repos\Progetto\Progetto-di-grafica\Progetto-di-grafica\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freeglut_staticd.lib; GraphicEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../x64/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>GraphicEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
