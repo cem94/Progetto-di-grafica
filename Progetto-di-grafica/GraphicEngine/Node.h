@@ -1,5 +1,4 @@
 #pragma once
-#include <glm.hpp>
 #include "Object.h"
 
 class Node : public Object

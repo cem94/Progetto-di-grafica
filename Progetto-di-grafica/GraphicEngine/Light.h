@@ -1,5 +1,6 @@
 #pragma once
 #include "Node.h"
+#include "glm/glm.hpp"
 
 class Light : public Node
 {

@@ -47,12 +47,6 @@
     <ClInclude Include="Camera.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
-    <ClInclude Include="EngineNode.h">
-      <Filter>File di intestazione</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineObject.h">
-      <Filter>File di intestazione</Filter>
-    </ClInclude>
     <ClInclude Include="Light.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
@@ -72,6 +66,9 @@
       <Filter>File di intestazione</Filter>
     </ClInclude>
     <ClInclude Include="Node.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
   </ItemGroup>
