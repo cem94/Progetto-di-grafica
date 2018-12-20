@@ -1,7 +1,5 @@
 #include "Engine.h"
 
-
-
 List::List()
 {
 }
@@ -10,20 +8,32 @@ List::List()
 List::~List()
 {
 }
-
-std::vector<Object> List::getList()
+//Getter
+std::vector<Object*> List::getList() const
 {
-    return std::vector<Object>();
+    return this->objects;
 }
-
-void List::addObject(Object obj)
+//Setter
+void List::setList(std::vector<Object*> objects)
 {
-}
+	this->objects = objects;
 
-void List::removeObject(Object obj)
-{
 }
-
-void List::renderList()
+void List::render(glm::mat4 renderMatrix)
 {
 }
+//aggiunge oggetto TODO capire come settare worlCoordinates
+void List::addObject(Object* obj)
+{
+	//Element *element = new Element(node, worldCoordinate);
+	this->objects.push_back(obj);
+}
+
+void List::removeObject(Object * node)
+{
+//TODO
+}
+
+
+
+

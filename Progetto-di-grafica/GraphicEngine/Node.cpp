@@ -38,3 +38,15 @@ void Node::setMatrix(glm::mat4 matrix)
 {
 	this->matrix = matrix;
 }
+
+//ritorna il numero di figli
+int Node::getChildrenSize() const
+{
+	//return this->children.size();
+	return 0;
+}
+
+void Node::render(glm::mat4 rendermatrix)
+{
+//TODO
+}

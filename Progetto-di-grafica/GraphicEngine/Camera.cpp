@@ -41,7 +41,3 @@ void Camera::setProjectionMatrix(glm::mat4 projection)
 	glMatrixMode(GL_MODELVIEW);
 }
 
-glm::vec4 Camera::getPosition() const
-{
-    return position;
-}

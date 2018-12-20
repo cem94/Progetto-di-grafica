@@ -8,7 +8,7 @@
 ////////////
 
 int windowId;
-int fps = 0;
+float fps = 0.f;
 int frames = 0;
 //Camera TODO settarla
 Camera *currentCamera = nullptr;
@@ -43,7 +43,7 @@ void LIB_API Engine::clear()
 void LIB_API Engine::clearColor(float r, float g, float b)
 {
 	glClearColor(r, g, b, 1.0f);
-	//clearBuffers();
+	clearBuffers();
 }
 
 void LIB_API Engine::beginLines()
@@ -94,8 +94,11 @@ void LIB_API Engine::display(void(*displayCallback)())
 
 void LIB_API Engine::timer(void callback(int))
 {
-	//per calcolare fps
+	//calcolo fps
+	fps = frames / 1.0f;
+	frames = 0;
 	glutTimerFunc(1000, callback, 0);
+	std::cout << fps << std::endl;
 }
 
 void LIB_API Engine::keyboard(void(*keyboardCallBack)(unsigned char, int, int))
@@ -107,7 +110,6 @@ void LIB_API Engine::keyboard(void(*keyboardCallBack)(unsigned char, int, int))
 void Engine::specialKeyboard(void(*specialFunc)(int, int, int))
 {
 	glutSpecialFunc(specialFunc);
-	glutPostWindowRedisplay(windowId);
 	redisplay();
 }
 

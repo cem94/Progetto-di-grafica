@@ -11,13 +11,15 @@ public:
     Node* getChildren() const;
     void setChildren(Node* children);
 
-    //TODO: controllare se vec4 o vec3
-    virtual glm::vec4 getPosition() const = 0;
 	glm::mat4 getMatrix() const;
 	void setMatrix(glm::mat4 matrix);
+	int getChildrenSize() const;
+	 void render(glm::mat4 rendermatrix) override;
 
 private:
+	//struttura gerarchica
     Node* parent;
     Node* children;
+	//posizione
 	glm::mat4 matrix;
 };

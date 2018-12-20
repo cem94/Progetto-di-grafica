@@ -17,11 +17,13 @@ std::vector<glm::vec4> Mesh::getVertexes() const
     return vertexes;
 }
 
-void Mesh::renderMesh()
+void Mesh::render(glm::mat4 renderMatrix)
 {
 }
 
-glm::vec4 Mesh::getPosition() const
+Material * Mesh::getMaterial() const
 {
-    return glm::vec4();
+	return material;
 }
+
+

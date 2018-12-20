@@ -1,2 +1,10 @@
-﻿  Engine.cpp
+﻿  Camera.cpp
+  Engine.cpp
+  Light.cpp
+  List.cpp
+  Material.cpp
+  Mesh.cpp
+  Node.cpp
+  Texture.cpp
+  Generating Code...
   GraphicEngine.vcxproj -> C:\Users\meyer\source\repos\Progetto\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.dll

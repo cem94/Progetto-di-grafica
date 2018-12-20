@@ -1,22 +1,25 @@
 #pragma once
-
+//Tutto inline perché è una classe astratta-> no cpp
 class Object
 {
 public:
     Object() {};
-    virtual ~Object();
-    int getID() const;
-    int generateID();
-    std::string getName() const;
-    void setName(std::string name);
-    Object* findByName(std::string name);
-    Object* findByID(int id);
-    //TODO: Mandatory
-
+	virtual ~Object() {};
+	int getID() const { return this->id; };
+	int generateID() {
+	//TODO
+	};
+	std::string getName() const { return this->name; };
+	void setName(std::string name) { this->name = name; };
+	Object* findByName(std::string name) {
+		//TODO
+	};
+	Object* findByID(int id) {
+		//TODO
+	};
+	//metodo che renderizza l'oggetto -> le sottoclassi dovranno implementarlo
+	virtual void render(glm::mat4 rendermatrix) = 0;
 private:
-	//Il compilatore si lamenta se stanno qua TODO spostare
-	//warning C4251 : 'Object::name' : class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll - interface to be used by clients
-   // std::vector<Object> listObject;
-    //int id;
-    //std::string name;
+    int id;
+    std::string name;
 };

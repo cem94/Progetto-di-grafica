@@ -20,13 +20,13 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-// CLASSES
+// CLASSES 
 #include "Object.h"
 #include "Node.h"
 #include "Camera.h"
 #include "Light.h"
-#include "Material.h"
 #include "Texture.h"
+#include "Material.h"
 #include "Mesh.h"
 #include "List.h"
 

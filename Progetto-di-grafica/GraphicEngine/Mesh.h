@@ -7,13 +7,15 @@ public:
     virtual ~Mesh();
 
     std::vector<glm::vec4> getVertexes() const;
-    void renderMesh();
-    //TODO: getUsedMaterials
 
-    // Ereditato tramite EngineNode
-    virtual glm::vec4 getPosition() const override;
+     void render(glm::mat4 renderMatrix) override;
+    //TODO: getUsedMaterials
+	 Material * getMaterial() const;
 
 private:
     std::vector<glm::vec4> vertexes;
+	//materiale di cui è fatta la mesh
+	Material* material;
+
 };
 
