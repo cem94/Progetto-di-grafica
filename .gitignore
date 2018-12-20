@@ -1,0 +1,17 @@
+# Don't track content of these folders
+Progetto-di-grafica/GraphicEngine/x64/*
+Progetto-di-grafica/ClientApp/x64/*
+Progetto-di-grafica/.vs/*
+Progetto-di-grafica/ClientApp/.vs/*
+
+# Compiled source #
+###################
+*.obj
+*.tlog
+*.vcxproj.user
+#file utente di Visual studio -> non va committato
+# Packages #
+############
+# Aggiungere qua i package da escludere dal commit
+#per esempio *.7z oppure *.rar
+# 
