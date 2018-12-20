@@ -1,5 +1,4 @@
 #pragma once
-#include "Node.h"
 
 class Mesh : Node
 {
@@ -7,14 +6,14 @@ public:
     Mesh();
     virtual ~Mesh();
 
-    vector<glm::vec4> getVertexes();
+    std::vector<glm::vec4> getVertexes() const;
     void renderMesh();
     //TODO: getUsedMaterials
 
     // Ereditato tramite EngineNode
-    virtual glm::vec4 getPosition() override;
+    virtual glm::vec4 getPosition() const override;
 
 private:
-    vector<glm::vec4> vertexes;
+    std::vector<glm::vec4> vertexes;
 };
 

@@ -1,5 +1,7 @@
-#include "Light.h"
-#include "glm/glm.hpp"
+#include "Engine.h"
+
+// FreeGLUT:
+#include <GL/freeglut.h>
 
 
 
@@ -12,7 +14,7 @@ Light::~Light()
 {
 }
 
-short Light::getIntensity()
+short Light::getIntensity() const
 {
     return 0;
 }
@@ -29,7 +31,7 @@ void Light::typeLight()
 {
 }
 
-glm::vec4 Light::getPosition()
+glm::vec4 Light::getPosition() const
 {
     return glm::vec4();
 }

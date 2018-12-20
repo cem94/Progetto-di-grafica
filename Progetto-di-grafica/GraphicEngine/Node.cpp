@@ -1,6 +1,4 @@
-#include "Node.h"
-
-
+#include "Engine.h"
 
 Node::Node()
 {
@@ -11,20 +9,32 @@ Node::~Node()
 {
 }
 
-Node * Node::getParent()
+Node * Node::getParent() const
 {
-    return nullptr;
+    return parent;
 }
 
 void Node::setParent(Node * parent)
 {
+	this->parent = parent;
 }
 
-Node * Node::getChildren()
+Node * Node::getChildren() const
 {
-    return nullptr;
+    return children;
 }
 
 void Node::setChildren(Node * children)
 {
+	this->children = children;
+}
+
+glm::mat4 Node::getMatrix() const
+{
+	return this->matrix;
+}
+
+void Node::setMatrix(glm::mat4 matrix)
+{
+	this->matrix = matrix;
 }

@@ -1,6 +1,4 @@
 #pragma once
-#include "Node.h"
-#include "glm/glm.hpp"
 
 class Light : public Node
 {
@@ -8,14 +6,14 @@ public:
     Light();
     virtual ~Light();
 
-    short getIntensity();
+    short getIntensity() const;
     void setIntensity(short intensity);
     void renderLight();
     //TODO: capire come fare
     void typeLight();
 
     // Ereditato tramite EngineNode
-    virtual glm::vec4 getPosition() override;
+    virtual glm::vec4 getPosition() const override;
 
 private:
     short intensity;

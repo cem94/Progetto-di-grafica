@@ -1,6 +1,6 @@
-#include "Mesh.h"
-#include "glm/glm.hpp"
-
+#include "Engine.h"
+// FreeGLUT:
+#include <GL/freeglut.h>
 
 
 Mesh::Mesh()
@@ -12,16 +12,16 @@ Mesh::~Mesh()
 {
 }
 
-vector<glm::vec4> Mesh::getVertexes()
+std::vector<glm::vec4> Mesh::getVertexes() const
 {
-    return vector<glm::vec4>();
+    return vertexes;
 }
 
 void Mesh::renderMesh()
 {
 }
 
-glm::vec4 Mesh::getPosition()
+glm::vec4 Mesh::getPosition() const
 {
     return glm::vec4();
 }
