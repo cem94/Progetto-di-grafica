@@ -20,10 +20,10 @@ void displayCallback() {
 	//2D rendering//
 	//setto la matrice di proiezione ortogonale il rendering 2d
 	engine->setProjectionMatrix(ortho, 1);
-	engine->enableLighting(false);
+	//engine->enableLighting(false);
 	//stampo informazioni
 	engine->renderText();
-	engine->enableLighting(true);
+	//engine->enableLighting(true);
 	//swappa il buffer mostrando ciò che è stato renderizzato
 	//engine->incrementFrames();
 	engine->swapBuffers();
@@ -50,6 +50,9 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY) {
 		break;
 	case 'd':
 		engine->rotate();
+		break;
+	case 'l':
+	//abilita/disabilita luci magari
 		break;
 
 	}
@@ -83,7 +86,7 @@ int main(int argc, char * argv[])
 	//setta il colore con cui verra dipinto lo sfondo -> per colorare lo sfondo uso clearBuffers
 	engine->clearColor(1.0f,0.0f,0.0f);
 	//abilita z buffer
-	//engine->enableZbuffer();
+	engine->enableZbuffer();
 	//abilita illuminazione
 	//engine->enableLighting(true);
 	// CAMERA //
