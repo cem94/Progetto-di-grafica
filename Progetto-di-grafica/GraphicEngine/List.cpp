@@ -8,20 +8,22 @@ List::List()
 List::~List()
 {
 }
-//Getter
+
 std::vector<Object*> List::getList() const
 {
     return this->objects;
 }
-//Setter
+
 void List::setList(std::vector<Object*> objects)
 {
 	this->objects = objects;
 
 }
+
 void List::render(glm::mat4 renderMatrix)
 {
 }
+
 //aggiunge oggetto TODO capire come settare worlCoordinates
 void List::addObject(Object* obj)
 {
@@ -29,9 +31,20 @@ void List::addObject(Object* obj)
 	this->objects.push_back(obj);
 }
 
-void List::removeObject(Object * node)
+void List::remove(Object * node)
 {
-//TODO
+	//TODO
+}
+
+void List::remove(int position)
+{
+	//TODO
+}
+
+Object * List::at(int position)
+{
+	//TODO
+	return nullptr;
 }
 
 

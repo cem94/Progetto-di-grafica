@@ -10,7 +10,10 @@
 int windowId;
 float fps = 0.f;
 int frames = 0;
-//Camera TODO settarla
+float angleY = 0.0f;
+float angleX = 0.0f;
+bool lighting = false;
+//Cameras
 Camera *currentCamera = nullptr;
 std::vector<Camera*> cameras;
 
@@ -28,6 +31,10 @@ void LIB_API Engine::init(int argc, char *argv[])
 }
 
 void LIB_API Engine::startLoop() {
+	//così posso controllare quando chiuderla p.e premendo un bottone
+	/*while (condition) {
+		glutMainLoopEvent();
+	}*/
 	glutMainLoop();
 }
 void LIB_API Engine::loadMatrix(glm::mat4 matrix)
@@ -35,40 +42,9 @@ void LIB_API Engine::loadMatrix(glm::mat4 matrix)
 	glLoadMatrixf(glm::value_ptr(matrix));
 }
 
-void LIB_API Engine::clear()
-{
-	clearColor(0.f, 1.f, 0.f);
-}
-
 void LIB_API Engine::clearColor(float r, float g, float b)
 {
 	glClearColor(r, g, b, 1.0f);
-	clearBuffers();
-}
-
-void LIB_API Engine::beginLines()
-{
-	glBegin(GL_LINES);
-}
-
-void LIB_API Engine::beginTriangles()
-{
-	glBegin(GL_TRIANGLES);
-}
-
-void LIB_API Engine::beginTriangleStrip()
-{
-	glBegin(GL_TRIANGLE_STRIP);
-}
-
-void LIB_API Engine::end3D()
-{
-	glEnd();
-}
-
-void LIB_API Engine::swapBuffer()
-{
-	glutSwapBuffers();
 }
 
 void LIB_API Engine::loadFile()
@@ -79,6 +55,7 @@ void LIB_API Engine::loadFile()
 void LIB_API Engine::redisplay()
 {
 	glutPostWindowRedisplay(windowId);
+	frames++;
 }
 
 void LIB_API Engine::reshape(void(*reshapeCallback)(int, int))
@@ -88,7 +65,6 @@ void LIB_API Engine::reshape(void(*reshapeCallback)(int, int))
 
 void LIB_API Engine::display(void(*displayCallback)())
 {
-	frames++;
 	glutDisplayFunc(displayCallback);
 }
 
@@ -104,13 +80,14 @@ void LIB_API Engine::timer(void callback(int))
 void LIB_API Engine::keyboard(void(*keyboardCallBack)(unsigned char, int, int))
 {
 	glutKeyboardFunc(keyboardCallBack);
-	redisplay();
+	//glutPostRedisplay();
+	//redisplay();
 }
 
 void Engine::specialKeyboard(void(*specialFunc)(int, int, int))
 {
 	glutSpecialFunc(specialFunc);
-	redisplay();
+//	redisplay();
 }
 
 void LIB_API Engine::setViewport(int x, int y, int width, int height)
@@ -127,65 +104,27 @@ void LIB_API Engine::swapBuffers()
 {
 	glutSwapBuffers();
 }
-void LIB_API Engine::displayCube(float edge)
+void LIB_API Engine::displayScene()
 {
-	float size = edge / 2.0f;
-	// Back:
-	glColor3f(1.f, 1.f, 1.f);
-	glBegin(GL_TRIANGLE_STRIP);
-	glVertex3f(size, -size, -size);
-	glVertex3f(-size, -size, -size);
-	glVertex3f(size, size, -size);
-	glVertex3f(-size, size, -size);
-	glEnd();
+	
+	glm::mat4 translation = glm::translate(glm::mat4(), glm::vec3(0.0f, 0.0f, -45.0f));
+	glm::mat4 rotation = glm::rotate(glm::mat4(), glm::radians(angleX), glm::vec3(1.0f, 0.0f, 0.0f));
+	rotation = glm::rotate(rotation, glm::radians(angleY), glm::vec3(0.0f, 1.0f, 0.0f));
 
-	// Front:
-	glBegin(GL_TRIANGLE_STRIP);
-	glNormal3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(-size, -size, size);
-	glVertex3f(size, -size, size);
-	glVertex3f(-size, size, size);
-	glVertex3f(size, size, size);
-	glEnd();
+	glm::mat4 f = translation * rotation;
 
-	// Left:
-	glBegin(GL_TRIANGLE_STRIP);
-	glNormal3f(-1.0f, 0.0f, 0.0f);
-	glVertex3f(-size, -size, -size);
-	glVertex3f(-size, -size, size);
-	glVertex3f(-size, size, -size);
-	glVertex3f(-size, size, size);
-	glEnd();
-
-	// Right:
-	glBegin(GL_TRIANGLE_STRIP);
-	glNormal3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(size, -size, -size);
-	glVertex3f(size, -size, size);
-	glVertex3f(size, size, -size);
-	glVertex3f(size, size, size);
-	glEnd();
-
-	// Bottom:
-	glBegin(GL_TRIANGLE_STRIP);
-	glNormal3f(0.0f, -1.0f, 0.0f);
-	glVertex3f(size, -size, size);
-	glVertex3f(-size, -size, size);
-	glVertex3f(size, -size, -size);
-	glVertex3f(-size, -size, -size);
-	glEnd();
-
-	// Top:
-	glBegin(GL_TRIANGLE_STRIP);
-	glNormal3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(size, size, size);
-	glVertex3f(-size, size, size);
-	glVertex3f(size, size, -size);
-	glVertex3f(-size, size, -size);
-	glEnd();
-	//redisplay();
+	// Set model matrix as current OpenGL matrix:
+	glLoadMatrixf(glm::value_ptr(f));
+	// Red color used to draw.
+	glColor3f(0.8, 0.2, 0.1);
+	glutSolidTeacup(10); 
+	glColor3f(0.8, 1.0, 0.1);
+	glTranslated(30, 0, -30);
+	glutSolidTeapot(10);
+	//glutSwapBuffers();
 }
-//setta la matrice di proiezione per la camera
+
+//setta
 void LIB_API Engine::setProjectionMatrix(glm::mat4 projection, int type)
 {
 	currentCamera->setProjectionMatrix(projection);
@@ -203,9 +142,11 @@ void LIB_API Engine::enableZbuffer()
 void LIB_API Engine::enableLighting(bool value)
 {
 	if (value) {
+		lighting = true;
 		glEnable(GL_LIGHTING);
 	}
 	else {
+		lighting = false;
 		glDisable(GL_LIGHTING);
 	}
 }
@@ -214,13 +155,20 @@ void LIB_API Engine::renderText()
 {
 	//TODO scrivere i comandi del guanto / opzioni / fps
 	char text[64];
+	//cambiato da strcpy il compilatore dice che è più sicuro strcpy_s
 	strcpy_s(text, "Some text");
 	//colore testo
-	glColor3f(1.0f, 1.0f, 1.0f);
+	glColor3f(0.0f, 1.0f, 1.0f);
 	//x,y del testo 
 	glRasterPos2f(10.0f, 20.0f);
 	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
-	strcpy_s(text, "Some text2");//cambiato da strcpy il compilatore dice che è più sicuro strcpy_s
+	if (lighting) {
+		strcpy_s(text, "Lighting on");
+	}
+	else {
+		strcpy_s(text, "Lighting off");
+	}
+	
 	glRasterPos2f(10.0f, 40.0f);
 	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
 	strcpy_s(text, "Some text3");
@@ -238,4 +186,10 @@ Camera LIB_API *Engine::addCamera(std::string name, glm::vec3 eye, glm::vec3 cen
 	//e la setta come camera corrente
 	currentCamera = camera;
 	return currentCamera;
+}
+
+void Engine::rotate()
+{
+	angleX++;
+	angleY++;	
 }

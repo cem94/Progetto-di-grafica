@@ -1,3 +1,7 @@
+/*
+*The engine class is the main component of the API. It’s a single class (either static or singleton) responsible for initializing the OpenGL  context and main modules.
+*
+*/
 #pragma once
 #define GLM_FORCE_RADIANS
 #ifdef _WINDOWS
@@ -40,19 +44,7 @@ public:
 
 	void startLoop();
 
-	void clear();
-
 	void clearColor(float r, float g, float b);
-
-	void beginLines();
-
-	void beginTriangles();
-
-	void beginTriangleStrip();
-
-	void end3D();
-
-	void swapBuffer();
 
 	void loadFile();
 
@@ -78,12 +70,14 @@ public:
 
 	void renderText();
 
-	void displayCube(float edge);
+	void displayScene();
 
 	void setProjectionMatrix(glm::mat4 projection, int type);
 
 	void enableZbuffer();
 
 	Camera* addCamera(std::string name, glm::vec3 eye, glm::vec3 center, glm::vec3 up);
+	//solo per ruotare il cubo -> rimuovere
+	void rotate();
 
 };

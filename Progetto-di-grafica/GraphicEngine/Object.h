@@ -1,16 +1,22 @@
 #pragma once
-//Tutto inline perché è una classe astratta-> no cpp
+/* Base class used by all the derived classes.This class is responsible for keeping track of the existing objects, forcing some required API (virtual) methods and providing a unique ID to each object.
+*  Tutto inline perché è una classe astratta-> no cpp */
 class Object
 {
 public:
     Object() {};
 	virtual ~Object() {};
+	
 	int getID() const { return this->id; };
+	
 	int generateID() {
 	//TODO
 	};
+	
 	std::string getName() const { return this->name; };
+	
 	void setName(std::string name) { this->name = name; };
+	
 	Object* findByName(std::string name) {
 		//TODO
 	};

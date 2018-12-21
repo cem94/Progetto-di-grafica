@@ -3,7 +3,7 @@
 #include <GL/freeglut.h>
 
 //// FreeImage:
-//#include <FreeImage.h>
+#include <FreeImage.h>
 
 
 Texture::Texture()
@@ -13,17 +13,18 @@ Texture::Texture()
 Texture::Texture(std::string textureName)
 {
 	this->setName(textureName);
-	//glGenTextures(1, &textureId);
-	//TODO potremmo anche spostarlo in render
+	glGenTextures(1, &textureId);
+	//TODO completare generazione texture
 }
 
-
+//libera risorse
 Texture::~Texture()
 {
-	//glDeleteTextures(1, this->getID()); TODO decidere come gestire id
+	glDeleteTextures(1, &textureId); 
 }
-
+//renderizza la texture
 void Texture::render(glm::mat4 rendermatrix)
 {
-
+	glBindTexture(GL_TEXTURE_2D, textureId);
+	glEnable(GL_TEXTURE_2D);
 }

@@ -1,10 +1,4 @@
-﻿  Camera.cpp
-  Engine.cpp
-  Light.cpp
-  List.cpp
-  Material.cpp
-  Mesh.cpp
-  Node.cpp
-  Texture.cpp
-  Generating Code...
+﻿  Engine.cpp
+c:\users\meyer\source\repos\progetto\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(119): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\meyer\source\repos\progetto\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(121): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
   GraphicEngine.vcxproj -> C:\Users\meyer\source\repos\Progetto\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.dll

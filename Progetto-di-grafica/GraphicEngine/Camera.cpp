@@ -32,7 +32,6 @@ glm::mat4 Camera::inverseCamera() const
 void Camera::typeCamera()
 {
 }
-//setta la matrice di proiezione della camera
 void Camera::setProjectionMatrix(glm::mat4 projection)
 {
 	this->projectionMatrix = projection;
