@@ -13,6 +13,8 @@ public:
 	//TODO: creare enum dei tipi
 	void typeCamera();
 	void setProjectionMatrix(glm::mat4 projection);
+	void setMatrix(glm::mat4 matrix);
+	void render(glm::mat4 renderMatrix) override;
 
 private:
 //	glm::vec4 position; da rimuovere la matrice(quella in Node) contiene la posizione -> settata tramite lookAt(eye,center,up)

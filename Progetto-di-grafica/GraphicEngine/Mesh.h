@@ -7,11 +7,12 @@ public:
     virtual ~Mesh();
 
     std::vector<glm::vec4> getVertexes() const;
+	void setVertices(std::vector<glm::vec4> vertexes);
 
      void render(glm::mat4 renderMatrix) override;
-    //TODO: getUsedMaterials
 	 Material * getMaterial() const;
-
+	 void setMaterial(Material* material);
+	 //TODO
 private:
 	//vertici mesh
     std::vector<glm::vec4> vertexes;

@@ -9,8 +9,13 @@ public:
 	Texture* getTexture() const;
 	void setTexture(Texture* texture);
 	void setAmbient(glm::vec4 ambient);
+	glm::vec4 getAmbient();
 	void setDiffuse(glm::vec4 diffuse);
+	glm::vec4 getDiffuse();
 	void setSpecular(glm::vec4 specular);
+	glm::vec4 getSpecular();
+
+
 	//ereditato da Object
 	void render(glm::mat4 renderMatrix) override;
     //TODO
@@ -20,6 +25,7 @@ private:
 	glm::vec4 ambient;
 	glm::vec4 diffuse;
 	glm::vec4 specular;
-	//float shininess = 128;
+	/*float shininess = 128;
+	float alpha = 1;*/
 };
 
