@@ -13,10 +13,7 @@ void displayCallback() {
 	//setto la matrice di proiezione prospettica per il rendering 3d
 	engine->setProjectionMatrix(perspective, 0);
 	//3d rendering//
-	//TODO capire perché non funziona
 	engine->displayScene();
-
-
 	//2D rendering//
 	//setto la matrice di proiezione ortogonale il rendering 2d
 	engine->setProjectionMatrix(ortho, 1);
@@ -41,7 +38,7 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY) {
 	switch (key)
 	{
 	case 'w':
-		
+		engine->switchWireframe();
 		break;
 	case 's':
 		break;
@@ -52,9 +49,12 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY) {
 		engine->rotate();
 		break;
 	case 'l':
-	//abilita/disabilita luci magari
+	//abilita/disabilita luci 
+		engine->switchLights();
 		break;
-
+	case 'r':
+		engine->setRandomColors();
+		break;
 	}
 
 //	engine->redisplay();

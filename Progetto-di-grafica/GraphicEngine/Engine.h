@@ -77,7 +77,10 @@ public:
 	void enableZbuffer();
 
 	Camera* addCamera(std::string name, glm::vec3 eye, glm::vec3 center, glm::vec3 up);
-	//solo per ruotare il cubo -> rimuovere
+	//solo per debug -> rimuovere
 	void rotate();
-
+	void switchWireframe();
+	void setRandomColors();
+	void switchLights();
+	
 };

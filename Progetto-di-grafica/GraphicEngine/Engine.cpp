@@ -12,6 +12,7 @@ float fps = 0.f;
 int frames = 0;
 float angleY = 0.0f;
 float angleX = 0.0f;
+bool wireframe = true;
 bool lighting = false;
 //Cameras
 Camera *currentCamera = nullptr;
@@ -104,24 +105,30 @@ void LIB_API Engine::swapBuffers()
 {
 	glutSwapBuffers();
 }
+//usata solo per testare se luci/texture etc funzionanos
 void LIB_API Engine::displayScene()
 {
 	
 	glm::mat4 translation = glm::translate(glm::mat4(), glm::vec3(0.0f, 0.0f, -45.0f));
 	glm::mat4 rotation = glm::rotate(glm::mat4(), glm::radians(angleX), glm::vec3(1.0f, 0.0f, 0.0f));
 	rotation = glm::rotate(rotation, glm::radians(angleY), glm::vec3(0.0f, 1.0f, 0.0f));
-
 	glm::mat4 f = translation * rotation;
-
+	//impostazioni luce TODO provare ad usare la classe light 
+	glm::vec4 ambient(100,0,1,0);
+	glm::vec4 diffuse(0,1,0,1);
+	glm::vec4 specular(1,0,0,0.5f);
+	//setto impostazioni prima luce 
+	glLightfv(GL_LIGHT0, GL_AMBIENT, glm::value_ptr(ambient));
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, glm::value_ptr(diffuse));
+	glLightfv(GL_LIGHT0, GL_SPECULAR, glm::value_ptr(specular));
 	// Set model matrix as current OpenGL matrix:
 	glLoadMatrixf(glm::value_ptr(f));
-	// Red color used to draw.
+	//aggiungo un po' di elementi
 	glColor3f(0.8, 0.2, 0.1);
-	glutSolidTeacup(10); 
+	glutSolidTeacup(5); 
 	glColor3f(0.8, 1.0, 0.1);
 	glTranslated(30, 0, -30);
 	glutSolidTeapot(10);
-	//glutSwapBuffers();
 }
 
 //setta
@@ -142,12 +149,12 @@ void LIB_API Engine::enableZbuffer()
 void LIB_API Engine::enableLighting(bool value)
 {
 	if (value) {
-		lighting = true;
 		glEnable(GL_LIGHTING);
+		glEnable(GL_LIGHT0);
 	}
 	else {
-		lighting = false;
 		glDisable(GL_LIGHTING);
+		glDisable(GL_LIGHT0);
 	}
 }
 //scrive info su schermo (FPS etc)
@@ -156,19 +163,19 @@ void LIB_API Engine::renderText()
 	//TODO scrivere i comandi del guanto / opzioni / fps
 	char text[64];
 	//cambiato da strcpy il compilatore dice che è più sicuro strcpy_s
-	strcpy_s(text, "Some text");
+	if(wireframe)
+	strcpy_s(text, "Wireframe on");
+	else
+	strcpy_s(text, "Wireframe off");
 	//colore testo
 	glColor3f(0.0f, 1.0f, 1.0f);
 	//x,y del testo 
 	glRasterPos2f(10.0f, 20.0f);
 	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
-	if (lighting) {
+	if (lighting)
 		strcpy_s(text, "Lighting on");
-	}
-	else {
-		strcpy_s(text, "Lighting off");
-	}
-	
+	else 
+	strcpy_s(text, "Lighting off");
 	glRasterPos2f(10.0f, 40.0f);
 	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
 	strcpy_s(text, "Some text3");
@@ -188,8 +195,33 @@ Camera LIB_API *Engine::addCamera(std::string name, glm::vec3 eye, glm::vec3 cen
 	return currentCamera;
 }
 
-void Engine::rotate()
+void LIB_API Engine::rotate()
 {
 	angleX++;
 	angleY++;	
+}
+
+void LIB_API Engine::switchWireframe()
+{
+	wireframe = !wireframe;
+	if (wireframe)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	else
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+
+void LIB_API Engine::setRandomColors()
+{
+	glm::vec4 color((rand() % 100) / 100.0f,
+		(rand() % 100) / 100.0f,
+		(rand() % 100) / 100.0f,
+		1.0f);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, glm::value_ptr(color));
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, glm::value_ptr(color));
+}
+
+void Engine::switchLights()
+{
+	lighting = !lighting;
+	enableLighting(lighting);
 }
