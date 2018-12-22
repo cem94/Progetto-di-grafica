@@ -17,7 +17,6 @@ bool lighting = true;
 //Cameras
 Camera *currentCamera = nullptr;
 std::vector<Camera*> cameras;
-
 void LIB_API Engine::init(int argc, char *argv[])
 {
 	std::cout << "The engine starts" << std::endl;
@@ -110,7 +109,6 @@ void LIB_API Engine::displayScene()
 	glm::mat4 translation = glm::translate(glm::mat4(), glm::vec3(0.0f, 0.0f, -45.0f));
 	glm::mat4 rotation = glm::rotate(glm::mat4(), glm::radians(angleX), glm::vec3(1.0f, 0.0f, 0.0f));
 	glm::mat4 f = translation * rotation;
-
 	//impostazioni luce
 	glm::vec4 ambient(100, 0, 1, 0);
 	glm::vec4 diffuse(0, 1, 0, 1);
@@ -121,7 +119,6 @@ void LIB_API Engine::displayScene()
 	l->setSpecular(specular);
 	//render della luce
 	l->render(f);
-
 	//aggiungo un po' di elementi
 	glColor3f(0.8f, 0.2f, 0.1f);
 	glutSolidTeacup(5);
@@ -224,9 +221,10 @@ void Engine::switchLights()
 	lighting = !lighting;
 	enableLighting(lighting);
 }
-
+//TODO rimuovere una volta che c'è Scene Graph
 void Engine::createTexture()
 {
-	std::cout << "Creating texture" << std::endl;
 	Texture* t = new Texture("texture.bmp");
+	//la matrice non la usa
+	t->render(glm::mat4());
 }
