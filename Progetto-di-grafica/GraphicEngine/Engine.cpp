@@ -10,10 +10,10 @@
 int windowId;
 float fps = 0.f;
 int frames = 0;
-float angleY = 0.0f;
 float angleX = 0.0f;
-bool wireframe = true;
-bool lighting = false;
+//options
+bool wireframe = false;
+bool lighting = true;
 //Cameras
 Camera *currentCamera = nullptr;
 std::vector<Camera*> cameras;
@@ -56,7 +56,7 @@ void LIB_API Engine::loadFile()
 void LIB_API Engine::redisplay()
 {
 	glutPostWindowRedisplay(windowId);
-	frames++;
+	frames++;//TODO completare e testare
 }
 
 void LIB_API Engine::reshape(void(*reshapeCallback)(int, int))
@@ -71,7 +71,7 @@ void LIB_API Engine::display(void(*displayCallback)())
 
 void LIB_API Engine::timer(void callback(int))
 {
-	//calcolo fps
+	//calcolo fps -> da completare
 	fps = frames / 1.0f;
 	frames = 0;
 	glutTimerFunc(1000, callback, 0);
@@ -81,14 +81,13 @@ void LIB_API Engine::timer(void callback(int))
 void LIB_API Engine::keyboard(void(*keyboardCallBack)(unsigned char, int, int))
 {
 	glutKeyboardFunc(keyboardCallBack);
-	//glutPostRedisplay();
-	//redisplay();
+	//redisplay(); -> non so se serve
 }
 
 void Engine::specialKeyboard(void(*specialFunc)(int, int, int))
 {
 	glutSpecialFunc(specialFunc);
-//	redisplay();
+	//	redisplay();
 }
 
 void LIB_API Engine::setViewport(int x, int y, int width, int height)
@@ -108,38 +107,47 @@ void LIB_API Engine::swapBuffers()
 //usata solo per testare se luci/texture etc funzionanos
 void LIB_API Engine::displayScene()
 {
-	
 	glm::mat4 translation = glm::translate(glm::mat4(), glm::vec3(0.0f, 0.0f, -45.0f));
 	glm::mat4 rotation = glm::rotate(glm::mat4(), glm::radians(angleX), glm::vec3(1.0f, 0.0f, 0.0f));
-	rotation = glm::rotate(rotation, glm::radians(angleY), glm::vec3(0.0f, 1.0f, 0.0f));
 	glm::mat4 f = translation * rotation;
-	//impostazioni luce TODO provare ad usare la classe light 
-	glm::vec4 ambient(100,0,1,0);
-	glm::vec4 diffuse(0,1,0,1);
-	glm::vec4 specular(1,0,0,0.5f);
-	//setto impostazioni prima luce 
-	glLightfv(GL_LIGHT0, GL_AMBIENT, glm::value_ptr(ambient));
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, glm::value_ptr(diffuse));
-	glLightfv(GL_LIGHT0, GL_SPECULAR, glm::value_ptr(specular));
-	// Set model matrix as current OpenGL matrix:
-	glLoadMatrixf(glm::value_ptr(f));
+
+	//impostazioni luce
+	glm::vec4 ambient(100, 0, 1, 0);
+	glm::vec4 diffuse(0, 1, 0, 1);
+	glm::vec4 specular(1, 0, 0, 0.5f);
+	Light* l = new Light();
+	l->setAmbient(ambient);
+	l->setDiffuse(diffuse);
+	l->setSpecular(specular);
+	//render della luce
+	l->render(f);
+
 	//aggiungo un po' di elementi
-	glColor3f(0.8, 0.2, 0.1);
-	glutSolidTeacup(5); 
-	glColor3f(0.8, 1.0, 0.1);
+	glColor3f(0.8f, 0.2f, 0.1f);
+	glutSolidTeacup(5);
+	glColor3f(0.8f, 1.0f, 0.1f);
 	glTranslated(30, 0, -30);
 	glutSolidTeapot(10);
 }
-
+void LIB_API Engine::loadIdentity() {
+	loadMatrix(glm::mat4(1.0f));
+}
+Camera * Engine::addCamera(std::string name, glm::vec3 eye, glm::vec3 center, glm::vec3 up)
+{
+	Camera * camera = new Camera();
+	camera->setName(name);
+	camera->setProjectionMatrix(glm::lookAt(eye, center, up));
+	//aggiunge la camera all'elenco
+	cameras.push_back(camera);
+	//e la setta come camera corrente
+	currentCamera = camera;
+	return currentCamera;
+}
 //setta
-void LIB_API Engine::setProjectionMatrix(glm::mat4 projection, int type)
+void LIB_API Engine::setProjectionMatrix(glm::mat4 projection)
 {
 	currentCamera->setProjectionMatrix(projection);
-	//TODO magari spostare in metodo loadIdentity
-	if (type == 1)
-	{
-		loadMatrix(glm::mat4(1.f));
-	}
+
 }
 void LIB_API Engine::enableZbuffer()
 {
@@ -160,13 +168,15 @@ void LIB_API Engine::enableLighting(bool value)
 //scrive info su schermo (FPS etc)
 void LIB_API Engine::renderText()
 {
+	if (lighting)
+		enableLighting(false);
 	//TODO scrivere i comandi del guanto / opzioni / fps
 	char text[64];
 	//cambiato da strcpy il compilatore dice che è più sicuro strcpy_s
-	if(wireframe)
-	strcpy_s(text, "Wireframe on");
+	if (wireframe)
+		strcpy_s(text, "Wireframe on");
 	else
-	strcpy_s(text, "Wireframe off");
+		strcpy_s(text, "Wireframe off");
 	//colore testo
 	glColor3f(0.0f, 1.0f, 1.0f);
 	//x,y del testo 
@@ -174,31 +184,20 @@ void LIB_API Engine::renderText()
 	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
 	if (lighting)
 		strcpy_s(text, "Lighting on");
-	else 
-	strcpy_s(text, "Lighting off");
+	else
+		strcpy_s(text, "Lighting off");
 	glRasterPos2f(10.0f, 40.0f);
 	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
 	strcpy_s(text, "Some text3");
 	glRasterPos2f(10.0f, 60.0f);
 	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
-}
-//aggiunge una camera alla scena TODO far si che si possa cambiare camera
-Camera LIB_API *Engine::addCamera(std::string name, glm::vec3 eye, glm::vec3 center, glm::vec3 up)
-{
-	Camera *camera = new Camera();
-	camera->setName(name);
-	camera->setMatrix(glm::lookAt(eye, center, up));
-	//aggiunge la camera all'elenco
-	cameras.push_back(camera);
-	//e la setta come camera corrente
-	currentCamera = camera;
-	return currentCamera;
+	if (lighting)
+		enableLighting(true);
 }
 
 void LIB_API Engine::rotate()
 {
 	angleX++;
-	angleY++;	
 }
 
 void LIB_API Engine::switchWireframe()
@@ -224,4 +223,10 @@ void Engine::switchLights()
 {
 	lighting = !lighting;
 	enableLighting(lighting);
+}
+
+void Engine::createTexture()
+{
+	std::cout << "Creating texture" << std::endl;
+	Texture* t = new Texture("texture.bmp");
 }

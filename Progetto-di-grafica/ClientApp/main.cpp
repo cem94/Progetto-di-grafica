@@ -3,7 +3,6 @@
 Engine* engine = new Engine();
 //matrici di proiezione
 glm::mat4 perspective;
-;
 glm::mat4 ortho;
 
 
@@ -11,18 +10,16 @@ void displayCallback() {
 	//engine->setViewport(0, 0, 1920, 1080);
 	engine->clearBuffers();
 	//setto la matrice di proiezione prospettica per il rendering 3d
-	engine->setProjectionMatrix(perspective, 0);
+	engine->setProjectionMatrix(perspective);
 	//3d rendering//
 	engine->displayScene();
 	//2D rendering//
 	//setto la matrice di proiezione ortogonale il rendering 2d
-	engine->setProjectionMatrix(ortho, 1);
-	//engine->enableLighting(false);
+	engine->setProjectionMatrix(ortho);
+	engine->loadIdentity();
 	//stampo informazioni
 	engine->renderText();
-	//engine->enableLighting(true);
 	//swappa il buffer mostrando ciò che è stato renderizzato
-	//engine->incrementFrames();
 	engine->swapBuffers();
 	engine->redisplay();
 }
@@ -49,7 +46,7 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY) {
 		engine->rotate();
 		break;
 	case 'l':
-	//abilita/disabilita luci 
+		//abilita/disabilita luci 
 		engine->switchLights();
 		break;
 	case 'r':
@@ -57,7 +54,7 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY) {
 		break;
 	}
 
-//	engine->redisplay();
+	//	engine->redisplay();
 }
 void specialCallback(int key, int x, int y) {
 	switch (key) {
@@ -65,7 +62,7 @@ void specialCallback(int key, int x, int y) {
 		break;
 		//Ideally, only GLM should be used client-side.
 	//TODO If needed, replicate the (few) required definitions in your engine’s include files(e.g., the definition of special keys provided by FreeGlut).
-}
+	}
 	//engine->redisplay();
 }
 void timerCallback(int value) {
@@ -84,11 +81,9 @@ int main(int argc, char * argv[])
 	engine->timer(timerCallback);
 	// Global OpenGL settings:
 	//setta il colore con cui verra dipinto lo sfondo -> per colorare lo sfondo uso clearBuffers
-	engine->clearColor(1.0f,0.0f,0.0f);
+	engine->clearColor(1.0f, 0.0f, 0.0f);
 	//abilita z buffer
 	engine->enableZbuffer();
-	//abilita illuminazione
-	//engine->enableLighting(true);
 	// CAMERA //
 	//dove si trova la camera
 	glm::vec3 eye = glm::vec3(0.f, 0.f, -45.f);
@@ -96,8 +91,9 @@ int main(int argc, char * argv[])
 	glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
 	//dove è il sopra
 	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-	//aggiunge la prima camera	TODO potrei creare le camere già qui e passargli l'oggetto
 	engine->addCamera("1", eye, center, up);
+	//createTexture test
+	engine->createTexture();
 	//main loop
 	engine->startLoop();
 	std::cout << "Application terminated" << std::endl;

@@ -4,14 +4,13 @@ List::List()
 {
 }
 
-
 List::~List()
 {
 }
 
 std::vector<Object*> List::getList() const
 {
-    return this->objects;
+	return this->objects;
 }
 
 void List::setList(std::vector<Object*> objects)
@@ -46,7 +45,3 @@ Object * List::at(int position)
 	//TODO
 	return nullptr;
 }
-
-
-
-

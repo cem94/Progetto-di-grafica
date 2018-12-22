@@ -4,20 +4,20 @@ class  Camera : public Node
 {
 public:
 	Camera();
-
 	virtual ~Camera();
+	void setProjectionMatrix(glm::mat4 projection);
+	void setMatrix(glm::mat4 matrix);
+	glm::mat4 inverseCamera() const;
+	//Ereditato da object
+	void render(glm::mat4 renderMatrix) override;
+	//TODO//
 	void createCamera();
 	void moveCamera(glm::mat4 matrix);
 	void zoomCamera(const int zoom);
-	glm::mat4 inverseCamera() const;
-	//TODO: creare enum dei tipi
+	//creare enum dei tipi
 	void typeCamera();
-	void setProjectionMatrix(glm::mat4 projection);
-	void setMatrix(glm::mat4 matrix);
-	void render(glm::mat4 renderMatrix) override;
-
 private:
-//	glm::vec4 position; da rimuovere la matrice(quella in Node) contiene la posizione -> settata tramite lookAt(eye,center,up)
+	//	glm::vec4 position; da rimuovere la matrice(quella in Node) contiene la posizione -> settata tramite lookAt(eye,center,up)
 	glm::mat4 projectionMatrix;
 };
 

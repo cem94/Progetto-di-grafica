@@ -38,7 +38,7 @@ class LIB_API Engine
 {
 public:
 
-	void  init(int argc, char *argv[]);
+	void init(int argc, char *argv[]);
 
 	void loadMatrix(glm::mat4 matrix);
 
@@ -72,15 +72,20 @@ public:
 
 	void displayScene();
 
-	void setProjectionMatrix(glm::mat4 projection, int type);
+	void setProjectionMatrix(glm::mat4 projection);
 
 	void enableZbuffer();
 
+	void loadIdentity();
+
 	Camera* addCamera(std::string name, glm::vec3 eye, glm::vec3 center, glm::vec3 up);
-	//solo per debug -> rimuovere
+	//solo per debug -> da rimuovere
 	void rotate();
+
 	void switchWireframe();
+
 	void setRandomColors();
+
 	void switchLights();
-	
+	void createTexture();
 };

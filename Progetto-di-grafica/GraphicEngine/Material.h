@@ -3,8 +3,8 @@
 class Material : public Object
 {
 public:
-    Material();
-    virtual ~Material();
+	Material();
+	virtual ~Material();
 	//Getter & setter
 	Texture* getTexture() const;
 	void setTexture(Texture* texture);
@@ -14,11 +14,9 @@ public:
 	glm::vec4 getDiffuse();
 	void setSpecular(glm::vec4 specular);
 	glm::vec4 getSpecular();
-
-
 	//ereditato da Object
 	void render(glm::mat4 renderMatrix) override;
-    //TODO
+	//TODO completare
 private:
 	Texture* texture;
 	//componenti materiale

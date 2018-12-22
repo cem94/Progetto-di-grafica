@@ -3,13 +3,13 @@
 class  Node : public Object
 {
 public:
-    Node();
-    virtual ~Node();
-	//getters&setters
-    Node* getParent() const;
-    void setParent(Node* parent);
+	Node();
+	virtual ~Node();
+	//Getters & Setters
+	Node* getParent() const;
+	void setParent(Node* parent);
 	std::vector<Node*> getChildren() const;
-    void setChildren(std::vector<Node*> children);
+	void setChildren(std::vector<Node*> children);
 	glm::mat4 getMatrix() const;
 	void setMatrix(glm::mat4 matrix);
 	//methods for the hierarchical structure
@@ -21,7 +21,7 @@ public:
 	void render(glm::mat4 rendermatrix) override;
 private:
 	//struttura gerarchica//
-    Node* parent;
+	Node* parent;
 	//Per ottimizzare si potrebbe capire quanti figli avrà e preallocarlo prima di riempirlo
 	std::vector<Node*> children;
 	//matrice di posizione

@@ -3,19 +3,17 @@
 class Mesh : Node
 {
 public:
-    Mesh();
-    virtual ~Mesh();
-
-    std::vector<glm::vec4> getVertexes() const;
+	Mesh();
+	virtual ~Mesh();
+	std::vector<glm::vec4> getVertexes() const;
 	void setVertices(std::vector<glm::vec4> vertexes);
-
-     void render(glm::mat4 renderMatrix) override;
-	 Material * getMaterial() const;
-	 void setMaterial(Material* material);
-	 //TODO
+	Material * getMaterial() const;
+	void setMaterial(Material* material);
+	void render(glm::mat4 renderMatrix) override;
+	//TODO
 private:
 	//vertici mesh
-    std::vector<glm::vec4> vertexes;
+	std::vector<glm::vec4> vertexes;
 	//materiale di cui è fatta la mesh
 	Material* material;
 	//aggiungere coordinate texturing e vettori normali

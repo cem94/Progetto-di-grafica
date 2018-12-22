@@ -9,16 +9,34 @@
 Texture::Texture()
 {
 }
-
+bool exists_test1(const std::string& name) {
+	if (FILE *file = fopen(name.c_str(), "r")) {
+		fclose(file);
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+std::string workingdir()
+{
+	char buf[256];
+	GetCurrentDirectoryA(256, buf);
+	return std::string(buf) + '\\';
+}
 Texture::Texture(std::string textureName)
 {
 	this->setName(textureName);
 	glGenTextures(1, &textureId);
-
+	std::string texturePath = "../resources/";
+	const char* fileName = texturePath.append(textureName).c_str();
+	if (exists_test1(fileName)) {
+		std::cout << "File exist!" << std::endl;
+	}
+	else {
+		std::cout << "File not found. Current working directory: "<< workingdir().c_str() << std::endl;
+	}
 	//TODO completare generazione texture
-	//std::string texturePath = "../resources/";
-
-	//const char* fileName = texturePath.append(textureName).c_str();
 	//TODO
 	//FIBITMAP* bitmap = FreeImage_Load(FreeImage_GetFileType(fileName, 0), fileName);
 	/*
@@ -50,13 +68,12 @@ Texture::Texture(std::string textureName)
 
 	// Free resources:
 	FreeImage_Unload(bitmap);
-	*/
-}
+	*/}
 
 //libera risorse
 Texture::~Texture()
 {
-	glDeleteTextures(1, &textureId); 
+	glDeleteTextures(1, &textureId);
 }
 //renderizza la texture
 void Texture::render(glm::mat4 rendermatrix)

@@ -3,21 +3,17 @@
 class List : public Object
 {
 public:
-    List();
-    virtual ~List();
-
-    std::vector<Object*> getList() const;
+	List();
+	virtual ~List();
+	std::vector<Object*> getList() const;
 	void setList(std::vector<Object*> list);
-
-    void addObject(Object* node);
-    void remove(Object* node);
+	void addObject(Object* node);
+	void remove(Object* node);
 	void remove(int position);
 	Object* at(int position);
-	
 	void render(glm::mat4 renderMatrix) override;
-
 private:
-    std::vector<Object*> objects;
+	std::vector<Object*> objects;
 };
 
 

@@ -10,7 +10,7 @@ Node::~Node()
 // Getters & Setters //
 Node * Node::getParent() const
 {
-    return parent;
+	return parent;
 }
 
 void Node::setParent(Node * parent)
@@ -20,7 +20,7 @@ void Node::setParent(Node * parent)
 
 std::vector<Node*> Node::getChildren() const
 {
-    return children;
+	return children;
 }
 
 void Node::setChildren(std::vector<Node*> children)
@@ -78,5 +78,5 @@ int Node::getChildrenSize() const
 
 void Node::render(glm::mat4 rendermatrix)
 {
-//TODO
+	//TODO
 }
