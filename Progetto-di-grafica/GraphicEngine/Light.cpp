@@ -46,6 +46,7 @@ void Light::render(glm::mat4 renderMatrix)
 	glLightfv(GL_LIGHT0, GL_SPECULAR, glm::value_ptr(this->specular));
 }
 
-void Light::typeLight()
+Object::Type Light::getType() const
 {
+	return LIGHT;
 }

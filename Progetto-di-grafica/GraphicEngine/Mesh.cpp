@@ -27,6 +27,11 @@ void Mesh::render(glm::mat4 renderMatrix)
 	//TODO completare
 }
 
+Object::Type Mesh::getType() const
+{
+	return MESH;
+}
+
 Material * Mesh::getMaterial() const
 {
 	return material;

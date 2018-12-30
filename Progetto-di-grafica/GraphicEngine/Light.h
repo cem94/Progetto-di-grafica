@@ -13,8 +13,7 @@ public:
 	void setSpecular(glm::vec4 specular);
 	//Ereditato da object
 	void render(glm::mat4 renderMatrix) override;
-	//TODO: creare enum
-	void typeLight();
+	Type getType() const override;
 private:
 	//impostazioni luce//
 	glm::vec4 position;

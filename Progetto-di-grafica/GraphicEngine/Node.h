@@ -18,6 +18,7 @@ public:
 	void remove(Node* node);
 	int getChildrenSize() const;
 	//ereditato da Object
+	virtual Type getType() const override;
 	void render(glm::mat4 rendermatrix) override;
 private:
 	//struttura gerarchica//

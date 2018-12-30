@@ -76,6 +76,11 @@ int Node::getChildrenSize() const
 	return (int)this->children.size();
 }
 
+Object::Type Node::getType() const
+{
+	return NODE;
+}
+
 void Node::render(glm::mat4 rendermatrix)
 {
 	//TODO

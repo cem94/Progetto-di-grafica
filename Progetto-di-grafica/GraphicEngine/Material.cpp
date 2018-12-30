@@ -24,6 +24,11 @@ void Material::render(glm::mat4 renderMatrix)
 	//TODO
 }
 
+Object::Type Material::getType() const
+{
+	return MATERIAL;
+}
+
 void Material::setTexture(Texture * texture)
 {
 	this->texture = texture;

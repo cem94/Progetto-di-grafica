@@ -16,6 +16,7 @@ public:
 	glm::vec4 getSpecular();
 	//ereditato da Object
 	void render(glm::mat4 renderMatrix) override;
+	Type getType() const override;
 	//TODO completare
 private:
 	Texture* texture;

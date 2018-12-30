@@ -79,3 +79,8 @@ void Texture::render(glm::mat4 rendermatrix)
 	glBindTexture(GL_TEXTURE_2D, textureId);
 	glEnable(GL_TEXTURE_2D);
 }
+
+Object::Type Texture::getType() const
+{
+	return TEXTURE;
+}

@@ -10,7 +10,7 @@ public:
 	Material * getMaterial() const;
 	void setMaterial(Material* material);
 	void render(glm::mat4 renderMatrix) override;
-	//TODO
+	Type getType() const override;
 private:
 	//vertici mesh
 	std::vector<glm::vec4> vertexes;
