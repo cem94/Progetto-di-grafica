@@ -16,7 +16,6 @@ private:
 	std::vector<Object*> objects;
 };
 
-
 /*• One same element (mesh, light, etc.) can be rendered multiple times at different coordinates and/or using different parameters.
 • Instead of directly rendering an element, you can store a list of objects with specific properties (e.g., using a different matrix and material each time):
 	– The list is parsed and each entry is rendered using the parameters stored in the list:

@@ -16,7 +16,7 @@ public:
 	void moveCamera(glm::mat4 matrix);
 	void zoomCamera(const int zoom);
 private:
-	//	glm::vec4 position; da rimuovere la matrice(quella in Node) contiene la posizione -> settata tramite lookAt(eye,center,up)
+	//contiene la matrice di proiezione -> glm::lookAt(eye,center,up)
 	glm::mat4 projectionMatrix;
 };
 

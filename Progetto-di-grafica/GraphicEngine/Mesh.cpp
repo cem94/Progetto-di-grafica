@@ -16,20 +16,29 @@ std::vector<glm::vec4> Mesh::getVertexes() const
 	return vertexes;
 }
 
-void Mesh::setVertices(std::vector<glm::vec4> vertexes)
+void Mesh::setVertexes(std::vector<glm::vec4> vertexes)
 {
 	this->vertexes = vertexes;
 }
 
-void Mesh::render(glm::mat4 renderMatrix)
+std::vector<glm::vec4> Mesh::getNormals() const
 {
-	glLoadMatrixf(glm::value_ptr(renderMatrix));
-	//TODO completare
+	return normals;
 }
 
-Object::Type Mesh::getType() const
+void Mesh::setNormals(std::vector<glm::vec4> normals)
 {
-	return MESH;
+	this->normals = normals;
+}
+
+std::vector<glm::vec4> Mesh::getTextureCoordinates() const
+{
+	return this->textureCoordinates;
+}
+
+void Mesh::setTextureCoordinates(std::vector<glm::vec4> textureCoordinates)
+{
+	this->textureCoordinates = textureCoordinates;
 }
 
 Material * Mesh::getMaterial() const
@@ -40,4 +49,15 @@ Material * Mesh::getMaterial() const
 void Mesh::setMaterial(Material * material)
 {
 	this->material = material;
+}
+
+void Mesh::render(glm::mat4 renderMatrix)
+{
+	glLoadMatrixf(glm::value_ptr(renderMatrix));
+	//TODO completare capire come si usa
+}
+
+Object::Type Mesh::getType() const
+{
+	return MESH;
 }

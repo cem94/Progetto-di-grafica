@@ -6,14 +6,7 @@ class Object
 public:
 	Object() {};
 	virtual ~Object() {};
-	enum Type {
-		CAMERA,
-		LIGHT,
-		MATERIAL,
-		MESH,
-		NODE,
-		TEXTURE
-	};
+	enum Type { CAMERA, LIGHT, MATERIAL, MESH, NODE, TEXTURE };
 	int getID() const { return this->id; };
 	int generateID() {/*TODO*/ };
 	std::string getName() const { return this->name; };

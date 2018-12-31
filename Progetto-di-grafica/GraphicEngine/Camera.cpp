@@ -11,10 +11,6 @@ Camera::~Camera()
 {
 }
 
-Node::Type Camera::getType() const
-{
-	return CAMERA;
-}
 //ritorna l'inversa della matrice corrente
 glm::mat4 Camera::inverseCamera() const
 {
@@ -38,8 +34,13 @@ void Camera::render(glm::mat4 renderMatrix)
 {
 	glLoadMatrixf(glm::value_ptr(renderMatrix));
 }
-//TODO
 
+Node::Type Camera::getType() const
+{
+	return CAMERA;
+}
+
+//TODO
 void Camera::createCamera()
 {
 }
@@ -51,3 +52,4 @@ void Camera::moveCamera(glm::mat4 matrix)
 void Camera::zoomCamera(const int zoom)
 {
 }
+

@@ -5,10 +5,10 @@
 //// FreeImage:
 #include <FreeImage.h>
 
-
 Texture::Texture()
 {
 }
+
 bool fileExist(const std::string& name) {
 	if (FILE *file = fopen(name.c_str(), "r")) {
 		fclose(file);
@@ -18,12 +18,14 @@ bool fileExist(const std::string& name) {
 		return false;
 	}
 }
+
 std::string workingdir()
 {
 	char buf[256];
 	GetCurrentDirectoryA(256, buf);
 	return std::string(buf) + '\\';
 }
+
 Texture::Texture(std::string textureName)
 {
 	this->setName(textureName);
@@ -32,9 +34,9 @@ Texture::Texture(std::string textureName)
 	const char* fileName = texturePath.append(textureName).c_str();
 	//check fileName
 	if (!fileExist(fileName)) {
-		std::cout << "File not found. Current working directory: "<< workingdir().c_str() << std::endl;
+		std::cout << "File not found. Current working directory: " << workingdir().c_str() << std::endl;
 		exit(-1);
-	}  
+	}
 	//create bitmap containing our texture
 	FIBITMAP* bitmap = FreeImage_Load(FreeImage_GetFileType(fileName, 0), fileName);
 	//formati in/out
@@ -67,7 +69,8 @@ Texture::Texture(std::string textureName)
 	gluBuild2DMipmaps(GL_TEXTURE_2D, format, FreeImage_GetWidth(bitmap), FreeImage_GetHeight(bitmap), extFormat, GL_UNSIGNED_BYTE, (void *)FreeImage_GetBits(bitmap));
 	// Free resources: TODO usare metodi di Engine
 	FreeImage_Unload(bitmap);
-	}
+}
+
 //libera risorse
 Texture::~Texture()
 {

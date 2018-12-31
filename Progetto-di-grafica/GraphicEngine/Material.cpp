@@ -1,6 +1,5 @@
 #include "Engine.h"
 
-
 // FreeGLUT:
 #include <GL/freeglut.h>
 
@@ -17,24 +16,15 @@ Texture * Material::getTexture() const
 	return this->texture;
 }
 
-
-
 void Material::render(glm::mat4 renderMatrix)
 {
 	//TODO
-}
-
-Object::Type Material::getType() const
-{
-	return MATERIAL;
 }
 
 void Material::setTexture(Texture * texture)
 {
 	this->texture = texture;
 }
-
-
 
 void Material::setAmbient(glm::vec4 ambient)
 {
@@ -64,4 +54,9 @@ void Material::setSpecular(glm::vec4 specular)
 glm::vec4 Material::getSpecular()
 {
 	return this->specular;
+}
+
+Object::Type Material::getType() const
+{
+	return MATERIAL;
 }

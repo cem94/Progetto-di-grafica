@@ -18,13 +18,21 @@ public:
 	void render(glm::mat4 renderMatrix) override;
 	Type getType() const override;
 	//TODO completare
+	/*
+	float getShininess() const;
+	void setShininess(float shininess);
+	float getAlpha() const;
+	void setAlpha(float alpha);
+	glm::vec4 getEmissive() const;
+	void setEmissive(glm::vec4 emissive);*/
 private:
 	Texture* texture;
 	//componenti materiale
 	glm::vec4 ambient;
 	glm::vec4 diffuse;
 	glm::vec4 specular;
-	/*float shininess = 128;
+	/*	glm::vec4 emissive;
+	float shininess = 128;
 	float alpha = 1;*/
 };
 

@@ -54,8 +54,7 @@ void Node::remove(int position)
 		children.erase(children.begin() + position);
 	}
 }
-//TODO migliorare
-//rimuove il nodo passato
+//rimuove node
 void Node::remove(Node * node)
 {
 	int index = 0;
@@ -66,14 +65,15 @@ void Node::remove(Node * node)
 			break;
 		index++;
 	}
-	if (index < children.size())
-		children.erase(children.begin() + index);
+	remove(index);
+	/*if (index < children.size())
+		children.erase(children.begin() + index);*/
 }
 
 //ritorna il numero di figli
 int Node::getChildrenSize() const
 {
-	return (int)this->children.size();
+	return (int) this->children.size();
 }
 
 Object::Type Node::getType() const
@@ -83,5 +83,5 @@ Object::Type Node::getType() const
 
 void Node::render(glm::mat4 rendermatrix)
 {
-	//TODO
+	//empty
 }
