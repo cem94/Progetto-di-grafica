@@ -34,7 +34,7 @@ private:
 	float shininess = 128;
 	//Emissive Lighting is light that is emitted by an object such as a light bulb.
 	glm::vec4 emissive;
-	//TODO capire a cosa serve
+	//TODO capire a cosa serve credo sia per le trasparenzes
 	/*float alpha = 1;*/
 };
 

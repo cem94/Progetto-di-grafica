@@ -14,14 +14,46 @@ public:
 	//Ereditato da object
 	void render(glm::mat4 renderMatrix) override;
 	Type getType() const override;
+	//TODO
+	enum SubType { DIRECTIONAL, OMNIDIRECTIONAL, SPOTLIGHT};
+	SubType getSubtype() const;
+	void setSubtype(SubType subtype);
+	//TODO finire switch GLenum
+	int getLightNumber();
+	void enableLight(bool enable);
+	void setColor(glm::vec4 color);
+	void setPosition(glm::vec4 position);
+	//direzione luce spotlight
+	glm::vec4 getDirection();
+	void setDirection(glm::vec4 direction);
+	//TODO rimuovere (è uguale a angle)
+	/*
+	float getCutoff();
+	void setCutoff(float cutoff);
+	*/
+	//l'angolo(di cutoff) massimo di diffusione di una fonte di luce (180 = uniform light distribution)
+	void setAngle(float angle);
+	float getAngle() const;
+	//raggio della fonte di luce (sfera)
+	float getRadius() const;
+	void setRadius(float radius);
 private:
 	//impostazioni luce//
 	glm::vec4 position;
-	glm::vec4 color;
 	short intensity;
 	//tipi di luce
 	glm::vec4 ambient;
 	glm::vec4 diffuse;
 	glm::vec4 specular;
+	//direzione della luce
+	glm::vec4 direction;
+	//colore della luce RGBA
+	glm::vec4 color;
+	//sottotipo luce(directional, omni, spotlight)
+	SubType subType;
+	//float cutoff;
+	float radius;
+	float angle;
+
 };
 
