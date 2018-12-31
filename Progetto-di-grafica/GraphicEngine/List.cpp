@@ -23,7 +23,7 @@ void List::render(glm::mat4 renderMatrix)
 {
 	//Empty
 }
-
+//TODO provare ad usare NODE
 //aggiunge oggetto a lista istanze e salva matrice(in worlCoordinates)
 void List::addObject(Object* obj, glm::mat4 matrix)
 {

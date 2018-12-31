@@ -16,10 +16,7 @@ Texture * Material::getTexture() const
 	return this->texture;
 }
 
-void Material::render(glm::mat4 renderMatrix)
-{
-	//TODO
-}
+
 
 void Material::setTexture(Texture * texture)
 {
@@ -59,4 +56,33 @@ glm::vec4 Material::getSpecular()
 Object::Type Material::getType() const
 {
 	return MATERIAL;
+}
+
+float Material::getShininess() const
+{
+	return this->shininess;
+}
+
+void Material::setShininess(float shininess)
+{
+	this->shininess = shininess;
+}
+
+glm::vec4 Material::getEmissive() const
+{
+	return this->emissive;
+}
+
+void Material::setEmissive(glm::vec4 emissive)
+{
+	this->emissive = emissive;
+}
+void Material::render(glm::mat4 renderMatrix)
+{
+	//TODO
+	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, glm::value_ptr(glm::vec3(ambient[0], ambient[1], ambient[2])));
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, glm::value_ptr(glm::vec3(diffuse[0], diffuse[1], diffuse[2])));
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, glm::value_ptr(glm::vec3(specular[0], specular[1], specular[2])));
+	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, glm::value_ptr(glm::vec3(emissive[0], emissive[1], emissive[2])));
 }

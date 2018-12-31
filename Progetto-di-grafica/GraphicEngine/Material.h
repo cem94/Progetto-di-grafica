@@ -17,22 +17,24 @@ public:
 	//ereditato da Object
 	void render(glm::mat4 renderMatrix) override;
 	Type getType() const override;
-	//TODO completare
-	/*
 	float getShininess() const;
 	void setShininess(float shininess);
-	float getAlpha() const;
-	void setAlpha(float alpha);
+	//TODO completare
+	/*float getAlpha() const;
+	void setAlpha(float alpha);*/
 	glm::vec4 getEmissive() const;
-	void setEmissive(glm::vec4 emissive);*/
+	void setEmissive(glm::vec4 emissive);
 private:
 	Texture* texture;
 	//componenti materiale
 	glm::vec4 ambient;
 	glm::vec4 diffuse;
 	glm::vec4 specular;
-	/*	glm::vec4 emissive;
+	//specular exponent
 	float shininess = 128;
-	float alpha = 1;*/
+	//Emissive Lighting is light that is emitted by an object such as a light bulb.
+	glm::vec4 emissive;
+	//TODO capire a cosa serve
+	/*float alpha = 1;*/
 };
 
