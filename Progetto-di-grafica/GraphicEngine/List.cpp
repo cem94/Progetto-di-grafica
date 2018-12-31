@@ -24,23 +24,32 @@ void List::render(glm::mat4 renderMatrix)
 	//Empty
 }
 
-//aggiunge oggetto TODO capire come settare worlCoordinates
-void List::addObject(Object* obj)
+//aggiunge oggetto a lista istanze e salva matrice(in worlCoordinates)
+void List::addObject(Object* obj, glm::mat4 matrix)
 {
-	//Element *element = new Element(node, worldCoordinate);
 	this->objects.push_back(obj);
-}
-
-//TODO
-void List::remove(Object * node)
-{
+	this->matrices.push_back(matrix);
 }
 
 void List::remove(int position)
 {
+	//creo iterator
+	std::vector<Object*>::iterator iterator;
+	//avanzo fino a pos desiderata
+	advance(iterator, position);
+	//cancello
+	this->objects.erase(iterator);
 }
 
 Object * List::at(int position)
 {
+	//TODO migliorare
+	if (position < this->objects.size())
+	{
+		//std::vector<Object*>::iterator iterator = this->objects.begin();
+		std::vector<Object*>::iterator iterator;
+		advance(iterator, position);
+		return *iterator;
+	}
 	return nullptr;
 }

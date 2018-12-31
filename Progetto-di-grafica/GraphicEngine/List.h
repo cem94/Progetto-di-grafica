@@ -7,13 +7,14 @@ public:
 	virtual ~List();
 	std::vector<Object*> getList() const;
 	void setList(std::vector<Object*> list);
-	void addObject(Object* node);
-	void remove(Object* node);
+	void addObject(Object* node, glm::mat4 matrix);
 	void remove(int position);
 	Object* at(int position);
 	void render(glm::mat4 renderMatrix) override;
 private:
 	std::vector<Object*> objects;
+	//TODO capire se fare così o creare classe Element
+	std::vector<glm::mat4> matrices;
 };
 
 /*• One same element (mesh, light, etc.) can be rendered multiple times at different coordinates and/or using different parameters.
