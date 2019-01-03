@@ -54,6 +54,4 @@ private:
 	//float cutoff;
 	float radius;
 	float angle;
-
 };
-

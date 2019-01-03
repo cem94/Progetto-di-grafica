@@ -1,16 +1,18 @@
 /*
 *The engine class is the main component of the API. It’s a single class (either static or singleton) responsible for initializing the OpenGL  context and main modules.
-*
 */
+
 #pragma once
 #define GLM_FORCE_RADIANS
 #ifdef _WINDOWS
 #ifdef GAUNTLET_EXPORTS
-#define LIB_API __declspec(dllexport)//windows necessita di questa macro per esportare la libreria come dll
+// Windows necessita di questa macro per esportare la libreria come dll
+#define LIB_API __declspec(dllexport)
 #else
 #define LIB_API __declspec(dllimport)
 #endif
-#else//linux
+// linux
+#else
 #define LIB_API
 #endif
 

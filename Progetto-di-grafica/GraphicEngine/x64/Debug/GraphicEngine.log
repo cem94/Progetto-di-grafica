@@ -1,3 +1,29 @@
-﻿  Light.cpp
-     Creating library C:\Users\meyer\source\repos\Progetto\Progetto-di-grafica\x64\Debug\GraphicEngine.lib and object C:\Users\meyer\source\repos\Progetto\Progetto-di-grafica\x64\Debug\GraphicEngine.exp
-  GraphicEngine.vcxproj -> C:\Users\meyer\source\repos\Progetto\Progetto-di-grafica\x64\Debug\GraphicEngine.dll
+﻿  Camera.cpp
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(15): warning C4311: 'cast di tipo': troncamento puntatore da 'std::chrono::system_clock::time_point (__cdecl *)(void) noexcept' a 'int'
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(15): warning C4302: 'cast di tipo': troncamento da 'std::chrono::system_clock::time_point (__cdecl *)(void) noexcept' a 'int'
+  Engine.cpp
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(15): warning C4311: 'cast di tipo': troncamento puntatore da 'std::chrono::system_clock::time_point (__cdecl *)(void) noexcept' a 'int'
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(15): warning C4302: 'cast di tipo': troncamento da 'std::chrono::system_clock::time_point (__cdecl *)(void) noexcept' a 'int'
+  Light.cpp
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(15): warning C4311: 'cast di tipo': troncamento puntatore da 'std::chrono::system_clock::time_point (__cdecl *)(void) noexcept' a 'int'
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(15): warning C4302: 'cast di tipo': troncamento da 'std::chrono::system_clock::time_point (__cdecl *)(void) noexcept' a 'int'
+  List.cpp
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(15): warning C4311: 'cast di tipo': troncamento puntatore da 'std::chrono::system_clock::time_point (__cdecl *)(void) noexcept' a 'int'
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(15): warning C4302: 'cast di tipo': troncamento da 'std::chrono::system_clock::time_point (__cdecl *)(void) noexcept' a 'int'
+  Material.cpp
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(15): warning C4311: 'cast di tipo': troncamento puntatore da 'std::chrono::system_clock::time_point (__cdecl *)(void) noexcept' a 'int'
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(15): warning C4302: 'cast di tipo': troncamento da 'std::chrono::system_clock::time_point (__cdecl *)(void) noexcept' a 'int'
+  Mesh.cpp
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(15): warning C4311: 'cast di tipo': troncamento puntatore da 'std::chrono::system_clock::time_point (__cdecl *)(void) noexcept' a 'int'
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(15): warning C4302: 'cast di tipo': troncamento da 'std::chrono::system_clock::time_point (__cdecl *)(void) noexcept' a 'int'
+  Node.cpp
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(15): warning C4311: 'cast di tipo': troncamento puntatore da 'std::chrono::system_clock::time_point (__cdecl *)(void) noexcept' a 'int'
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(15): warning C4302: 'cast di tipo': troncamento da 'std::chrono::system_clock::time_point (__cdecl *)(void) noexcept' a 'int'
+  Texture.cpp
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(15): warning C4311: 'cast di tipo': troncamento puntatore da 'std::chrono::system_clock::time_point (__cdecl *)(void) noexcept' a 'int'
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(15): warning C4302: 'cast di tipo': troncamento da 'std::chrono::system_clock::time_point (__cdecl *)(void) noexcept' a 'int'
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\texture.cpp(13): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: vedere la dichiarazione di 'fopen'
+  Generazione del codice in corso...
+     Creazione della libreria C:\Users\cem\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.lib e dell'oggetto C:\Users\cem\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.exp
+  GraphicEngine.vcxproj -> C:\Users\cem\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.dll
