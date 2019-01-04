@@ -8,48 +8,44 @@ List::~List()
 {
 }
 
-std::vector<Object*> List::getList() const
+std::vector<List::Element*> List::getList() const
 {
 	return this->objects;
 }
 
-void List::setList(std::vector<Object*> objects)
+void List::setList(std::vector<Element*> objects)
 {
 	this->objects = objects;
 
 }
 
-void List::render(glm::mat4 renderMatrix)
-{
-	//Empty
-}
-//TODO provare ad usare NODE
+
 //aggiunge oggetto a lista istanze e salva matrice(in worlCoordinates)
-void List::addObject(Object* obj, glm::mat4 matrix)
+void List::add(Object* obj, glm::mat4 matrix)
 {
-	this->objects.push_back(obj);
-	this->matrices.push_back(matrix);
+	Element *element = new Element(obj, matrix);
+	this->objects.push_back(element);
 }
 
 void List::remove(int position)
 {
-	//creo iterator
-	std::vector<Object*>::iterator iterator;
-	//avanzo fino a pos desiderata
+	std::vector<Element*>::iterator iterator;
 	advance(iterator, position);
-	//cancello
 	this->objects.erase(iterator);
 }
 
-Object * List::at(int position)
+List::Element * List::at(int position)
 {
-	//TODO migliorare
 	if (position < this->objects.size())
 	{
-		//std::vector<Object*>::iterator iterator = this->objects.begin();
-		std::vector<Object*>::iterator iterator;
+		std::vector<Element*>::iterator iterator;
 		advance(iterator, position);
 		return *iterator;
 	}
 	return nullptr;
+}
+
+void List::render(glm::mat4 renderMatrix)
+{
+	//Empty
 }

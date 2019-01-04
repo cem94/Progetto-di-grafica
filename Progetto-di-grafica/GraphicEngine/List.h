@@ -3,18 +3,39 @@
 class List : public Object
 {
 public:
+	//classe che contiene l'oggetto e la matrice in world coordinates
+	//TODO possiamo rimuovere element secondo me è usare Liste di Node ( salvando li la matrice) ma non sono sicuro // -> CHIEDERE
+	class Element
+	{
+	public:
+		Element(Object* object, glm::mat4 matrix)
+			:object{ object }, matrix{ matrix }
+		{
+		}
+		Object * object;
+		glm::mat4 matrix;
+		glm::mat4 getMatrix()
+		{
+			return this->matrix;
+		}
+		Object* getNode()
+		{
+			return this->object;
+		}
+	};
 	List();
 	virtual ~List();
-	std::vector<Object*> getList() const;
-	void setList(std::vector<Object*> list);
-	void addObject(Object* node, glm::mat4 matrix);
+	std::vector<Element*> getList() const;
+	void setList(std::vector<Element*> list);
+	void add(Object* node, glm::mat4 matrix);
 	void remove(int position);
-	Object* at(int position);
+	Element* at(int position);
 	void render(glm::mat4 renderMatrix) override;
+	//non so chi ha scritto questi metodi
+	Element* findByName(std::string name) {/*TODO*/ };
+	Element* findByID(int id) {/*TODO*/ };
 private:
-	std::vector<Object*> objects;
-	//TODO capire se fare così o creare classe Element
-	std::vector<glm::mat4> matrices;
+	std::vector<Element*> objects;
 };
 
 /*• One same element (mesh, light, etc.) can be rendered multiple times at different coordinates and/or using different parameters.
