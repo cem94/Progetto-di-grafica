@@ -1,7 +1,7 @@
  //////////////
  // #INCLUDE //
  //////////////  
-//TODO da controllare per farlo funzionare ho cambiato un po' di cose
+//TODO da controllare per farlo funzionare ho cambiato un po' di cose vec3 -> vec3 etc
 #pragma once
 	// GLM:
 #define GLM_FORCE_CTOR_INIT         // Constructors no longer init to identity since 0.9.9

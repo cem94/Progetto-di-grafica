@@ -21,8 +21,6 @@ public:
 	Type getType() const override;
 	void setMatrix(glm::mat4 matrix);
 	void setVertexOrder(std::vector<unsigned int> facesArray);
-
-
 private:
 	//vertici mesh
 	std::vector<glm::vec3> vertexes;
