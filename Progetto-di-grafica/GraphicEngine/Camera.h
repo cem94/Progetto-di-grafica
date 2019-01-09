@@ -1,6 +1,6 @@
 #pragma once
 /*This class represents a camera. Settings should comprise both orthographic and perspective projections, and the necessary math to retrieve the camera inverse matrix.*/
-class  Camera : public Node
+class Camera : public Node
 {
 public:
 	Camera();

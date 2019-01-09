@@ -21,17 +21,17 @@ void Light::setIntensity(short intensity)
 	this->intensity = intensity;
 }
 
-void Light::setAmbient(glm::vec4 ambient)
+void Light::setAmbient(glm::vec3 ambient)
 {
 	this->ambient = ambient;
 }
 
-void Light::setDiffuse(glm::vec4 diffuse)
+void Light::setDiffuse(glm::vec3 diffuse)
 {
 	this->diffuse = diffuse;
 }
 
-void Light::setSpecular(glm::vec4 specular)
+void Light::setSpecular(glm::vec3 specular)
 {
 	this->specular = specular;
 }
@@ -49,7 +49,7 @@ void Light::render(glm::mat4 renderMatrix)
 		/////directional [ x , y  ,z , 0.0f ]/////////////////////
 		glLightfv(getLightNumber(), GL_POSITION, glm::value_ptr(glm::vec4(0.0f, 0.0f, 0.0f, 0.0f)));//dovremmo settare la posizione da un altra parte così da poter settare this->position sopra
 		break;
-	case OMNIDIRECTIONAL:
+	case OMNI:
 		/////omnidirectional [ x , y  ,z , 1.0f ], cutoff=180 /////
 		glLightfv(getLightNumber(), GL_POSITION, glm::value_ptr(glm::vec4(0.0f, 0.0f, 0.0f, 1.0f)));
 		glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &angle);
@@ -67,12 +67,12 @@ Object::Type Light::getType() const
 {
 	return LIGHT;
 }
-Light::SubType Light::getSubtype() const
+Light::SubType Light::getSubType() const
 {
 	return this->subType;
 }
 //seleziona tipo luce (directional/omni/spotlight
-void Light::setSubtype(SubType subtype)
+void Light::setSubType(Light::SubType subtype)
 {
 	this->subType = subType;
 }
@@ -93,12 +93,12 @@ void Light::enableLight(bool enable)
 	}
 }
 
-void Light::setColor(glm::vec4 color)
+void Light::setColor(glm::vec3 color)
 {
 	this->color = color;
-	this->setAmbient(glm::vec4(color));
-	this->setDiffuse(glm::vec4(color));
-	this->setSpecular(glm::vec4(color));
+	this->setAmbient(glm::vec3(color));
+	this->setDiffuse(glm::vec3(color));
+	this->setSpecular(glm::vec3(color));
 }
 
 void Light::setPosition(glm::vec4 position)
@@ -106,12 +106,12 @@ void Light::setPosition(glm::vec4 position)
 	this->position = position;
 }
 
-glm::vec4 Light::getDirection()
+glm::vec3 Light::getDirection()
 {
 	return this->direction;
 }
 
-void Light::setDirection(glm::vec4 direction)
+void Light::setDirection(glm::vec3 direction)
 {
 	this->direction = direction;
 }
@@ -132,14 +132,16 @@ void Light::setRadius(float radius)
 {
 	this->radius = radius;
 }
-//TODO rimuovere 
-/*float Light::getCutoff()
+float Light::getCutoff() const
 {
 	return this->cutoff;
 }
-
 void Light::setCutoff(float cutoff)
 {
-	this->cutoff=cutoff;
+	this->cutoff = cutoff;
 }
-*/
+//TODO rimuovere in qualche modo
+void Light::setMatrix(glm::mat4 matrix)
+{
+	Node::setMatrix(matrix);
+}

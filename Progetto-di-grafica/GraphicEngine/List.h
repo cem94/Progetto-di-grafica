@@ -31,7 +31,6 @@ public:
 	void remove(int position);
 	Element* at(int position);
 	void render(glm::mat4 renderMatrix) override;
-	//non so chi ha scritto questi metodi
 	Element* findByName(std::string name) {/*TODO*/ };
 	Element* findByID(int id) {/*TODO*/ };
 private:

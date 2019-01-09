@@ -11,19 +11,30 @@ Mesh::~Mesh()
 {
 }
 
-std::vector<glm::vec4> Mesh::getVertexes() const
+
+std::vector<glm::vec3> Mesh::getVertexes() const
 {
-	return vertexes;
+	return this->vertexes;
 }
 
-void Mesh::setVertexes(std::vector<glm::vec4> vertexes)
+void Mesh::setVertexes(std::vector<glm::vec3> vertexes)
 {
 	this->vertexes = vertexes;
+}
+//TODO provvisorio: capire come farlo meglio
+void Mesh::setMatrix(glm::mat4 matrix)
+{
+	Node::setMatrix(matrix);
+}
+//TODO capire cos'è
+void Mesh::setVertexOrder(std::vector<unsigned int> facesArray)
+{
+	this->facesArray = facesArray;
 }
 
 std::vector<glm::vec4> Mesh::getNormals() const
 {
-	return normals;
+	return this->normals;
 }
 
 void Mesh::setNormals(std::vector<glm::vec4> normals)
@@ -61,3 +72,9 @@ Object::Type Mesh::getType() const
 {
 	return MESH;
 }
+
+/*void Mesh::setNormals(std::vector<glm::vec4> normals)
+{
+	this->normals = normals;
+}
+*/

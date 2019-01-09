@@ -23,32 +23,32 @@ void Material::setTexture(Texture * texture)
 	this->texture = texture;
 }
 
-void Material::setAmbient(glm::vec4 ambient)
+void Material::setAmbient(glm::vec3 ambient)
 {
 	this->ambient = ambient;
 }
 
-glm::vec4 Material::getAmbient()
+glm::vec3 Material::getAmbient()
 {
 	return this->ambient;
 }
 
-void Material::setDiffuse(glm::vec4 diffuse)
+void Material::setDiffuse(glm::vec3 diffuse)
 {
 	this->diffuse = diffuse;
 }
 
-glm::vec4 Material::getDiffuse()
+glm::vec3 Material::getDiffuse()
 {
 	return this->diffuse;
 }
 
-void Material::setSpecular(glm::vec4 specular)
+void Material::setSpecular(glm::vec3 specular)
 {
 	this->specular = specular;
 }
 
-glm::vec4 Material::getSpecular()
+glm::vec3 Material::getSpecular()
 {
 	return this->specular;
 }
