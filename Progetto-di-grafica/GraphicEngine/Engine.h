@@ -79,15 +79,23 @@ public:
 	void enableZbuffer();
 
 	void loadIdentity();
+	
+	void freeImageInitialize();
+
+	void freeImageDeInitialize();
+	
+	Node * readOVOfile(const char * name);
 
 	Camera* addCamera(std::string name, glm::vec3 eye, glm::vec3 center, glm::vec3 up);
+	
 	//solo per debug -> da rimuovere
 	void rotate();
 
 	void switchWireframe();
-
+	
 	void setRandomColors();
-
+	
 	void switchLights();
+	
 	void createTexture();
 };

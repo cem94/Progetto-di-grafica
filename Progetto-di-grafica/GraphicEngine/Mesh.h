@@ -18,7 +18,7 @@ public:
 	void setMaterial(Material* material);
 	//Ereditato da Object
 	void render(glm::mat4 renderMatrix) override;
-	Type getType() const override;
+	Object::Type getType() const override;
 	void setMatrix(glm::mat4 matrix);
 	void setVertexOrder(std::vector<unsigned int> facesArray);
 private:

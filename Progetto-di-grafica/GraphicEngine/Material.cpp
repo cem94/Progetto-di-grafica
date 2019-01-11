@@ -7,6 +7,11 @@ Material::Material()
 {
 }
 
+Material::Material(const char * name)
+{
+		this->setName(name);	
+}
+
 Material::~Material()
 {
 }
@@ -16,7 +21,10 @@ Texture * Material::getTexture() const
 	return this->texture;
 }
 
-
+void Material::setTexture(const char * textureName)
+{
+//TODO
+}
 
 void Material::setTexture(Texture * texture)
 {

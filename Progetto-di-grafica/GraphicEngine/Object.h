@@ -6,12 +6,7 @@
 
 class  Object {
 public:
-	Object() {};
-	Object(const char *name) { this->name = name; };
 	enum Type { CAMERA, LIGHT, MATERIAL, MESH, NODE, TEXTURE };
-	Object(const char *name, Type type) : Object(name) {
-		this->type = type;
-	};
 	int getID() const { return this->id; };
 	int generateID() {
 		//return (int)std::chrono::system_clock::now; 
@@ -21,6 +16,7 @@ public:
 	virtual void render(glm::mat4 rendermatrix) = 0;
 	virtual Type getType() const = 0;
 	void setType(Type type) { this->type = type; }
+
 private:
 	int id;
 	std::string name;

@@ -4,7 +4,7 @@ Engine* engine = new Engine();
 //matrici di proiezione
 glm::mat4 perspective;
 glm::mat4 ortho;
-
+Node *root = NULL;
 
 void displayCallback() {
 	//engine->setViewport(0, 0, 1920, 1080);
@@ -31,6 +31,7 @@ void reshapeCallback(int width, int height) {
 	perspective = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 1.0f, 100.0f);
 	ortho = glm::ortho(0.f, (float)width, 0.f, (float)height, -1.f, 1.f);
 }
+
 void keyboardCallback(unsigned char key, int mouseX, int mouseY) {
 	switch (key)
 	{
@@ -56,6 +57,7 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY) {
 
 	//	engine->redisplay();
 }
+
 void specialCallback(int key, int x, int y) {
 	switch (key) {
 	default:
@@ -65,10 +67,12 @@ void specialCallback(int key, int x, int y) {
 	}
 	//engine->redisplay();
 }
+
 void timerCallback(int value) {
 	//si può fare?
 	engine->timer(timerCallback);
 }
+
 int main(int argc, char * argv[])
 {
 	std::cout << "Client application starts" << std::endl;
@@ -79,11 +83,11 @@ int main(int argc, char * argv[])
 	engine->keyboard(keyboardCallback);
 	engine->specialKeyboard(specialCallback);
 	engine->timer(timerCallback);
-	// Global OpenGL settings:
+	engine->enableZbuffer();
+	engine->freeImageInitialize();
 	//setta il colore con cui verra dipinto lo sfondo -> per colorare lo sfondo uso clearBuffers
 	engine->clearColor(1.0f, 0.0f, 0.0f);
-	//abilita z buffer
-	engine->enableZbuffer();
+
 	// CAMERA //
 	//dove si trova la camera
 	glm::vec3 eye = glm::vec3(0.f, 0.f, -45.f);
@@ -92,10 +96,16 @@ int main(int argc, char * argv[])
 	//dove è il sopra
 	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
 	engine->addCamera("1", eye, center, up);
+
+	const char* fileName = "../ovo_files/gauntlet.ovo";
+	//root =
+	root  =  engine->readOVOfile(fileName);
+	std::cout << "objects readed " << std::endl;
 	//createTexture test
 	engine->createTexture();
+
 	//main loop
 	engine->startLoop();
+	engine->freeImageDeInitialize();
 	std::cout << "Application terminated" << std::endl;
-
 }

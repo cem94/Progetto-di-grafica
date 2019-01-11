@@ -1,12 +1,10 @@
 #pragma once
-#include "Object.h"
-#include <vector>
+#include "Engine.h"
 
 static class OvoReader
 {
 public:
-	static std::vector<Object *> readOVOfile(int argc, const char *argv);
-	
+	static std::vector<Object *> readOVOfile(const char * name);
 };
 
 #pragma once

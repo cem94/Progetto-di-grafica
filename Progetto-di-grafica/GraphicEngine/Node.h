@@ -3,8 +3,10 @@
 class Node : public Object
 {
 public:
+	//necessario?
 	Node();
-	Node(const char* name) : Object(name){};
+	Node(const char* name);
+	Node(const char* name, Type type );
 	virtual ~Node();
 	//Getters & Setters
 	Node* getParent() const;
@@ -18,8 +20,10 @@ public:
 	void remove(int position);
 	void remove(Node* node);
 	int getChildrenSize() const;
+	void setChildrenSize(unsigned int size);
 	//ereditato da Object
 	virtual Type getType() const override;
+	virtual void render(glm::mat4 rendermatrix) override;
 private:
 	//struttura gerarchica//
 	Node* parent;
@@ -27,4 +31,5 @@ private:
 	std::vector<Node*> children;
 	//matrice di posizione
 	glm::mat4 matrix;
+
 };

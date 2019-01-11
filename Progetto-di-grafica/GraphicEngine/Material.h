@@ -4,6 +4,8 @@ class  Material : public Object
 {
 public:
 	Material();
+	//TODO migliorare
+	Material(const char * name);
 	virtual ~Material();
 	//Getter & setter
 	Texture* getTexture() const;
@@ -24,6 +26,8 @@ public:
 	void setAlpha(float alpha);*/
 	glm::vec4 getEmissive() const;
 	void setEmissive(glm::vec4 emissive);
+	void setTexture(const char * textureName);
+
 private:
 	Texture* texture;
 	//componenti materiale
