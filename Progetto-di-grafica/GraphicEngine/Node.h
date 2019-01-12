@@ -29,11 +29,5 @@ private:
 	std::vector<Node*> children;
 	//matrice di posizione
 	glm::mat4 matrix;
-<<<<<<< HEAD
-	unsigned int size;
-=======
-
-	int childrenSize=0;
-
->>>>>>> 2ce52d2d1083d3f095fb395bf382bceb26b9aa0e
+	int childrenSize = 0;
 };
