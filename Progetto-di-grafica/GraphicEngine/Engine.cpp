@@ -181,9 +181,11 @@ void findChildren(Node* currentNode, std::vector<Node*>& nodes) {
 }
 
 void printTree(Node *node, std::string indentation) {
-	std::cout << indentation.c_str() << node->getName().c_str() << std::endl;
+	auto mat = node->getMatrix();
+  std::cout << indentation.c_str() << node->getName().c_str() << mat[0][3]
+                  << mat[1][3] << mat[2][3] << mat[3][3] << std::endl;
 	for (int i = 0; i < node->getChildrenSize(); i++)
-		printTree(node->getChildren().at(i), "\t" + indentation);
+		printTree(node->getChildren().at(i), "\t - " + indentation);
 }
 
 

@@ -90,7 +90,7 @@ int main(int argc, char * argv[])
 
 	// CAMERA //
 	//dove si trova la camera
-	glm::vec3 eye = glm::vec3(0.f, 0.f, -45.f);
+	glm::vec3 eye = glm::vec3(0.f, 0.f, -45.0f);
 	//verso dove guarda 
 	glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
 	//dove è il sopra
@@ -98,7 +98,7 @@ int main(int argc, char * argv[])
 	engine->addCamera("1", eye, center, up);
 
 	const char* fileName = "../ovo_files/gauntlet.ovo";
-	//root =
+
 	root  =  engine->readOVOfile(fileName);
 	std::cout << "objects readed " << std::endl;
 	//createTexture test

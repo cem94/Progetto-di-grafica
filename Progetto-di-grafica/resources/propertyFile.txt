@@ -84,32 +84,24 @@
    Heightmap tex.:  [none]
    Roughness tex.:  [none]
    Metalness tex.:  [none]
-[chunk id: 9, chunk size: 96, chunk type: material]
-   Name  . . . . :  10 - Default
+[chunk id: 9, chunk size: 89, chunk type: material]
+   Name  . . . . :  13 - Default
    Emission  . . :  0, 0, 0
    Albedo  . . . :  0.588235, 0.588235, 0.588235
    Roughness . . :  0.81
    Metalness . . :  0
    Transparency  :  1
-   Albedo tex. . :  marble_texture.dds
+   Albedo tex. . :  texture.dds
    Normalmap tex.:  [none]
    Heightmap tex.:  [none]
    Roughness tex.:  [none]
    Metalness tex.:  [none]
 [chunk id: 1, chunk size: 82, chunk type: node]
    Name  . . . . :  [root]
-   Matrix  . . . :  	1	0	0	0
-                    	0	1	0	0
-                    	0	0	1	0
-                    	0	0	0	1
    Nr. children  :  6
    Target node . :  [none]
 [chunk id: 18, chunk size: 8654, chunk type: mesh]
    Name  . . . . :  guardia
-   Matrix  . . . :  	0.844792	0	-0	-0.949367
-                    	0	0.814846	-0	-31.498
-                    	-0	-0	0.955484	-1.41833
-                    	0	0	-0	1
    Nr. children  :  1
    Target node . :  [none]
    Subtype . . . :  0 (standard)
@@ -1465,10 +1457,6 @@
    Face data . . :  f287 (185, 210, 186)
 [chunk id: 18, chunk size: 121236, chunk type: mesh]
    Name  . . . . :  palmo
-   Matrix  . . . :  	0.93081	0	-0	0.374596
-                    	0	1.2408	-0	38.6552
-                    	-0	-0	1.19009	-0.171585
-                    	0	0	-0	1
    Nr. children  :  11
    Target node . :  [none]
    Subtype . . . :  0 (standard)
@@ -19511,10 +19499,6 @@
    Face data . . :  f4799 (2645, 2644, 2623)
 [chunk id: 18, chunk size: 7719, chunk type: mesh]
    Name  . . . . :  pollice1
-   Matrix  . . . :  	-0.108051	-0.0890128	1.14158	0.364941
-                    	-0.48575	0.589644	-1.10536e-08	13.7477
-                    	-0.58526	-0.482138	-0.0929893	-14.8725
-                    	0	0	-0	1
    Nr. children  :  1
    Target node . :  [none]
    Subtype . . . :  0 (standard)
@@ -20675,10 +20659,6 @@
    Face data . . :  f287 (170, 171, 159)
 [chunk id: 18, chunk size: 7719, chunk type: mesh]
    Name  . . . . :  pollice2
-   Matrix  . . . :  	0.769275	2.98023e-08	7.07713e-09	0.8341
-                    	-5.96046e-08	0.769275	-4.86552e-09	19.7991
-                    	-8.92882e-09	-2.98627e-09	0.769275	-0.462883
-                    	0	0	-0	1
    Nr. children  :  0
    Target node . :  [none]
    Subtype . . . :  0 (standard)
@@ -21839,10 +21819,6 @@
    Face data . . :  f287 (170, 171, 159)
 [chunk id: 18, chunk size: 7718, chunk type: mesh]
    Name  . . . . :  indice1
-   Matrix  . . . :  	1.3136	-0.0095562	-0	-0.47642
-                    	0.0208944	0.600785	-0	36.8761
-                    	-0	-0	0.655929	-11.2236
-                    	0	0	-0	1
    Nr. children  :  1
    Target node . :  [none]
    Subtype . . . :  0 (standard)
@@ -23003,10 +22979,6 @@
    Face data . . :  f287 (170, 171, 159)
 [chunk id: 18, chunk size: 7718, chunk type: mesh]
    Name  . . . . :  indice2
-   Matrix  . . . :  	0.772207	0	-0	5.96046e-08
-                    	-1.86265e-09	0.748722	-0	21.323
-                    	-0	-0	0.748722	-0
-                    	0	0	-0	1
    Nr. children  :  1
    Target node . :  [none]
    Subtype . . . :  0 (standard)
@@ -24167,10 +24139,6 @@
    Face data . . :  f287 (170, 171, 159)
 [chunk id: 18, chunk size: 7718, chunk type: mesh]
    Name  . . . . :  indice3
-   Matrix  . . . :  	0.945135	-4.65661e-10	-0	-2.38419e-07
-                    	0	0.779607	-0	20.3183
-                    	-0	-0	0.779607	-0
-                    	0	0	-0	1
    Nr. children  :  0
    Target node . :  [none]
    Subtype . . . :  0 (standard)
@@ -25331,10 +25299,6 @@
    Face data . . :  f287 (170, 171, 159)
 [chunk id: 18, chunk size: 7717, chunk type: mesh]
    Name  . . . . :  medio1
-   Matrix  . . . :  	1.39729	0.00485861	-1.04852e-06	-0.47642
-                    	-0.0106233	0.639061	-0.000137914	36.8761
-                    	-0	0.000113929	0.773641	-3.70927
-                    	0	0	-0	1
    Nr. children  :  1
    Target node . :  [none]
    Subtype . . . :  0 (standard)
@@ -26495,10 +26459,6 @@
    Face data . . :  f287 (170, 171, 159)
 [chunk id: 18, chunk size: 7717, chunk type: mesh]
    Name  . . . . :  medio2
-   Matrix  . . . :  	0.772207	0	-5.68434e-14	0
-                    	0	0.748722	2.91038e-11	21.323
-                    	-2.27374e-13	7.27596e-12	0.748722	-0
-                    	0	0	-0	1
    Nr. children  :  1
    Target node . :  [none]
    Subtype . . . :  0 (standard)
@@ -27659,10 +27619,6 @@
    Face data . . :  f287 (170, 171, 159)
 [chunk id: 18, chunk size: 7717, chunk type: mesh]
    Name  . . . . :  medio3
-   Matrix  . . . :  	0.945135	-2.32831e-10	5.68434e-14	0
-                    	0	0.779607	-0	20.3183
-                    	2.27374e-13	-7.27596e-12	0.779607	-0
-                    	0	0	-0	1
    Nr. children  :  0
    Target node . :  [none]
    Subtype . . . :  0 (standard)
@@ -28823,10 +28779,6 @@
    Face data . . :  f287 (170, 171, 159)
 [chunk id: 18, chunk size: 7719, chunk type: mesh]
    Name  . . . . :  anulare1
-   Matrix  . . . :  	1.33286	0	-0	-0.47642
-                    	0	0.60959	-0	36.8761
-                    	-0	-0	0.737943	4.46894
-                    	0	0	-0	1
    Nr. children  :  1
    Target node . :  [none]
    Subtype . . . :  0 (standard)
@@ -29987,10 +29939,6 @@
    Face data . . :  f287 (170, 171, 159)
 [chunk id: 18, chunk size: 7719, chunk type: mesh]
    Name  . . . . :  anulare2
-   Matrix  . . . :  	0.772207	0	-0	0
-                    	0	0.748722	-0	21.323
-                    	-0	-0	0.748722	4.76837e-07
-                    	0	0	-0	1
    Nr. children  :  1
    Target node . :  [none]
    Subtype . . . :  0 (standard)
@@ -31151,10 +31099,6 @@
    Face data . . :  f287 (170, 171, 159)
 [chunk id: 18, chunk size: 7719, chunk type: mesh]
    Name  . . . . :  anulare3
-   Matrix  . . . :  	0.945135	0	-0	-2.38419e-07
-                    	0	0.779607	-0	20.3183
-                    	-0	-0	0.779607	-0
-                    	0	0	-0	1
    Nr. children  :  0
    Target node . :  [none]
    Subtype . . . :  0 (standard)
@@ -32313,12 +32257,8 @@
    Face data . . :  f285 (168, 171, 169)
    Face data . . :  f286 (169, 171, 170)
    Face data . . :  f287 (170, 171, 159)
-[chunk id: 18, chunk size: 7718, chunk type: mesh]
-   Name  . . . . :  indice1
-   Matrix  . . . :  	1.2371	0	-0	-0.47642
-                    	0	0.565798	-0	36.8761
-                    	-0	-0	0.684929	11.4231
-                    	0	0	-0	1
+[chunk id: 18, chunk size: 7719, chunk type: mesh]
+   Name  . . . . :  mignolo1
    Nr. children  :  1
    Target node . :  [none]
    Subtype . . . :  0 (standard)
@@ -33477,12 +33417,8 @@
    Face data . . :  f285 (168, 171, 169)
    Face data . . :  f286 (169, 171, 170)
    Face data . . :  f287 (170, 171, 159)
-[chunk id: 18, chunk size: 7718, chunk type: mesh]
-   Name  . . . . :  indice2
-   Matrix  . . . :  	0.772207	0	-0	0
-                    	0	0.748722	-0	21.323
-                    	-0	-0	0.748722	-0
-                    	0	0	-0	1
+[chunk id: 18, chunk size: 7719, chunk type: mesh]
+   Name  . . . . :  mignolo2
    Nr. children  :  1
    Target node . :  [none]
    Subtype . . . :  0 (standard)
@@ -34641,12 +34577,8 @@
    Face data . . :  f285 (168, 171, 169)
    Face data . . :  f286 (169, 171, 170)
    Face data . . :  f287 (170, 171, 159)
-[chunk id: 18, chunk size: 7718, chunk type: mesh]
-   Name  . . . . :  indice3
-   Matrix  . . . :  	0.945135	0	-0	-2.38419e-07
-                    	0	0.779607	-0	20.3183
-                    	-0	-0	0.779607	-0
-                    	0	0	-0	1
+[chunk id: 18, chunk size: 7719, chunk type: mesh]
+   Name  . . . . :  mignolo3
    Nr. children  :  0
    Target node . :  [none]
    Subtype . . . :  0 (standard)
@@ -35807,10 +35739,6 @@
    Face data . . :  f287 (170, 171, 159)
 [chunk id: 18, chunk size: 25074, chunk type: mesh]
    Name  . . . . :  gemma_palmo
-   Matrix  . . . :  	-1.51593e-07	-1.34554	2.29089e-07	-5.32165
-                    	0	-2.19216e-07	-1.40614	15.3621
-                    	0.930469	-2.19216e-07	3.73233e-14	0.580844
-                    	0	0	-0	1
    Nr. children  :  0
    Target node . :  [none]
    Subtype . . . :  0 (standard)
@@ -39578,10 +39506,6 @@
    Face data . . :  f959 (558, 526, 525)
 [chunk id: 18, chunk size: 25076, chunk type: mesh]
    Name  . . . . :  gemma_mignolo
-   Matrix  . . . :  	-8.72404e-08	-0.999313	1.37445e-07	-6.29958
-                    	0	-1.62809e-07	-0.843633	32.1275
-                    	0.535478	-1.62809e-07	2.23927e-14	10.6558
-                    	0	0	-0	1
    Nr. children  :  0
    Target node . :  [none]
    Subtype . . . :  0 (standard)
@@ -43349,10 +43273,6 @@
    Face data . . :  f959 (558, 526, 525)
 [chunk id: 18, chunk size: 25076, chunk type: mesh]
    Name  . . . . :  gemma_anulare
-   Matrix  . . . :  	-9.29628e-08	-0.999313	1.46461e-07	-6.29958
-                    	0	-1.62809e-07	-0.89897	32.1275
-                    	0.570601	-1.62809e-07	2.38615e-14	4.21387
-                    	0	0	-0	1
    Nr. children  :  0
    Target node . :  [none]
    Subtype . . . :  0 (standard)
@@ -47120,10 +47040,6 @@
    Face data . . :  f959 (558, 526, 525)
 [chunk id: 18, chunk size: 25074, chunk type: mesh]
    Name  . . . . :  gemma_medio
-   Matrix  . . . :  	-9.30453e-08	-0.999313	1.46591e-07	-6.29958
-                    	0	-1.62809e-07	-0.899768	32.1275
-                    	0.571108	-1.62809e-07	2.38827e-14	-3.37678
-                    	0	0	-0	1
    Nr. children  :  0
    Target node . :  [none]
    Subtype . . . :  0 (standard)
@@ -50891,10 +50807,6 @@
    Face data . . :  f959 (558, 526, 525)
 [chunk id: 18, chunk size: 25075, chunk type: mesh]
    Name  . . . . :  gemma_indice
-   Matrix  . . . :  	-8.72404e-08	-0.999313	1.37445e-07	-6.29958
-                    	0	-1.62809e-07	-0.843633	32.1275
-                    	0.535478	-1.62809e-07	2.23927e-14	-10.5135
-                    	0	0	-0	1
    Nr. children  :  0
    Target node . :  [none]
    Subtype . . . :  0 (standard)
@@ -54662,10 +54574,6 @@
    Face data . . :  f959 (558, 526, 525)
 [chunk id: 18, chunk size: 25076, chunk type: mesh]
    Name  . . . . :  gemma_pollice
-   Matrix  . . . :  	-3.75516e-08	-0.524014	2.29394e-08	-6.29958
-                    	0.269505	-8.80762e-08	-0.516941	18.6055
-                    	0.347729	-3.37019e-08	0.449978	-18.3232
-                    	0	0	-0	1
    Nr. children  :  0
    Target node . :  [none]
    Subtype . . . :  0 (standard)
@@ -58433,10 +58341,6 @@
    Face data . . :  f959 (558, 526, 525)
 [chunk id: 16, chunk size: 134, chunk type: light]
    Name  . . . . :  fix_light
-   Matrix  . . . :  	1	0	-0	0
-                    	-0	0.999977	-0.00671127	141.713
-                    	-0	0.00671127	0.999977	0.28413
-                    	0	0	-0	1
    Nr. children  :  0
    Target node . :  fix_light.Target
    Subtype . . . :  2 (spot)
@@ -58449,18 +58353,10 @@
    Volumetric  . :  0
 [chunk id: 1, chunk size: 92, chunk type: node]
    Name  . . . . :  fix_light.Target
-   Matrix  . . . :  	-1.62921e-07	-1	4.37114e-08	0
-                    	0	-4.37114e-08	-1	-46.8942
-                    	1	-1.62921e-07	7.12149e-15	-0.981696
-                    	0	0	-0	1
    Nr. children  :  0
    Target node . :  [none]
 [chunk id: 16, chunk size: 125, chunk type: light]
    Name  . . . . :  back_light
-   Matrix  . . . :  	1	0	-0	33.5293
-                    	0	-1.62921e-07	-1	32.3337
-                    	-0	1	-1.62921e-07	69.3579
-                    	0	0	-0	1
    Nr. children  :  0
    Target node . :  [none]
    Subtype . . . :  0 (omni)
@@ -58473,10 +58369,6 @@
    Volumetric  . :  0
 [chunk id: 16, chunk size: 126, chunk type: light]
    Name  . . . . :  front_light
-   Matrix  . . . :  	1	0	-0	-171.94
-                    	0	-1.62921e-07	-1	-19.9367
-                    	-0	1	-1.62921e-07	-135.268
-                    	0	0	-0	1
    Nr. children  :  0
    Target node . :  [none]
    Subtype . . . :  0 (omni)
@@ -58489,16 +58381,12 @@
    Volumetric  . :  0
 [chunk id: 18, chunk size: 20316, chunk type: mesh]
    Name  . . . . :  plane
-   Matrix  . . . :  	2.05683	0	-0	0.632912
-                    	0	1	-0	-49.2183
-                    	-0	-0	2.05683	-0.316458
-                    	0	0	-0	1
    Nr. children  :  0
    Target node . :  [none]
    Subtype . . . :  0 (standard)
    Nr. vertices  :  441
    Nr. faces . . :  800
-   Material  . . :  10 - Default
+   Material  . . :  13 - Default
    Radius  . . . :  116.491
    BBox minimum  :  -91.4557, 0, -72.1519
    BBox maximum  :  91.4557, 0, 72.1519
