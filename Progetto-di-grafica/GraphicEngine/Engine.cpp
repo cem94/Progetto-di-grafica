@@ -138,10 +138,32 @@ void print(std::vector<Node*> nodes) {
 		std::cout << nodes.at(i)->getName().c_str() << std::endl;
 	}
 }
+
+/*
+Node *findChildren(std::vector<Node *> &nodes) { 
+	if (nodes.size()==1){
+		Node * toReturn = nodes.at(0);
+        nodes.erase(nodes.begin());
+        return toReturn;
+    } else {
+        Node *p = nodes.at(0);
+		nodes.erase(nodes.begin());
+		for (auto i = 0; p->getChildrenSize(); i++) {
+			Node *chidl = nodes.at(0);
+			nodes.erase(nodes.begin());
+			p->setChildren();
+		}
+        return p;
+	}
+}
+
+*/
+
 //parte dal nodo corrente  e popola l'albero
 void findChildren(Node* currentNode, std::vector<Node*>& nodes) {
 	//int size = currentNode->getChildrenSize();
 	//std::cout << currentNode->getName().c_str() << " children: " << size << std::endl;
+
 		for (int i = 0; i < currentNode->getChildrenSize(); i++) {
 		//prendo testa 
 		if (nodes.size() == 0) {
@@ -156,7 +178,6 @@ void findChildren(Node* currentNode, std::vector<Node*>& nodes) {
 		findChildren(temp, nodes);
 		currentNode->insert(temp);
 	}
-
 }
 
 void printTree(Node *node, std::string indentation) {
@@ -171,9 +192,11 @@ Node * Engine::readOVOfile(const char * name)
 	std::vector<Object*> objects = OvoReader::readOVOfile(name);
 	//cast della lista da Object* a Node*
 	std::vector<Node*> vec{};
+
 	for (auto o : objects) {
 		vec.push_back(dynamic_cast<Node*>(o));
 	}
+
 	//prendo la testa come root
 	Node* root = vec.at(0);
 	// e la cancello

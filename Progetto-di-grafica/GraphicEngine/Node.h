@@ -32,4 +32,6 @@ private:
 	//matrice di posizione
 	glm::mat4 matrix;
 
+	int childrenSize=0;
+
 };

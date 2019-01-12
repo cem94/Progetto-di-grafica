@@ -87,14 +87,15 @@ void Node::remove(Node * node)
 //ritorna il numero di figli del nodo corrente
 int Node::getChildrenSize() const
 {
-	return (int) this->children.size();
+	return this->childrenSize;
 }
 //TODO da rivedere
 void Node::setChildrenSize(unsigned int size)
 {
+	this->childrenSize = size;
 	children.reserve(size);
-	for (unsigned int i = 0; i < size; i++) 
-		children.push_back(nullptr);
+	//for (unsigned int i = 0; i < size; i++) 
+	//	children.push_back(nullptr);
 }
 
 Object::Type Node::getType() const
