@@ -139,26 +139,6 @@ void print(std::vector<Node*> nodes) {
 	}
 }
 
-/*
-Node *findChildren(std::vector<Node *> &nodes) { 
-	if (nodes.size()==1){
-		Node * toReturn = nodes.at(0);
-        nodes.erase(nodes.begin());
-        return toReturn;
-    } else {
-        Node *p = nodes.at(0);
-		nodes.erase(nodes.begin());
-		for (auto i = 0; p->getChildrenSize(); i++) {
-			Node *chidl = nodes.at(0);
-			nodes.erase(nodes.begin());
-			p->setChildren();
-		}
-        return p;
-	}
-}
-
-*/
-
 //parte dal nodo corrente  e popola l'albero
 void findChildren(Node* currentNode, std::vector<Node*>& nodes) {
 	//int size = currentNode->getChildrenSize();
@@ -182,8 +162,7 @@ void findChildren(Node* currentNode, std::vector<Node*>& nodes) {
 
 void printTree(Node *node, std::string indentation) {
 	auto mat = node->getMatrix();
-  std::cout << indentation.c_str() << node->getName().c_str() << mat[0][3]
-                  << mat[1][3] << mat[2][3] << mat[3][3] << std::endl;
+  std::cout << indentation.c_str() << node->getName().c_str()<< std::endl;
 	for (int i = 0; i < node->getChildrenSize(); i++)
 		printTree(node->getChildren().at(i), "\t - " + indentation);
 }

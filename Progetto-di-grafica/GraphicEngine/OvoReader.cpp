@@ -28,11 +28,6 @@
                            << "                    \t" << m[0][2] << "\t" << m[1][2] << "\t" << m[2][2] << "\t" << m[3][2] << std::endl \
                            << "                    \t" << m[0][3] << "\t" << m[1][3] << "\t" << m[2][3] << "\t" << m[3][3] << std::endl 
   
-
-void printMatrix(glm::mat4 m) {
-  std::cout <<"   Matrix  . . . :  \t" << m[0][0] << "\t" << m[1][0] << "\t" << m[2][0] << "\t" << m[3][0] << std::endl<< "                    \t" << m[0][1] << "\t" << m[1][1] << "\t" << m[2][1] << "\t" << m[3][1] << std::endl<< "                    \t" << m[0][2] << "\t" << m[1][2] << "\t"<< m[2][2] << "\t" << m[3][2] << std::endl<< "                    \t" << m[0][3] << "\t" << m[1][3] << "\t" << m[2][3] << "\t" << m[3][3] << std::endl;
-}
-
 // Stripped-down redefinition of OvObject (just for the chunk IDs):
 class OvObject
 {
@@ -174,8 +169,7 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 			glm::mat4 matrix;
 			memcpy(&matrix, data + position, sizeof(glm::mat4));
 			if (verbose)
-				// MAT2STR(f, matrix);
-				printMatrix(matrix);
+				MAT2STR(f, matrix);
 			position += sizeof(glm::mat4);
 			// Nr. of children nodes:
 			unsigned int children;
@@ -289,8 +283,7 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 			glm::mat4 matrix;
 			memcpy(&matrix, data + position, sizeof(glm::mat4));
 			if (verbose)
-				//MAT2STR(f, matrix);
-                printMatrix(matrix);
+				MAT2STR(f, matrix);
 			position += sizeof(glm::mat4);
 			// Mesh nr. of children nodes:
 			unsigned int children;
@@ -472,8 +465,7 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 				glm::mat4 poseMatrix;
 				memcpy(&poseMatrix, data + position, sizeof(glm::mat4));
 				if (verbose)
-					//MAT2STR(f, poseMatrix);
-					printMatrix(matrix);
+					MAT2STR(f, poseMatrix);
 				position += sizeof(glm::vec4);
 
 				// Bone list:
@@ -494,8 +486,7 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 					glm::mat4 boneMatrix;
 					memcpy(&boneMatrix, data + position, sizeof(glm::mat4));
 					if (verbose)
-						//MAT2STR(f, boneMatrix);
-						printMatrix(matrix);
+						MAT2STR(f, boneMatrix);
 					position += sizeof(glm::mat4);
 				}
 
@@ -560,8 +551,7 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 			glm::mat4 matrix;
 			memcpy(&matrix, data + position, sizeof(glm::mat4));
 			if (verbose)
-				//MAT2STR(f, matrix);
-				printMatrix(matrix);
+				MAT2STR(f, matrix);
 			position += sizeof(glm::mat4);
 			// Nr. of children nodes:
 			unsigned int children;
@@ -653,8 +643,7 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 			glm::mat4 matrix;
 			memcpy(&matrix, data + position, sizeof(glm::mat4));
 			if (verbose)
-				//MAT2STR(f, matrix);
-                printMatrix(matrix);
+				MAT2STR(f, matrix);
 			position += sizeof(glm::mat4);
 
 			// Nr. of children nodes:
