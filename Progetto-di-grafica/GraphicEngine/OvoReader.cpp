@@ -105,7 +105,7 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 	//list of materials
 	std::vector<Material *> allMaterials;
 	// Check for retrieve vertex:
-	bool verbose = true;
+	const bool verbose = true;
 	// Open file:
 	FILE *dat = fopen(name, "rb");
 	// Create file of property:

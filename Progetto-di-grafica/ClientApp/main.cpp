@@ -185,7 +185,7 @@ int main(int argc, char * argv[])
 
 	// CAMERA //
 	//dove si trova la camera
-	glm::vec3 eye = glm::vec3(0.f, 0.f, -45.f);
+	glm::vec3 eye = glm::vec3(0.f, 0.f, -45.0f);
 	//verso dove guarda 
 	glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
 	//dove è il sopra
@@ -196,7 +196,6 @@ int main(int argc, char * argv[])
 	const char* fileName = "../ovo_files/gauntlet.ovo";
 	root = engine->getRoot(fileName);
 	std::cout << "Ovo file readed " << std::endl;
-
 	engine->startLoop();
 	//forse si può spostare in engine->free o qualcosa così
 	engine->freeImageDeInitialize();

@@ -143,34 +143,12 @@ void LIB_API Engine::swapBuffers()
 void LIB_API Engine::loadIdentity() {
 	loadMatrix(glm::mat4(1.0f));
 }
-<<<<<<< HEAD
 
-=======
 void print(std::vector<Node*> nodes) {
 	for (int i = 0; i < nodes.size(); i++) {
 		std::cout << nodes.at(i)->getName().c_str() << std::endl;
 	}
 }
-
-/*
-Node *findChildren(std::vector<Node *> &nodes) { 
-	if (nodes.size()==1){
-		Node * toReturn = nodes.at(0);
-        nodes.erase(nodes.begin());
-        return toReturn;
-    } else {
-        Node *p = nodes.at(0);
-		nodes.erase(nodes.begin());
-		for (auto i = 0; p->getChildrenSize(); i++) {
-			Node *chidl = nodes.at(0);
-			nodes.erase(nodes.begin());
-			p->setChildren();
-		}
-        return p;
-	}
-}
-
-*/
 
 //parte dal nodo corrente  e popola l'albero
 void findChildren(Node* currentNode, std::vector<Node*>& nodes) {
@@ -194,9 +172,10 @@ void findChildren(Node* currentNode, std::vector<Node*>& nodes) {
 }
 
 void printTree(Node *node, std::string indentation) {
-	std::cout << indentation.c_str() << node->getName().c_str() << std::endl;
+	auto mat = node->getMatrix();
+  std::cout << indentation.c_str() << node->getName().c_str()<< std::endl;
 	for (int i = 0; i < node->getChildrenSize(); i++)
-		printTree(node->getChildren().at(i), "\t" + indentation);
+		printTree(node->getChildren().at(i), "\t - " + indentation);
 }
 
 
@@ -244,8 +223,6 @@ Camera * Engine::addCamera(std::string name, glm::vec3 eye, glm::vec3 center, gl
 	currentCamera = camera;
 	return currentCamera;
 }
-//setta
->>>>>>> 2ce52d2d1083d3f095fb395bf382bceb26b9aa0e
 void LIB_API Engine::setProjectionMatrix(glm::mat4 projection)
 {
 	currentCamera->setProjectionMatrix(projection);
