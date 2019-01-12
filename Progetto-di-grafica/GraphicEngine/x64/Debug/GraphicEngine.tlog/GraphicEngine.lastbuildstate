@@ -1,2 +1,6 @@
 #TargetFrameworkVersion=v4.0:PlatformToolSet=v141:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit:WindowsTargetPlatformVersion=10.0.15063.0
+<<<<<<< HEAD
 Debug|x64|C:\Users\meyer\source\repos\Progetto-di-grafica\Progetto-di-grafica\|
+=======
+Debug|x64|C:\Users\cem\source\repos\cem94\Progetto-di-grafica\Progetto-di-grafica\|
+>>>>>>> 2ce52d2d1083d3f095fb395bf382bceb26b9aa0e

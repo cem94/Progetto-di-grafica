@@ -143,7 +143,109 @@ void LIB_API Engine::swapBuffers()
 void LIB_API Engine::loadIdentity() {
 	loadMatrix(glm::mat4(1.0f));
 }
+<<<<<<< HEAD
 
+=======
+void print(std::vector<Node*> nodes) {
+	for (int i = 0; i < nodes.size(); i++) {
+		std::cout << nodes.at(i)->getName().c_str() << std::endl;
+	}
+}
+
+/*
+Node *findChildren(std::vector<Node *> &nodes) { 
+	if (nodes.size()==1){
+		Node * toReturn = nodes.at(0);
+        nodes.erase(nodes.begin());
+        return toReturn;
+    } else {
+        Node *p = nodes.at(0);
+		nodes.erase(nodes.begin());
+		for (auto i = 0; p->getChildrenSize(); i++) {
+			Node *chidl = nodes.at(0);
+			nodes.erase(nodes.begin());
+			p->setChildren();
+		}
+        return p;
+	}
+}
+
+*/
+
+//parte dal nodo corrente  e popola l'albero
+void findChildren(Node* currentNode, std::vector<Node*>& nodes) {
+	//int size = currentNode->getChildrenSize();
+	//std::cout << currentNode->getName().c_str() << " children: " << size << std::endl;
+
+		for (int i = 0; i < currentNode->getChildrenSize(); i++) {
+		//prendo testa 
+		if (nodes.size() == 0) {
+			std::cout << " Empty " << std::endl;
+		//problema
+		}
+		Node * temp = nodes.at(0);
+		//la tolgo dalla lista
+		nodes.erase(nodes.begin());
+	//	std::cout << "node  " << temp->getName().c_str() << " children: " << temp->getChildrenSize() << std::endl;
+		//e scendo
+		findChildren(temp, nodes);
+		currentNode->insert(temp);
+	}
+}
+
+void printTree(Node *node, std::string indentation) {
+	std::cout << indentation.c_str() << node->getName().c_str() << std::endl;
+	for (int i = 0; i < node->getChildrenSize(); i++)
+		printTree(node->getChildren().at(i), "\t" + indentation);
+}
+
+
+Node * Engine::readOVOfile(const char * name)
+{
+	std::vector<Object*> objects = OvoReader::readOVOfile(name);
+	//cast della lista da Object* a Node*
+	std::vector<Node*> vec{};
+
+	for (auto o : objects) {
+		vec.push_back(dynamic_cast<Node*>(o));
+	}
+
+	//prendo la testa come root
+	Node* root = vec.at(0);
+	// e la cancello
+	vec.erase(vec.begin());
+	//ci attacco i figli per costruire l'albero
+	//questo secondo cast non lo capisco 
+	//print(vec);
+	findChildren(dynamic_cast<Node*>(root), vec);
+	printTree(root, "");
+	std::cout << " Children size " << root->getChildrenSize() << std::endl;
+	return root;
+}
+
+void Engine::freeImageInitialize()
+{
+	FreeImage_Initialise();
+}
+
+void Engine::freeImageDeInitialize()
+{
+	FreeImage_DeInitialise();
+}
+
+Camera * Engine::addCamera(std::string name, glm::vec3 eye, glm::vec3 center, glm::vec3 up)
+{
+	Camera * camera = new Camera();
+	camera->setName(name);
+	camera->setProjectionMatrix(glm::lookAt(eye, center, up));
+	//aggiunge la camera all'elenco
+	cameras.push_back(camera);
+	//e la setta come camera corrente
+	currentCamera = camera;
+	return currentCamera;
+}
+//setta
+>>>>>>> 2ce52d2d1083d3f095fb395bf382bceb26b9aa0e
 void LIB_API Engine::setProjectionMatrix(glm::mat4 projection)
 {
 	currentCamera->setProjectionMatrix(projection);
