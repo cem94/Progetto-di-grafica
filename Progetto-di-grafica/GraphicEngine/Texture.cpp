@@ -8,7 +8,7 @@
 Texture::Texture()
 {
 }
-
+//TODO remove when project ends///////////////////////////////////////////
 bool fileExist(const std::string& name) {
 	if (FILE *file = fopen(name.c_str(), "r")) {
 		fclose(file);
@@ -25,7 +25,7 @@ std::string workingdir()
 	GetCurrentDirectoryA(256, buf);
 	return std::string(buf) + '\\';
 }
-
+////////////////////////////////////////////////////////////
 Texture::Texture(std::string textureName)
 {
 	this->setName(textureName);

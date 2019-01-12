@@ -8,17 +8,23 @@
 /////////////
 // GLOBALS //
 ////////////
-
 int windowId;
+//performance properties
 float fps = 0.f;
 int frames = 0;
-float angleX = 0.0f;
 //options
 bool wireframe = false;
 bool lighting = true;
 //Cameras
 Camera *currentCamera = nullptr;
 std::vector<Camera*> cameras;
+int activeCamera = 0;
+//lists
+List *renderList = new List();
+List *listObjects = new List();
+List *listLight = new List();
+
+//init function//
 void LIB_API Engine::init(int argc, char *argv[])
 {
 	std::cout << "The engine starts" << std::endl;
@@ -32,6 +38,7 @@ void LIB_API Engine::init(int argc, char *argv[])
 	windowId = glutCreateWindow("Engine");
 }
 
+//main loop//
 void LIB_API Engine::startLoop() {
 	//così posso controllare quando chiuderla p.e premendo un bottone
 	/*while (condition) {
@@ -39,44 +46,71 @@ void LIB_API Engine::startLoop() {
 	}*/
 	glutMainLoop();
 }
+
+//load matrix as current OpenGL matrix
 void LIB_API Engine::loadMatrix(glm::mat4 matrix)
 {
 	glLoadMatrixf(glm::value_ptr(matrix));
 }
 
+//clear the screen 
 void LIB_API Engine::clearColor(float r, float g, float b)
 {
 	glClearColor(r, g, b, 1.0f);
 }
 
-void LIB_API Engine::loadFile()
+void Engine::mouseWheel(void(*mouseWheelFunc)(int, int, int, int))
 {
-	//TODO
+	glutMouseWheelFunc(mouseWheelFunc);
 }
 
+//TODO capire come possiamo usarlo nel nostro progetto
+void Engine::mousePressed(int button, int state, int x, int y)
+{
+	if (state == GLUT_UP)
+	{
+		//isMousePressed = false;
+	}
+	if (state == GLUT_DOWN)
+	{
+		//isMousePressed = true;
+		//mousePosition.x = x;
+		//mousePosition.y = y;
+	}
+}
+//mousePressedCallback
+void Engine::mousePressed(void(*mouseFunc)(int, int, int, int))
+{
+	glutMouseFunc(mouseFunc);
+}
+
+//redisplay window
 void LIB_API Engine::redisplay()
 {
 	glutPostWindowRedisplay(windowId);
 	frames++;//TODO completare e testare
 }
 
+//reshape callback
 void LIB_API Engine::reshape(void(*reshapeCallback)(int, int))
 {
 	glutReshapeFunc(reshapeCallback);
 }
 
+//display callback
 void LIB_API Engine::display(void(*displayCallback)())
 {
 	glutDisplayFunc(displayCallback);
 }
+
 
 void LIB_API Engine::timer(void callback(int))
 {
 	//calcolo fps -> da completare
 	fps = frames / 1.0f;
 	frames = 0;
+	// Register the next update:
 	glutTimerFunc(1000, callback, 0);
-	std::cout << fps << std::endl;
 }
 
 void LIB_API Engine::keyboard(void(*keyboardCallBack)(unsigned char, int, int))
@@ -105,118 +139,26 @@ void LIB_API Engine::swapBuffers()
 {
 	glutSwapBuffers();
 }
-//usata solo per testare se luci/texture etc funzionanos
-void LIB_API Engine::displayScene()
-{
 
-	/*glm::mat4 translation = glm::translate(glm::mat4(), glm::vec3(0.0f, 0.0f, -45.0f));
-	glm::mat4 rotation = glm::rotate(glm::mat4(), glm::radians(angleX), glm::vec3(1.0f, 0.0f, 0.0f));
-	glm::mat4 f = translation * rotation;
-	//impostazioni luce
-	glm::vec4 ambient(100, 0, 1, 0);
-	glm::vec4 diffuse(0, 1, 0, 1);
-	glm::vec4 specular(1, 0, 0, 0.5f);
-	Light* l = new Light();
-	l->setAmbient(ambient);
-	l->setDiffuse(diffuse);
-	l->setSpecular(specular);
-	//render della luce
-	l->render(f);
-	//aggiungo un po' di elementi
-	glColor3f(0.8f, 0.2f, 0.1f);
-	glutSolidTeacup(5);
-	glColor3f(0.8f, 1.0f, 0.1f);
-	glTranslated(30, 0, -30);
-	glutSolidTeapot(10);*/
-
-}
 void LIB_API Engine::loadIdentity() {
 	loadMatrix(glm::mat4(1.0f));
 }
-void print(std::vector<Node*> nodes) {
-	for (int i = 0; i < nodes.size(); i++) {
-		std::cout << nodes.at(i)->getName().c_str() << std::endl;
-	}
-}
-//parte dal nodo corrente  e popola l'albero
-void findChildren(Node* currentNode, std::vector<Node*>& nodes) {
-	//int size = currentNode->getChildrenSize();
-	//std::cout << currentNode->getName().c_str() << " children: " << size << std::endl;
-		for (int i = 0; i < currentNode->getChildrenSize(); i++) {
-		//prendo testa 
-		if (nodes.size() == 0) {
-			std::cout << " Empty " << std::endl;
-		//problema
-		}
-		Node * temp = nodes.at(0);
-		//la tolgo dalla lista
-		nodes.erase(nodes.begin());
-	//	std::cout << "node  " << temp->getName().c_str() << " children: " << temp->getChildrenSize() << std::endl;
-		//e scendo
-		findChildren(temp, nodes);
-		currentNode->insert(temp);
-	}
 
-}
-
-void printTree(Node *node, std::string indentation) {
-	std::cout << indentation.c_str() << node->getName().c_str() << std::endl;
-	for (int i = 0; i < node->getChildrenSize(); i++)
-		printTree(node->getChildren().at(i), "\t" + indentation);
-}
-
-
-Node * Engine::readOVOfile(const char * name)
-{
-	std::vector<Object*> objects = OvoReader::readOVOfile(name);
-	//cast della lista da Object* a Node*
-	std::vector<Node*> vec{};
-	for (auto o : objects) {
-		vec.push_back(dynamic_cast<Node*>(o));
-	}
-	//prendo la testa come root
-	Node* root = vec.at(0);
-	// e la cancello
-	vec.erase(vec.begin());
-	//ci attacco i figli per costruire l'albero
-	//questo secondo cast non lo capisco 
-	//print(vec);
-	findChildren(dynamic_cast<Node*>(root), vec);
-	printTree(root, "");
-	std::cout << " Children size " << root->getChildrenSize() << std::endl;
-	return root;
-}
-
-void Engine::freeImageInitialize()
-{
-	FreeImage_Initialise();
-}
-
-void Engine::freeImageDeInitialize()
-{
-	FreeImage_DeInitialise();
-}
-
-Camera * Engine::addCamera(std::string name, glm::vec3 eye, glm::vec3 center, glm::vec3 up)
-{
-	Camera * camera = new Camera();
-	camera->setName(name);
-	camera->setProjectionMatrix(glm::lookAt(eye, center, up));
-	//aggiunge la camera all'elenco
-	cameras.push_back(camera);
-	//e la setta come camera corrente
-	currentCamera = camera;
-	return currentCamera;
-}
-//setta
 void LIB_API Engine::setProjectionMatrix(glm::mat4 projection)
 {
 	currentCamera->setProjectionMatrix(projection);
 
 }
+
 void LIB_API Engine::enableZbuffer()
 {
 	glEnable(GL_DEPTH_TEST);
+}
+//accende / spegne luci
+void Engine::switchLights()
+{
+	lighting = !lighting;
+	enableLighting(lighting);
 }
 //abilita/disabilita l'illuminazione(per renderizzare in 2D (testo etc)
 void LIB_API Engine::enableLighting(bool value)
@@ -260,11 +202,6 @@ void LIB_API Engine::renderText()
 		enableLighting(true);
 }
 
-void LIB_API Engine::rotate()
-{
-	angleX++;
-}
-
 void LIB_API Engine::switchWireframe()
 {
 	wireframe = !wireframe;
@@ -284,15 +221,256 @@ void LIB_API Engine::setRandomColors()
 	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, glm::value_ptr(color));
 }
 
-void Engine::switchLights()
-{
-	lighting = !lighting;
-	enableLighting(lighting);
+void print(std::vector<Node*> nodes) {
+	for (int i = 0; i < nodes.size(); i++) {
+		std::cout << nodes.at(i)->getName().c_str() << std::endl;
+	}
 }
-//TODO rimuovere una volta che c'è Scene Graph
-void Engine::createTexture()
-{
-	Texture* t = new Texture("texture.bmp");
-	//la matrice non la usa
-	t->render(glm::mat4());
+void printTree(Node *node, std::string indentation) {
+	std::cout << indentation.c_str() << node->getName().c_str() << std::endl;
+	for (int i = 0; i < node->getChildrenSize(); i++)
+		printTree(node->getChildren().at(i), "\t" + indentation);
 }
+
+//parte dal nodo corrente  e popola l'albero
+void findChildren(Node* currentNode, std::vector<Node*>& nodes) {
+	if (currentNode->getChildrenSize() == 0) {
+		printf("Leaf \n");
+	}
+	for (int i = 0; i < currentNode->getChildrenSize(); i++) {
+		//prendo elemento dalla lista (rimuovendolo)
+		Node * temp = nodes.at(0);
+		nodes.erase(nodes.begin());
+		//e scendo
+		printf("Scendo \n");
+		findChildren(temp, nodes);
+		//lo inserisco come figlio del nodo corrente
+		currentNode->insert(temp);
+	}
+}
+
+Node * Engine::getRoot(const char * name)
+{
+	std::vector<Object*> objects = OvoReader::readOVOfile(name);
+	//cast della lista da Object* a Node*
+	std::vector<Node*> nodes{};
+	for (auto o : objects) {
+		nodes.push_back(dynamic_cast<Node*>(o));
+	}
+	//prendo la testa come root
+	Node* root = nodes.at(0);
+	// e la cancello
+	nodes.erase(nodes.begin());
+	std::cout << " Children of root " << root->getChildrenSize() << std::endl;
+	findChildren(dynamic_cast<Node*>(root), nodes);
+	printTree(root, "");
+	std::cout << " Children size " << root->getChildrenSize() << std::endl;
+	std::cout << " Nodes left " << nodes.size() << std::endl;
+	return root;
+}
+
+/**
+* takes a node from scene graph searching it by his name
+* @param root node and node name
+*/
+Node * Engine::getNodeByName(Node * root, std::string name)
+{
+	if (root->getName().compare(name) == 0)
+	{
+		return root;
+	}
+	else
+	{
+		if (root->getChildrenSize() > 0)
+		{
+			for (int i = 0; i < root->getChildrenSize(); i++)
+			{
+				Node *tmpNode = getNodeByName(root->getChildren()[i], name);
+				if (tmpNode)
+				{
+					return tmpNode;
+				}
+			}
+		}
+		return nullptr;
+	}
+}
+
+/**
+* read the scene graph and put the nodes in List
+* @param initial matrix and root node
+*/
+void  Engine::populateListFromTree(glm::mat4 fatherMatrix, Node* root)
+{
+	///////////////////////////////////////////////////////////////////////////////////////////
+	glm::mat4 actualMatrix = fatherMatrix * root->getMatrix();
+	std::vector<Node*> children = root->getChildren();
+	Mesh* mesh = nullptr;
+	switch (root->getType()) {
+	case Object::Type::NODE:
+		listObjects->add(root, actualMatrix);
+		break;
+	case Object::Type::MESH:
+		mesh = (Mesh*)root;
+		//forse il bug che non trovavano
+		listObjects->add(root, actualMatrix);
+		break;
+	case Object::Type::LIGHT:
+		listLight->add(root, actualMatrix);
+		break;
+	default:
+		printf("Error type not managed \n");
+		exit(0);
+		break;
+	}
+	for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
+	{
+		populateListFromTree(actualMatrix, *it);
+	}
+	///////////////////////////////////////////////////////////////////////////////////////////
+	/*if (root->getType() == Object::Type::NODE)
+	{
+		glm::mat4 actualMatrix = fatherMatrix * root->getMatrix();
+		listObjects->add(root, actualMatrix);
+		std::vector<Node*> children = root->getChildren();
+		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
+		{
+			populateListFromTree(actualMatrix, *it);
+		}
+	}
+	else if (root->getType() == Object::Type::MESH)
+	{
+		glm::mat4 actualMatrix = fatherMatrix * root->getMatrix();
+		Mesh* mesh = (Mesh*)root;
+		listObjects->add(root, actualMatrix);
+		std::vector<Node*> children = root->getChildren();
+		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
+		{
+			populateListFromTree(actualMatrix, *it);
+		}
+	}
+	else if (root->getType() == Object::Type::LIGHT)
+	{
+		glm::mat4 actualMatrix = fatherMatrix * root->getMatrix();
+		listLight->add(root, actualMatrix);
+		std::vector<Node*> children = root->getChildren();
+		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
+		{
+			populateListFromTree(actualMatrix, *it);
+		}
+	}
+	*/
+}
+
+/** TODO spostare in list.render
+* render elements from list
+*/
+void  Engine::renderElementsList()
+{
+	std::list<Node*> render = renderList->getList();
+	for (std::list<Node*>::iterator it = render.begin(); it != render.end(); ++it)
+	{
+		glm::mat4 renderMatrix = (*it)->getMatrix();
+		if ((*it)->getType() == Object::Type::MESH)
+		{
+			Mesh* mesh = (Mesh*)(*it);
+			if (mesh->getMaterial() != nullptr)
+			{
+				//renderizzo materiale mesh
+				mesh->getMaterial()->render(renderMatrix);
+				//renderizzo textures mesh
+				mesh->getMaterial()->getTexture()->render(renderMatrix);
+			}
+		}
+		//renderizzo elementi
+		(*it)->render(currentCamera->getMatrix()*renderMatrix);
+	}
+	//svuoto le liste -> perché??
+	listObjects = new List();
+	listLight = new List();
+}
+
+void Engine::incrementFrames()
+{
+	frames++;
+}
+
+void Engine::freeImageInitialize()
+{
+	FreeImage_Initialise();
+}
+
+void Engine::freeImageDeInitialize()
+{
+	FreeImage_DeInitialise();
+}
+
+Camera * Engine::addCamera(std::string name, glm::vec3 eye, glm::vec3 center, glm::vec3 up)
+{
+	Camera * camera = new Camera();
+	camera->setName(name);
+	camera->setProjectionMatrix(glm::lookAt(eye, center, up));
+	//aggiunge la camera all'elenco
+	cameras.push_back(camera);
+	//e la setta come camera corrente
+	currentCamera = camera;
+	return currentCamera;
+}
+
+/**
+* change current camera
+*/
+void Engine::changeCamera()
+{
+	activeCamera = (activeCamera + 1) % cameras.size();
+	currentCamera = cameras.at(activeCamera);
+}
+
+/**
+* moves actual camera
+* @param translation matrix
+*/
+void Engine::moveCamera(glm::vec3 translation)
+{
+	currentCamera->setMatrix(glm::translate(currentCamera->getMatrix(), translation));
+}
+
+/**
+* set a specific camera to gauntlet
+* @param root node and camera name
+*/
+void Engine::setCameraToNode(Node* root, std::string cameraName, std::string nodeName)
+{
+	//ottengo il nodo cercato
+	Node* gauntlet = getNodeByName(root, nodeName);
+	Camera* camera = nullptr;
+	if (gauntlet != nullptr)
+	{
+		//cambiare in for each
+		for (std::vector<Camera*>::iterator it = cameras.begin(); it != cameras.end(); ++it)
+		{
+			if ((*it)->getName().compare(cameraName) == 0)
+			{
+				camera = *it;
+			}
+		}
+		/* forse auto&
+		for (auto c : cameras) {
+			if (c->getName().compare(cameraName) == 0)
+			{
+				camera = c;
+			}
+		}*/
+		if (camera != nullptr)
+		{
+			root->remove(camera);
+			glm::vec3 pos = gauntlet->getMatrix()[3];
+			glm::vec3 eye = glm::vec3(pos.x, pos.y + 50, pos.z - 100);
+			glm::vec3 center = pos;
+			glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+			camera->setMatrix(glm::lookAt(eye, center, up));
+			gauntlet->insert(camera);
+		}
+	}
+}
+

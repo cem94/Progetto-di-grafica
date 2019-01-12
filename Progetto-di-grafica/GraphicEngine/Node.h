@@ -3,10 +3,9 @@
 class Node : public Object
 {
 public:
-	//necessario?
 	Node();
 	Node(const char* name);
-	Node(const char* name, Type type );
+	Node(const char* name, Type type);
 	virtual ~Node();
 	//Getters & Setters
 	Node* getParent() const;
@@ -27,9 +26,8 @@ public:
 private:
 	//struttura gerarchica//
 	Node* parent;
-	//Per ottimizzare si potrebbe capire quanti figli avrà e preallocarlo prima di riempirlo
 	std::vector<Node*> children;
 	//matrice di posizione
 	glm::mat4 matrix;
-
+	unsigned int size;
 };

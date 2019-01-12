@@ -51,13 +51,13 @@ void Node::setMatrix(glm::mat4 matrix)
 //Inserisce il nodo fra i  figli del nodo corrente
 void Node::insert(Node * node)
 {
-	//std::cout << "inserting node " << this->getName().c_str() << std::endl;
 	//setto padre
 	node->setParent(this);
 	//lo metto in fondo alla lista
 	children.push_back(node);
-	std::cout << " Current node " << getName().c_str() << std::endl;
-	std::cout << " childrens " << getChildrenSize() << std::endl;
+
+	std::cout << "Current node " << getName().c_str() << std::endl;
+	std::cout << "Childrens " << getChildrenSize() << std::endl;
 }
 /* TODO se possibile Use shrink_to_fit() to release memory consumed by the vector – clear() or erase() does not release memory.*/
 void Node::remove(int position)
@@ -87,14 +87,20 @@ void Node::remove(Node * node)
 //ritorna il numero di figli del nodo corrente
 int Node::getChildrenSize() const
 {
+	if (children.size() == 0) {
+		int size = this->size;
+		return size;
+	}else
 	return (int) this->children.size();
 }
 //TODO da rivedere
 void Node::setChildrenSize(unsigned int size)
 {
+	this->size = size;
 	children.reserve(size);
+	/*children.reserve(size);
 	for (unsigned int i = 0; i < size; i++) 
-		children.push_back(nullptr);
+		children.push_back(nullptr);*/
 }
 
 Object::Type Node::getType() const

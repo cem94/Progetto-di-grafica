@@ -8,37 +8,36 @@ List::~List()
 {
 }
 
-std::vector<List::Element*> List::getList() const
+std::list<Node*> List::getList() const
 {
 	return this->objects;
 }
 
-void List::setList(std::vector<Element*> objects)
+void List::setList(std::list<Node*> objects)
 {
 	this->objects = objects;
 
 }
 
-
 //aggiunge oggetto a lista istanze e salva matrice(in worlCoordinates)
-void List::add(Object* obj, glm::mat4 matrix)
+void List::add(Node* node, glm::mat4 matrix) 
 {
-	Element *element = new Element(obj, matrix);
-	this->objects.push_back(element);
+	node->setMatrix(matrix);
+	this->objects.push_back(node);
 }
 
 void List::remove(int position)
 {
-	std::vector<Element*>::iterator iterator;
+	std::list<Node*>::iterator iterator;
 	advance(iterator, position);
 	this->objects.erase(iterator);
 }
 
-List::Element * List::at(int position)
+Node* List::at(int position)
 {
 	if (position < this->objects.size())
 	{
-		std::vector<Element*>::iterator iterator;
+		std::list<Node*>::iterator iterator;
 		advance(iterator, position);
 		return *iterator;
 	}
@@ -48,4 +47,9 @@ List::Element * List::at(int position)
 void List::render(glm::mat4 renderMatrix)
 {
 	//Empty
+}
+//non ritorna nulla -> tipo lista non c'è
+Object::Type List::getType() const
+{
+	return Object::Type();
 }

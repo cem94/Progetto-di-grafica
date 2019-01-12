@@ -48,7 +48,10 @@ public:
 
 	void clearColor(float r, float g, float b);
 
-	void loadFile();
+	void mouseWheel(void(*mouseWheelFunc)(int, int, int, int));
+
+	void mousePressed(int button, int state, int x, int y);
+	void mousePressed(void(*mouseFunc)(int, int, int, int));
 
 	void redisplay();
 
@@ -72,8 +75,6 @@ public:
 
 	void renderText();
 
-	void displayScene();
-
 	void setProjectionMatrix(glm::mat4 projection);
 
 	void enableZbuffer();
@@ -84,18 +85,29 @@ public:
 
 	void freeImageDeInitialize();
 	
-	Node * readOVOfile(const char * name);
+	Node * getRoot(const char * name);
 
 	Camera* addCamera(std::string name, glm::vec3 eye, glm::vec3 center, glm::vec3 up);
 	
-	//solo per debug -> da rimuovere
-	void rotate();
-
+	//erano per debug -> da modificare
 	void switchWireframe();
-	
+
 	void setRandomColors();
 	
 	void switchLights();
+
+	Node * getNodeByName(Node * root, std::string name);
 	
-	void createTexture();
+	void changeCamera();
+
+	void moveCamera(glm::vec3 translation);
+	
+	void setCameraToNode(Node* root, std::string cameraName, std::string nodeName);
+
+	void  populateListFromTree(glm::mat4 fatherMatrix, Node* root);
+
+	void  renderElementsList();
+
+	void incrementFrames();
+
 };

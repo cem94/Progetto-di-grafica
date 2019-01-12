@@ -1,10 +1,3 @@
-/**
- * @file		ovoreader.cpp
- * @brief	Minimal decoder for the OverVision Object (OVO) 3D file format
- *
- * @author	Gregorio Meyer 2019
-**/
-
  //////////////
  // #INCLUDE //
  //////////////  
@@ -115,7 +108,6 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 	bool verbose = true;
 	// Open file:
 	FILE *dat = fopen(name, "rb");
-
 	// Create file of property:
 	std::ofstream f("../resources/propertyFile.txt");
 	// Configure stream:
@@ -124,7 +116,6 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 	Node *root;
 	// Parse chunks:	
 	unsigned int chunkId, chunkSize;
-
 	while (true)
 	{
 		fread(&chunkId, sizeof(unsigned int), 1, dat);
