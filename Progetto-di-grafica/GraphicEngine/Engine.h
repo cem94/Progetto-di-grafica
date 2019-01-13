@@ -110,4 +110,6 @@ public:
 
 	void incrementFrames();
 
+	void pass(Node* root, glm::mat4 baseMatrix);
+
 };

@@ -16,11 +16,12 @@ void displayCallback() {
 	engine->clearBuffers();
 
 	//TODO setto la camera sull'oggetto principale
-	//engine->setCameraToNode(root, "1", "gauntlet");
+	engine->setCameraToNode(root, "1", "palmo");
 
 	//setto la matrice di proiezione prospettica per il rendering 3d
 	engine->setProjectionMatrix(perspective);
-
+	//we pass the scene graph
+	engine->pass(root, glm::mat4(1.0f));
 	//3d rendering//
 	//renderizza la lista ottenuta dal file OVO
 	engine->renderElementsList();
@@ -58,10 +59,9 @@ void displayCallback() {
 }
 
 void reshapeCallback(int width, int height) {
-	std::cout << "reshape func invoked" << std::endl;
 	engine->setViewport(0, 0, width, height);
-	//perspective:(fieldOfView,aspectRatio,nearPlane, farPlane)
-	perspective = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 1.0f, 100.0f);
+	//perspective:							(fieldOfView,		aspectRatio,			 nearPlane, farPlane)
+	perspective = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 1.0f, 4000.0f);
 	ortho = glm::ortho(0.f, (float)width, 0.f, (float)height, -1.f, 1.f);
 }
 
@@ -183,15 +183,14 @@ int main(int argc, char * argv[])
 	//setta il colore con cui verra dipinto lo sfondo -> per colorare lo sfondo uso clearBuffers
 	engine->clearColor(1.0f, 0.0f, 0.0f);
 
-	// CAMERA //
 	//dove si trova la camera
-	glm::vec3 eye = glm::vec3(0.f, 0.f, -45.0f);
+	glm::vec3 eye = glm::vec3(200.f, 500.f, 1200.f);
 	//verso dove guarda 
-	glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
+	glm::vec3 center = glm::vec3(200.0f, 0.0f, 0.0f);
 	//dove è il sopra
 	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
 	engine->addCamera("1", eye, center, up);
-	//engine->addCamera("2", eye, center, up);
+	engine->addCamera("2", eye, center, up);
 
 	const char* fileName = "../ovo_files/gauntlet.ovo";
 	root = engine->getRoot(fileName);

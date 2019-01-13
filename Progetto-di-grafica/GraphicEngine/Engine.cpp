@@ -78,6 +78,7 @@ void Engine::mousePressed(int button, int state, int x, int y)
 		//mousePosition.y = y;
 	}
 }
+
 //mousePressedCallback
 void Engine::mousePressed(void(*mouseFunc)(int, int, int, int))
 {
@@ -102,7 +103,6 @@ void LIB_API Engine::display(void(*displayCallback)())
 {
 	glutDisplayFunc(displayCallback);
 }
-
 
 void LIB_API Engine::timer(void callback(int))
 {
@@ -157,9 +157,6 @@ void printTree(Node *node, std::string indentation) {
 		printTree(node->getChildren().at(i), "\t - " + indentation);
 }
 
-
-
-
 void Engine::freeImageInitialize()
 {
 	FreeImage_Initialise();
@@ -169,7 +166,6 @@ void Engine::freeImageDeInitialize()
 {
 	FreeImage_DeInitialise();
 }
-
 
 void LIB_API Engine::setProjectionMatrix(glm::mat4 projection)
 {
@@ -181,12 +177,14 @@ void LIB_API Engine::enableZbuffer()
 {
 	glEnable(GL_DEPTH_TEST);
 }
+
 //accende / spegne luci
 void Engine::switchLights()
 {
 	lighting = !lighting;
 	enableLighting(lighting);
 }
+
 //abilita/disabilita l'illuminazione(per renderizzare in 2D (testo etc)
 void LIB_API Engine::enableLighting(bool value)
 {
@@ -199,6 +197,7 @@ void LIB_API Engine::enableLighting(bool value)
 		glDisable(GL_LIGHT0);
 	}
 }
+
 //scrive info su schermo (FPS etc)
 void LIB_API Engine::renderText()
 {
@@ -248,25 +247,13 @@ void LIB_API Engine::setRandomColors()
 	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, glm::value_ptr(color));
 }
 
-
-/*
-void printTree(Node *node, std::string indentation) {
-	std::cout << indentation.c_str() << node->getName().c_str() << std::endl;
-	for (int i = 0; i < node->getChildrenSize(); i++)
-		printTree(node->getChildren().at(i), "\t" + indentation);
-}
-*/
 //parte dal nodo corrente  e popola l'albero
 void findChildren(Node* currentNode, std::vector<Node*>& nodes) {
-	if (currentNode->getChildrenSize() == 0) {
-		printf("Leaf \n");
-	}
 	for (int i = 0; i < currentNode->getChildrenSize(); i++) {
 		//prendo elemento dalla lista (rimuovendolo)
 		Node * temp = nodes.at(0);
 		nodes.erase(nodes.begin());
 		//e scendo
-		printf("Scendo \n");
 		findChildren(temp, nodes);
 		//lo inserisco come figlio del nodo corrente
 		currentNode->insert(temp);
@@ -285,11 +272,8 @@ Node * Engine::getRoot(const char * name)
 	Node* root = nodes.at(0);
 	// e la cancello
 	nodes.erase(nodes.begin());
-	std::cout << " Children of root " << root->getChildrenSize() << std::endl;
-	findChildren(dynamic_cast<Node*>(root), nodes);
+	findChildren(root, nodes);
 	printTree(root, "");
-	std::cout << " Children size " << root->getChildrenSize() << std::endl;
-	std::cout << " Nodes left " << nodes.size() << std::endl;
 	return root;
 }
 
@@ -327,7 +311,7 @@ Node * Engine::getNodeByName(Node * root, std::string name)
 void  Engine::populateListFromTree(glm::mat4 fatherMatrix, Node* root)
 {
 	///////////////////////////////////////////////////////////////////////////////////////////
-	glm::mat4 actualMatrix = fatherMatrix * root->getMatrix();
+	/*glm::mat4 actualMatrix = fatherMatrix * root->getMatrix();
 	std::vector<Node*> children = root->getChildren();
 	Mesh* mesh = nullptr;
 	switch (root->getType()) {
@@ -343,16 +327,16 @@ void  Engine::populateListFromTree(glm::mat4 fatherMatrix, Node* root)
 		listLight->add(root, actualMatrix);
 		break;
 	default:
-		printf("Error type not managed \n");
-		exit(0);
+	//	printf("Error type not managed \n");
+		//exit(0);
 		break;
 	}
 	for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
 	{
 		populateListFromTree(actualMatrix, *it);
-	}
+	}*/
 	///////////////////////////////////////////////////////////////////////////////////////////
-	/*if (root->getType() == Object::Type::NODE)
+	if (root->getType() == Object::Type::NODE)
 	{
 		glm::mat4 actualMatrix = fatherMatrix * root->getMatrix();
 		listObjects->add(root, actualMatrix);
@@ -383,7 +367,29 @@ void  Engine::populateListFromTree(glm::mat4 fatherMatrix, Node* root)
 			populateListFromTree(actualMatrix, *it);
 		}
 	}
-	*/
+}
+
+/**
+* pass the tree and build several list for elements
+* @param root node and base matrix
+*/
+void Engine::pass(Node* root, glm::mat4 baseMatrix)
+{
+	renderList = new List();
+	populateListFromTree(baseMatrix, root);
+	std::list<Node*> render;
+	std::list<Node*> renderLight = listLight->getList();
+	std::list<Node*> renderNode = listObjects->getList();
+
+	if (renderLight.size() > 0)
+	{
+		render.insert(render.begin(), renderLight.begin(), renderLight.end());
+	}
+	if (renderNode.size() > 0)
+	{
+		render.insert(render.end(), renderNode.begin(), renderNode.end());
+	}
+	renderList->setList(render);
 }
 
 /** TODO spostare in list.render
@@ -392,6 +398,10 @@ void  Engine::populateListFromTree(glm::mat4 fatherMatrix, Node* root)
 void  Engine::renderElementsList()
 {
 	std::list<Node*> render = renderList->getList();
+	if (render.size() == 0) { printf("Render list empty\n"); }
+	else {
+		printf("Rendering list of %d elements \n",render.size());
+	}
 	for (std::list<Node*>::iterator it = render.begin(); it != render.end(); ++it)
 	{
 		glm::mat4 renderMatrix = (*it)->getMatrix();
@@ -436,6 +446,7 @@ Camera * Engine::addCamera(std::string name, glm::vec3 eye, glm::vec3 center, gl
 */
 void Engine::changeCamera()
 {
+	printf("Changing camera \n");
 	activeCamera = (activeCamera + 1) % cameras.size();
 	currentCamera = cameras.at(activeCamera);
 }
@@ -460,7 +471,6 @@ void Engine::setCameraToNode(Node* root, std::string cameraName, std::string nod
 	Camera* camera = nullptr;
 	if (gauntlet != nullptr)
 	{
-		//cambiare in for each
 		for (std::vector<Camera*>::iterator it = cameras.begin(); it != cameras.end(); ++it)
 		{
 			if ((*it)->getName().compare(cameraName) == 0)
@@ -468,13 +478,6 @@ void Engine::setCameraToNode(Node* root, std::string cameraName, std::string nod
 				camera = *it;
 			}
 		}
-		/* forse auto&
-		for (auto c : cameras) {
-			if (c->getName().compare(cameraName) == 0)
-			{
-				camera = c;
-			}
-		}*/
 		if (camera != nullptr)
 		{
 			root->remove(camera);
@@ -487,4 +490,5 @@ void Engine::setCameraToNode(Node* root, std::string cameraName, std::string nod
 		}
 	}
 }
+
 
