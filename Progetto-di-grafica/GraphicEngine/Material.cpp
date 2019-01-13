@@ -21,11 +21,6 @@ Texture * Material::getTexture() const
 	return this->texture;
 }
 
-void Material::setTexture(const char * textureName)
-{
-//TODO
-}
-
 void Material::setTexture(Texture * texture)
 {
 	this->texture = texture;
@@ -84,6 +79,10 @@ glm::vec4 Material::getEmissive() const
 void Material::setEmissive(glm::vec4 emissive)
 {
 	this->emissive = emissive;
+}
+void Material::setTexture(const char * textureName)
+{
+	this->texture = new Texture(textureName);
 }
 void Material::render(glm::mat4 renderMatrix)
 {

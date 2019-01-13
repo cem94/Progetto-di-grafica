@@ -25,7 +25,7 @@ void displayCallback() {
 	//3d rendering//
 	//renderizza la lista ottenuta dal file OVO
 	engine->renderElementsList();
-
+	printf("List rendered \n");
 	/* TODO far muovere il guanto in automatico o qualcosa così
 	->trasformazioni etc
 	if (moving)

@@ -412,8 +412,15 @@ void  Engine::renderElementsList()
 			{
 				//renderizzo materiale mesh
 				mesh->getMaterial()->render(renderMatrix);
-				//renderizzo textures mesh
-				mesh->getMaterial()->getTexture()->render(renderMatrix);
+				//renderizzo textures mesh TODO
+				Texture* t = mesh->getMaterial()->getTexture();
+				if (t == nullptr) {
+					if (render.size() == 0) { printf("No texture\n"); }
+
+				}
+				else {
+					t->render(renderMatrix);
+				}
 			}
 		}
 		//renderizzo elementi

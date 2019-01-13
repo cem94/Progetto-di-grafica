@@ -1,5 +1,4 @@
-﻿  Engine.cpp
-c:\users\meyer\source\repos\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.h(8): warning C4091: 'static ': ignored on left of 'OvoReader' when no variable is declared
-c:\users\meyer\source\repos\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(403): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
-  c:\users\meyer\source\repos\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(403): note: consider using '%zd' in the format string
+﻿  Texture.cpp
+c:\users\meyer\source\repos\progetto-di-grafica\progetto-di-grafica\graphicengine\texture.cpp(13): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
   GraphicEngine.vcxproj -> C:\Users\meyer\source\repos\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.dll
