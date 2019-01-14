@@ -179,8 +179,8 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 			root->setChildrenSize(children);
 			root->setType(Object::Type::NODE);
 			root->setName(nodeName);
-		//	root->setID(idCounter);
-			//idCounter++;
+			root->setID(root->getID());
+				//idCounter++;
 			root->setMatrix(matrix);
 
 			objects.push_back(root);
@@ -276,7 +276,6 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 			//////////Mesh instance/////////
 			//------ array of vertexRender order-------//
 			std::vector<unsigned int> facesArray;
-			////////////////////////////////
 			// Mesh matrix:
 			glm::mat4 matrix;
 			memcpy(&matrix, data + position, sizeof(glm::mat4));
@@ -512,8 +511,8 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 			//Creo la mesh
 			Mesh *mesh = new Mesh();
 			mesh->setName(meshName);
-		/*	mesh->setID(idCounter);
-			idCounter++;*/
+			mesh->setID(mesh->getID());
+			//idCounter++;
 			mesh->setMatrix(matrix);
 			Material *material = nullptr;
 			for (std::vector<Material*>::iterator it = allMaterials.begin(); it != allMaterials.end(); ++it)
@@ -539,7 +538,7 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 			strcpy_s(lightName, data + position);
 			f << "   Name  . . . . :  " << lightName << std::endl;
 			position += (unsigned int)strlen(lightName) + 1;
-			
+
 			// Light matrix:
 			glm::mat4 matrix;
 			memcpy(&matrix, data + position, sizeof(glm::mat4));
@@ -625,6 +624,8 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 				strcpy_s(subtypeName, "UNDEFINED");
 				break;
 			}
+			//TODO dovrebbero essere 0,1,2,3, credo resettare id
+			light->setID(light->getID());
 			light->setMatrix(matrix);
 			light->setColor(color);
 			light->setDirection(direction);
@@ -695,27 +696,19 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 /*
 void OvoReader::readChildren(FILE* dat, Node* root)
 {
-		////////////////////////////////
-	case OvObject::Type::MESH:    //
-	case OvObject::Type::SKINNED:
-	
-	//////////////////////////////
-	case OvObject::Type::LIGHT: //
+	case OvObject::Type::LIGHT:
 	{
-
-	//	light->setID(counterLightId);
-		//counterLightId++;
+		light->setID(counterLightId);
+		counterLightId++;
 		idCounter++;
 		light->setColor(glm::vec4(color.r, color.g, color.b, 1.f));
 		light->setDirection(glm::vec4(direction.r, direction.g, direction.b, 1.f));
 	}
+}
 
-}*/
-/*
 Node*  OvoReader::readOVOfile2(const char *name) {
 
-			/////////////////////////////////
-			case OvObject::Type::MATERIAL : //
+			case OvObject::Type::MATERIAL :
 			{
 				// Material term colors, starting with emissive:
 				glm::vec3  emission, ambient, diffuse, specular;
@@ -750,13 +743,11 @@ Node*  OvoReader::readOVOfile2(const char *name) {
 				std::cout << "   Diffuse tex.  :  " << textureName << std::endl;
 				position += (unsigned int)strlen(textureName) + 1;
 
-				///////////////////////////
 				Material* material = new Material();
-				/*if (alpha != 1)
+				if (alpha != 1)
 				{
 					material->activeTransparencies();
-				}*/
-				/*
+				}
 								material->setName(materialName);
 								material->setID(idCounter);
 								idCounter++;

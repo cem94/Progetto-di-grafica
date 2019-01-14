@@ -54,5 +54,4 @@ private:
 	float radius;
 	float angle;
 	bool isActive = false;
-
 };

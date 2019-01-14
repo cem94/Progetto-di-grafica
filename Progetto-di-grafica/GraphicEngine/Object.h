@@ -10,7 +10,6 @@ public:
 	int getID() const { return this->id; };
 	void setID(int id)  { this->id=id; };
 	int generateID() {
-	//	printf("id: %d",id);
 		return counter++; 
 	};
 	std::string getName() const { return this->name; };

@@ -1,5 +1,6 @@
 #include "Engine.h"
-#include "OvoReader.h"
+#include <GL/glew.h>
+
 //FreeGlut//
 #include <GL/freeglut.h>
 //FreeImage
@@ -36,6 +37,16 @@ void LIB_API Engine::init(int argc, char *argv[])
 	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 	//creo finestra
 	windowId = glutCreateWindow("Engine");
+	glewExperimental = GL_TRUE; // Optional, but recommended
+	GLenum err = glewInit();
+	if (err != GLEW_OK)
+	{
+		// Error loading GLEW
+	}
+	if (!glewIsSupported("GL_VERSION_2_1"))
+	{
+		// Required OpenGL version not supported
+	}
 }
 
 //main loop//

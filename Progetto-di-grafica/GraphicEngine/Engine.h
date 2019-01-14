@@ -36,6 +36,7 @@
 #include "Material.h"
 #include "Mesh.h"
 #include "List.h"
+#include "OvoReader.h"
 
 class LIB_API Engine
 {
