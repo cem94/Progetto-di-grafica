@@ -13,7 +13,6 @@ public:
 	void insert(std::list<Node*> elements);
 	//Ereditato da object
 	 void render(glm::mat4 renderMatrix) override;
-	 Type getType() const override;
 private:
 	//credo che la lista sia più efficente -> controllare
 	std::list<Node*> list;

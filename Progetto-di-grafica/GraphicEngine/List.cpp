@@ -45,9 +45,3 @@ void List::insert(std::list<Node*> elements)
 }
 
 void List::render(glm::mat4 renderMatrix){}
-
-//There isn't light type
-Object::Type List::getType() const
-{
-	return Object::Type();
-}

@@ -66,7 +66,14 @@ void Node::remove(Node * node)
 	}
 	remove(i);
 }
-
+Node * Node::operator[](int position)
+{
+	if (position >= 0 && position < childrenSize)
+	{
+		return children.at(position);
+	}
+	return nullptr;
+}
 //ritorna il numero di figli del nodo corrente
 int Node::getChildrenSize() const
 {
@@ -78,10 +85,13 @@ void Node::setChildrenSize(unsigned int size)
 	this->childrenSize = size;
 	children.reserve(size);
 }
-
-Object::Type Node::getType() const
+//TODO sostituirlo dove necessario
+glm::mat4 Node::getFinalMatrix()
 {
-	return NODE;
+		if (!parent)
+			return matrix;
+		return parent->getFinalMatrix()*matrix;
+	
 }
 
 void Node::render(glm::mat4 renderMatrix)

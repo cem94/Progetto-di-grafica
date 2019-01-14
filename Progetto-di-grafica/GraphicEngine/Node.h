@@ -18,12 +18,14 @@ public:
 	void remove(Node* node);
 	int getChildrenSize() const;
 	void setChildrenSize(unsigned int size);
+	glm::mat4 getFinalMatrix();
+	//TODO usarlo per accedere ai figli
+	Node *operator[](int position);
 	//ereditato da Object
-	virtual Type getType() const override;
 	virtual void render(glm::mat4 rendermatrix) override;
 private:
 	//struttura gerarchica//
-	Node* parent;
+	Node* parent{ nullptr };
 	std::vector<Node*> children;
 	//matrice di posizione
 	glm::mat4 matrix;

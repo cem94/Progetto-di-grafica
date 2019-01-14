@@ -21,4 +21,4 @@ void Camera::setMatrix(glm::mat4 matrix){	Node::setMatrix(matrix);}
 
 void Camera::render(glm::mat4 renderMatrix){	glLoadMatrixf(glm::value_ptr(renderMatrix));}
 
-Node::Type Camera::getType() const{		return CAMERA;}
+//Node::Type Camera::getType() const{		return CAMERA;}

@@ -11,6 +11,7 @@ short Light::getIntensity() const { return this->intensity; }
 
 void Light::setIntensity(short intensity) { this->intensity = intensity; }
 
+//forse usare reference & per color,ambient,diffuse,specular
 void Light::setAmbient(glm::vec4 ambient) { this->ambient = ambient; }
 
 void Light::setDiffuse(glm::vec4 diffuse) { this->diffuse = diffuse; }
@@ -36,8 +37,22 @@ void Light::render(glm::mat4 renderMatrix)
 	}
 }
 
-Object::Type Light::getType() const { return LIGHT; }
 
+
+void Light::changeState()
+{
+	if (isActive) {
+		printf("Turning off light %s\n",getName().c_str());
+		glEnable(getLightNumber());
+		//this->isActive = false;
+	}
+	else {
+		printf("Turning on light %s\n", getName().c_str());
+		glEnable(getLightNumber());
+		//this->isActive = true;
+	}
+	this->isActive = !isActive;
+	}
 Light::SubType Light::getSubType() const { return this->subType; }
 
 void Light::setSubType(Light::SubType subtype) { this->subType = subType; }

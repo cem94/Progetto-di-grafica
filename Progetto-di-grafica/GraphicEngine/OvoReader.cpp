@@ -4,7 +4,7 @@
 std::vector<Node *> OvoReader::readOVOfile(const char *name)
 {
 	std::vector<Node*> objects;
-	std::vector<Material *> allMaterials;
+	std::vector<Material*> materials;
 	const bool verbose = true;
 	FILE *dat = fopen(name, "rb");
 	std::ofstream f("../resources/propertyFile.txt");
@@ -141,9 +141,10 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
 			position += (unsigned int)strlen(metalnessMapName) + 1;
 
 			Material *material = new Material();
-			//TODO vedere se serve
-			material->setEmissive(glm::vec4(emission.r, emission.g, emission.b, 1.0f));
+			//TODO aggiungere trasparenze
+			//material->setEmissive(glm::vec4(emission.r, emission.g, emission.b, 1.0f));
 			//
+			material->setType(Object::Type::MATERIAL);
 			material->setShininess((1 - (float)sqrt((int)roughness)) * 128);
 			material->setName(materialName);
 			material->setTexture(textureName);
@@ -151,14 +152,14 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
 			material->setAmbient(albedo*0.2f);
 			material->setSpecular(albedo*0.4f);
 			material->setDiffuse(albedo*0.6f);
-			allMaterials.push_back(material);
+			materials.push_back(material);
 		}
 		break;
+		// Both standard and skinned meshes are handled through this case:
 		////////////////////////////////
 		case OvObject::Type::MESH:    //
 		case OvObject::Type::SKINNED:
 		{
-			// Both standard and skinned meshes are handled through this case:
 			bool isSkinned = false;
 			if ((OvObject::Type) chunkId == OvObject::Type::SKINNED)
 			{
@@ -172,9 +173,6 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
 			strcpy_s(meshName, data + position);
 			position += (unsigned int)strlen(meshName) + 1;
 			f << "   Name  . . . . :  " << meshName << std::endl;
-			//////////Mesh instance/////////
-			//------ array of vertexRender order-------//
-			std::vector<unsigned int> facesArray;
 			// Mesh matrix:
 			glm::mat4 matrix;
 			memcpy(&matrix, data + position, sizeof(glm::mat4));
@@ -386,7 +384,7 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
 				meshTextures[c * 2] = uv.x;
 				meshTextures[c * 2 + 1] = 1 - uv.y;
 			}
-			//setto gli indice delle facce
+			//setto gli indiie delle facce
 			unsigned int* indices = new unsigned int[faces * 3];
 			unsigned int face[3];
 			for (unsigned int c = 0; c < faces; c++)
@@ -397,24 +395,19 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
 					//capire se posso spostarli fuori dal for
 					memcpy(face, data + position, sizeof(unsigned int) * 3);
 					position += sizeof(unsigned int) * 3;
-
 					indices[c * 3] = face[0];
 					indices[c * 3 + 1] = face[1];
 					indices[c * 3 + 2] = face[2];
-					/*		facesArray.push_back(face[0]);
-							facesArray.push_back(face[1]);
-							facesArray.push_back(face[2]);*/
 				}
 			}
 			//////////////////////////////////////////////////////////////		
 			//Creo la mesh
 			Mesh *mesh = new Mesh();
+			mesh->setType(Object::Type::MESH);
 			mesh->setName(meshName);
-			//	mesh->setID(mesh->getID());
-				//idCounter++;
 			mesh->setMatrix(matrix);
 			Material *material = nullptr;
-			for (std::vector<Material*>::iterator it = allMaterials.begin(); it != allMaterials.end(); ++it)
+			for (std::vector<Material*>::iterator it = materials.begin(); it != materials.end(); ++it)
 			{
 				if ((*it)->getName().compare(materialName) == 0)
 					material = *it;
@@ -525,6 +518,7 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
 			}
 			//TODO dovrebbero essere 0,1,2,3, credo resettare id
 		//	light->setID(light->getID());
+			light->setType(Object::Type::LIGHT);
 			light->setMatrix(matrix);
 			light->setColor(glm::vec4(color.r, color.g, color.b, 1.0f));
 			light->setDirection(glm::vec4(direction.r, direction.g, direction.b, 1.0f));

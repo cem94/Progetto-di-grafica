@@ -15,7 +15,6 @@ public:
 	void generateVAO(float * vertexArray, float * normalArray, float * uvArray, unsigned int * indices, unsigned int vertices);
 	//Ereditato da Object
 	 void render(glm::mat4 renderMatrix) override;
-	 Type getType() const override;
 private:
 	float radius;
 	unsigned int numberOfFaces;

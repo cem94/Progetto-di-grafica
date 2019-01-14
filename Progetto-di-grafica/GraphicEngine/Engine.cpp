@@ -19,6 +19,7 @@ bool lighting = true;
 Camera *currentCamera = nullptr;
 std::vector<Camera*> cameras;
 int activeCamera = 1;
+
 //lists
 List *toRender = new List();
 List *objects = new List();
@@ -178,7 +179,6 @@ void Engine::freeImageDeInitialize()
 void LIB_API Engine::setProjectionMatrix(glm::mat4 projection)
 {
 	currentCamera->setProjectionMatrix(projection);
-
 }
 
 void LIB_API Engine::enableZbuffer()
@@ -189,21 +189,26 @@ void LIB_API Engine::enableZbuffer()
 //accende / spegne luci
 void Engine::switchLights()
 {
+	printf("Lights %d\n", lighting);
+	
 	lighting = !lighting;
 	enableLighting(lighting);
 }
-
-//abilita/disabilita l'illuminazione(per renderizzare in 2D (testo etc)
-void LIB_API Engine::enableLighting(bool value)
+void Engine::enableLighting(bool value)
 {
-	if (value) {
-		glEnable(GL_LIGHTING);
-		glEnable(GL_LIGHT0);
-	}
-	else {
+	if(value)
+	glEnable(GL_LIGHTING);
+	else
 		glDisable(GL_LIGHTING);
-		glDisable(GL_LIGHT0);
-	}
+}
+//abilita/disabilita l'illuminazione(per renderizzare in 2D (testo etc)
+void LIB_API Engine::enableLight(Node *root, std::string lightName)
+{
+	Light* light = (Light*)getNodeByName(root, lightName);
+	if (light != nullptr)
+		light->changeState();
+	else
+		std::cout << "Light not present" << std::endl;
 }
 
 //scrive info su schermo (FPS etc)
@@ -243,16 +248,13 @@ void findChildren(Node* currentNode, std::vector<Node*>& nodes) {
 	}
 }
 
-Node * Engine::getRoot(const char * name)
+Node * Engine::getScene(const char * name)
 {
 	std::vector<Node*> nodes = OvoReader::readOVOfile(name);
-	
 	Node* root = nodes.at(0);
 	nodes.erase(nodes.begin());
-
 	findChildren(root, nodes);
-	
-	printTree(root, "");
+	//printTree(root, "");
 	return root;
 }
 
@@ -290,12 +292,11 @@ Node * Engine::getNodeByName(Node * root, std::string name)
 void  Engine::populateListFromTree(glm::mat4 fatherMatrix, Node* root)
 {
 	std::vector<Node*> children = root->getChildren();
-	Mesh* mesh = nullptr;
-	glm::mat4 actualMatrix;
+	glm::mat4 actualMatrix = root->getFinalMatrix();
+	root->setMatrix(root->getFinalMatrix());
+
 	switch (root->getType()) {
 	case Object::Type::NODE:
-		actualMatrix = fatherMatrix * root->getMatrix();
-		root->setMatrix(actualMatrix);
 		objects->add(root);
 		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
 		{
@@ -303,18 +304,13 @@ void  Engine::populateListFromTree(glm::mat4 fatherMatrix, Node* root)
 		}
 		break;
 	case Object::Type::MESH:
-		actualMatrix = fatherMatrix * root->getMatrix();
-		mesh = (Mesh*)root;
-		root->setMatrix(actualMatrix);
-		objects->add(root);
+		objects->add((Mesh*)root);
 		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
 		{
 			populateListFromTree(actualMatrix, *it);
 		}
 		break;
 	case Object::Type::LIGHT:
-		actualMatrix = fatherMatrix * root->getMatrix();
-		root->setMatrix(actualMatrix);
 		lights->add(root);
 		std::vector<Node*> children = root->getChildren();
 		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
@@ -333,7 +329,9 @@ void Engine::pass(Node* root, glm::mat4 baseMatrix)
 {
 	toRender = new List();
 	populateListFromTree(baseMatrix, root);
+	printf("Lights %d \n", lights->getList().size());
 	toRender->insert(lights->getList());
+	printf("Objects %d \n", objects->getList().size());
 	toRender->insert(objects->getList());
 }
 
@@ -361,6 +359,7 @@ void  Engine::renderList()
 		}
 		//renderizzo elementi
 		std::string s = (*it)->getName();
+
 		(*it)->render(currentCamera->getMatrix()*renderMatrix);
 	}
 	//svuoto le liste -> perché??
@@ -376,7 +375,7 @@ void Engine::incrementFrames()
 Camera * Engine::addCamera(std::string name, glm::vec3 eye, glm::vec3 center, glm::vec3 up)
 {
 	Camera * camera = new Camera();
-	//camera->setID(camera->getID());
+	printf("Id: %d\n",camera->getId());
 	camera->setName(name);
 	camera->setProjectionMatrix(glm::lookAt(eye, center, up));
 	//aggiunge la camera all'elenco
@@ -428,7 +427,7 @@ void Engine::setCameraToNode(Node* root, std::string cameraName, std::string nod
 		{
 			root->remove(camera);
 			glm::vec3 pos = gauntlet->getMatrix()[3];
-			glm::vec3 eye = glm::vec3(pos.x, pos.y + 50, pos.z - 100);
+			glm::vec3 eye = glm::vec3(pos.x, pos.y + 50, pos.z - 400);
 			glm::vec3 center = pos;
 			glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
 			camera->setMatrix(glm::lookAt(eye, center, up));

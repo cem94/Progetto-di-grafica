@@ -78,6 +78,8 @@ public:
 
 	void swapBuffers();
 
+	void enableLight(Node *root, std::string lightName);
+
 	void enableLighting(bool value);
 
 	void renderText();
@@ -92,7 +94,7 @@ public:
 
 	void freeImageDeInitialize();
 
-	Node * getRoot(const char * name);
+	Node * getScene(const char * name);
 
 	Camera* addCamera(std::string name, glm::vec3 eye, glm::vec3 center, glm::vec3 up);
 

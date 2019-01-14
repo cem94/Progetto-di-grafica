@@ -1,7 +1,6 @@
 #include "Engine.h"
 // FreeGLUT:
 #include <GL/freeglut.h>
-
 //// FreeImage:
 #include <FreeImage.h>
 
@@ -24,21 +23,28 @@ std::string workingdir()
 	char buf[256];
 	GetCurrentDirectoryA(256, buf);
 	return std::string(buf) + '\\';
-}
+}//////////////////////////////////////////////////
 
+//TODO fix
 Texture::Texture(std::string textureName){
-//TODO aggiungere texture valide e rimuovere questo//////////////////////////////////////////////////
+
+//TODO aggiungere texture valide e rimuovere questo//////////////////////////////////////////////////////////////7
 	if (textureName.size() == 0 || textureName.compare("[none]")==0||textureName.size()==11) {
-		std::cout << "Texture name not valid" << std::endl;
+		std::cout << "Texture name not valid " << textureName.c_str() << std::endl;
 	}/////////////////////////////////////////////////////////////////
+	
+	
+	
+	
+	
+	
 	else {
-		std::cout << "Texture name size" << textureName.size() <<std::endl;
+		std::cout << "Texture name size " << textureName.size() <<std::endl;
 		std::cout << "Texture name " << textureName.c_str() <<std::endl;
 		this->setName(textureName);
 		glGenTextures(1, &textureId);
 		std::string texturePath = "../resources/";
 		const char* fileName = texturePath.append(textureName).c_str();
-
 		//check fileName
 		if (!fileExist(fileName)) {
 			std::cout << "File " << textureName.c_str() << " not found. Current working directory: " << workingdir().c_str() << std::endl;
@@ -65,9 +71,11 @@ Texture::Texture(std::string textureName){
 		// Set circular coordinates:
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
 		//TODO aggiungere asintropia
-		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1);
-		// Set min/mag filters migliorano la texture rimuovendo errori
+	//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1);
+		
+	// Set min/mag filters migliorano la texture rimuovendo errori
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		//TODO controllare se OpenGL > 3.0 altrimenti mimapping non funziona
 		// Using mipmapping 
@@ -89,9 +97,4 @@ void Texture::render(glm::mat4 rendermatrix)
 {
 	glBindTexture(GL_TEXTURE_2D, textureId);
 	glEnable(GL_TEXTURE_2D);
-}
-
-Object::Type Texture::getType() const
-{
-	return TEXTURE;
 }

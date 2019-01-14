@@ -13,13 +13,10 @@ public:
 	void setAmbient(glm::vec4 ambient);
 	void setDiffuse(glm::vec4 diffuse);
 	void setSpecular(glm::vec4 specular);
-	
-	//We dont 'use DIRECTIONAL, remove it.
 	enum SubType {OMNI, SPOTLIGHT, DIRECTIONAL};
 	SubType getSubType() const;
 	void setSubType(SubType subtype);
-	Type getType() const override;
-
+	void changeState();
 	int getLightNumber();
 	void enableLight(bool enable);
 	void setColor(glm::vec4 color);
@@ -37,7 +34,6 @@ public:
 	float getCutoff() const;
 	void setCutoff(float cutoff);
 	void setMatrix(glm::mat4 matrix);
-
 	//Ereditato da object
 	 void render(glm::mat4 renderMatrix) override;
 private:
@@ -57,5 +53,5 @@ private:
 	float cutoff;
 	float radius;
 	float angle;
-	bool isActive = false;
+	bool isActive = true;
 };

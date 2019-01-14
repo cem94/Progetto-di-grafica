@@ -78,8 +78,3 @@ void Mesh::render(glm::mat4 renderMatrix)
 	glBindVertexArray(vao);
 	glDrawElements(GL_TRIANGLES, numberOfFaces * 3, GL_UNSIGNED_INT, nullptr);
 }
-
-Object::Type Mesh::getType() const
-{
-	return MESH;
-}

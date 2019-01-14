@@ -25,7 +25,6 @@ public:
 	void setTexture(const char * textureName);
 	//ereditato da Object
 	void render(glm::mat4 renderMatrix) override;
-	Type getType() const override;
 
 private:
 	Texture* texture;

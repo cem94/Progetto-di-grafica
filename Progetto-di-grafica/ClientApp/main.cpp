@@ -4,7 +4,7 @@ Engine* engine = new Engine();
 //matrici di proiezione
 glm::mat4 perspective;
 glm::mat4 ortho;
-Node *root = NULL;
+Node *scene = NULL;
 //Ideally, only GLM should be used client-side.
 //TODO If needed, replicate the (few) required definitions in your engine’s include files(e.g., the definition of special keys provided by FreeGlut).
 #define GLUT_KEY_LEFT 0x0064
@@ -12,34 +12,21 @@ Node *root = NULL;
 #define GLUT_KEY_RIGHT 0x0066
 #define GLUT_KEY_DOWN 0x0069
 
-
 void displayCallback() {
 	//clear dei bit DEPTH etc
 	engine->clearBuffers();
-
 	//TODO setto la camera sull'oggetto principale
-	engine->setCameraToNode(root, "1", "palmo");
-
+	engine->setCameraToNode(scene, "1", "palmo");
 	//setto la matrice di proiezione prospettica per il rendering 3d
 	engine->setProjectionMatrix(perspective);
 	//we pass the scene graph
-	engine->pass(root, glm::mat4(1.0f));
+	engine->pass(scene, glm::mat4(1.0f));
 	//3d rendering//
 	//renderizza la lista ottenuta dal file OVO
 	engine->renderList();
 	/* TODO far muovere il guanto in automatico o qualcosa così
-	->trasformazioni etc
-	if (moving)
-	{
-			speed = speed + 0.1;
-	}
-	else
-	{
-			speed = speed - 0.1;
-	}
 	engine->moveGauntlet(root, speed);
 	*/
-
 	//2D rendering//
 	//setto la matrice di proiezione ortogonale il rendering 2d
 	engine->setProjectionMatrix(ortho);
@@ -65,6 +52,9 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY) {
 	{
 		//Così dovrebbe essere comoda da usare//
 		//pollice
+	case '1':
+		//TODO fare come per camera
+		//engine->changeLight(root, "Omni001");
 	case ' ':
 		//engine->closeFinger();
 		break;
@@ -86,7 +76,7 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY) {
 		//engine->closeFinger();
 		break;
 	case 'l':
-		//abilita/disabilita luci 
+		//abilita/disabilita illuminazione 
 		engine->switchLights();
 		break;
 
@@ -104,10 +94,10 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY) {
 	}
 	//necessario?
 		engine->redisplay();
-
 }
 
 void specialCallback(int key, int x, int y) {
+	//muovi luce
 	switch (key) {
 	case GLUT_KEY_DOWN:
 		break;
@@ -129,7 +119,6 @@ void specialCallback(int key, int x, int y) {
 }
 
 void timerCallback(int value) {
-	//si può fare?
 	engine->timer(timerCallback);
 }
 
@@ -157,9 +146,7 @@ void mousePressed(int button, int state, int x, int y)
 int main(int argc, char * argv[])
 {
 	std::cout << "Client application starts" << std::endl;
-
 	engine->init(argc, argv);
-
 	//set callback
 	engine->display(displayCallback);
 	engine->reshape(reshapeCallback);
@@ -167,15 +154,14 @@ int main(int argc, char * argv[])
 	engine->specialKeyboard(specialCallback);
 	engine->mouseWheel(mouseWheel);
 	engine->mousePressed(mousePressed);
-
 	engine->timer(timerCallback);
+
 	//forse si possono spostare in init
 	engine->enableZbuffer();
 	engine->freeImageInitialize();
 
 	//setta il colore con cui verra dipinto lo sfondo -> per colorare lo sfondo uso clearBuffers
-	engine->clearColor(0.2f, 0.3f, 0.0f);
-
+	engine->clearColor(0.2f, 0.3f, 0.7f);
 	//dove si trova la camera
 	glm::vec3 eye = glm::vec3(200.f, 500.f, 1200.f);
 	//verso dove guarda 
@@ -186,8 +172,7 @@ int main(int argc, char * argv[])
 	engine->addCamera("2", eye, center, up);
 
 	const char* fileName = "../ovo_files/gauntlet.ovo";
-	root = engine->getRoot(fileName);
-	std::cout << "Ovo file readed " << std::endl;
+	scene = engine->getScene(fileName);
 	engine->startLoop();
 	//forse si può spostare in engine->free o qualcosa così
 	engine->freeImageDeInitialize();

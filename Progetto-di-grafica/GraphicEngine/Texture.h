@@ -7,8 +7,6 @@ public:
 	Texture(std::string textureName);
 	virtual ~Texture();
 	void render(glm::mat4 rendermatrix) override;
-	Type getType() const override;
 private:
-	//potremmo usare direttamente l'id dell'object
 	unsigned int textureId;
 };

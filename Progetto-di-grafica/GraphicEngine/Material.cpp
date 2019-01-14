@@ -51,11 +51,6 @@ glm::vec3 Material::getSpecular()
 	return this->specular;
 }
 
-Object::Type Material::getType() const
-{
-	return MATERIAL;
-}
-
 float Material::getShininess() const
 {
 	return this->shininess;

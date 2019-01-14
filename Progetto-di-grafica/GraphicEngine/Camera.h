@@ -11,8 +11,7 @@ public:
 	glm::mat4 inverseCamera() const;
 	//Ereditato da object
 	void render(glm::mat4 renderMatrix) override;
-	Type getType() const override;
+	//Type getType() const override;
 private:
-	//contiene la matrice di proiezione -> glm::lookAt(eye,center,up)
 	glm::mat4 projectionMatrix;
 };

@@ -7,6 +7,7 @@
                            << "                    \t" << m[0][1] << "\t" << m[1][1] << "\t" << m[2][1] << "\t" << m[3][1] << std::endl \
                            << "                    \t" << m[0][2] << "\t" << m[1][2] << "\t" << m[2][2] << "\t" << m[3][2] << std::endl \
                            << "                    \t" << m[0][3] << "\t" << m[1][3] << "\t" << m[2][3] << "\t" << m[3][3] << std::endl 
+
 // Stripped-down redefinition of OvObject (just for the chunk IDs):
 class OvObject
 {
@@ -82,7 +83,6 @@ public:
 		LAST,
 	};
 };
-
 
  class OvoReader
 {
