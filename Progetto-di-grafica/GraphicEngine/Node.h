@@ -4,8 +4,6 @@ class Node : public Object
 {
 public:
 	Node();
-	Node(const char* name);
-	Node(const char* name, Type type);
 	virtual ~Node();
 	//Getters & Setters
 	Node* getParent() const;

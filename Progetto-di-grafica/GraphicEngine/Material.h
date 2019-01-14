@@ -4,8 +4,6 @@ class  Material : public Object
 {
 public:
 	Material();
-	//TODO migliorare
-	Material(const char * name);
 	virtual ~Material();
 	//Getter & setter
 	Texture* getTexture() const;

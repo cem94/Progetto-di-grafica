@@ -1,18 +1,10 @@
 #include "Engine.h"
 
+static int counter;
+
 Node::Node()
 {
-}
-
-Node::Node(const char * name)
-{
-	this->setName(name);
-}
-
-Node::Node(const char * name, Object::Type type)
-{
-	this->setName(name);
-	this->setType(type);
+	this->setId(counter++);
 }
 
 Node::~Node()
@@ -51,15 +43,12 @@ void Node::setMatrix(glm::mat4 matrix)
 //Inserisce il nodo fra i  figli del nodo corrente
 void Node::insert(Node * node)
 {
-	//setto padre
 	node->setParent(this);
-	//lo metto in fondo alla lista
 	children.push_back(node);
 }
 /* TODO se possibile Use shrink_to_fit() to release memory consumed by the vector – clear() or erase() does not release memory.*/
 void Node::remove(int position)
 {
-	//TODO semplificare if
 	if (children.size() > 0 && position > 0 && position < children.size())
 	{
 		children.erase(children.begin() + position);
@@ -68,15 +57,14 @@ void Node::remove(int position)
 //rimuove node
 void Node::remove(Node * node)
 {
-	int index = 0;
-	//iteratore per calcolare l'indice del nodo da rimuovere
+	int i = 0;
 	for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
 	{
 		if ((*it) == node)
 			break;
-		index++;
+		i++;
 	}
-	remove(index);
+	remove(i);
 }
 
 //ritorna il numero di figli del nodo corrente

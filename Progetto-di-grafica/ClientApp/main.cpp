@@ -26,7 +26,7 @@ void displayCallback() {
 	engine->pass(root, glm::mat4(1.0f));
 	//3d rendering//
 	//renderizza la lista ottenuta dal file OVO
-	engine->renderElementsList();
+	engine->renderList();
 	/* TODO far muovere il guanto in automatico o qualcosa così
 	->trasformazioni etc
 	if (moving)
@@ -45,15 +45,9 @@ void displayCallback() {
 	engine->setProjectionMatrix(ortho);
 	//necessario (la matrice è ortogonale)
 	engine->loadIdentity();
-
-	//stampo informazioni TODO sistemare 
-	//-> le luci vanno attivate / disattivate prima di renderizzare
-	//senza influenzare il colore del testo
 	engine->renderText();
-
 	//TODO testare e vedere se serve
-	//engine->incrementFrames();
-
+	engine->incrementFrames();
 	//swappa il buffer mostrando ciò che è stato renderizzato
 	engine->swapBuffers();
 	engine->redisplay();
@@ -95,20 +89,15 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY) {
 		//abilita/disabilita luci 
 		engine->switchLights();
 		break;
-	case 'r':
-		engine->setRandomColors();
-		break;
+
 		//muovi mano
 	case 'm':
 		//engine->moveHand();
 		break;
-		//wireframe (griglia)
-	case 'g':
-		engine->switchWireframe();
-		break;
 		//cambia camera corrente
 	case 'c':
 		engine->changeCamera();
+		//set nome camera corrente
 		break;
 	case 'p':
 		break;
@@ -143,19 +132,18 @@ void timerCallback(int value) {
 	//si può fare?
 	engine->timer(timerCallback);
 }
+
 //zoom in / out
 void mouseWheel(int wheel, int direction, int x, int y)
 {
 	wheel = 0;
 	if (direction == -1)
 	{
-		printf("Zoom out \n");
 		glm::vec3 traslation(0.0, 0.0, -10);
 		engine->moveCamera(traslation);
 	}
 	else if (direction == +1)
 	{
-		printf("Zoom in \n");
 		glm::vec3 traslation(0.0, 0.0, 10);
 		engine->moveCamera(traslation);
 	}
@@ -163,7 +151,6 @@ void mouseWheel(int wheel, int direction, int x, int y)
 //callback per pressione mouse
 void mousePressed(int button, int state, int x, int y)
 {
-
 	engine->mousePressed(button, state, x, y);
 }
 

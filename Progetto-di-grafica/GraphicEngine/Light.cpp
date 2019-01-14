@@ -3,67 +3,52 @@
 // FreeGLUT:
 #include <GL/freeglut.h>
 
-Light::Light(){}
+Light::Light() {}
 
-Light::~Light(){}
+Light::~Light() {}
 
-short Light::getIntensity() const{	return this->intensity;}
+short Light::getIntensity() const { return this->intensity; }
 
-void Light::setIntensity(short intensity){	this->intensity = intensity;}
+void Light::setIntensity(short intensity) { this->intensity = intensity; }
 
+void Light::setAmbient(glm::vec4 ambient) { this->ambient = ambient; }
 
-void Light::setAmbient(glm::vec4 ambient){	this->ambient = ambient;}
+void Light::setDiffuse(glm::vec4 diffuse) { this->diffuse = diffuse; }
 
-void Light::setDiffuse(glm::vec4 diffuse){	this->diffuse = diffuse;}
+void Light::setSpecular(glm::vec4 specular) { this->specular = specular; }
 
-void Light::setSpecular(glm::vec4 specular){	this->specular = specular;}
-
-//TODO miglioorare
 void Light::render(glm::mat4 renderMatrix)
 {
 	//set renderingMatrix as current OpenGL Matrix
 	glLoadMatrixf(glm::value_ptr(renderMatrix));
-
 	//setto le componenti
 	glLightfv(getLightNumber(), GL_AMBIENT, glm::value_ptr(this->ambient));
 	glLightfv(getLightNumber(), GL_DIFFUSE, glm::value_ptr(this->diffuse));
 	glLightfv(getLightNumber(), GL_SPECULAR, glm::value_ptr(this->specular));
-	
-	// DIRECTIONAL
-	////directional [ x , y  ,z , 0.0f ]/////////////////////
-	// OMNI
-    /////omnidirectional [ x , y  ,z , 1.0f ], cutoff=180 /////
-	// SPOTLIGHT
-    /////spotlight [ x , y , z , 1.0f ], 0 < cutoff < 90 //////
-
 	// DIRECTIONL, OMNI AND SPOTLIGHT
 	glLightfv(getLightNumber(), GL_POSITION, glm::value_ptr(this->position));
-	
 	// OMNI OR SPOTLIGHT
 	if (this->subType != DIRECTIONAL) {
-
-          glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &angle);
-
-		  // ONLY SPOTLIGHT
-		  if (this->subType != OMNI)
-            glLightfv(getLightNumber(), GL_SPOT_DIRECTION, glm::value_ptr(direction));
+		glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &angle);
+		// ONLY SPOTLIGHT
+		if (this->subType != OMNI)
+			glLightfv(getLightNumber(), GL_SPOT_DIRECTION, glm::value_ptr(direction));
 	}
 }
 
-Object::Type Light::getType() const{	return LIGHT;}
+Object::Type Light::getType() const { return LIGHT; }
 
-Light::SubType Light::getSubType() const{	return this->subType;}
+Light::SubType Light::getSubType() const { return this->subType; }
 
-//seleziona tipo luce (directional/omni/spotlight)
-void Light::setSubType(Light::SubType subtype){		this->subType = subType;}
+void Light::setSubType(Light::SubType subtype) { this->subType = subType; }
 
 int Light::getLightNumber()
 {
-	const int n_light = this->getID();
+	const int n_light = this->getId();
 	// we have 7 light, 0 = 0x4000 and 7 = 0x4007
 	if (0 <= n_light || n_light <= 7)
-          return GL_LIGHT0 + n_light;
-	else 
+		return GL_LIGHT0 + n_light;
+	else
 		return GL_LIGHT0;
 }
 
@@ -106,28 +91,33 @@ void Light::setAngle(float angle)
 {
 	this->angle = angle;
 }
+
 float Light::getAngle() const
 {
 	return this->angle;
 }
+
 float Light::getRadius() const
 {
 	return this->radius;
 }
+
 void Light::setRadius(float radius)
 {
 	this->radius = radius;
 }
+
 float Light::getCutoff() const
 {
 	return this->cutoff;
 }
+
 void Light::setCutoff(float cutoff)
 {
 	this->cutoff = cutoff;
 }
-//TODO rimuovere in qualche modo
-//TODO:: GERG cosa intendi? che devo rimuovere questo metodo da questa classe?
+
+//TODO volevo provare a vedere se se ne può fare a meno(visto che c'è già in Node e Light eredita da node,  ma non credo
 void Light::setMatrix(glm::mat4 matrix)
 {
 	Node::setMatrix(matrix);

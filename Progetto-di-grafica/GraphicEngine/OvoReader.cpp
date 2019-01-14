@@ -1,117 +1,12 @@
-//////////////
-// #INCLUDE //
-//////////////  
-
-// GLM:
-//#define GLM_ENABLE_EXPERIMENTAL     // Silly requirement since 0.9.9
-#define GLM_FORCE_CTOR_INIT         // Constructors no longer init to identity since 0.9.9
-#include <glm/glm.hpp>
-#include <glm/gtc/packing.hpp>
-
-// C/C++:
-//#include <iostream>
-#include <iomanip>   
-#include <fstream>
-#include <limits.h>
-#include "OvoReader.h"
-#define OV_MAXNUMBEROFCHARS 256
-
-// Macro for printing an OvMatrix4 to console:   
-#define MAT2STR(f, m) f << "   Matrix  . . . :  \t" << m[0][0] << "\t" << m[1][0] << "\t" << m[2][0] << "\t" << m[3][0] << std::endl \
-                           << "                    \t" << m[0][1] << "\t" << m[1][1] << "\t" << m[2][1] << "\t" << m[3][1] << std::endl \
-                           << "                    \t" << m[0][2] << "\t" << m[1][2] << "\t" << m[2][2] << "\t" << m[3][2] << std::endl \
-                           << "                    \t" << m[0][3] << "\t" << m[1][3] << "\t" << m[2][3] << "\t" << m[3][3] << std::endl 
-
-// Stripped-down redefinition of OvObject (just for the chunk IDs):
-class OvObject
-{
-public:
-	enum class Type : int  ///< Type of entities
-	{
-		// Foundation types:
-		OBJECT = 0,
-		NODE,
-		OBJECT2D,
-		OBJECT3D,
-		LIST,
-
-		// Derived classes:
-		BUFFER,
-		SHADER,
-		TEXTURE,
-		FILTER,
-		MATERIAL,
-		FBO,
-		QUAD,
-		BOX,
-		SKYBOX,
-		FONT,
-		CAMERA,
-		LIGHT,
-		BONE,
-		MESH,	   // Keep them...
-		SKINNED, // ...consecutive        
-		INSTANCED,
-		PIPELINE,
-		EMITTER,
-
-		// Animation type
-		ANIM,
-
-		// Physics related:
-		PHYSICS,
-
-		// Terminator:
-		LAST,
-	};
-};
-
-// Stripped-down redefinition of OvMesh (just for the subtypes):
-class OvMesh
-{
-public:
-	enum class Subtype : int ///< Kind of mesh
-	{
-		// Foundation types:
-		DEFAULT = 0,
-		NORMALMAPPED,
-		TESSELLATED,
-
-		// Terminator:
-		LAST,
-	};
-};
-
-// Stripped-down redefinition of OvLight (just for the subtypes):
-class OvLight
-{
-public:
-	enum class Subtype : int ///< Kind of light
-	{
-		// Foundation types:
-		OMNI = 0,
-		DIRECTIONAL,
-		SPOT,
-
-		// Terminator:
-		LAST,
-	};
-};
+#include "Engine.h"
 
 //legge ovoFile e ritorna una lista di oggetti 
-
-//ID temporaneamente commentati
-std::vector<Object *> OvoReader::readOVOfile(const char *name)
+std::vector<Node *> OvoReader::readOVOfile(const char *name)
 {
-	//list of parsed object
-	std::vector<Object *> objects;
-	//list of materials
+	std::vector<Node*> objects;
 	std::vector<Material *> allMaterials;
-	// Check for retrieve vertex:
 	const bool verbose = true;
-	// Open file:
 	FILE *dat = fopen(name, "rb");
-	// Create file of property:
 	std::ofstream f("../resources/propertyFile.txt");
 	// Configure stream:
 	std::cout.precision(2);  // 2 decimals are enough
@@ -179,8 +74,8 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 			root->setChildrenSize(children);
 			root->setType(Object::Type::NODE);
 			root->setName(nodeName);
-			root->setID(root->getID());
-				//idCounter++;
+			//	root->setID(root->getID());
+					//idCounter++;
 			root->setMatrix(matrix);
 
 			objects.push_back(root);
@@ -246,9 +141,13 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 			position += (unsigned int)strlen(metalnessMapName) + 1;
 
 			Material *material = new Material();
+			//TODO vedere se serve
+			material->setEmissive(glm::vec4(emission.r, emission.g, emission.b, 1.0f));
+			//
 			material->setShininess((1 - (float)sqrt((int)roughness)) * 128);
 			material->setName(materialName);
 			material->setTexture(textureName);
+			//material->setAlpha(alpha);
 			material->setAmbient(albedo*0.2f);
 			material->setSpecular(albedo*0.4f);
 			material->setDiffuse(albedo*0.6f);
@@ -511,8 +410,8 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 			//Creo la mesh
 			Mesh *mesh = new Mesh();
 			mesh->setName(meshName);
-			mesh->setID(mesh->getID());
-			//idCounter++;
+			//	mesh->setID(mesh->getID());
+				//idCounter++;
 			mesh->setMatrix(matrix);
 			Material *material = nullptr;
 			for (std::vector<Material*>::iterator it = allMaterials.begin(); it != allMaterials.end(); ++it)
@@ -625,10 +524,10 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 				break;
 			}
 			//TODO dovrebbero essere 0,1,2,3, credo resettare id
-			light->setID(light->getID());
+		//	light->setID(light->getID());
 			light->setMatrix(matrix);
-			light->setColor(glm::vec4(color.r,color.g,color.b,1.0f));
-			light->setDirection(glm::vec4(direction.r,direction.g,direction.b,1.0f));
+			light->setColor(glm::vec4(color.r, color.g, color.b, 1.0f));
+			light->setDirection(glm::vec4(direction.r, direction.g, direction.b, 1.0f));
 			light->setCutoff(cutoff);
 			light->setChildrenSize(children);
 			objects.push_back(light);
@@ -693,73 +592,3 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 	std::cout << "\nFile parsed" << std::endl;
 	return objects;
 }
-/*
-void OvoReader::readChildren(FILE* dat, Node* root)
-{
-	case OvObject::Type::LIGHT:
-	{
-		light->setID(counterLightId);
-		counterLightId++;
-		idCounter++;
-		light->setDirection(glm::vec4(direction.r, direction.g, direction.b, 1.f));
-	}
-}
-
-Node*  OvoReader::readOVOfile2(const char *name) {
-
-			case OvObject::Type::MATERIAL :
-			{
-				// Material term colors, starting with emissive:
-				glm::vec3  emission, ambient, diffuse, specular;
-				std::memcpy(&emission, data + position, sizeof(glm::vec3));
-				std::cout << "   Emission  . . :  " << emission.r << ", " << emission.g << ", " << emission.b << std::endl;
-				position += sizeof(glm::vec3);
-
-				// Ambient:
-				std::memcpy(&ambient, data + position, sizeof(glm::vec3));
-				std::cout << "   Ambient . . . :  " << ambient.r << ", " << ambient.g << ", " << ambient.b << std::endl;
-				position += sizeof(glm::vec3);
-
-				// Diffuse:
-				std::memcpy(&diffuse, data + position, sizeof(glm::vec3));
-				std::cout << "   Diffuse . . . :  " << diffuse.r << ", " << diffuse.g << ", " << diffuse.b << std::endl;
-				position += sizeof(glm::vec3);
-
-				// Specular:
-				std::memcpy(&specular, data + position, sizeof(glm::vec3));
-				std::cout << "   Specular  . . :  " << specular.r << ", " << specular.g << ", " << specular.b << std::endl;
-				position += sizeof(glm::vec3);
-
-				// Shininess factor:
-				float shininess;
-				std::memcpy(&shininess, data + position, sizeof(float));
-				std::cout << "   Shininess . . :  " << shininess << std::endl;
-				position += sizeof(float);
-
-				// Diffuse texture filename, or [none] if not used:
-				char textureName[OV_MAXNUMBEROFCHARS];
-				std::strcpy(textureName, data + position);
-				std::cout << "   Diffuse tex.  :  " << textureName << std::endl;
-				position += (unsigned int)strlen(textureName) + 1;
-
-				Material* material = new Material();
-				if (alpha != 1)
-				{
-					material->activeTransparencies();
-				}
-								material->setName(materialName);
-								material->setID(idCounter);
-								idCounter++;
-								//material->setAlpha(alpha);
-								material->setShininess(shininess);
-								material->setAmbient(glm::vec4(ambient.r, ambient.g, ambient.b, 1.f));
-								material->setDiffuse(glm::vec4(diffuse.r, diffuse.g, diffuse.b, 1.f));
-								material->setSpecular(glm::vec4(specular.r, specular.g, specular.b, 1.f));
-								if (textureName != "[none]")
-								{
-									Texture* texture = new Texture(textureName);
-									material->setTexture(texture);
-								}
-
-					}*/
-

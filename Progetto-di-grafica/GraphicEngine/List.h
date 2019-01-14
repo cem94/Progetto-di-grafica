@@ -7,9 +7,10 @@ public:
 	virtual ~List();
 	std::list<Node*> getList() const;
 	void setList(std::list<Node*> list);
-	void add(Node* node, glm::mat4 matrix);
+	void add(Node* node);
 	void remove(int position);
 	Node* at(int position);
+	void insert(std::list<Node*> elements);
 	//Ereditato da object
 	 void render(glm::mat4 renderMatrix) override;
 	 Type getType() const override;

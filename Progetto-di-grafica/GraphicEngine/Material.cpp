@@ -7,11 +7,6 @@ Material::Material()
 {
 }
 
-Material::Material(const char * name)
-{
-	this->setName(name);	
-}
-
 Material::~Material()
 {
 }
@@ -82,7 +77,10 @@ void Material::setEmissive(glm::vec4 emissive)
 }
 void Material::setTexture(const char * textureName)
 {
-	this->texture = new Texture(textureName);
+	if (textureName != "[none]")
+	{
+		this->setTexture(new Texture(textureName));
+	}
 }
 //una volte create trasparenze sostituire 1 con alpha
 void Material::render(glm::mat4 renderMatrix)

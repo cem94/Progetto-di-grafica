@@ -18,7 +18,7 @@ bool lighting = true;
 //Cameras
 Camera *currentCamera = nullptr;
 std::vector<Camera*> cameras;
-int activeCamera = 0;
+int activeCamera = 1;
 //lists
 List *toRender = new List();
 List *objects = new List();
@@ -83,14 +83,12 @@ void Engine::mousePressed(int button, int state, int x, int y)
 	if (state == GLUT_UP)
 	{
 		//isMousePressed = false;
-		printf("Mouse released \n");
 	}
 	if (state == GLUT_DOWN)
 	{
 		//isMousePressed = true;
 		//mousePosition.x = x;
 		//mousePosition.y = y;
-		printf("Mouse pressed \n");
 	}
 }
 
@@ -104,7 +102,6 @@ void Engine::mousePressed(void(*mouseFunc)(int, int, int, int))
 void LIB_API Engine::redisplay()
 {
 	glutPostWindowRedisplay(windowId);
-	frames++;//TODO completare e testare
 }
 
 //reshape callback
@@ -218,22 +215,18 @@ void LIB_API Engine::renderText()
 	char text[64];
 	//colore testo
 	glColor3f(1.0f, 1.0f, 1.0f);
-	//x,y del testo 
-	glRasterPos2f(10.0f, 20.0f);
-	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
 	if (lighting)
 		strcpy_s(text, "Lighting on");
 	else
 		strcpy_s(text, "Lighting off");
-	glRasterPos2f(10.0f, 40.0f);
+	glRasterPos2f(10.0f, 20.0f);
 	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
-	strcpy_s(text, "");
-	glRasterPos2f(10.0f, 60.0f);
-	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
-	//---------------------------------------------------------------------
 	glColor3f(1.0f, 1.0f, 1.0f);
 	sprintf_s(text, "FPS: %.1f", fps);
-	glRasterPos2f(10.0f, 80.0f);
+	glRasterPos2f(10.0f, 40.0f);
+	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
+	strcpy_s(text, "[c] change camera");
+	glRasterPos2f(10.0f, 60.0f);
 	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
 	//---------------------------------------------------------------------
 	if (lighting)
@@ -243,29 +236,22 @@ void LIB_API Engine::renderText()
 //parte dal nodo corrente  e popola l'albero
 void findChildren(Node* currentNode, std::vector<Node*>& nodes) {
 	for (int i = 0; i < currentNode->getChildrenSize(); i++) {
-		//prendo elemento dalla lista (rimuovendolo)
-		Node * temp = nodes.at(0);
+		Node * next = nodes.at(0);
 		nodes.erase(nodes.begin());
-		//e scendo
-		findChildren(temp, nodes);
-		//lo inserisco come figlio del nodo corrente
-		currentNode->insert(temp);
+		findChildren(next, nodes);
+		currentNode->insert(next);
 	}
 }
 
 Node * Engine::getRoot(const char * name)
 {
-	std::vector<Object*> objects = OvoReader::readOVOfile(name);
-	//cast della lista da Object* a Node*
-	std::vector<Node*> nodes{};
-	for (auto o : objects) {
-		nodes.push_back(dynamic_cast<Node*>(o));
-	}
-	//prendo la testa come root
+	std::vector<Node*> nodes = OvoReader::readOVOfile(name);
+	
 	Node* root = nodes.at(0);
-	// e la cancello
 	nodes.erase(nodes.begin());
+
 	findChildren(root, nodes);
+	
 	printTree(root, "");
 	return root;
 }
@@ -286,10 +272,10 @@ Node * Engine::getNodeByName(Node * root, std::string name)
 		{
 			for (int i = 0; i < root->getChildrenSize(); i++)
 			{
-				Node *tmpNode = getNodeByName(root->getChildren()[i], name);
-				if (tmpNode)
+				Node *node = getNodeByName(root->getChildren()[i], name);
+				if (node)
 				{
-					return tmpNode;
+					return node;
 				}
 			}
 		}
@@ -303,62 +289,39 @@ Node * Engine::getNodeByName(Node * root, std::string name)
 */
 void  Engine::populateListFromTree(glm::mat4 fatherMatrix, Node* root)
 {
-	///////////////////////////////////////////////////////////////////////////////////////////
-	/*glm::mat4 actualMatrix = fatherMatrix * root->getMatrix();
 	std::vector<Node*> children = root->getChildren();
 	Mesh* mesh = nullptr;
+	glm::mat4 actualMatrix;
 	switch (root->getType()) {
 	case Object::Type::NODE:
-		listObjects->add(root, actualMatrix);
+		actualMatrix = fatherMatrix * root->getMatrix();
+		root->setMatrix(actualMatrix);
+		objects->add(root);
+		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
+		{
+			populateListFromTree(actualMatrix, *it);
+		}
 		break;
 	case Object::Type::MESH:
+		actualMatrix = fatherMatrix * root->getMatrix();
 		mesh = (Mesh*)root;
-		//forse il bug che non trovavano
-		listObjects->add(root, actualMatrix);
+		root->setMatrix(actualMatrix);
+		objects->add(root);
+		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
+		{
+			populateListFromTree(actualMatrix, *it);
+		}
 		break;
 	case Object::Type::LIGHT:
-		listLight->add(root, actualMatrix);
+		actualMatrix = fatherMatrix * root->getMatrix();
+		root->setMatrix(actualMatrix);
+		lights->add(root);
+		std::vector<Node*> children = root->getChildren();
+		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
+		{
+			populateListFromTree(actualMatrix, *it);
+		}
 		break;
-	default:
-	//	printf("Error type not managed \n");
-		//exit(0);
-		break;
-	}
-	for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
-	{
-		populateListFromTree(actualMatrix, *it);
-	}*/
-	///////////////////////////////////////////////////////////////////////////////////////////
-	if (root->getType() == Object::Type::NODE)
-	{
-		glm::mat4 actualMatrix = fatherMatrix * root->getMatrix();
-		objects->add(root, actualMatrix);
-		std::vector<Node*> children = root->getChildren();
-		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
-		{
-			populateListFromTree(actualMatrix, *it);
-		}
-	}
-	else if (root->getType() == Object::Type::MESH)
-	{
-		glm::mat4 actualMatrix = fatherMatrix * root->getMatrix();
-		Mesh* mesh = (Mesh*)root;
-		objects->add(root, actualMatrix);
-		std::vector<Node*> children = root->getChildren();
-		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
-		{
-			populateListFromTree(actualMatrix, *it);
-		}
-	}
-	else if (root->getType() == Object::Type::LIGHT)
-	{
-		glm::mat4 actualMatrix = fatherMatrix * root->getMatrix();
-		lights->add(root, actualMatrix);
-		std::vector<Node*> children = root->getChildren();
-		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
-		{
-			populateListFromTree(actualMatrix, *it);
-		}
 	}
 }
 
@@ -370,27 +333,16 @@ void Engine::pass(Node* root, glm::mat4 baseMatrix)
 {
 	toRender = new List();
 	populateListFromTree(baseMatrix, root);
-	std::list<Node*> render;
-	std::list<Node*> renderLight = lights->getList();
-	std::list<Node*> renderNode = objects->getList();
-
-	if (renderLight.size() > 0)
-	{
-		render.insert(render.begin(), renderLight.begin(), renderLight.end());
-	}
-	if (renderNode.size() > 0)
-	{
-		render.insert(render.end(), renderNode.begin(), renderNode.end());
-	}
-	toRender->setList(render);
+	toRender->insert(lights->getList());
+	toRender->insert(objects->getList());
 }
 
-/** TODO spostare in list.render
+/** 
 * render elements from list
 */
-void  Engine::renderElementsList()
+void  Engine::renderList()
 {
-	toRender->render(glm::mat4(1.0f));
+	//toRender->render(glm::mat4(1.0f));
 	std::list<Node*> render = toRender->getList();
 	for (std::list<Node*>::iterator it = render.begin(); it != render.end(); ++it)
 	{
@@ -424,7 +376,7 @@ void Engine::incrementFrames()
 Camera * Engine::addCamera(std::string name, glm::vec3 eye, glm::vec3 center, glm::vec3 up)
 {
 	Camera * camera = new Camera();
-	camera->setID(camera->getID());
+	//camera->setID(camera->getID());
 	camera->setName(name);
 	camera->setProjectionMatrix(glm::lookAt(eye, center, up));
 	//aggiunge la camera all'elenco

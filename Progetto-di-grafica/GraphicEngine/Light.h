@@ -5,7 +5,6 @@ class Light : public Node
 {
 public:
 	Light();
-	Light(const char* name) : Node(name){}
 	virtual ~Light();
 
 	//Getters & Setters

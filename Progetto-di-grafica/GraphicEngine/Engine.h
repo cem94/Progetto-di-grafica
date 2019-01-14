@@ -20,12 +20,16 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <iomanip>   
+#include <fstream>
+#include <limits.h>
 
 //GLM
 #define GLM_FORCE_CTOR_INIT               // Force constructors to initialize to identity from v0.9.9
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <glm/gtc/packing.hpp>
 
 // CLASSES 
 #include "Object.h"
@@ -104,7 +108,7 @@ public:
 
 	void  populateListFromTree(glm::mat4 fatherMatrix, Node* root);
 
-	void  renderElementsList();
+	void  renderList();
 
 	void incrementFrames();
 

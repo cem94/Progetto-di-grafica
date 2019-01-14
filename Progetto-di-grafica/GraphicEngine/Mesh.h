@@ -5,7 +5,6 @@ class  Mesh : public Node
 {
 public:
 	Mesh();
-	Mesh(const char* name): Node(name) {};
 	virtual ~Mesh();
 	//Getters & Setters
 	Material * getMaterial() const;
@@ -13,27 +12,22 @@ public:
 	void setRadius(float radius);
 	void setNumberOfFaces(unsigned int numberOfFaces);
 	void setMatrix(glm::mat4 matrix);
-
 	void generateVAO(float * vertexArray, float * normalArray, float * uvArray, unsigned int * indices, unsigned int vertices);
-		//Ereditato da Object
+	//Ereditato da Object
 	 void render(glm::mat4 renderMatrix) override;
 	 Type getType() const override;
 private:
-	
 	float radius;
 	unsigned int numberOfFaces;
 	unsigned int* indices;
 	float* vertices;
 	float* normals;
 	float* textureArray;
-
 	unsigned int vertexVBO = 0;
 	unsigned int normalVBO = 0;
 	unsigned int uvVBO = 0;
 	unsigned int indicesVBO = 0;
-	//VAO
 	unsigned int vao = 0;
-	//materiale di cui è fatta la mesh
 	Material* material;
 };
 

@@ -7,11 +7,8 @@
 class  Object {
 public:
 	enum Type { CAMERA, LIGHT, MATERIAL, MESH, NODE, TEXTURE, NONE };
-	int getID() const { return this->id; };
-	void setID(int id)  { this->id=id; };
-	int generateID() {
-		return counter++; 
-	};
+	int getId() const { return this->id; };
+	void setId(int id)  { this->id=id; };
 	std::string getName() const { return this->name; };
 	void setName(std::string name) { this->name = name; };
 	virtual void render(glm::mat4 rendermatrix) = 0;
@@ -21,5 +18,4 @@ private:
 	int id;
 	std::string name;
 	Type type;
-	static int counter;
 };
