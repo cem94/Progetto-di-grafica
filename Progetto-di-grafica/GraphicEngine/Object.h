@@ -6,7 +6,7 @@
 
 class  Object {
 public:
-	enum Type { CAMERA, LIGHT, MATERIAL, MESH, NODE, TEXTURE };
+	enum Type { CAMERA, LIGHT, MATERIAL, MESH, NODE, TEXTURE, NONE };
 	int getID() const { return this->id; };
 	void setID(int id)  { this->id=id; };
 	int generateID() {
