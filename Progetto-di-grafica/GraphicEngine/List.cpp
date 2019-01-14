@@ -1,23 +1,12 @@
 #include "Engine.h"
 
-List::List()
-{
-}
+List::List(){}
 
-List::~List()
-{
-}
+List::~List(){}
 
-std::list<Node*> List::getList() const
-{
-	return this->list;
-}
+std::list<Node*> List::getList() const{	return this->list;}
 
-void List::setList(std::list<Node*> list)
-{
-	this->list = list;
-
-}
+void List::setList(std::list<Node*> list){	this->list = list;}
 
 //aggiunge oggetto a lista istanze e salva matrice(in worlCoordinates)
 void List::add(Node* node, glm::mat4 matrix) 
@@ -44,12 +33,10 @@ Node* List::at(int position)
 	return nullptr;
 }
 
-void List::render(glm::mat4 renderMatrix)
-{
-	//Empty
-}
-//non ritorna nulla -> tipo lista non c'è
+void List::render(glm::mat4 renderMatrix){}
+
+//There isn't light type
 Object::Type List::getType() const
 {
-	return Object::Type();
+	return Object::NONE;
 }

@@ -1,11 +1,13 @@
 #pragma once
 /*Light class that implements the main types of light introduced in the course. This class includes the necessary methods for applying its settings to OpenGL.      */
+
 class Light : public Node
 {
 public:
 	Light();
 	Light(const char* name) : Node(name){}
 	virtual ~Light();
+
 	//Getters & Setters
 	short getIntensity() const;
 	void setIntensity(short intensity);
@@ -13,14 +15,19 @@ public:
 	void setDiffuse(glm::vec3 diffuse);
 	void setSpecular(glm::vec3 specular);
 	
-	enum SubType { DIRECTIONAL, OMNI, SPOTLIGHT};
+	//We dont 'use DIRECTIONAL, remove it.
+	enum SubType {OMNI, SPOTLIGHT, DIRECTIONAL};
 	SubType getSubType() const;
 	void setSubType(SubType subtype);
-	//TODO finire switch GLenum
+	Type getType() const override;
+
 	int getLightNumber();
 	void enableLight(bool enable);
 	void setColor(glm::vec3 color);
+
+	//posizione della luce, per tutte e 3
 	void setPosition(glm::vec4 position);
+
 	//direzione luce spotlight
 	glm::vec3 getDirection();
 	void setDirection(glm::vec3 direction);
@@ -33,9 +40,9 @@ public:
 	float getCutoff() const;
 	void setCutoff(float cutoff);
 	void setMatrix(glm::mat4 matrix);
+
 	//Ereditato da object
 	 void render(glm::mat4 renderMatrix) override;
-	 Type getType() const override;
 private:
 	//impostazioni luce//
 	glm::vec4 position;
