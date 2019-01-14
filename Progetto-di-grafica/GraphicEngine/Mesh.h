@@ -29,7 +29,7 @@ public:
 private:
 	
 	//Usate dall'ovo reader 1/////////////////////////////////
-	/*float radius;
+	float radius;
 	//unsigned int* indices;
 	unsigned int numberOfFaces;
 	unsigned int* indices;
@@ -44,18 +44,18 @@ private:
 
 	//VAO
 	unsigned int vao = 0;
-	*/
+	
 	//////////////////////////////////////////////////
 	//materiale di cui è fatta la mesh
 	Material* material;
 	//USATE DALL'OVO READER 1 ///
 	//aggiungere coordinate texturing e vettori normali
-	std::vector<unsigned int> facesArray;
+	/*std::vector<unsigned int> facesArray;
 	//vertici mesh
 	std::vector<glm::vec3> vertexes;
 	//vettori normali
 	std::vector<glm::vec4> normals;
 	//coordinate di texturing
-	std::vector<glm::vec4> textureCoordinates;
+	std::vector<glm::vec4> textureCoordinates;*/
 };
 
