@@ -87,7 +87,6 @@ Texture::~Texture()
 //renderizza la texture TODO capire perché renderMatrix non utilizzata
 void Texture::render(glm::mat4 rendermatrix)
 {
-	printf("Rendering texture \n");
 	glBindTexture(GL_TEXTURE_2D, textureId);
 	glEnable(GL_TEXTURE_2D);
 }

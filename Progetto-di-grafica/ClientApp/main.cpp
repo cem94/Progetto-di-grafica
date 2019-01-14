@@ -5,6 +5,8 @@ Engine* engine = new Engine();
 glm::mat4 perspective;
 glm::mat4 ortho;
 Node *root = NULL;
+//Ideally, only GLM should be used client-side.
+//TODO If needed, replicate the (few) required definitions in your engine’s include files(e.g., the definition of special keys provided by FreeGlut).
 #define GLUT_KEY_LEFT 0x0064
 #define GLUT_KEY_UP 0x0065
 #define GLUT_KEY_RIGHT 0x0066
@@ -25,7 +27,6 @@ void displayCallback() {
 	//3d rendering//
 	//renderizza la lista ottenuta dal file OVO
 	engine->renderElementsList();
-	printf("List rendered \n");
 	/* TODO far muovere il guanto in automatico o qualcosa così
 	->trasformazioni etc
 	if (moving)
@@ -110,14 +111,14 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY) {
 		engine->changeCamera();
 		break;
 	}
-	//	engine->redisplay();
+	//necessario?
+		engine->redisplay();
 
 }
 
 void specialCallback(int key, int x, int y) {
 	switch (key) {
 	case GLUT_KEY_DOWN:
-
 		break;
 	case GLUT_KEY_LEFT:
 
@@ -130,10 +131,10 @@ void specialCallback(int key, int x, int y) {
 		break;
 	default:
 		break;
-		//Ideally, only GLM should be used client-side.
-	//TODO If needed, replicate the (few) required definitions in your engine’s include files(e.g., the definition of special keys provided by FreeGlut).
+
 	}
-	//engine->redisplay();
+	//necessario?
+	engine->redisplay();
 }
 
 void timerCallback(int value) {
@@ -146,11 +147,13 @@ void mouseWheel(int wheel, int direction, int x, int y)
 	wheel = 0;
 	if (direction == -1)
 	{
+		printf("Zoom out \n");
 		glm::vec3 traslation(0.0, 0.0, -10);
 		engine->moveCamera(traslation);
 	}
 	else if (direction == +1)
 	{
+		printf("Zoom in \n");
 		glm::vec3 traslation(0.0, 0.0, 10);
 		engine->moveCamera(traslation);
 	}
@@ -158,6 +161,7 @@ void mouseWheel(int wheel, int direction, int x, int y)
 //callback per pressione mouse
 void mousePressed(int button, int state, int x, int y)
 {
+
 	engine->mousePressed(button, state, x, y);
 }
 

@@ -98,5 +98,6 @@ Object::Type Node::getType() const
 
 void Node::render(glm::mat4 renderMatrix)
 {
+	printf("Node render called \n");
 	//empty
 }

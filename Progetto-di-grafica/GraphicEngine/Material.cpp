@@ -2,14 +2,14 @@
 
 // FreeGLUT:
 #include <GL/freeglut.h>
-
+//TODO trasparenze
 Material::Material()
 {
 }
 
 Material::Material(const char * name)
 {
-		this->setName(name);	
+	this->setName(name);	
 }
 
 Material::~Material()
@@ -84,12 +84,12 @@ void Material::setTexture(const char * textureName)
 {
 	this->texture = new Texture(textureName);
 }
+//una volte create trasparenze sostituire 1 con alpha
 void Material::render(glm::mat4 renderMatrix)
 {
-	//TODO
 	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, glm::value_ptr(glm::vec3(ambient[0], ambient[1], ambient[2])));
-	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, glm::value_ptr(glm::vec3(diffuse[0], diffuse[1], diffuse[2])));
-	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, glm::value_ptr(glm::vec3(specular[0], specular[1], specular[2])));
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, glm::value_ptr(glm::vec4(ambient[0], ambient[1], ambient[2],1)));
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, glm::value_ptr(glm::vec4(diffuse[0], diffuse[1], diffuse[2],1)));
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, glm::value_ptr(glm::vec4(specular[0], specular[1], specular[2],1)));
 	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, glm::value_ptr(glm::vec3(emissive[0], emissive[1], emissive[2])));
 }

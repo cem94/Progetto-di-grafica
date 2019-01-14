@@ -14,6 +14,9 @@
 #include <fstream>
 #include <limits.h>
 #include "OvoReader.h"
+#define OV_MAXNUMBEROFCHARS 256
+std::vector<Material*> materials;
+
 
 // Macro for printing an OvMatrix4 to console:   
 #define MAT2STR(f, m) f << "   Matrix  . . . :  \t" << m[0][0] << "\t" << m[1][0] << "\t" << m[2][0] << "\t" << m[3][0] << std::endl \
@@ -174,7 +177,6 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 			f << "   Target node . :  " << targetName << std::endl;
 			position += (unsigned int)strlen(targetName) + 1;
 			root->setMatrix(matrix);
-			
 			objects.push_back(root);
 		}
 		break;
@@ -408,7 +410,6 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 					normalVertexList.push_back(normal);
 				}
 
-
 				position += sizeof(unsigned int);
 
 				// Texture coordinates:
@@ -618,7 +619,7 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 			objects.push_back(light);
 		}
 		break;
-
+		//TODO credo si possa rimuovere
 		/////////////////////////////
 		case OvObject::Type::BONE: //
 		{
@@ -677,3 +678,223 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 	std::cout << "\nFile parsed" << std::endl;
 	return objects;
 }
+/*
+void OvoReader::readChildren(FILE* dat, Node* root)
+{
+		////////////////////////////////
+	case OvObject::Type::MESH:    //
+	case OvObject::Type::SKINNED:
+	{
+		if (hasPhysics != 0)
+		{
+			std::cout << "Errore" << std::endl;
+		}
+
+		float* meshVertices = new float[vertices * 3];
+		float* meshTextures = new float[vertices * 2];
+		float* meshNormals = new float[vertices * 3];
+
+		// Interleaved and compressed vertex/normal/UV/tangent data:
+		for (unsigned int c = 0; c < vertices; c++)
+		{
+			// Vertex coords:
+			glm::vec3 vertex;
+			std::memcpy(&vertex, data + position, sizeof(glm::vec3));
+			position += sizeof(glm::vec3);
+
+			// Vertex normal:
+			unsigned int normalData;
+			std::memcpy(&normalData, data + position, sizeof(unsigned int));
+			position += sizeof(unsigned int);
+			glm::vec4 normal = glm::unpackSnorm3x10_1x2(normalData);
+			// Texture coordinates:
+			unsigned short textureData[2];
+			std::memcpy(textureData, data + position, sizeof(unsigned short) * 2);
+			position += sizeof(unsigned short) * 2;
+
+			glm::vec2 uv;
+			uv.x = glm::unpackHalf1x16(textureData[0]);
+			uv.y = glm::unpackHalf1x16(textureData[1]);
+			// Tangent vector:
+			unsigned int tangentData;
+			std::memcpy(&tangentData, data + position, sizeof(unsigned int));
+			position += sizeof(unsigned int);
+
+			//meshVertex.push_back(new Vertex(vertex, glm::unpackSnorm3x10_1x2(normalData), textureDataVector));
+
+			meshVertices[c * 3] = vertex.x;
+			meshVertices[c * 3 + 1] = vertex.y;
+			meshVertices[c * 3 + 2] = vertex.z;
+
+			meshNormals[c * 3] = normal.x;
+			meshNormals[c * 3 + 1] = normal.y;
+			meshNormals[c * 3 + 2] = normal.z;
+
+			meshTextures[c * 2] = uv.x;
+			meshTextures[c * 2 + 1] = 1 - uv.y;
+		}
+
+		//vector<array<unsigned int, 3>> meshFaces;
+		unsigned int* indices = new unsigned int[faces * 3];
+		// Faces:
+		for (unsigned int c = 0; c < faces; c++)
+		{
+			// Face indexes:
+			unsigned int face[3];
+			std::memcpy(face, data + position, sizeof(unsigned int) * 3);
+			position += sizeof(unsigned int) * 3;
+			//array<unsigned int, 3> tempFace = { face[0], face[1], face[2] };
+			//meshFaces.push_back(tempFace);
+			indices[c * 3] = face[0];
+			indices[c * 3 + 1] = face[1];
+			indices[c * 3 + 2] = face[2];
+		}
+
+		///////////////////////////
+		Mesh* mesh = new Mesh();
+		mesh->setName(meshName);
+		mesh->setID(idCounter);
+		idCounter++;
+		mesh->setMatrix(matrix);
+
+		Material *material = nullptr;
+		for (std::vector<Material*>::iterator it = materials.begin(); it != materials.end(); ++it)
+		{
+			if ((*it)->getName().compare(materialName) == 0)
+				material = *it;
+		}
+		mesh->setMaterial(material);
+		mesh->setRadius(radius);
+		mesh->setNumberOfFaces(faces);
+		mesh->generateVAO(meshVertices, meshNormals, meshTextures, indices, vertices);
+		root->insert(mesh);
+		///////////////////////////
+	}
+	break;
+	//////////////////////////////
+	case OvObject::Type::LIGHT: //
+	{
+	///////////////////////////
+		Light* light = new Light();
+		light->setName(lightName);
+	//	light->setID(counterLightId);
+		//counterLightId++;
+		//light->setSubType(subtype);
+		idCounter++;
+		light->setColor(glm::vec4(color.r, color.g, color.b, 1.f));
+		light->setDirection(glm::vec4(direction.r, direction.g, direction.b, 1.f));
+		root->insert(light);
+		////////////////////////////
+	}
+	break;
+	/////////////////////////////
+	case OvObject::Type::BONE: //
+	{
+}*/
+/*
+Node*  OvoReader::readOVOfile2(const char *name) {
+		
+			// Parse chunk information according to its type:
+			unsigned int position = 0;
+			switch ((OvObject::Type)chunkId)
+			{
+		
+			/////////////////////////////
+			case OvObject::Type::NODE: //
+			{
+				root->setName(nodeName);
+				root->setID(idCounter);
+				idCounter++;
+				root->setMatrix(matrix);
+			}
+			break;
+			/////////////////////////////////
+			case OvObject::Type::MATERIAL : //
+			{
+				std::cout << "material]" << std::endl;
+
+				// Material name:
+				char materialName[OV_MAXNUMBEROFCHARS];
+				std::strcpy(materialName, data + position);
+				std::cout << "   Name  . . . . :  " << materialName << std::endl;
+				position += (unsigned int)strlen(materialName) + 1;
+
+				// Material term colors, starting with emissive:
+				glm::vec3  emission, ambient, diffuse, specular;
+				std::memcpy(&emission, data + position, sizeof(glm::vec3));
+				std::cout << "   Emission  . . :  " << emission.r << ", " << emission.g << ", " << emission.b << std::endl;
+				position += sizeof(glm::vec3);
+
+				// Ambient:
+				std::memcpy(&ambient, data + position, sizeof(glm::vec3));
+				std::cout << "   Ambient . . . :  " << ambient.r << ", " << ambient.g << ", " << ambient.b << std::endl;
+				position += sizeof(glm::vec3);
+
+				// Diffuse:
+				std::memcpy(&diffuse, data + position, sizeof(glm::vec3));
+				std::cout << "   Diffuse . . . :  " << diffuse.r << ", " << diffuse.g << ", " << diffuse.b << std::endl;
+				position += sizeof(glm::vec3);
+
+				// Specular:
+				std::memcpy(&specular, data + position, sizeof(glm::vec3));
+				std::cout << "   Specular  . . :  " << specular.r << ", " << specular.g << ", " << specular.b << std::endl;
+				position += sizeof(glm::vec3);
+
+				// Shininess factor:
+				float shininess;
+				std::memcpy(&shininess, data + position, sizeof(float));
+				std::cout << "   Shininess . . :  " << shininess << std::endl;
+				position += sizeof(float);
+
+				// Transparency factor:
+				float alpha;
+				std::memcpy(&alpha, data + position, sizeof(float));
+				std::cout << "   Transparency  :  " << alpha << std::endl;
+				position += sizeof(float);
+
+				// Diffuse texture filename, or [none] if not used:
+				char textureName[OV_MAXNUMBEROFCHARS];
+				std::strcpy(textureName, data + position);
+				std::cout << "   Diffuse tex.  :  " << textureName << std::endl;
+				position += (unsigned int)strlen(textureName) + 1;
+
+				// Normal map filename, or [none] if not used:
+				char normalMapName[OV_MAXNUMBEROFCHARS];
+				std::strcpy(normalMapName, data + position);
+				std::cout << "   Normalmap tex.:  " << normalMapName << std::endl;
+				position += (unsigned int)strlen(normalMapName) + 1;
+
+				// Height map filename, or [none] if not used:
+				char heightMapName[OV_MAXNUMBEROFCHARS];
+				std::strcpy(heightMapName, data + position);
+				std::cout << "   Heightmap tex.:  " << heightMapName << std::endl;
+				position += (unsigned int)strlen(heightMapName) + 1;
+
+				///////////////////////////
+				Material* material = new Material();
+				/*if (alpha != 1)
+				{
+					material->activeTransparencies();
+				}*/
+/*
+				material->setName(materialName);
+				material->setID(idCounter);
+				idCounter++;
+				//material->setAlpha(alpha);
+				material->setShininess(shininess);
+				material->setEmissive(glm::vec4(emission.r, emission.g, emission.b, 1.f));
+				material->setAmbient(glm::vec4(ambient.r, ambient.g, ambient.b, 1.f));
+				material->setDiffuse(glm::vec4(diffuse.r, diffuse.g, diffuse.b, 1.f));
+				material->setSpecular(glm::vec4(specular.r, specular.g, specular.b, 1.f));
+				if (textureName != "[none]")
+				{
+					Texture* texture = new Texture(textureName);
+					material->setTexture(texture);
+				}
+				materials.push_back(material);
+				////////////////////////////////
+			}
+			break;
+			///////////
+	}*/
+

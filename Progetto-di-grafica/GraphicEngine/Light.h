@@ -12,10 +12,7 @@ public:
 	void setAmbient(glm::vec3 ambient);
 	void setDiffuse(glm::vec3 diffuse);
 	void setSpecular(glm::vec3 specular);
-	//Ereditato da object
-	void render(glm::mat4 renderMatrix) override;
-	Type getType() const override;
-	//TODO
+	
 	enum SubType { DIRECTIONAL, OMNI, SPOTLIGHT};
 	SubType getSubType() const;
 	void setSubType(SubType subtype);
@@ -36,6 +33,9 @@ public:
 	float getCutoff() const;
 	void setCutoff(float cutoff);
 	void setMatrix(glm::mat4 matrix);
+	//Ereditato da object
+	 void render(glm::mat4 renderMatrix) override;
+	 Type getType() const override;
 private:
 	//impostazioni luce//
 	glm::vec4 position;
@@ -53,4 +53,6 @@ private:
 	float cutoff;
 	float radius;
 	float angle;
+	bool isActive = false;
+
 };

@@ -10,12 +10,12 @@ List::~List()
 
 std::list<Node*> List::getList() const
 {
-	return this->objects;
+	return this->list;
 }
 
-void List::setList(std::list<Node*> objects)
+void List::setList(std::list<Node*> list)
 {
-	this->objects = objects;
+	this->list = list;
 
 }
 
@@ -23,19 +23,19 @@ void List::setList(std::list<Node*> objects)
 void List::add(Node* node, glm::mat4 matrix) 
 {
 	node->setMatrix(matrix);
-	this->objects.push_back(node);
+	this->list.push_back(node);
 }
 
 void List::remove(int position)
 {
 	std::list<Node*>::iterator iterator;
 	advance(iterator, position);
-	this->objects.erase(iterator);
+	this->list.erase(iterator);
 }
 
 Node* List::at(int position)
 {
-	if (position < this->objects.size())
+	if (position < this->list.size())
 	{
 		std::list<Node*>::iterator iterator;
 		advance(iterator, position);

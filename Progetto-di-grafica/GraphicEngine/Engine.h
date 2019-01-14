@@ -19,6 +19,7 @@
 //C/C++
 #include <iostream>
 #include <vector>
+#include <list>
 
 //GLM
 #define GLM_FORCE_CTOR_INIT               // Force constructors to initialize to identity from v0.9.9
@@ -51,6 +52,7 @@ public:
 	void mouseWheel(void(*mouseWheelFunc)(int, int, int, int));
 
 	void mousePressed(int button, int state, int x, int y);
+
 	void mousePressed(void(*mouseFunc)(int, int, int, int));
 
 	void redisplay();
@@ -80,28 +82,28 @@ public:
 	void enableZbuffer();
 
 	void loadIdentity();
-	
+
 	void freeImageInitialize();
 
 	void freeImageDeInitialize();
-	
+
 	Node * getRoot(const char * name);
 
 	Camera* addCamera(std::string name, glm::vec3 eye, glm::vec3 center, glm::vec3 up);
-	
+
 	//erano per debug -> da modificare
 	void switchWireframe();
 
 	void setRandomColors();
-	
+
 	void switchLights();
 
 	Node * getNodeByName(Node * root, std::string name);
-	
+
 	void changeCamera();
 
 	void moveCamera(glm::vec3 translation);
-	
+
 	void setCameraToNode(Node* root, std::string cameraName, std::string nodeName);
 
 	void  populateListFromTree(glm::mat4 fatherMatrix, Node* root);

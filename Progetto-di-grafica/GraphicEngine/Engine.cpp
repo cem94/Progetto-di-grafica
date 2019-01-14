@@ -70,12 +70,15 @@ void Engine::mousePressed(int button, int state, int x, int y)
 	if (state == GLUT_UP)
 	{
 		//isMousePressed = false;
+		printf("Mouse released \n");
 	}
 	if (state == GLUT_DOWN)
 	{
 		//isMousePressed = true;
 		//mousePosition.x = x;
 		//mousePosition.y = y;
+		printf("Mouse pressed \n");
+
 	}
 }
 
@@ -116,13 +119,15 @@ void LIB_API Engine::timer(void callback(int))
 void LIB_API Engine::keyboard(void(*keyboardCallBack)(unsigned char, int, int))
 {
 	glutKeyboardFunc(keyboardCallBack);
-	//redisplay(); -> non so se serve
+	//-> non so se serve
+	redisplay();
 }
 
 void Engine::specialKeyboard(void(*specialFunc)(int, int, int))
 {
 	glutSpecialFunc(specialFunc);
-	//	redisplay();
+	//-> non so se serve
+	redisplay();
 }
 
 void LIB_API Engine::setViewport(int x, int y, int width, int height)
@@ -142,12 +147,6 @@ void LIB_API Engine::swapBuffers()
 
 void LIB_API Engine::loadIdentity() {
 	loadMatrix(glm::mat4(1.0f));
-}
-
-void print(std::vector<Node*> nodes) {
-	for (int i = 0; i < nodes.size(); i++) {
-		std::cout << nodes.at(i)->getName().c_str() << std::endl;
-	}
 }
 
 void printTree(Node *node, std::string indentation) {
@@ -397,11 +396,9 @@ void Engine::pass(Node* root, glm::mat4 baseMatrix)
 */
 void  Engine::renderElementsList()
 {
+
 	std::list<Node*> render = renderList->getList();
-	if (render.size() == 0) { printf("Render list empty\n"); }
-	else {
-		printf("Rendering list of %d elements \n",render.size());
-	}
+	std::cout<< "Rendering list size "<<render.size()<<std::endl;
 	for (std::list<Node*>::iterator it = render.begin(); it != render.end(); ++it)
 	{
 		glm::mat4 renderMatrix = (*it)->getMatrix();
@@ -414,16 +411,12 @@ void  Engine::renderElementsList()
 				mesh->getMaterial()->render(renderMatrix);
 				//renderizzo textures mesh TODO
 				Texture* t = mesh->getMaterial()->getTexture();
-				if (t == nullptr) {
-					if (render.size() == 0) { printf("No texture\n"); }
-
-				}
-				else {
 					t->render(renderMatrix);
-				}
 			}
 		}
 		//renderizzo elementi
+		std::string s = (*it)->getName();
+		printf("Rendering %s\n", s.c_str());
 		(*it)->render(currentCamera->getMatrix()*renderMatrix);
 	}
 	//svuoto le liste -> perché??

@@ -38,6 +38,7 @@ void Light::setSpecular(glm::vec3 specular)
 //TODO miglioorare
 void Light::render(glm::mat4 renderMatrix)
 {
+	printf("Rendering light \n");
 	//set renderingMatrix as current OpenGL Matrix
 	glLoadMatrixf(glm::value_ptr(renderMatrix));
 	//setto le componenti
@@ -71,25 +72,55 @@ Light::SubType Light::getSubType() const
 {
 	return this->subType;
 }
-//seleziona tipo luce (directional/omni/spotlight
+//seleziona tipo luce (directional/omni/spotlight)
 void Light::setSubType(Light::SubType subtype)
 {
 	this->subType = subType;
 }
-
+//TODO migliorare
 int Light::getLightNumber()
 {
-//TODO creare switch GLLIGHT se necessario
-	return getID();
+	switch (this->getID())
+	{
+	case 0:
+		return GL_LIGHT0;
+		break;
+	case 1:
+		return GL_LIGHT1;
+		break;
+	case 2:
+		return GL_LIGHT2;
+		break;
+	case 3:
+		return GL_LIGHT3;
+		break;
+	case 4:
+		return GL_LIGHT4;
+		break;
+	case 5:
+		return GL_LIGHT5;
+		break;
+	case 6:
+		return GL_LIGHT6;
+		break;
+	case 7:
+		return GL_LIGHT7;
+		break;
+	default:
+		return GL_LIGHT0;
+		break;
+	}
 }
 
 void Light::enableLight(bool enable)
 {
 	if (enable) {
 		glEnable(getLightNumber());
+		this->isActive = true;
 	}
 	else {
 		glDisable(getLightNumber());
+		this->isActive = false;
 	}
 }
 

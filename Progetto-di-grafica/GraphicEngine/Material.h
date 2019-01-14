@@ -16,9 +16,7 @@ public:
 	glm::vec3 getDiffuse();
 	void setSpecular(glm::vec3 specular);
 	glm::vec3 getSpecular();
-	//ereditato da Object
-	void render(glm::mat4 renderMatrix) override;
-	Type getType() const override;
+
 	float getShininess() const;
 	void setShininess(float shininess);
 	//TODO completare
@@ -27,6 +25,9 @@ public:
 	glm::vec4 getEmissive() const;
 	void setEmissive(glm::vec4 emissive);
 	void setTexture(const char * textureName);
+	//ereditato da Object
+	void render(glm::mat4 renderMatrix) override;
+	Type getType() const override;
 
 private:
 	Texture* texture;

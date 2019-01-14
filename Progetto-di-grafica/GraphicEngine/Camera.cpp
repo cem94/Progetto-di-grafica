@@ -11,7 +11,6 @@ Camera::~Camera()
 {
 }
 
-//ritorna l'inversa della matrice corrente
 glm::mat4 Camera::inverseCamera() const
 {
 	return glm::inverse(getMatrix());
@@ -39,17 +38,3 @@ Node::Type Camera::getType() const
 {
 	return CAMERA;
 }
-
-//TODO
-void Camera::createCamera()
-{
-}
-
-void Camera::moveCamera(glm::mat4 matrix)
-{
-}
-
-void Camera::zoomCamera(const int zoom)
-{
-}
-
