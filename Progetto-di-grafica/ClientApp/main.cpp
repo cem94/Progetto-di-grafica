@@ -110,6 +110,8 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY) {
 	case 'c':
 		engine->changeCamera();
 		break;
+	case 'p':
+		break;
 	}
 	//necessario?
 		engine->redisplay();
@@ -185,7 +187,7 @@ int main(int argc, char * argv[])
 	engine->freeImageInitialize();
 
 	//setta il colore con cui verra dipinto lo sfondo -> per colorare lo sfondo uso clearBuffers
-	engine->clearColor(1.0f, 0.0f, 0.0f);
+	engine->clearColor(0.2f, 0.3f, 0.0f);
 
 	//dove si trova la camera
 	glm::vec3 eye = glm::vec3(200.f, 500.f, 1200.f);

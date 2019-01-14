@@ -14,16 +14,15 @@ int windowId;
 float fps = 0.f;
 int frames = 0;
 //options
-bool wireframe = false;
 bool lighting = true;
 //Cameras
 Camera *currentCamera = nullptr;
 std::vector<Camera*> cameras;
 int activeCamera = 0;
 //lists
-List *renderList = new List();
-List *listObjects = new List();
-List *listLight = new List();
+List *toRender = new List();
+List *objects = new List();
+List *lights = new List();
 
 //init function//
 void LIB_API Engine::init(int argc, char *argv[])
@@ -38,14 +37,17 @@ void LIB_API Engine::init(int argc, char *argv[])
 	//creo finestra
 	windowId = glutCreateWindow("Engine");
 	glewExperimental = GL_TRUE; // Optional, but recommended
+	//Init di glew
 	GLenum err = glewInit();
 	if (err != GLEW_OK)
 	{
 		// Error loading GLEW
+		printf("Error loading GLEW\n");
 	}
 	if (!glewIsSupported("GL_VERSION_2_1"))
 	{
 		// Required OpenGL version not supported
+		printf("Required OpenGL version not supported\n");
 	}
 }
 
@@ -89,7 +91,6 @@ void Engine::mousePressed(int button, int state, int x, int y)
 		//mousePosition.x = x;
 		//mousePosition.y = y;
 		printf("Mouse pressed \n");
-
 	}
 }
 
@@ -215,13 +216,8 @@ void LIB_API Engine::renderText()
 		enableLighting(false);
 	//TODO scrivere i comandi del guanto / opzioni / fps
 	char text[64];
-	//cambiato da strcpy il compilatore dice che è più sicuro strcpy_s
-	if (wireframe)
-		strcpy_s(text, "Wireframe on");
-	else
-		strcpy_s(text, "Wireframe off");
 	//colore testo
-	glColor3f(0.0f, 1.0f, 1.0f);
+	glColor3f(1.0f, 1.0f, 1.0f);
 	//x,y del testo 
 	glRasterPos2f(10.0f, 20.0f);
 	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
@@ -231,30 +227,17 @@ void LIB_API Engine::renderText()
 		strcpy_s(text, "Lighting off");
 	glRasterPos2f(10.0f, 40.0f);
 	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
-	strcpy_s(text, "Some text3");
+	strcpy_s(text, "");
 	glRasterPos2f(10.0f, 60.0f);
 	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
+	//---------------------------------------------------------------------
+	glColor3f(1.0f, 1.0f, 1.0f);
+	sprintf_s(text, "FPS: %.1f", fps);
+	glRasterPos2f(10.0f, 80.0f);
+	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
+	//---------------------------------------------------------------------
 	if (lighting)
 		enableLighting(true);
-}
-
-void LIB_API Engine::switchWireframe()
-{
-	wireframe = !wireframe;
-	if (wireframe)
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	else
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-}
-
-void LIB_API Engine::setRandomColors()
-{
-	glm::vec4 color((rand() % 100) / 100.0f,
-		(rand() % 100) / 100.0f,
-		(rand() % 100) / 100.0f,
-		1.0f);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, glm::value_ptr(color));
-	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, glm::value_ptr(color));
 }
 
 //parte dal nodo corrente  e popola l'albero
@@ -349,7 +332,7 @@ void  Engine::populateListFromTree(glm::mat4 fatherMatrix, Node* root)
 	if (root->getType() == Object::Type::NODE)
 	{
 		glm::mat4 actualMatrix = fatherMatrix * root->getMatrix();
-		listObjects->add(root, actualMatrix);
+		objects->add(root, actualMatrix);
 		std::vector<Node*> children = root->getChildren();
 		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
 		{
@@ -360,7 +343,7 @@ void  Engine::populateListFromTree(glm::mat4 fatherMatrix, Node* root)
 	{
 		glm::mat4 actualMatrix = fatherMatrix * root->getMatrix();
 		Mesh* mesh = (Mesh*)root;
-		listObjects->add(root, actualMatrix);
+		objects->add(root, actualMatrix);
 		std::vector<Node*> children = root->getChildren();
 		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
 		{
@@ -370,7 +353,7 @@ void  Engine::populateListFromTree(glm::mat4 fatherMatrix, Node* root)
 	else if (root->getType() == Object::Type::LIGHT)
 	{
 		glm::mat4 actualMatrix = fatherMatrix * root->getMatrix();
-		listLight->add(root, actualMatrix);
+		lights->add(root, actualMatrix);
 		std::vector<Node*> children = root->getChildren();
 		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
 		{
@@ -385,11 +368,11 @@ void  Engine::populateListFromTree(glm::mat4 fatherMatrix, Node* root)
 */
 void Engine::pass(Node* root, glm::mat4 baseMatrix)
 {
-	renderList = new List();
+	toRender = new List();
 	populateListFromTree(baseMatrix, root);
 	std::list<Node*> render;
-	std::list<Node*> renderLight = listLight->getList();
-	std::list<Node*> renderNode = listObjects->getList();
+	std::list<Node*> renderLight = lights->getList();
+	std::list<Node*> renderNode = objects->getList();
 
 	if (renderLight.size() > 0)
 	{
@@ -399,7 +382,7 @@ void Engine::pass(Node* root, glm::mat4 baseMatrix)
 	{
 		render.insert(render.end(), renderNode.begin(), renderNode.end());
 	}
-	renderList->setList(render);
+	toRender->setList(render);
 }
 
 /** TODO spostare in list.render
@@ -407,9 +390,8 @@ void Engine::pass(Node* root, glm::mat4 baseMatrix)
 */
 void  Engine::renderElementsList()
 {
-
-	std::list<Node*> render = renderList->getList();
-	std::cout<< "Rendering list size "<<render.size()<<std::endl;
+	toRender->render(glm::mat4(1.0f));
+	std::list<Node*> render = toRender->getList();
 	for (std::list<Node*>::iterator it = render.begin(); it != render.end(); ++it)
 	{
 		glm::mat4 renderMatrix = (*it)->getMatrix();
@@ -427,12 +409,11 @@ void  Engine::renderElementsList()
 		}
 		//renderizzo elementi
 		std::string s = (*it)->getName();
-		printf("Rendering %s\n", s.c_str());
 		(*it)->render(currentCamera->getMatrix()*renderMatrix);
 	}
 	//svuoto le liste -> perché??
-	listObjects = new List();
-	listLight = new List();
+	objects = new List();
+	lights = new List();
 }
 
 void Engine::incrementFrames()
@@ -443,6 +424,7 @@ void Engine::incrementFrames()
 Camera * Engine::addCamera(std::string name, glm::vec3 eye, glm::vec3 center, glm::vec3 up)
 {
 	Camera * camera = new Camera();
+	camera->setID(camera->getID());
 	camera->setName(name);
 	camera->setProjectionMatrix(glm::lookAt(eye, center, up));
 	//aggiunge la camera all'elenco
@@ -457,9 +439,10 @@ Camera * Engine::addCamera(std::string name, glm::vec3 eye, glm::vec3 center, gl
 */
 void Engine::changeCamera()
 {
-	printf("Changing camera \n");
+	printf("Changing camera from %s ", currentCamera->getName().c_str());
 	activeCamera = (activeCamera + 1) % cameras.size();
 	currentCamera = cameras.at(activeCamera);
+	printf("to %s\n", currentCamera->getName().c_str());
 }
 
 /**

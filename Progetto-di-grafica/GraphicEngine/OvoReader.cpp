@@ -627,8 +627,8 @@ std::vector<Object *> OvoReader::readOVOfile(const char *name)
 			//TODO dovrebbero essere 0,1,2,3, credo resettare id
 			light->setID(light->getID());
 			light->setMatrix(matrix);
-			light->setColor(color);
-			light->setDirection(direction);
+			light->setColor(glm::vec4(color.r,color.g,color.b,1.0f));
+			light->setDirection(glm::vec4(direction.r,direction.g,direction.b,1.0f));
 			light->setCutoff(cutoff);
 			light->setChildrenSize(children);
 			objects.push_back(light);
@@ -701,7 +701,6 @@ void OvoReader::readChildren(FILE* dat, Node* root)
 		light->setID(counterLightId);
 		counterLightId++;
 		idCounter++;
-		light->setColor(glm::vec4(color.r, color.g, color.b, 1.f));
 		light->setDirection(glm::vec4(direction.r, direction.g, direction.b, 1.f));
 	}
 }

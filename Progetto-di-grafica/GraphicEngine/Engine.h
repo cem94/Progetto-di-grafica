@@ -92,11 +92,6 @@ public:
 
 	Camera* addCamera(std::string name, glm::vec3 eye, glm::vec3 center, glm::vec3 up);
 
-	//erano per debug -> da modificare
-	void switchWireframe();
-
-	void setRandomColors();
-
 	void switchLights();
 
 	Node * getNodeByName(Node * root, std::string name);

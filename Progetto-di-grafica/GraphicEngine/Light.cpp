@@ -21,24 +21,23 @@ void Light::setIntensity(short intensity)
 	this->intensity = intensity;
 }
 
-void Light::setAmbient(glm::vec3 ambient)
+void Light::setAmbient(glm::vec4 ambient)
 {
 	this->ambient = ambient;
 }
 
-void Light::setDiffuse(glm::vec3 diffuse)
+void Light::setDiffuse(glm::vec4 diffuse)
 {
 	this->diffuse = diffuse;
 }
 
-void Light::setSpecular(glm::vec3 specular)
+void Light::setSpecular(glm::vec4 specular)
 {
 	this->specular = specular;
 }
 //TODO miglioorare
 void Light::render(glm::mat4 renderMatrix)
 {
-	printf("Rendering light \n");
 	//set renderingMatrix as current OpenGL Matrix
 	glLoadMatrixf(glm::value_ptr(renderMatrix));
 	//setto le componenti
@@ -124,12 +123,12 @@ void Light::enableLight(bool enable)
 	}
 }
 
-void Light::setColor(glm::vec3 color)
+void Light::setColor(glm::vec4 color)
 {
 	this->color = color;
-	this->setAmbient(glm::vec3(color));
-	this->setDiffuse(glm::vec3(color));
-	this->setSpecular(glm::vec3(color));
+	this->setAmbient(glm::vec4(color));
+	this->setDiffuse(glm::vec4(color));
+	this->setSpecular(glm::vec4(color));
 }
 
 void Light::setPosition(glm::vec4 position)
@@ -142,7 +141,7 @@ glm::vec3 Light::getDirection()
 	return this->direction;
 }
 
-void Light::setDirection(glm::vec3 direction)
+void Light::setDirection(glm::vec4 direction)
 {
 	this->direction = direction;
 }
