@@ -12,11 +12,11 @@ short Light::getIntensity() const{	return this->intensity;}
 void Light::setIntensity(short intensity){	this->intensity = intensity;}
 
 
-void Light::setAmbient(glm::vec3 ambient){	this->ambient = ambient;}
+void Light::setAmbient(glm::vec4 ambient){	this->ambient = ambient;}
 
-void Light::setDiffuse(glm::vec3 diffuse){	this->diffuse = diffuse;}
+void Light::setDiffuse(glm::vec4 diffuse){	this->diffuse = diffuse;}
 
-void Light::setSpecular(glm::vec3 specular){	this->specular = specular;}
+void Light::setSpecular(glm::vec4 specular){	this->specular = specular;}
 
 //TODO miglioorare
 void Light::render(glm::mat4 renderMatrix)

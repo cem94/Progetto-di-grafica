@@ -23,15 +23,9 @@ public:
 
 	int getLightNumber();
 	void enableLight(bool enable);
-<<<<<<< HEAD
 	void setColor(glm::vec4 color);
-=======
-	void setColor(glm::vec3 color);
-
 	//posizione della luce, per tutte e 3
->>>>>>> 3c60b6a312a4571c0fbe2329b4569aad649a2e8e
 	void setPosition(glm::vec4 position);
-
 	//direzione luce spotlight
 	glm::vec3 getDirection();
 	void setDirection(glm::vec4 direction);
