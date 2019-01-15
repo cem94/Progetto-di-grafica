@@ -11,7 +11,7 @@ public:
 	//void setMatrix(glm::mat4 matrix);
 	//glm::mat4 inverseCamera() const;
 	//Ereditato da object
-	void render(glm::mat4 renderMatrix) override;
+	void render(glm::mat4 renderMatrix);
 	//Type getType() const override;
 private:
 	glm::mat4 projectionMatrix;

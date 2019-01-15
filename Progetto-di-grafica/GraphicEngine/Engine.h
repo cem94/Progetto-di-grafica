@@ -1,6 +1,8 @@
 /*
-*The engine class is the main component of the API. It’s a single class (either static or singleton) responsible for initializing the OpenGL  context and main modules.
-*/
+ *The engine class is the main component of the API. Itís a single class (either
+ *static or singleton) responsible for initializing the OpenGL  context and main
+ *modules.
+ */
 
 #pragma once
 #define GLM_FORCE_RADIANS
@@ -16,103 +18,108 @@
 #define LIB_API
 #endif
 
-//C/C++
-#include <iostream>
-#include <vector>
-#include <list>
-#include <iomanip>   
-#include <fstream>
+// C/C++
 #include <limits.h>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <list>
+#include <vector>
 
-//GLM
-#define GLM_FORCE_CTOR_INIT               // Force constructors to initialize to identity from v0.9.9
+// GLM
+#define GLM_FORCE_CTOR_INIT  // Force constructors to initialize to identity
+                             // from v0.9.9
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/packing.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
-// CLASSES 
+// CLASSES
 #include "Object.h"
 #include "Node.h"
 #include "Camera.h"
 #include "Light.h"
+#include "List.h"
 #include "Texture.h"
 #include "Material.h"
 #include "Mesh.h"
-#include "List.h"
 #include "OvoReader.h"
 
-class LIB_API Engine
-{
-public:
+class LIB_API Engine {
+ public:
+  ~Engine();
 
-	~Engine();
+  void setGuardiaMatrix(Node * root);
 
-	void init(int argc, char *argv[]);
+  void init(int argc, char* argv[]);
 
-	void loadMatrix(glm::mat4 matrix);
+  void loadMatrix(glm::mat4 matrix);
 
-	void startLoop();
+  void startLoop();
 
-	void clearColor(float r, float g, float b);
+  void clearColor(float r, float g, float b);
 
-	void mouseWheel(void(*mouseWheelFunc)(int, int, int, int));
+  void mouseWheel(void (*mouseWheelFunc)(int, int, int, int));
 
-	void mousePressed(int button, int state, int x, int y);
+  void mousePressed(int button, int state, int x, int y);
 
-	void mousePressed(void(*mouseFunc)(int, int, int, int));
+  void mousePressed(void (*mouseFunc)(int, int, int, int));
 
-	void redisplay();
+  void redisplay();
 
-	void reshape(void(*reshapeCallback)(int, int));
+  void reshape(void (*reshapeCallback)(int, int));
 
-	void display(void(*displayCallback)());
+  void display(void (*displayCallback)());
 
-	void timer(void callback(int));
+  void timer(void callback(int));
 
-	void keyboard(void(*keyboardCallBack)(unsigned char, int, int));
+  void keyboard(void (*keyboardCallBack)(unsigned char, int, int));
 
-	void specialKeyboard(void(*specialFunc)(int, int, int));
+  void specialKeyboard(void (*specialFunc)(int, int, int));
 
-	void setViewport(int x, int y, int width, int height);
+  void setViewport(int x, int y, int width, int height);
 
-	void clearBuffers();
+  void clearBuffers();
 
-	void swapBuffers();
+  void swapBuffers();
 
-	void enableLight(Node *root, std::string lightName);
+  void enableLight(Node* root, std::string lightName);
 
-	void enableLighting(bool value);
+  void enableLighting(bool value);
 
-	void renderText();
+  void renderText();
 
-	void setProjectionMatrix(glm::mat4 projection);
+  void setProjectionMatrix(glm::mat4 projection);
 
-	void enableZbuffer();
+  void enableZbuffer();
 
-	void loadIdentity();
+  void loadIdentity();
 
-	void freeImageInitialize();
+  void freeImageInitialize();
 
-	Node * getScene(const char * name);
+  Node* getScene(const char* name);
 
-	Camera* addCamera(std::string name, glm::vec3 eye, glm::vec3 center, glm::vec3 up);
+  Camera* addCamera(std::string name, glm::vec3 eye, glm::vec3 center,
+                    glm::vec3 up);
 
-	void switchLights();
+  void switchLights();
 
-	Node * getNodeByName(Node * root, std::string name);
+  Node* getNodeByName(Node* root, std::string name);
 
-	void changeCamera();
+  void changeCamera();
 
-	void setCameraToNode(Node* root, std::string cameraName, std::string nodeName);
+  void moveCamera(float direction);
 
-	void  createLists(Node* element);
+  void setCameraToNode(Node* root, std::string cameraName,
+                       std::string nodeName);
 
-	void  renderList();
+  void createLists(Node* element);
 
-	void incrementFrames();
+  void renderList();
 
-	void pass(Node* scene);
+  void incrementFrames();
 
-	void rotateModel(Node * root, float angle);
+  void pass(Node* scene);
+
+  void rotateModel(Node* root, float angle);
 };

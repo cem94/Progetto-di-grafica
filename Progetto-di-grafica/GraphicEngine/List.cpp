@@ -21,7 +21,7 @@ void List::remove(int position)
 	list.erase(it);
 }
 
-Node* List::at(int position)
+Node* List::at(int position) 
 {
 	if (position < this->list.size())
 	{
