@@ -22,7 +22,7 @@ void displayCallback()
 	engine->setProjectionMatrix(perspective);
 
 	//we pass the scene graph
-	engine->pass(scene, glm::mat4(1.0f));
+	//engine->pass(scene, glm::mat4(1.0f));
 
 	//3d rendering//
 	//renderizza la lista ottenuta dal file OVO
@@ -60,7 +60,6 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 		//Così dovrebbe essere comoda da usare//
 	case '1':
 		//TODO fare come per camera
-		engine->enableLight(scene, "fix_light");
 		//pollice
 	case ' ':
 		//engine->closeFinger();
@@ -87,7 +86,8 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 		engine->switchLights();
 		break;
 		//muovi mano
-	case 'm':
+	case 'r':
+		engine->rotateModel(scene,1);
 		//engine->moveHand();
 		break;
 		//cambia camera corrente
@@ -96,7 +96,7 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 		//set nome camera corrente
 		break;
 	case 'p':
-	//	engine->enableLight(scene, "fix_light");
+	engine->enableLight(scene, "fix_light");
 		break;
 	}
 	engine->redisplay();
@@ -193,7 +193,7 @@ int main(int argc, char * argv[])
 	scene = engine->getScene(fileName);
 
 	// init camera
-    initCamera();
+    //initCamera();
 
 	// TODO setto la camera sull'oggetto principale
 	// TODO:: GREG questo non va nel call back function

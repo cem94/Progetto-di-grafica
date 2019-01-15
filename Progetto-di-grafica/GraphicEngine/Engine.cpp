@@ -232,9 +232,9 @@ void LIB_API Engine::renderText()
 	//colore testo
 	glColor3f(1.0f, 1.0f, 1.0f);
 	if (lighting)
-		strcpy_s(text, "Lighting on");
+		strcpy_s(text, "[l] lighting (on)");
 	else
-		strcpy_s(text, "Lighting off");
+		strcpy_s(text, "[l] lighting (off)");
 	glRasterPos2f(10.0f, 20.0f);
 	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
 	glColor3f(1.0f, 1.0f, 1.0f);
@@ -244,7 +244,7 @@ void LIB_API Engine::renderText()
 	strcpy_s(text, "[c] change camera");
 	glRasterPos2f(10.0f, 60.0f);
 	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
-	sprintf_s(text, "Position: ");
+	sprintf_s(text, "[r] rotate model ");
 	glRasterPos2f(10.0f, 80.0f);
 	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
 	//---------------------------------------------------------------------
@@ -304,71 +304,39 @@ Node * Engine::getNodeByName(Node * root, std::string name)
 * read the scene graph and put the nodes in List
 * @param initial matrix and root node
 */
-void  Engine::populateListFromTree(glm::mat4 fatherMatrix, Node* root)
+void  Engine::createLists( Node* element)
 {
 
-	/*if (root == nullptr)
+	if (element->getType() == Object::Type::NODE)
 	{
-		std::cout << "nullptr";
-		return;
-	}
-	if (root->getType() == Object::Type::NODE) {
-		objects->insert(root);
-	}
-	if (root->getType() == Object::Type::MESH) {
-		objects->insert(root);
-	}
-	for (int i = 0; i < root->getNumberOfChildren(); i++)
-		//populateListFromTree(root->getChildren()->at(i));
-	*/
-	if (root->getType() == Object::Type::NODE)
-	{
-		//printf("Node\n");
-		//glm::mat4 actualMatrix = fatherMatrix * root->getMatrix();
-		//root->setMatrix(actualMatrix);
-		objects->add(root);
-		std::vector<Node*> children = root->getChildren();
+		objects->add(element);
+		std::vector<Node*> children = element->getChildren();
 		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
 		{
-			populateListFromTree(glm::mat4(1.0f), *it);
+			createLists(*it);
 		}
 	}
-	else if (root->getType() == Object::Type::MESH)
+	else if (element->getType() == Object::Type::MESH)
 	{
-	//	printf("Mesh\n");
-		//glm::mat4 actualMatrix = fatherMatrix * root->getMatrix();
-		//Mesh* mesh = (Mesh*)root;
-		//root->setMatrix(actualMatrix);
-		objects->add(root);
-		std::vector<Node*> children = root->getChildren();
+		objects->add(element);
+		std::vector<Node*> children = element->getChildren();
 		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
 		{
-			populateListFromTree(glm::mat4(1.0f), *it);
+			createLists(*it);
 		}
 	}
-	else if (root->getType() == Object::Type::LIGHT)
+	else if (element->getType() == Object::Type::LIGHT)
 	{
-		//printf("Light\n");
-		//glm::mat4 actualMatrix = fatherMatrix * root->getMatrix();
-		//root->setMatrix(actualMatrix);
-		lights->add(root);
-		std::vector<Node*> children = root->getChildren();
+		
+		lights->add(element);
+		std::vector<Node*> children = element->getChildren();
 		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
 		{
-			populateListFromTree(glm::mat4(1.0f), *it);
+			createLists(*it);
 		}
 	}
 	else {
-		//printf("Other %s \n",root->getName().c_str());
-		/*glm::mat4 actualMatrix = fatherMatrix * root->getMatrix();
-		root->setMatrix(actualMatrix);
-		objects->add(root);
-		std::vector<Node*> children = root->getChildren();
-
-		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
-		{
-			populateListFromTree(actualMatrix, *it);
-		}*/
+	//Camera
 	}
 
 	/*std::vector<Node*> children = root->getChildren();
@@ -405,12 +373,13 @@ void  Engine::populateListFromTree(glm::mat4 fatherMatrix, Node* root)
 * pass the tree and build several list for elements
 * @param root node and base matrix
 */
-void Engine::pass(Node* root, glm::mat4 baseMatrix)
+//TODO capire perché c'è lista luci
+void Engine::pass(Node* scene)
 {
 	toRender = new List();
-	populateListFromTree(baseMatrix, root);
+	createLists(scene);
+	//Perché sono in una lista separata??
 	toRender->insert(lights->getList());
-	//printf("Objects %d \n", objects->getList().size());
 	toRender->insert(objects->getList());
 }
 
@@ -419,23 +388,17 @@ void Engine::pass(Node* root, glm::mat4 baseMatrix)
 */
 void  Engine::renderList()
 {
-	//toRender->render(glm::mat4(1.0f));
 	std::list<Node*> render = toRender->getList();
-	//printf("Size %d\n",render.size());
 	for (std::list<Node*>::iterator it = render.begin(); it != render.end(); ++it)
 	{
 		std::string s = (*it)->getName();
 		int size = (*it)->getChildrenSize();
-		//std::cout << "Rendering " << s.c_str() << " size " << size << std::endl;
 		glm::mat4 renderMatrix = (*it)->getFinalMatrix();
 		if ((*it)->getType() == Object::Type::MESH)
 		{
-		//	printf("Rendering %s\n",s.c_str());
-
 			Mesh* mesh = (Mesh*)(*it);
 			if (mesh->getMaterial() != nullptr)
 			{
-				//renderizzo materiale mesh
 				mesh->getMaterial()->render(renderMatrix);
 				Texture* t = mesh->getMaterial()->getTexture();
 				t->render(renderMatrix);
@@ -456,9 +419,7 @@ Camera * Engine::addCamera(std::string name, glm::vec3 eye, glm::vec3 center, gl
 	Camera * camera = new Camera();
 	camera->setName(name);
 	camera->setMatrix(glm::lookAt(eye, center, up));
-	//aggiunge la camera all'elenco
 	cameras.push_back(camera);
-	//e la setta come camera corrente
 	currentCamera = camera;
 	return currentCamera;
 }
@@ -509,12 +470,12 @@ void Engine::setCameraToNode(Node* root, std::string cameraName, std::string nod
 }
 
 
-void Engine::rotate(Node * root, float angle) {
+void Engine::rotateModel(Node * root, float angle) {
 	Node* guardia = getNodeByName(root, "guardia");
 	if (guardia != nullptr)
 	{
-		glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(1.0f, 0.0f, 0.0f));
-		//guardia->setMatrix(guardia->getMatrix()*rotation);
+		glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
+		guardia->setMatrix(guardia->getMatrix()*rotation);
 	}
 	else {
 		printf("Node not found\n");

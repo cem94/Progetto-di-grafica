@@ -106,13 +106,13 @@ public:
 
 	void setCameraToNode(Node* root, std::string cameraName, std::string nodeName);
 
-	void  populateListFromTree(glm::mat4 fatherMatrix, Node* root);
+	void  createLists(Node* element);
 
 	void  renderList();
 
 	void incrementFrames();
 
-	void pass(Node* root, glm::mat4 baseMatrix);
+	void pass(Node* scene);
 
-	void rotate(Node * root, float angle);
+	void rotateModel(Node * root, float angle);
 };
