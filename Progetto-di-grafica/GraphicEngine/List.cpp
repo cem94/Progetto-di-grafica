@@ -33,8 +33,6 @@ Node* List::at(int position)
 	return nullptr;
 }
 
-
-
 void List::insert(std::list<Node*> elements)
 {
 	if (elements.size() == 0) {

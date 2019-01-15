@@ -2,56 +2,37 @@
 
 static int counter;
 
-Node::Node()
-{
-	this->setId(counter++);
-}
+Node::Node(){	this->setId(counter++);}
 
-Node::~Node()
-{
-}
+Node::~Node(){}
+
 // Getters & Setters //
-Node * Node::getParent() const
-{
-	return parent;
-}
+Node * Node::getParent() const{	return parent;}
 
-void Node::setParent(Node * parent)
-{
-	this->parent = parent;
-}
+void Node::setParent(Node * parent){	this->parent = parent;}
 
-std::vector<Node*> Node::getChildren() const
-{
-	return children;
-}
+std::vector<Node*> Node::getChildren() const{	return children;}
 
-void Node::setChildren(std::vector<Node*> children)
-{
-	this->children = children;
-}
+void Node::setChildren(std::vector<Node*> children){	this->children = children;}
 
-glm::mat4 Node::getMatrix() const
-{
-	return this->matrix;
-}
+glm::mat4 Node::getMatrix() const{	return this->matrix;}
 
-void Node::setMatrix(glm::mat4 matrix)
-{
-	this->matrix = matrix;
-}
+void Node::setMatrix(glm::mat4 matrix){	this->matrix = matrix;}
+
 //Inserisce il nodo fra i  figli del nodo corrente
 void Node::insert(Node * node)
 {
 	node->setParent(this);
 	children.push_back(node);
 }
-/* TODO se possibile Use shrink_to_fit() to release memory consumed by the vector – clear() or erase() does not release memory.*/
+
 void Node::remove(int position)
 {
-	if (children.size() > 0 && position > 0 && position < children.size())
+	if (children.size() > position && position >= 0)
 	{
+		auto to_remove = children.at(position);
 		children.erase(children.begin() + position);
+        free(to_remove);
 	}
 }
 //rimuove node
@@ -77,12 +58,13 @@ Node * Node::operator[](int position)
 //ritorna il numero di figli del nodo corrente
 int Node::getChildrenSize() const
 {
-	return this->childrenSize;
+	return this->children.size();
 }
+
 //TODO da rivedere -> i metodi insert remove modificano la dimensione, noi ritorniamo sempre quella originale
 void Node::setChildrenSize(unsigned int size)
 {
-	this->childrenSize = size;
+	//this->childrenSize = size;
 	children.reserve(size);
 }
 //TODO sostituirlo dove necessario
@@ -94,7 +76,6 @@ glm::mat4 Node::getFinalMatrix()
 	
 }
 
-void Node::render(glm::mat4 renderMatrix)
-{
-	//empty
-}
+int Node::getCapacity() const { return this->children.capacity(); }
+
+void Node::render(glm::mat4 renderMatrix){}

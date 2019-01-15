@@ -3,13 +3,9 @@
 // FreeGLUT:
 #include <GL/freeglut.h>
 
-Mesh::Mesh()
-{
-}
+Mesh::Mesh(){}
 
-Mesh::~Mesh()
-{
-}
+Mesh::~Mesh(){}
 
 /*std::vector<glm::vec3> Mesh::getVertexes() const
 {
@@ -20,11 +16,7 @@ void Mesh::setVertexes(std::vector<glm::vec3> vertexes)
 {
 	this->vertexes = vertexes;
 }*/
-//TODO provvisorio: capire come farlo meglio
-void Mesh::setMatrix(glm::mat4 matrix)
-{
-	Node::setMatrix(matrix);
-}
+
 void Mesh::generateVAO(float * vertexArray, float * normalArray, float * uvArray, unsigned int * indices, unsigned int vertices)
 {
 	glGenVertexArrays(1, &vao);
@@ -52,25 +44,14 @@ void Mesh::generateVAO(float * vertexArray, float * normalArray, float * uvArray
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glBindVertexArray(0);
 }
-Material * Mesh::getMaterial() const
-{
-	return material;
-}
 
-void Mesh::setMaterial(Material * material)
-{
-	this->material = material;
-}
+Material * Mesh::getMaterial() const{	return material;}
 
-void Mesh::setRadius(float radius)
-{
-	this->radius = radius;
-}
+void Mesh::setMaterial(Material * material){	this->material = material;}
 
-void Mesh::setNumberOfFaces(unsigned int numberOfFaces)
-{
-	this->numberOfFaces = numberOfFaces;
-}
+void Mesh::setRadius(float radius){	this->radius = radius;}
+
+void Mesh::setNumberOfFaces(unsigned int numberOfFaces){	this->numberOfFaces = numberOfFaces;}
 
 void Mesh::render(glm::mat4 renderMatrix)
 {

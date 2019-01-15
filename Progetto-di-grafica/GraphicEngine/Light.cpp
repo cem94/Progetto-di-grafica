@@ -37,22 +37,19 @@ void Light::render(glm::mat4 renderMatrix)
 	}
 }
 
-
-
 void Light::changeState()
 {
 	if (isActive) {
 		printf("Turning off light %s\n",getName().c_str());
 		glEnable(getLightNumber());
-		//this->isActive = false;
 	}
 	else {
 		printf("Turning on light %s\n", getName().c_str());
 		glEnable(getLightNumber());
-		//this->isActive = true;
 	}
 	this->isActive = !isActive;
-	}
+}
+
 Light::SubType Light::getSubType() const { return this->subType; }
 
 void Light::setSubType(Light::SubType subtype) { this->subType = subType; }
@@ -61,7 +58,7 @@ int Light::getLightNumber()
 {
 	const int n_light = this->getId();
 	// we have 7 light, 0 = 0x4000 and 7 = 0x4007
-	if (0 <= n_light || n_light <= 7)
+	if (0 <= n_light && n_light <= 7)
 		return GL_LIGHT0 + n_light;
 	else
 		return GL_LIGHT0;
@@ -69,14 +66,11 @@ int Light::getLightNumber()
 
 void Light::enableLight(bool enable)
 {
-	if (enable) {
+	if (enable)
 		glEnable(getLightNumber());
-		this->isActive = true;
-	}
-	else {
+	else 
 		glDisable(getLightNumber());
-		this->isActive = false;
-	}
+	this->isActive = !this->isActive;
 }
 
 void Light::setColor(glm::vec4 color)
@@ -130,10 +124,4 @@ float Light::getCutoff() const
 void Light::setCutoff(float cutoff)
 {
 	this->cutoff = cutoff;
-}
-
-//TODO volevo provare a vedere se se ne può fare a meno(visto che c'è già in Node e Light eredita da node,  ma non credo
-void Light::setMatrix(glm::mat4 matrix)
-{
-	Node::setMatrix(matrix);
 }
