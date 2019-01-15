@@ -12,7 +12,8 @@ Node *scene = NULL;
 #define GLUT_KEY_RIGHT 0x0066
 #define GLUT_KEY_DOWN 0x0069
 
-void displayCallback() {
+void displayCallback() 
+{
 	//clear dei bit DEPTH etc
 	engine->clearBuffers();
 	//TODO setto la camera sull'oggetto principale
@@ -40,14 +41,16 @@ void displayCallback() {
 	engine->redisplay();
 }
 
-void reshapeCallback(int width, int height) {
+void reshapeCallback(int width, int height) 
+{
 	engine->setViewport(0, 0, width, height);
 	//perspective:							(fieldOfView,		aspectRatio,			 nearPlane, farPlane)
 	perspective = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 1.0f, 4000.0f);
 	ortho = glm::ortho(0.f, (float)width, 0.f, (float)height, -1.f, 1.f);
 }
 
-void keyboardCallback(unsigned char key, int mouseX, int mouseY) {
+void keyboardCallback(unsigned char key, int mouseX, int mouseY) 
+{
 	switch (key)
 	{
 		//Così dovrebbe essere comoda da usare//
@@ -92,11 +95,11 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY) {
 	case 'p':
 		break;
 	}
-	//necessario?
-		engine->redisplay();
+	engine->redisplay();
 }
 
-void specialCallback(int key, int x, int y) {
+void specialCallback(int key, int x, int y) 
+{
 	//muovi luce
 	switch (key) {
 	case GLUT_KEY_DOWN:
@@ -114,17 +117,19 @@ void specialCallback(int key, int x, int y) {
 		break;
 
 	}
-	//necessario?
+	//TODO:: GREG si se modifica qualcosa graficamente, devi far vedere i cambiamenti.
 	engine->redisplay();
 }
 
-void timerCallback(int value) {
+void timerCallback(int value) 
+{
 	engine->timer(timerCallback);
 }
 
 //zoom in / out
 void mouseWheel(int wheel, int direction, int x, int y)
 {
+	// TODO:: come possiamo usarlo?
 	wheel = 0;
 	if (direction == -1)
 	{
@@ -137,17 +142,30 @@ void mouseWheel(int wheel, int direction, int x, int y)
 		engine->moveCamera(traslation);
 	}
 }
+
 //callback per pressione mouse
 void mousePressed(int button, int state, int x, int y)
 {
 	engine->mousePressed(button, state, x, y);
 }
 
-int main(int argc, char * argv[])
+void initCamera()
 {
-	std::cout << "Client application starts" << std::endl;
-	engine->init(argc, argv);
-	//set callback
+	//TODO:: come mai cambiando il valore non cambia la posizione iniziale?
+	// dove si trova la camera
+	glm::vec3 eye = glm::vec3(200.f, 500.f, 1200.f);
+	// verso dove guarda
+	glm::vec3 center = glm::vec3(200.0f, 0.0f, 0.0f);
+	// dove è il sopra
+	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+	engine->addCamera("1", eye, center, up);
+	engine->addCamera("2", eye, center, up);
+}
+
+// TODO:: vedere quali ci servono e quali no.
+void initCallBackFunction()
+{
+	// set callback
 	engine->display(displayCallback);
 	engine->reshape(reshapeCallback);
 	engine->keyboard(keyboardCallback);
@@ -155,26 +173,31 @@ int main(int argc, char * argv[])
 	engine->mouseWheel(mouseWheel);
 	engine->mousePressed(mousePressed);
 	engine->timer(timerCallback);
+}
 
-	//forse si possono spostare in init
-	engine->enableZbuffer();
-	engine->freeImageInitialize();
+int main(int argc, char * argv[])
+{
+	std::cout << "Client application starts" << std::endl;
 
-	//setta il colore con cui verra dipinto lo sfondo -> per colorare lo sfondo uso clearBuffers
+	//init engine settings
+	engine->init(argc, argv);
+
+	// init call back functions
+	initCallBackFunction();
+
+	// set background color
 	engine->clearColor(0.2f, 0.3f, 0.7f);
-	//dove si trova la camera
-	glm::vec3 eye = glm::vec3(200.f, 500.f, 1200.f);
-	//verso dove guarda 
-	glm::vec3 center = glm::vec3(200.0f, 0.0f, 0.0f);
-	//dove è il sopra
-	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-	engine->addCamera("1", eye, center, up);
-	engine->addCamera("2", eye, center, up);
 
+	// init camera
+	initCamera();
+
+	// read ovo file, load scene and start main loop
 	const char* fileName = "../ovo_files/gauntlet.ovo";
 	scene = engine->getScene(fileName);
 	engine->startLoop();
-	//forse si può spostare in engine->free o qualcosa così
-	engine->freeImageDeInitialize();
+	
+	// free memory
+	delete (engine);
+	
 	std::cout << "Application terminated" << std::endl;
 }

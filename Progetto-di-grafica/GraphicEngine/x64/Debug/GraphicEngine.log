@@ -1,9 +1,9 @@
 ﻿  Camera.cpp
   Engine.cpp
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(333): warning C4477: 'printf': con la stringa di formato '%d' è necessario un argomento di tipo 'int', ma il tipo dell'argomento variadic 1 è 'unsigned __int64'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(333): note: provare a usare '%zd' nella stringa di formato
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(335): warning C4477: 'printf': con la stringa di formato '%d' è necessario un argomento di tipo 'int', ma il tipo dell'argomento variadic 1 è 'unsigned __int64'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(335): note: provare a usare '%zd' nella stringa di formato
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(334): warning C4477: 'printf': con la stringa di formato '%d' è necessario un argomento di tipo 'int', ma il tipo dell'argomento variadic 1 è 'unsigned __int64'
+  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(334): note: provare a usare '%zd' nella stringa di formato
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(336): warning C4477: 'printf': con la stringa di formato '%d' è necessario un argomento di tipo 'int', ma il tipo dell'argomento variadic 1 è 'unsigned __int64'
+  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(336): note: provare a usare '%zd' nella stringa di formato
   Light.cpp
   List.cpp
   Material.cpp

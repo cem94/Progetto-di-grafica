@@ -25,7 +25,9 @@ List *toRender = new List();
 List *objects = new List();
 List *lights = new List();
 
-//init function//
+Engine::~Engine() {  FreeImage_DeInitialise();}
+
+// init function//
 void LIB_API Engine::init(int argc, char *argv[])
 {
 	std::cout << "The engine starts" << std::endl;
@@ -50,6 +52,10 @@ void LIB_API Engine::init(int argc, char *argv[])
 		// Required OpenGL version not supported
 		printf("Required OpenGL version not supported\n");
 	}
+
+		// forse si possono spostare in init
+        enableZbuffer();
+        freeImageInitialize();
 }
 
 //main loop//
@@ -169,11 +175,6 @@ void printTree(Node *node, std::string indentation) {
 void Engine::freeImageInitialize()
 {
 	FreeImage_Initialise();
-}
-
-void Engine::freeImageDeInitialize()
-{
-	FreeImage_DeInitialise();
 }
 
 void LIB_API Engine::setProjectionMatrix(glm::mat4 projection)

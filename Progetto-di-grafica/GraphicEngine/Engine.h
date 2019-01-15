@@ -46,6 +46,8 @@ class LIB_API Engine
 {
 public:
 
+	~Engine();
+
 	void init(int argc, char *argv[]);
 
 	void loadMatrix(glm::mat4 matrix);
@@ -91,8 +93,6 @@ public:
 	void loadIdentity();
 
 	void freeImageInitialize();
-
-	void freeImageDeInitialize();
 
 	Node * getScene(const char * name);
 
