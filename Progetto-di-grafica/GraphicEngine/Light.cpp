@@ -37,37 +37,52 @@ void Light::render(glm::mat4 renderMatrix)
 	}
 }
 
-
-
-void Light::changeState()
-{
-	if (isActive) {
-		printf("Turning off light %s\n",getName().c_str());
-		glEnable(getLightNumber());
-		//this->isActive = false;
-	}
-	else {
-		printf("Turning on light %s\n", getName().c_str());
-		glEnable(getLightNumber());
-		//this->isActive = true;
-	}
-	this->isActive = !isActive;
-	}
 Light::SubType Light::getSubType() const { return this->subType; }
 
 void Light::setSubType(Light::SubType subtype) { this->subType = subType; }
 
 int Light::getLightNumber()
 {
-	const int n_light = this->getId();
+	switch (this->getId())
+	{
+	case 0:
+		return GL_LIGHT0;
+		break;
+	case 1:
+		return GL_LIGHT1;
+		break;
+	case 2:
+		return GL_LIGHT2;
+		break;
+	case 3:
+		return GL_LIGHT3;
+		break;
+	case 4:
+		return GL_LIGHT4;
+		break;
+	case 5:
+		return GL_LIGHT5;
+		break;
+	case 6:
+		return GL_LIGHT6;
+		break;
+	case 7:
+		return GL_LIGHT7;
+		break;
+	default:
+		return GL_LIGHT0;
+		break;
+	}
+	/*const int n_light = this->getId();
 	// we have 7 light, 0 = 0x4000 and 7 = 0x4007
 	if (0 <= n_light || n_light <= 7)
 		return GL_LIGHT0 + n_light;
 	else
-		return GL_LIGHT0;
+		return GL_LIGHT0;*/
+
 }
 
-void Light::enableLight(bool enable)
+/*void Light::enableLight(bool enable)
 {
 	if (enable) {
 		glEnable(getLightNumber());
@@ -78,7 +93,7 @@ void Light::enableLight(bool enable)
 		this->isActive = false;
 	}
 }
-
+*/
 void Light::setColor(glm::vec4 color)
 {
 	this->color = color;

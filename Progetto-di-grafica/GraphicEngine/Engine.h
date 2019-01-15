@@ -115,5 +115,5 @@ public:
 	void incrementFrames();
 
 	void pass(Node* root, glm::mat4 baseMatrix);
-
+	void rotate(Node * root, float angle);
 };

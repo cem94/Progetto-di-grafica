@@ -13,6 +13,7 @@ public:
 	void setNumberOfFaces(unsigned int numberOfFaces);
 	void setMatrix(glm::mat4 matrix);
 	void generateVAO(float * vertexArray, float * normalArray, float * uvArray, unsigned int * indices, unsigned int vertices);
+
 	//Ereditato da Object
 	 void render(glm::mat4 renderMatrix) override;
 private:

@@ -8,7 +8,7 @@ std::list<Node*> List::getList() const{	return this->list;}
 
 void List::setList(std::list<Node*> list){	this->list = list;}
 
-//aggiunge oggetto a lista istanze e salva matrice(in worldCoordinates)
+//aggiunge oggetto a lista istanze
 void List::add(Node* node) 
 {
 	//node->setMatrix(matrix);
@@ -32,8 +32,6 @@ Node* List::at(int position)
 	}
 	return nullptr;
 }
-
-
 
 void List::insert(std::list<Node*> elements)
 {
