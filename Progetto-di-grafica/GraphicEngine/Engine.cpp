@@ -310,63 +310,26 @@ void  Engine::createLists( Node* element)
 	if (element->getType() == Object::Type::NODE)
 	{
 		objects->add(element);
-		std::vector<Node*> children = element->getChildren();
-		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
-		{
-			createLists(*it);
-		}
 	}
 	else if (element->getType() == Object::Type::MESH)
 	{
 		objects->add(element);
-		std::vector<Node*> children = element->getChildren();
-		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
-		{
-			createLists(*it);
-		}
 	}
 	else if (element->getType() == Object::Type::LIGHT)
 	{
 		
 		lights->add(element);
-		std::vector<Node*> children = element->getChildren();
-		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
-		{
-			createLists(*it);
-		}
 	}
 	else {
 	//Camera
+		return;
+	}
+	std::vector<Node*> children = element->getChildren();
+	for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
+	{
+		createLists(*it);
 	}
 
-	/*std::vector<Node*> children = root->getChildren();
-	glm::mat4 actualMatrix = root->getFinalMatrix();
-	root->setMatrix(root->getFinalMatrix());
-
-	switch (root->getType()) {
-	case Object::Type::NODE:
-		objects->add(root);
-		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
-		{
-			populateListFromTree(actualMatrix, *it);
-		}
-		break;
-	case Object::Type::MESH:
-		objects->add((Mesh*)root);
-		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
-		{
-			populateListFromTree(actualMatrix, *it);
-		}
-		break;
-	case Object::Type::LIGHT:
-		lights->add(root);
-		std::vector<Node*> children = root->getChildren();
-		for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
-		{
-			populateListFromTree(actualMatrix, *it);
-		}
-		break;
-	}*/
 }
 
 /**
