@@ -82,10 +82,8 @@ Texture::Texture(std::string textureName){
 }
 
 //libera risorse
-Texture::~Texture()
-{
-	glDeleteTextures(1, &textureId);
-}
+Texture::~Texture(){	glDeleteTextures(1, &textureId);}
+
 //renderizza la texture TODO capire perché renderMatrix non utilizzata
 void Texture::render(glm::mat4 rendermatrix)
 {

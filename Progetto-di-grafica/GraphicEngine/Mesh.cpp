@@ -3,18 +3,10 @@
 // FreeGLUT:
 #include <GL/freeglut.h>
 
-Mesh::Mesh()
-{
-}
+Mesh::Mesh(){}
 
-Mesh::~Mesh()
-{
-}
+Mesh::~Mesh(){}
 
-/*void Mesh::setMatrix(glm::mat4 matrix)
-{
-	Node::setMatrix(matrix);
-}*/
 void Mesh::generateVAO(float * vertexes, float * normals, float * uvArray, unsigned int * indices, unsigned int vertices)
 {
 	printf("Generating vao %s\n", getName().c_str());
@@ -48,25 +40,13 @@ void Mesh::generateVAO(float * vertexes, float * normals, float * uvArray, unsig
 
 	glBindVertexArray(0);
 }
-Material * Mesh::getMaterial() const
-{
-	return material;
-}
+Material * Mesh::getMaterial() const{	return material;}
 
-void Mesh::setMaterial(Material * material)
-{
-	this->material = material;
-}
+void Mesh::setMaterial(Material * material){	this->material = material;}
 
-void Mesh::setRadius(float radius)
-{
-	this->radius = radius;
-}
+void Mesh::setRadius(float radius){	this->radius = radius;}
 
-void Mesh::setNumberOfFaces(unsigned int numberOfFaces)
-{
-	this->numberOfFaces = numberOfFaces;
-}
+void Mesh::setNumberOfFaces(unsigned int numberOfFaces){	this->numberOfFaces = numberOfFaces;}
 
 void Mesh::render(glm::mat4 renderMatrix)
 {

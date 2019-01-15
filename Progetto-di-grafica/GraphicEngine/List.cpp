@@ -11,7 +11,6 @@ void List::setList(std::list<Node*> list){	this->list = list;}
 //aggiunge oggetto a lista istanze
 void List::add(Node* node) 
 {
-	//node->setMatrix(matrix);
 	this->list.push_back(node);
 }
 
@@ -37,9 +36,8 @@ void List::insert(std::list<Node*> elements)
 {
 	if (elements.size() == 0) {
 		printf("Nothing to insert\n");
-		return;
-	}
-	list.insert(list.begin(), elements.begin(), elements.end());
+	}else
+		list.insert(list.begin(), elements.begin(), elements.end());
 }
 
 void List::render(glm::mat4 renderMatrix){}

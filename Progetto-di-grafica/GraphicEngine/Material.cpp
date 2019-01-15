@@ -31,12 +31,9 @@ glm::vec4 Material::getEmissive() const{	return this->emissive;}
 
 void Material::setEmissive(glm::vec4 emissive){	this->emissive = emissive;}
 
-
 void Material::setTexture(std::string textureName)
-
 {
 		this->setTexture(new Texture(textureName));
-	
 }
 
 //una volte create trasparenze sostituire 1 con alpha
@@ -48,4 +45,3 @@ void Material::render(glm::mat4 renderMatrix)
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, glm::value_ptr(glm::vec4(specular[0], specular[1], specular[2],1)));
 	//glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, glm::value_ptr(glm::vec3(emissive[0], emissive[1], emissive[2])));
 }
-

@@ -34,7 +34,7 @@ void displayCallback()
 	angle+=0.005;
 	//2D rendering//
 	//setto la matrice di proiezione ortogonale il rendering 2d
-	engine->setProjectionMatrix(ortho);
+	//engine->setProjectionMatrix(ortho);
 	//necessario (la matrice è ortogonale)
 	engine->loadIdentity();
 	engine->renderText();
@@ -49,7 +49,7 @@ void reshapeCallback(int width, int height)
 {
 	engine->setViewport(0, 0, width, height);
 	//perspective:							(fieldOfView,		aspectRatio,			 nearPlane, farPlane)
-	perspective = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 1.0f, 700.0f);
+	perspective = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 1.0f, 1400.0f);
 	ortho = glm::ortho(0.f, (float)width, 0.f, (float)height, -1.f, 1.f);
 }
 
@@ -134,17 +134,13 @@ void timerCallback(int value)
 void mouseWheel(int wheel, int direction, int x, int y)
 {
 	// TODO:: come possiamo usarlo?
+  /*
 	wheel = 0;
 	if (direction == -1)
-	{
-		glm::vec3 traslation(0.0, 0.0, -10);
-		engine->moveCamera(traslation);
-	}
+		engine->moveCamera(-1.0f);
 	else if (direction == +1)
-	{
-		glm::vec3 traslation(0.0, 0.0, 10);
-		engine->moveCamera(traslation);
-	}
+		engine->moveCamera(1.0f);
+                      */
 }
 
 //callback per pressione mouse
@@ -157,7 +153,7 @@ void initCamera()
 {
 	//TODO:: come mai cambiando il valore non cambia la posizione iniziale?
 	// dove si trova la camera
-	glm::vec3 eye = glm::vec3(200.f, 200.f, 200.f);
+	glm::vec3 eye = glm::vec3(-100.f, 100.f, -200.f);
 	// verso dove guarda
 	glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
 	// dove è il sopra
@@ -192,16 +188,17 @@ int main(int argc, char * argv[])
 	// set background color
 	engine->clearColor(0.2f, 0.3f, 0.7f);
 
-	// init camera
-	initCamera();
-
 	// read ovo file, load scene and start main loop
 	const char* fileName = "../ovo_files/gauntlet.ovo";
 	scene = engine->getScene(fileName);
 
+	// init camera
+    initCamera();
+
 	// TODO setto la camera sull'oggetto principale
-	// TODO:: questo non va nel call back function
-    engine->setCameraToNode(scene, "1", "pollice1");
+	// TODO:: GREG questo non va nel call back function
+	// TODO:: GREG anche se è commentata funziona?
+    //engine->setCameraToNode(scene, "1", "pollice1");
 
 	engine->startLoop();
 	

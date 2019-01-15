@@ -104,8 +104,6 @@ public:
 
 	void changeCamera();
 
-	void moveCamera(glm::vec3 translation);
-
 	void setCameraToNode(Node* root, std::string cameraName, std::string nodeName);
 
 	void  populateListFromTree(glm::mat4 fatherMatrix, Node* root);

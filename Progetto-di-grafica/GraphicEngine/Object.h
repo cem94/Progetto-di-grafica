@@ -12,7 +12,7 @@ public:
 	void setName(std::string name) { this->name = name; };
 	void setType(Type type) { this->type = type; }
 	virtual void render(glm::mat4 rendermatrix) = 0;
-	 Type getType() const { return type; };
+	Type getType() const { return type; };
 private:
 	Type type;
 	int id;

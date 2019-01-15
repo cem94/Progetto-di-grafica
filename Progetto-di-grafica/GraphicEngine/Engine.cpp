@@ -25,7 +25,7 @@ List *toRender = new List();
 List *objects = new List();
 List *lights = new List();
 
-Engine::~Engine() {  FreeImage_DeInitialise();}
+Engine::~Engine() { FreeImage_DeInitialise(); }
 
 // init function//
 void LIB_API Engine::init(int argc, char *argv[])
@@ -475,15 +475,6 @@ void Engine::changeCamera()
 }
 
 /**
-* moves actual camera
-* @param translation matrix
-*/
-void Engine::moveCamera(glm::vec3 translation)
-{
-	currentCamera->setMatrix(glm::translate(currentCamera->getMatrix(), translation));
-}
-
-/**
 * set a specific camera to gauntlet
 * @param root node and camera name
 */
@@ -508,7 +499,10 @@ void Engine::setCameraToNode(Node* root, std::string cameraName, std::string nod
 			glm::vec3 eye = glm::vec3(pos.x , pos.y , pos.z-1000);
 			glm::vec3 center = pos;
 			glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-			camera->setProjectionMatrix(glm::lookAt(eye, center, up));
+            //camera->setMatrix(glm::lookAt(eye, center, up));
+                        // TODO:: GREG a cosa serve? se lo commento funziona
+                        // comunque.
+			//camera->setProjectionMatrix(glm::lookAt(eye, center, up));
 			searched->insert(camera);
 		}
 	}

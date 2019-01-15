@@ -13,9 +13,9 @@ void Node::setParent(Node * parent){	this->parent = parent;}
 
 std::vector<Node*> Node::getChildren() const{	return children;}
 
-void Node::setChildren(std::vector<Node*> children){	this->children = children;}
+//void Node::setChildren(std::vector<Node*> children){this->children = children;}
 
-glm::mat4 Node::getMatrix() const{	return this->matrix;}
+glm::mat4 Node::getMatrix(){	return matrix;}
 
 void Node::setMatrix(glm::mat4 matrix){	this->matrix = matrix;}
 
@@ -28,7 +28,7 @@ void Node::insert(Node * node)
 
 void Node::remove(int position)
 {
-	if (children.size() > position && position >= 0)
+	if (getChildrenSize() > position && position >= 0)
 	{
 		auto to_remove = children.at(position);
 		children.erase(children.begin() + position);
@@ -49,6 +49,7 @@ void Node::remove(Node * node)
 }
 Node * Node::operator[](int position)
 {
+  const int childrenSize = getChildrenSize();
 	if (position >= 0 && position < childrenSize)
 	{
 		return children.at(position);
@@ -67,6 +68,7 @@ void Node::setChildrenSize(unsigned int size)
 	//this->childrenSize = size;
 	children.reserve(size);
 }
+
 //TODO sostituirlo dove necessario
 glm::mat4 Node::getFinalMatrix()
 {
