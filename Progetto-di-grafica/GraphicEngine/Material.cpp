@@ -36,7 +36,6 @@ void Material::setTexture(std::string textureName)
 
 {
 		this->setTexture(new Texture(textureName));
-	
 }
 
 //una volte create trasparenze sostituire 1 con alpha

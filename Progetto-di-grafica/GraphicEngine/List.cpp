@@ -11,7 +11,6 @@ void List::setList(std::list<Node*> list){	this->list = list;}
 //aggiunge oggetto a lista istanze
 void List::add(Node* node) 
 {
-	//node->setMatrix(matrix);
 	this->list.push_back(node);
 }
 
