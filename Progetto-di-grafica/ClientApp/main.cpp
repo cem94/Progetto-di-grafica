@@ -17,18 +17,20 @@ void displayCallback()
 {
 	//clear dei bit DEPTH etc
 	engine->clearBuffers();
-	//TODO setto la camera sull'oggetto principale
-	engine->setCameraToNode(scene, "1", "pollice1");
+
 	//setto la matrice di proiezione prospettica per il rendering 3d
 	engine->setProjectionMatrix(perspective);
+
 	//we pass the scene graph
 	engine->pass(scene, glm::mat4(1.0f));
+
 	//3d rendering//
 	//renderizza la lista ottenuta dal file OVO
 	engine->renderList();
 	/* TODO far muovere il guanto in automatico o qualcosa così
 	*/
 	//engine->rotate(scene, angle);
+	//TODO:: deve essere modulo 360
 	angle+=0.005;
 	//2D rendering//
 	//setto la matrice di proiezione ortogonale il rendering 2d
@@ -47,7 +49,7 @@ void reshapeCallback(int width, int height)
 {
 	engine->setViewport(0, 0, width, height);
 	//perspective:							(fieldOfView,		aspectRatio,			 nearPlane, farPlane)
-	perspective = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 1.0f, 4000.0f);
+	perspective = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 1.0f, 700.0f);
 	ortho = glm::ortho(0.f, (float)width, 0.f, (float)height, -1.f, 1.f);
 }
 
@@ -155,9 +157,9 @@ void initCamera()
 {
 	//TODO:: come mai cambiando il valore non cambia la posizione iniziale?
 	// dove si trova la camera
-	glm::vec3 eye = glm::vec3(200.f, 500.f, 1200.f);
+	glm::vec3 eye = glm::vec3(200.f, 200.f, 200.f);
 	// verso dove guarda
-	glm::vec3 center = glm::vec3(200.0f, 0.0f, 0.0f);
+	glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
 	// dove è il sopra
 	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
 	engine->addCamera("1", eye, center, up);
@@ -196,6 +198,10 @@ int main(int argc, char * argv[])
 	// read ovo file, load scene and start main loop
 	const char* fileName = "../ovo_files/gauntlet.ovo";
 	scene = engine->getScene(fileName);
+
+	// TODO setto la camera sull'oggetto principale
+	// TODO:: questo non va nel call back function
+    engine->setCameraToNode(scene, "1", "pollice1");
 
 	engine->startLoop();
 	

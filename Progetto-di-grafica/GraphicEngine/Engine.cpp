@@ -455,7 +455,7 @@ Camera * Engine::addCamera(std::string name, glm::vec3 eye, glm::vec3 center, gl
 {
 	Camera * camera = new Camera();
 	camera->setName(name);
-	camera->setProjectionMatrix(glm::lookAt(eye, center, up));
+	camera->setMatrix(glm::lookAt(eye, center, up));
 	//aggiunge la camera all'elenco
 	cameras.push_back(camera);
 	//e la setta come camera corrente
@@ -505,7 +505,7 @@ void Engine::setCameraToNode(Node* root, std::string cameraName, std::string nod
 		{
 			root->remove(camera);
 			glm::vec3 pos = searched->getMatrix()[3];
-			glm::vec3 eye = glm::vec3(pos.x, pos.y , pos.z-100);
+			glm::vec3 eye = glm::vec3(pos.x , pos.y , pos.z-1000);
 			glm::vec3 center = pos;
 			glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
 			camera->setProjectionMatrix(glm::lookAt(eye, center, up));
