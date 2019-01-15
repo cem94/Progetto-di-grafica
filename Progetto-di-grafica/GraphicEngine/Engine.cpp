@@ -145,10 +145,10 @@ void LIB_API Engine::keyboard(void (*keyboardCallBack)(unsigned char, int,
   redisplay();
 }
 
-void Engine::specialKeyboard(void (*specialFunc)(int, int, int)) {
-  glutSpecialFunc(specialFunc);
-  //-> non so se serve
-  redisplay();
+void Engine::specialKeyboard(void(*specialFunc)(int, int, int))
+{
+	glutSpecialFunc(specialFunc);
+	redisplay();
 }
 
 void LIB_API Engine::setViewport(int x, int y, int width, int height) {
@@ -183,51 +183,67 @@ void LIB_API Engine::switchLights() {
   lighting = !lighting;
   enableLighting(lighting);
 }
-void LIB_API Engine::enableLighting(bool value) {
-  if (value) {
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
-  } else {
-    glDisable(GL_LIGHTING);
-    glDisable(GL_LIGHT0);
-  }
+//spostare in light la parte che accende le luci
+void LIB_API Engine::enableLighting(bool value)
+{
+	if (value) {
+		
+		glEnable(GL_LIGHTING);
+		//sostituire con light->getLightNumber()
+		glEnable(GL_LIGHT0);
+		//
+	}
+	else {
+		glDisable(GL_LIGHTING);
+		glDisable(GL_LIGHT0);
+	}
 }
 
-// abilita/disabilita l'illuminazione(per renderizzare in 2D (testo etc)
-void LIB_API Engine::enableLight(Node* root, std::string lightName) {
-  Light* light = (Light*)getNodeByName(root, lightName);
-  if (light != nullptr) printf("Found\n");
-  // light->changeState();
-  else
-    std::cout << "Light not present" << std::endl;
+//abilita/disabilita l'illuminazione(per renderizzare in 2D (testo etc)
+void LIB_API Engine::enableLight(Node *root, std::string lightName)
+{
+	Light* light = (Light*)getNodeByName(root, lightName);
+	if (light != nullptr)
+		printf("Found\n");
+	//TODO	
+	//light->changeState();
+	else
+		std::cout << "Light not present" << std::endl;
 }
 
 // scrive info su schermo (FPS etc)
 void LIB_API Engine::renderText() {
   if (lighting) enableLighting(false);
 
-  // TODO scrivere i comandi del guanto / opzioni / fps
-  char text[64];
-  // colore testo
-  glColor3f(1.0f, 1.0f, 1.0f);
-  if (lighting)
-    strcpy_s(text, "[l] lighting (on)");
-  else
-    strcpy_s(text, "[l] lighting (off)");
-  glRasterPos2f(10.0f, 20.0f);
-  glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char*)text);
-  glColor3f(1.0f, 1.0f, 1.0f);
-  sprintf_s(text, "FPS: %.1f", fps);
-  glRasterPos2f(10.0f, 40.0f);
-  glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char*)text);
-  strcpy_s(text, "[c] change camera");
-  glRasterPos2f(10.0f, 60.0f);
-  glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char*)text);
-  sprintf_s(text, "[r] rotate model ");
-  glRasterPos2f(10.0f, 80.0f);
-  glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char*)text);
-  //---------------------------------------------------------------------
-  if (lighting) enableLighting(true);
+//scrive info su schermo (FPS etc)
+void LIB_API Engine::renderText()
+{
+	if (lighting)
+		enableLighting(false);
+
+	//TODO scrivere i comandi del guanto / opzioni 
+	char text[64];
+	//colore testo
+	glColor3f(1.0f, 1.0f, 1.0f);
+	if (lighting)
+		strcpy_s(text, "[l] lighting (on)");
+	else
+		strcpy_s(text, "[l] lighting (off)");
+	glRasterPos2f(10.0f, 20.0f);
+	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
+	glColor3f(1.0f, 1.0f, 1.0f);
+	sprintf_s(text, "FPS: %.1f", fps);
+	glRasterPos2f(10.0f, 40.0f);
+	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
+	strcpy_s(text, "[c] change camera");
+	glRasterPos2f(10.0f, 60.0f);
+	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
+	sprintf_s(text, "[r] rotate model ");
+	glRasterPos2f(10.0f, 80.0f);
+	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
+	//---------------------------------------------------------------------
+	if (lighting)
+		enableLighting(true);
 }
 
 // parte dal nodo corrente  e popola l'albero
@@ -271,25 +287,35 @@ Node* Engine::getNodeByName(Node* root, std::string name) {
 }
 
 /**
- * read the scene graph and put the nodes in List
- * @param initial matrix and root node
- */
-void Engine::createLists(Node* element) {
-  if (element->getType() == Object::Type::NODE) {
-    objects->add(element);
-  } else if (element->getType() == Object::Type::MESH) {
-    objects->add(element);
-  } else if (element->getType() == Object::Type::LIGHT) {
-    lights->add(element);
-  } else {
-    // Camera
-    return;
-  }
-  std::vector<Node*> children = element->getChildren();
-  for (std::vector<Node*>::iterator it = children.begin(); it != children.end();
-       ++it) {
-    createLists(*it);
-  }
+* read the scene graph and put the nodes in List
+* @param initial matrix and root node
+*/
+void  Engine::createLists( Node* element)
+{
+
+	if (element->getType() == Object::Type::NODE)
+	{
+		objects->add(element);
+	}
+	else if (element->getType() == Object::Type::MESH)
+	{
+		objects->add(element);
+	}
+	else if (element->getType() == Object::Type::LIGHT)
+	{
+		
+		lights->add(element);
+	}
+	else {
+	//Camera
+		return;
+	}
+	std::vector<Node*> children = element->getChildren();
+	for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
+	{
+		createLists(*it);
+	}
+
 }
 
 /**
@@ -397,13 +423,48 @@ void Engine::setCameraToNode(Node* root, std::string cameraName,
   }
 }
 
-void Engine::rotateModel(Node* root, float angle) {
-  Node* guardia = getNodeByName(root, "guardia");
-  if (guardia != nullptr) {
-    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle),
-                                     glm::vec3(0.0f, 1.0f, 0.0f));
-    guardia->setMatrix(guardia->getMatrix() * rotation);
-  } else {
-    printf("Node not found\n");
-  }
+
+void Engine::rotateModel(Node * root, float angle) {
+	Node* guardia = getNodeByName(root, "guardia");
+	if (guardia != nullptr)
+	{
+		glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
+		guardia->setMatrix(guardia->getMatrix()*rotation);
+	}
+	else {
+		printf("Node not found\n");
+	}
+}
+//TODO completare, limitare la rotazione e far si che quando mollo spazio faccia la rotazione inversa (se possibile)
+void Engine::closeThumb(Node * root)
+{
+	Node* finger = getNodeByName(root, "pollice1");
+	Node* finger2 = getNodeByName(root, "pollice2");
+	//la gemma non segue il dito capire come fare
+	Node* gemma= getNodeByName(root, "gemma_pollice");
+	glm::mat4 rotationJewel= glm::rotate(glm::mat4(1.0f), glm::radians(10.f), glm::vec3(1.0f, 0.0f, 0.0f));
+	//le falangi dovrebbero ruotare anche su un altro asse probabilmente r1*r2 
+	glm::mat4 rotationFinger = glm::rotate(glm::mat4(1.0f), glm::radians(10.f), glm::vec3(1.0f, 0.0f, 0.0f));
+	glm::mat4 rotationFinger2 = glm::rotate(glm::mat4(1.0f), glm::radians(5.f), glm::vec3(1.0f, 0.0f, 0.0f));
+	gemma->setMatrix(gemma->getMatrix()*rotationJewel);
+	finger->setMatrix(finger->getMatrix()*rotationFinger);
+	finger2->setMatrix(finger2->getMatrix()*rotationFinger2);
+}
+//TODO completare (settare assi/angoli giusti etc)
+void Engine::closeFinger(Node * root,std::string name)
+{
+	name.append("1");
+	Node* finger = getNodeByName(root, name);
+	name = name.substr(0,name.size()-1);
+	name.append("2");
+	Node* finger1 = getNodeByName(root, name);
+	Node* finger2 = getNodeByName(root, name);
+
+	glm::mat4 rotationFinger = glm::rotate(glm::mat4(1.0f), glm::radians(20.f), glm::vec3(0.0f, 0.0f, -1.0f));
+	glm::mat4 rotationFinger1 = glm::rotate(glm::mat4(1.0f), glm::radians(10.f), glm::vec3(0.0f, 0.0f, -1.0f));
+	glm::mat4 rotationFinger2 = glm::rotate(glm::mat4(1.0f), glm::radians(5.f), glm::vec3(0.0f, 0.0f, -1.0f));
+
+	finger->setMatrix(finger->getMatrix()*rotationFinger);
+	finger1->setMatrix(finger1->getMatrix()*rotationFinger1);
+	finger2->setMatrix(finger2->getMatrix()*rotationFinger2);
 }
