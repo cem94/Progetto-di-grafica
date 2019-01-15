@@ -117,4 +117,6 @@ public:
 	void pass(Node* scene);
 
 	void rotateModel(Node * root, float angle);
+	void closeThumb(Node * root);
+	void closeFinger(Node * root, std::string name);
 };

@@ -59,27 +59,28 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 	{
 		//Così dovrebbe essere comoda da usare//
 	case '1':
-		//TODO fare come per camera
+		//TODO accendere /spegnere luce1,2 ,3 etc
+
 		//pollice
 	case ' ':
-		//engine->closeFinger();
+		engine->closeThumb(scene);
 		break;
 		//indice
 	case 'd':
-		//engine->closeFinger();
+		engine->closeFinger(scene,"indice");
 		break;
 		//medio
 	case 'w':
-		//engine->closeFinger();
+		engine->closeFinger(scene,"medio");
 		break;
 		//anulare
 	case 'a':
-		//engine->closeFinger();
+		engine->closeFinger(scene,"anulare");
 		break;
 		//mignolo
-			//16 =  shift
-	case 16:
-		//engine->closeFinger();
+	//TODO capire qual'è lo shift e cambiare
+	case 'e':
+		engine->closeFinger(scene,"mignolo");
 		break;
 	case 'l':
 		//abilita/disabilita illuminazione 
@@ -88,7 +89,6 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 		//muovi mano
 	case 'r':
 		engine->rotateModel(scene,1);
-		//engine->moveHand();
 		break;
 		//cambia camera corrente
 	case 'c':
@@ -109,19 +109,15 @@ void specialCallback(int key, int x, int y)
 	case GLUT_KEY_DOWN:
 		break;
 	case GLUT_KEY_LEFT:
-
 		break;
 	case GLUT_KEY_RIGHT:
-
 		break;
 	case GLUT_KEY_UP:
-
 		break;
 	default:
 		break;
 
 	}
-	//TODO:: GREG si se modifica qualcosa graficamente, devi far vedere i cambiamenti.
 	engine->redisplay();
 }
 
@@ -166,10 +162,9 @@ void initCamera()
 	engine->addCamera("2", eye, center, up);
 }
 
-// TODO:: vedere quali ci servono e quali no.
+// TODO:: vedere quali ci servono e quali no. 
 void initCallBackFunction()
 {
-	// set callback
 	engine->display(displayCallback);
 	engine->reshape(reshapeCallback);
 	engine->keyboard(keyboardCallback);
@@ -188,7 +183,6 @@ int main(int argc, char * argv[])
 
 	// init call back functions
 	initCallBackFunction();
-
 	// set background color
 	engine->clearColor(0.2f, 0.3f, 0.7f);
 
@@ -199,14 +193,12 @@ int main(int argc, char * argv[])
 	const char* fileName = "../ovo_files/gauntlet.ovo";
 	scene = engine->getScene(fileName);
 	//L'ho spostato qua sembra funzionare
-	//we pass the scene graph
 	engine->pass(scene);
 	// TODO setto la camera sull'oggetto principale
 	// TODO:: questo non va nel call back function
-    engine->setCameraToNode(scene, "1", "pollice1");
+    engine->setCameraToNode(scene, "1", "guardia");
 
 	engine->startLoop();
-	
 	// free memory
 	delete (engine);
 	
