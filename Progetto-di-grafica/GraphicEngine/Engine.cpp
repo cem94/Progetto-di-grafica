@@ -253,7 +253,8 @@ void LIB_API Engine::renderText()
 
 //parte dal nodo corrente  e popola l'albero
 void findChildren(Node* currentNode, std::vector<Node*>& nodes) {
-	for (int i = 0; i < currentNode->getChildrenSize(); i++) {
+	const int capacity = currentNode->getCapacity();
+	for (int i = 0; i < capacity; i++) {
 		Node * next = nodes.at(0);
 		nodes.erase(nodes.begin());
 		findChildren(next, nodes);
@@ -447,10 +448,7 @@ void  Engine::renderList()
 	lights = new List();
 }
 
-void Engine::incrementFrames()
-{
-	frames++;
-}
+void Engine::incrementFrames(){	frames++;}
 
 Camera * Engine::addCamera(std::string name, glm::vec3 eye, glm::vec3 center, glm::vec3 up)
 {

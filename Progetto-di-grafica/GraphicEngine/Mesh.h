@@ -11,7 +11,6 @@ public:
 	void setMaterial(Material* material);
 	void setRadius(float radius);
 	void setNumberOfFaces(unsigned int numberOfFaces);
-	void setMatrix(glm::mat4 matrix);
 	void generateVAO(float * vertexArray, float * normalArray, float * uvArray, unsigned int * indices, unsigned int vertices);
 
 	//Ereditato da Object
@@ -30,4 +29,3 @@ private:
 	unsigned int vao = 0;
 	Material* material;
 };
-

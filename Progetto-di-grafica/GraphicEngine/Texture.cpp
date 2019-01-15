@@ -4,9 +4,8 @@
 //// FreeImage:
 #include <FreeImage.h>
 
-Texture::Texture()
-{
-}
+Texture::Texture(){}
+
 //TODO remove when project ends///////////////////////////////////////////
 bool fileExist(const std::string& name) {
 	if (FILE *file = fopen(name.c_str(), "r")) {

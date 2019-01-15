@@ -33,7 +33,6 @@ public:
 	void setRadius(float radius);
 	float getCutoff() const;
 	void setCutoff(float cutoff);
-	void setMatrix(glm::mat4 matrix);
 	//Ereditato da object
 	 void render(glm::mat4 renderMatrix) override;
 private:

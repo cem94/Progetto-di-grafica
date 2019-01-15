@@ -11,12 +11,13 @@ Mesh::~Mesh()
 {
 }
 
-void Mesh::setMatrix(glm::mat4 matrix)
+/*void Mesh::setMatrix(glm::mat4 matrix)
 {
 	Node::setMatrix(matrix);
-}
+}*/
 void Mesh::generateVAO(float * vertexes, float * normals, float * uvArray, unsigned int * indices, unsigned int vertices)
 {
+	printf("Generating vao %s\n", getName().c_str());
 
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);

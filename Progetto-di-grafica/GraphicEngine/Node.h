@@ -19,6 +19,7 @@ public:
 	int getChildrenSize() const;
 	void setChildrenSize(unsigned int size);
 	glm::mat4 getFinalMatrix();
+    int getCapacity() const;
 	//TODO usarlo per accedere ai figli
 	Node *operator[](int position);
 	//ereditato da Object

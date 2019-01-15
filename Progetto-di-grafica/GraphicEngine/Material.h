@@ -39,4 +39,3 @@ private:
 	//TODO capire a cosa serve credo sia per le trasparenzes
 	/*float alpha = 1;*/
 };
-
