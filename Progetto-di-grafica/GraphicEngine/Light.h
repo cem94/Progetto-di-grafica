@@ -6,6 +6,7 @@ class Light : public Node
 public:
 	Light();
 	virtual ~Light();
+	enum SubType { OMNI, SPOTLIGHT, DIRECTIONAL };
 
 	//Getters & Setters
 	short getIntensity() const;
@@ -13,12 +14,11 @@ public:
 	void setAmbient(glm::vec4 ambient);
 	void setDiffuse(glm::vec4 diffuse);
 	void setSpecular(glm::vec4 specular);
-	enum SubType {OMNI, SPOTLIGHT, DIRECTIONAL};
 	SubType getSubType() const;
 	void setSubType(SubType subtype);
-	void changeState();
 	int getLightNumber();
-	void enableLight(bool enable);
+	//void changeState();
+	//void enableLight(bool enable);
 	void setColor(glm::vec4 color);
 	//posizione della luce, per tutte e 3
 	void setPosition(glm::vec4 position);

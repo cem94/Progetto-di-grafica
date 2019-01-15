@@ -19,6 +19,7 @@ void Camera::setProjectionMatrix(glm::mat4 projection)
 
 void Camera::setMatrix(glm::mat4 matrix){	Node::setMatrix(matrix);}
 
-void Camera::render(glm::mat4 renderMatrix){	glLoadMatrixf(glm::value_ptr(renderMatrix));}
+void Camera::render(glm::mat4 renderMatrix){	
+	printf("Rendering camera %s \n",getName().c_str());
+	glLoadMatrixf(glm::value_ptr(renderMatrix));}
 
-//Node::Type Camera::getType() const{		return CAMERA;}

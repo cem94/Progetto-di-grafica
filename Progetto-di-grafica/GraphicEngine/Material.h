@@ -22,7 +22,7 @@ public:
 	void setAlpha(float alpha);*/
 	glm::vec4 getEmissive() const;
 	void setEmissive(glm::vec4 emissive);
-	void setTexture(const char * textureName);
+	void setTexture(std::string textureName);
 	//ereditato da Object
 	void render(glm::mat4 renderMatrix) override;
 

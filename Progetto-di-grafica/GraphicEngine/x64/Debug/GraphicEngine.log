@@ -1,22 +1,4 @@
-﻿  Camera.cpp
-  Engine.cpp
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(334): warning C4477: 'printf': con la stringa di formato '%d' è necessario un argomento di tipo 'int', ma il tipo dell'argomento variadic 1 è 'unsigned __int64'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(334): note: provare a usare '%zd' nella stringa di formato
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(336): warning C4477: 'printf': con la stringa di formato '%d' è necessario un argomento di tipo 'int', ma il tipo dell'argomento variadic 1 è 'unsigned __int64'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(336): note: provare a usare '%zd' nella stringa di formato
-  Light.cpp
-  List.cpp
-  Material.cpp
-  Mesh.cpp
-  Node.cpp
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.cpp(61): warning C4267: 'return': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.cpp(79): warning C4267: 'return': conversione da 'size_t' a 'int'. Possibile perdita di dati.
-  OvoReader.cpp
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(9): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: vedere la dichiarazione di 'fopen'
-  Texture.cpp
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\texture.cpp(11): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: vedere la dichiarazione di 'fopen'
-  Generazione del codice in corso...
-     Creazione della libreria C:\Users\cem\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.lib e dell'oggetto C:\Users\cem\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.exp
-  GraphicEngine.vcxproj -> C:\Users\cem\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.dll
+﻿  Material.cpp
+  LINK : C:\Users\meyer\source\repos\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.dll not found or not built by the last incremental link; performing full link
+     Creating library C:\Users\meyer\source\repos\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.lib and object C:\Users\meyer\source\repos\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.exp
+  GraphicEngine.vcxproj -> C:\Users\meyer\source\repos\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.dll

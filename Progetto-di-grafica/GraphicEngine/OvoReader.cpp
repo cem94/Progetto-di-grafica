@@ -69,16 +69,13 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
 			strcpy_s(targetName, data + position);
 			f << "   Target node . :  " << targetName << std::endl;
 			position += (unsigned int)strlen(targetName) + 1;
-
-			root = new Node();
-			root->setChildrenSize(children);
-			root->setType(Object::Type::NODE);
-			root->setName(nodeName);
-			//	root->setID(root->getID());
-					//idCounter++;
-			root->setMatrix(matrix);
-
-			objects.push_back(root);
+			Node* node = new Node();
+			node->setName(nodeName);
+			node->setType(Object::Type::NODE);
+			node->setChildrenSize(children);
+			node->setMatrix(matrix);
+			//root->insert(node);
+			objects.push_back(node);
 		}
 		break;
 		/////////////////////////////////
@@ -372,7 +369,6 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
 				position += sizeof(unsigned int);
 
 				//meshVertex.push_back(new Vertex(vertex, glm::unpackSnorm3x10_1x2(normalData), textureDataVector));
-
 				meshVertices[c * 3] = vertex.x;
 				meshVertices[c * 3 + 1] = vertex.y;
 				meshVertices[c * 3 + 2] = vertex.z;
@@ -415,8 +411,14 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
 			mesh->setMaterial(material);
 			mesh->setRadius(radius);
 			mesh->setNumberOfFaces(faces);
-			mesh->setMatrix(matrix);
 			mesh->setChildrenSize(children);
+		/*
+			mesh->setMeshVertexes(meshVertices);
+			mesh->setNormals(meshNormals);
+			mesh->setTextures(meshTextures);
+			mesh->setIndices(indices);
+			mesh->setVertexes(vertices);
+			*/
 			mesh->generateVAO(meshVertices, meshNormals, meshTextures, indices, vertices);
 			objects.push_back(mesh);
 		}
@@ -501,6 +503,7 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
 			//////////////////////////////////////////////////////////////////////////////////////////7
 			Light *light = new Light();
 			light->setName(lightName);
+			light->setType(Object::Type::LIGHT);
 			switch ((OvLight::Subtype) subtype)
 			{
 			case OvLight::Subtype::DIRECTIONAL: strcpy_s(subtypeName, "directional");
@@ -518,7 +521,6 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
 			}
 			//TODO dovrebbero essere 0,1,2,3, credo resettare id
 		//	light->setID(light->getID());
-			light->setType(Object::Type::LIGHT);
 			light->setMatrix(matrix);
 			light->setColor(glm::vec4(color.r, color.g, color.b, 1.0f));
 			light->setDirection(glm::vec4(direction.r, direction.g, direction.b, 1.0f));
@@ -584,5 +586,6 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
 	// Done:
 	fclose(dat);
 	std::cout << "\nFile parsed" << std::endl;
+	std::cout << "\nReaded " << objects.size()<<std::endl;
 	return objects;
 }

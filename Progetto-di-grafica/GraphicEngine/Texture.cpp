@@ -28,15 +28,10 @@ std::string workingdir()
 Texture::Texture(std::string textureName){
 
 //TODO aggiungere texture valide e rimuovere questo//////////////////////////////////////////////////////////////7
-	if (textureName.size() == 0 || textureName.compare("[none]")==0||textureName.size()==11) {
+	if (textureName.compare("[none]")==0||textureName.size()==11) {
 		std::cout << "Texture name not valid " << textureName.c_str() << std::endl;
 	}/////////////////////////////////////////////////////////////////
-	
-	
-	
-	
-	
-	
+
 	else {
 		std::cout << "Texture name size " << textureName.size() <<std::endl;
 		std::cout << "Texture name " << textureName.c_str() <<std::endl;

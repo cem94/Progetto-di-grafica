@@ -5,6 +5,7 @@ Engine* engine = new Engine();
 glm::mat4 perspective;
 glm::mat4 ortho;
 Node *scene = NULL;
+float angle = 0.0f;
 //Ideally, only GLM should be used client-side.
 //TODO If needed, replicate the (few) required definitions in your engine’s include files(e.g., the definition of special keys provided by FreeGlut).
 #define GLUT_KEY_LEFT 0x0064
@@ -17,7 +18,7 @@ void displayCallback()
 	//clear dei bit DEPTH etc
 	engine->clearBuffers();
 	//TODO setto la camera sull'oggetto principale
-	engine->setCameraToNode(scene, "1", "palmo");
+	engine->setCameraToNode(scene, "1", "pollice1");
 	//setto la matrice di proiezione prospettica per il rendering 3d
 	engine->setProjectionMatrix(perspective);
 	//we pass the scene graph
@@ -26,8 +27,9 @@ void displayCallback()
 	//renderizza la lista ottenuta dal file OVO
 	engine->renderList();
 	/* TODO far muovere il guanto in automatico o qualcosa così
-	engine->moveGauntlet(root, speed);
 	*/
+	//engine->rotate(scene, angle);
+	angle+=0.005;
 	//2D rendering//
 	//setto la matrice di proiezione ortogonale il rendering 2d
 	engine->setProjectionMatrix(ortho);
@@ -54,10 +56,10 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 	switch (key)
 	{
 		//Così dovrebbe essere comoda da usare//
-		//pollice
 	case '1':
 		//TODO fare come per camera
-		//engine->changeLight(root, "Omni001");
+		engine->enableLight(scene, "fix_light");
+		//pollice
 	case ' ':
 		//engine->closeFinger();
 		break;
@@ -82,7 +84,6 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 		//abilita/disabilita illuminazione 
 		engine->switchLights();
 		break;
-
 		//muovi mano
 	case 'm':
 		//engine->moveHand();
@@ -93,6 +94,7 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 		//set nome camera corrente
 		break;
 	case 'p':
+	//	engine->enableLight(scene, "fix_light");
 		break;
 	}
 	engine->redisplay();
@@ -194,6 +196,7 @@ int main(int argc, char * argv[])
 	// read ovo file, load scene and start main loop
 	const char* fileName = "../ovo_files/gauntlet.ovo";
 	scene = engine->getScene(fileName);
+
 	engine->startLoop();
 	
 	// free memory

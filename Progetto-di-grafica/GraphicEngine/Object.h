@@ -2,7 +2,6 @@
 /* Base class used by all the derived classes.This class is responsible for
  * keeping track of the existing objects, forcing some required API (virtual)
  * methods and providing a unique ID to each object. */
-#include <chrono>
 
 class  Object {
 public:
