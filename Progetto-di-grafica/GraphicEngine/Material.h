@@ -14,7 +14,6 @@ public:
 	glm::vec3 getDiffuse();
 	void setSpecular(glm::vec3 specular);
 	glm::vec3 getSpecular();
-
 	float getShininess() const;
 	void setShininess(float shininess);
 	//TODO completare

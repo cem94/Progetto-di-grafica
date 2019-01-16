@@ -7,8 +7,6 @@ public:
 	Camera();
 	virtual ~Camera();
 	void setProjectionMatrix(glm::mat4 projection);
-
-	//glm::mat4 inverseCamera() const;
 	//Ereditato da object
 	void render(glm::mat4 renderMatrix);
 	//Type getType() const override;

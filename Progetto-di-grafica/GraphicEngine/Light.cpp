@@ -10,8 +10,8 @@ Light::Light()
 }
 
 Light::Light(std::string name) {
-	printf("Adding light %s",name.c_str());
-	printf("Number of lights %d",numberOfLights+1);
+	printf("Adding light %s", name.c_str());
+	printf("Number of lights %d", numberOfLights + 1);
 	numberOfLights = numberOfLights + 1;
 	lightNumber = numberOfLights;
 	this->setName(name);
@@ -19,27 +19,62 @@ Light::Light(std::string name) {
 }
 
 Light::~Light() {}
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 short Light::getIntensity() const { return this->intensity; }
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 void Light::setIntensity(short intensity) { this->intensity = intensity; }
-
-//forse usare reference & per color,ambient,diffuse,specular
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+ //forse usare reference & per color,ambient,diffuse,specular
 void Light::setAmbient(glm::vec4 ambient) { this->ambient = ambient; }
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 void Light::setDiffuse(glm::vec4 diffuse) { this->diffuse = diffuse; }
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 void Light::setSpecular(glm::vec4 specular) { this->specular = specular; }
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 void Light::changeState()
 {
-		if (this->isActive)
-			this->disableLight();
-		else
-			this->enableLight();
+	if (this->isActive)
+		this->disableLight();
+	else
+		this->enableLight();
 }
 
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 void Light::render(glm::mat4 renderMatrix)
 {
 	//set renderingMatrix as current OpenGL Matrix
@@ -59,11 +94,26 @@ void Light::render(glm::mat4 renderMatrix)
 	}
 }
 
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 Light::SubType Light::getSubType() const { return this->subType; }
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 void Light::setSubType(Light::SubType subtype) { this->subType = subType; }
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 int Light::getLightNumber()
 {
 	switch (this->getId())
@@ -102,18 +152,13 @@ int Light::getLightNumber()
 		return GL_LIGHT0 + n_light;
 	else
 		return GL_LIGHT0;*/
-
 }
-
-/*void Light::enableLight(bool enable)
-{
-	if (enable)
-		glEnable(getLightNumber());
-	else 
-		glDisable(getLightNumber());
-	this->isActive = !this->isActive;
-}
-*/
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 void Light::setColor(glm::vec4 color)
 {
 	this->color = color;
@@ -121,68 +166,118 @@ void Light::setColor(glm::vec4 color)
 	this->setDiffuse(glm::vec4(color));
 	this->setSpecular(glm::vec4(color));
 }
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 void Light::setPosition(glm::vec4 position)
 {
 	this->position = position;
 }
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 glm::vec3 Light::getDirection()
 {
 	return this->direction;
 }
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 void Light::setDirection(glm::vec4 direction)
 {
 	this->direction = direction;
 }
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 void Light::setAngle(float angle)
 {
 	this->angle = angle;
 }
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 float Light::getAngle() const
 {
 	return this->angle;
 }
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 float Light::getRadius() const
 {
 	return this->radius;
 }
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 void Light::setRadius(float radius)
 {
 	this->radius = radius;
 }
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 float Light::getCutoff() const
 {
 	return this->cutoff;
 }
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 void Light::setCutoff(float cutoff)
 {
 	this->cutoff = cutoff;
 }
 
 
-	/**
-* enables the current light and put the isactive flag to true
+/**
+* Comment
+* @param  name1
+* @param2 name2
+* @return what it returns
 */
-	void Light::enableLight()
-	{
-		glEnable(getLightNumber());
-		this->isActive = true;
-	}
+void Light::enableLight()
+{
+	glEnable(getLightNumber());
+	this->isActive = true;
+}
 
-	/**
-	* disable this light
-	*/
-	void Light::disableLight()
-	{
-		glDisable(getLightNumber());
-		this->isActive = false;
-	}
-
+/**
+* Comment
+* @param  name1
+* @param2 name2
+* @return what it returns
+*/
+void Light::disableLight()
+{
+	glDisable(getLightNumber());
+	this->isActive = false;
+}

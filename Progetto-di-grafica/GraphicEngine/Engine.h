@@ -44,12 +44,10 @@
 #include "Material.h"
 #include "Mesh.h"
 #include "OvoReader.h"
-
+//Cem TODO dev'essere singleton
 class LIB_API Engine {
 public:
 	~Engine();
-
-
 	void init(int argc, char* argv[]);
 
 	void loadMatrix(glm::mat4 matrix);
@@ -98,7 +96,7 @@ public:
 
 	Node* getScene(const char* name);
 
-	Camera* addCamera(std::string name, glm::vec3 eye, glm::vec3 center,
+	void addCamera(std::string name, glm::vec3 eye, glm::vec3 center,
 		glm::vec3 up);
 
 	void switchLights();
@@ -112,7 +110,7 @@ public:
 	void setCameraToNode(Node* root, std::string cameraName,
 		std::string nodeName);
 
-	void createLists(Node* element);
+	void setRenderList(Node* element);
 
 	void renderList();
 
@@ -125,4 +123,5 @@ public:
 	void closeThumb(Node * root);
 
 	void closeFinger(Node * root, std::string name);
+	void closeHand(Node * root);
 };

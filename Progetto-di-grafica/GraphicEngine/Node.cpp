@@ -1,34 +1,74 @@
 #include "Engine.h"
 
 static int counter;
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 Node::Node(){
+	//TODO Cem magari spostare il contatore nell'ovoreader e settare l'id da lì
 	this->setId(counter++);
 
 }
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 Node::~Node(){}
 
 // Getters & Setters //
 Node * Node::getParent() const{	return parent;}
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 void Node::setParent(Node * parent){	this->parent = parent;}
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 std::vector<Node*> Node::getChildren() const{	return children;}
-
-//void Node::setChildren(std::vector<Node*> children){this->children = children;}
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 glm::mat4 Node::getMatrix(){	return matrix;}
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 void Node::setMatrix(glm::mat4 matrix){	this->matrix = matrix;}
 
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 //Inserisce il nodo fra i  figli del nodo corrente
 void Node::insert(Node * node)
 {
 	node->setParent(this);
 	children.push_back(node);
 }
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 void Node::remove(int position)
 {
 	if (getChildrenSize() > position && position >= 0)
@@ -38,6 +78,12 @@ void Node::remove(int position)
         free(to_remove);
 	}
 }
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 //rimuove node
 void Node::remove(Node * node)
 {
@@ -60,26 +106,51 @@ Node * Node::operator[](int position)
 	return nullptr;
 }
 //ritorna il numero di figli del nodo corrente
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 int Node::getChildrenSize() const
 {
-	return this->children.size();
+	return (int)this->children.size();
 }
 
-//TODO da rivedere -> i metodi insert remove modificano la dimensione, noi ritorniamo sempre quella originale
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 void Node::setChildrenSize(unsigned int size)
 {
-	//this->childrenSize = size;
 	children.reserve(size);
 }
 
-//TODO sostituirlo dove necessario
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 glm::mat4 Node::getFinalMatrix()
 {
 		if (!parent)
 			return matrix;
 		return parent->getFinalMatrix()*matrix;
 }
-
-int Node::getCapacity() const { return this->children.capacity(); }
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+int Node::getCapacity() const { return (int)this->children.capacity(); }
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 void Node::render(glm::mat4 renderMatrix){}

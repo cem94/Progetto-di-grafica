@@ -2,13 +2,31 @@
 
 //FreeGlut
 #include <GL/freeglut.h>
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+Camera::Camera()
+{
+}
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+Camera::~Camera()
+{
+}
 
-Camera::Camera(){}
-
-Camera::~Camera(){}
-
-//glm::mat4 Camera::inverseCamera() const {	return glm::inverse(getMatrix());}
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 void Camera::setProjectionMatrix(glm::mat4 projection)
 {
 	this->projectionMatrix = projection;
@@ -16,8 +34,13 @@ void Camera::setProjectionMatrix(glm::mat4 projection)
 	glLoadMatrixf(glm::value_ptr(projection));
 	glMatrixMode(GL_MODELVIEW);
 }
-
-void Camera::render(glm::mat4 renderMatrix){	
-	//printf("Rendering camera %s \n",getName().c_str());
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+void Camera::render(glm::mat4 renderMatrix)
+{	
 	glLoadMatrixf(glm::value_ptr(renderMatrix));
 }

@@ -5,7 +5,7 @@ Engine* engine = new Engine();
 glm::mat4 perspective;
 glm::mat4 ortho;
 Node* scene = NULL;
-bool autoRotate = false;
+bool rotating = false;
 // Ideally, only GLM should be used client-side.
 // TODO If needed, replicate the (few) required definitions in your engineís
 // include files(e.g., the definition of special keys provided by FreeGlut).
@@ -13,52 +13,60 @@ bool autoRotate = false;
 #define GLUT_KEY_UP 0x0065
 #define GLUT_KEY_RIGHT 0x0066
 #define GLUT_KEY_DOWN 0x0069
-
-void displayCallback() {
-  // clear dei bit DEPTH etc
-  engine->clearBuffers();
-
-  // setto la matrice di proiezione prospettica per il rendering 3d
-  engine->setProjectionMatrix(perspective);
-
-  // we pass the scene graph
-  // engine->pass(scene, glm::mat4(1.0f));
-
-  // 3d rendering//
-  // renderizza la lista ottenuta dal file OVO
-  engine->renderList();
-  // TODO:: deve essere modulo 360 -> non lo fa da solo`?
-
-  if (autoRotate) 
-	  engine->rotateModel(scene, -3);
-  // 2D rendering//
-  // setto la matrice di proiezione ortogonale il rendering 2d
-  engine->setProjectionMatrix(ortho);
-  // necessario (la matrice Ë ortogonale)
-  engine->loadIdentity();
-  engine->enableLighting(false);
-  engine->renderText();
-  engine->enableLighting(true);
-  // TODO testare e vedere se serve
-  engine->incrementFrames();
-  // swappa il buffer mostrando ciÚ che Ë stato renderizzato
-  engine->swapBuffers();
-  engine->redisplay();
-}
-
-void reshapeCallback(int width, int height) {
-  engine->setViewport(0, 0, width, height);
-  // perspective:							(fieldOfView,		aspectRatio,
-  // nearPlane, farPlane)
-  perspective = glm::perspective(glm::radians(45.0f),(float)width / (float)height, 1.0f, 4000.0f);
-  ortho = glm::ortho(0.f, (float)width, 0.f, (float)height, -1.f, 1.f);
-}
-
-void keyboardCallback(unsigned char key, int mouseX, int mouseY) 
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+void displayCallback() 
 {
-	switch (key)
-	{
-		//Così dovrebbe essere comoda da usare//
+	// clear dei bit DEPTH etc
+	engine->clearBuffers();
+
+	// setto la matrice di proiezione prospettica per il rendering 3d
+	engine->setProjectionMatrix(perspective);
+	// 3d rendering//
+	// renderizza la lista ottenuta dal file OVO
+	engine->renderList();
+	if (rotating)
+		engine->rotateModel(scene, -5);
+	// 2D rendering//
+	// setto la matrice di proiezione ortogonale il rendering 2d
+	engine->setProjectionMatrix(ortho);
+	// necessario (la matrice Ë ortogonale)
+	engine->loadIdentity();
+	engine->enableLighting(false);
+	engine->renderText();
+	engine->enableLighting(true);
+	// TODO testare e vedere se serve
+	engine->incrementFrames();
+	// swappa il buffer mostrando cio che e stato renderizzato
+	engine->swapBuffers();
+	engine->redisplay();
+}
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+void reshapeCallback(int width, int height)
+{
+	engine->setViewport(0, 0, width, height);
+	perspective = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 1.0f, 4000.0f);
+	ortho = glm::ortho(0.f, (float)width, 0.f, (float)height, -1.f, 1.f);
+}
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+void keyboardCallback(unsigned char key, int mouseX, int mouseY)
+{
+	switch (key) 
+{
 	case '1':
 		engine->enableLight(scene, "fix_light");
 		break;
@@ -73,44 +81,47 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 		engine->closeThumb(scene);
 		break;
 		//indice
-	case 'd':
-		engine->closeFinger(scene,"indice");
+	case 'f':
+		engine->closeFinger(scene, "indice");
 		break;
 		//medio
-	case 'w':
-		engine->closeFinger(scene,"medio");
+	case 'e':
+		engine->closeFinger(scene, "medio");
 		break;
 		//anulare
-	case 'a':
-		engine->closeFinger(scene,"anulare");
+	case 'w':
+		engine->closeFinger(scene, "anulare");
 		break;
 		//mignolo
-	//TODO capire qual'è lo shift e cambiare
-	case 'e':
-		engine->closeFinger(scene,"mignolo");
-		break;
-	case 'l':
-		//abilita/disabilita illuminazione 
-		//engine->switchLights();
+	case 'a':
+		engine->closeFinger(scene, "mignolo");
 		break;
 		//muovi mano
 	case 'r':
-		engine->rotateModel(scene,1);
+		engine->rotateModel(scene, 1);
 		break;
 		//rotazione automatica
-    case 'R':
-        autoRotate = !autoRotate;
-        break;
-        //cambia camera corrente
+	case 'R':
+		rotating = !rotating;
+		break;
+		//cambia camera corrente
 	case 'c':
 		engine->changeCamera();
 		break;
-
+		//close hand
+	case 'h':
+		engine->closeHand(scene);
+		break;
 	}
 	engine->redisplay();
 }
-
-void specialCallback(int key, int x, int y) 
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+void specialCallback(int key, int x, int y)
 {
 	//muovi luce
 	switch (key) {
@@ -128,80 +139,108 @@ void specialCallback(int key, int x, int y)
 	}
 	engine->redisplay();
 }
-
-void timerCallback(int value) { engine->timer(timerCallback); }
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+void timerCallback(int value) 
+{ 
+	engine->timer(timerCallback);
+}
 
 //zoom in / out
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 void mouseWheel(int wheel, int direction, int x, int y)
 {
-	// TODO:: come possiamo usarlo?
+	// TODO: come possiamo usarlo?
 	wheel = 0;
 	if (direction == -1) {
-		engine->moveCamera(-1.0f);
-	} else if (direction == +1) {
-		engine->moveCamera(1.0f);
+		engine->moveCamera(-10.0f);
+	}
+	else if (direction == +1) {
+		engine->moveCamera(10.0f);
 	}
 }
 
 //callback per pressione mouse
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 void mousePressed(int button, int state, int x, int y)
 {
 	engine->mousePressed(button, state, x, y);
 }
-
-void initCamera()
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+void setCameras()
 {
+	//TODO cem lo zoom funziona solo con x = 0 y = 0
 	// dove si trova la camera
-	glm::vec3 eye = glm::vec3(420.f, 400.f, 400.f);
+	glm::vec3 eye = glm::vec3(0.f, 0.f, 400.f);
 	// verso dove guarda
 	glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
 	// dove è il sopra
 	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-	engine->addCamera("1", eye, center, up);
 	engine->addCamera("2", eye, center, up);
+//si direbbe che renderizza prima l'ultima che gli passi quindi questa è la camera 1
+	eye = glm::vec3(-400.f, 400.f, 400.f);
+	engine->addCamera("1", eye, center, up);
 }
 
-// TODO:: vedere quali ci servono e quali no. 
-void initCallBackFunction()
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+void setCallBacks()
 {
 	engine->display(displayCallback);
 	engine->reshape(reshapeCallback);
 	engine->keyboard(keyboardCallback);
 	engine->specialKeyboard(specialCallback);
 	engine->mouseWheel(mouseWheel);
+	//eliminare se non lo usiamo
 	engine->mousePressed(mousePressed);
 	engine->timer(timerCallback);
 }
-
-int main(int argc, char* argv[]) {
-  std::cout << "Client application starts" << std::endl;
-
-  // init engine settings
-  engine->init(argc, argv);
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+int main(int argc, char* argv[])
+{
+	std::cout << "Client application starts" << std::endl;
+	// init engine settings
+	engine->init(argc, argv);
 	// init call back functions
-	initCallBackFunction();
+	setCallBacks();
 	// set background color
 	engine->clearColor(0.2f, 0.3f, 0.7f);
-	
 	// init camera
-	initCamera();
-
-	// init camera
-	initCamera();
-
+	setCameras();
 	// read ovo file, load scene and start main loop
 	const char* fileName = "../ovo_files/full_scene.ovo";
 	scene = engine->getScene(fileName);
-
 	//L'ho spostato qua sembra funzionare
 	engine->pass(scene);
-	
 	// setto la camera sull'oggetto principale
-    engine->setCameraToNode(scene, "2", "guardia");
-
-	//engine->changeCamera();
-
 	engine->startLoop();
 	// free memory
 	delete (engine);

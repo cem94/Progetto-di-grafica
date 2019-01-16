@@ -1,8 +1,11 @@
 #pragma once
 #include "Engine.h"
+
 #define OV_MAXNUMBEROFCHARS 256
 
-// Macro for printing an OvMatrix4 to console:   
+/**
+ * Macro for printing an OvMatrix4 to console:   
+ */
 #define MAT2STR(f, m) f << "   Matrix  . . . :  \t" << m[0][0] << "\t" << m[1][0] << "\t" << m[2][0] << "\t" << m[3][0] << std::endl \
                            << "                    \t" << m[0][1] << "\t" << m[1][1] << "\t" << m[2][1] << "\t" << m[3][1] << std::endl \
                            << "                    \t" << m[0][2] << "\t" << m[1][2] << "\t" << m[2][2] << "\t" << m[3][2] << std::endl \
