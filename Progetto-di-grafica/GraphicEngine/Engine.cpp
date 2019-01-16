@@ -32,49 +32,8 @@ Engine::~Engine() { FreeImage_DeInitialise(); }
 //TODO:: devo vedre come farlo cos'è??
 /*void Engine::setGuardiaMatrix(Node* root) 
 {
-<<<<<<< HEAD
-	std::cout << "The engine starts" << std::endl;
-	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-	//setto opzioni finestra
-	glutInitWindowPosition(0, 0);
-	glutInitWindowSize(1920, 1080);
-	glutInit(&argc, argv);
-	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
-	//creo finestra
-	windowId = glutCreateWindow("Engine");
-	glewExperimental = GL_TRUE; // Optional, but recommended
-	//non sicuro siano necessari
-	glLightModelf(GL_LIGHT_MODEL_LOCAL_VIEWER, 1.0f);
-	glEnable(GL_NORMALIZE);
-
-	//Init di glew
-	GLenum err = glewInit();
-	if (err != GLEW_OK)
-	{
-		// Error loading GLEW
-		printf("Error loading GLEW\n");
-	}
-	if (!glewIsSupported("GL_VERSION_2_1"))
-	{
-		// Required OpenGL version not supported
-		printf("Required OpenGL version not supported\n");
-	}
-		// forse si possono spostare in init
-        enableZbuffer();
-        freeImageInitialize();
-=======
 	Node* guardia = getNodeByName(root, "guardia");
-
 	center = guardia->getMatrix()[0];
-    /* TODO:: REMOVE IT
-	  auto stp = guardia->getMatrix();
-        std::cout << stp[0][0] << ", " << stp[0][1] << ", " << stp[0][2] << ", "
-                  << stp[0][3] << " - " << stp[1][0] << ", " << stp[1][1]
-                  << ", " << stp[1][2] << ", " << stp[1][3] << " - "
-                  << stp[2][0] << ", " << stp[2][1] << ", " << stp[2][2] << ", "
-                  << stp[0][3] << std::endl;
-                                  */
-/*>>>>>>> 0cd164bc74d25d0a2bab7feffb618e663ccd02e2
 }*/
 
 // init function//
@@ -103,6 +62,8 @@ void LIB_API Engine::init(int argc, char* argv[]) {
     // Required OpenGL version not supported
     printf("Required OpenGL version not supported\n");
   }
+  enableLighting(true);
+  glEnable(GL_LIGHT0);
 
   // forse si possono spostare in init
   enableZbuffer();
@@ -219,15 +180,13 @@ void LIB_API Engine::switchLights() {
 void LIB_API Engine::enableLighting(bool value)
 {
 	if (value) {
-		
 		glEnable(GL_LIGHTING);
 		//sostituire con light->getLightNumber()
-		glEnable(GL_LIGHT0);
-		//
+		//glEnable(GL_LIGHT0);
 	}
 	else {
 		glDisable(GL_LIGHTING);
-		glDisable(GL_LIGHT0);
+		//glDisable(GL_LIGHT0);
 	}
 }
 
@@ -236,9 +195,7 @@ void LIB_API Engine::enableLight(Node *root, std::string lightName)
 {
 	Light* light = (Light*)getNodeByName(root, lightName);
 	if (light != nullptr)
-		printf("Found\n");
-	//TODO	
-	//light->changeState();
+	light->switchOffLight();
 	else
 		std::cout << "Light not present" << std::endl;
 }
@@ -416,7 +373,7 @@ void Engine::moveCamera(float direction) {
 
 	glm::vec3 translation =
       direction * 0.7f * (glm::vec4(0.0f) - mat_current_camera[0]);
-  currentCamera->setMatrix(
+	 currentCamera->setMatrix(
       glm::translate(currentCamera->getMatrix(), translation));
 }
 
@@ -486,6 +443,8 @@ void Engine::closeFinger(Node * root,std::string name)
 	name = name.substr(0,name.size()-1);
 	name.append("2");
 	Node* finger1 = getNodeByName(root, name);
+	name = name.substr(0, name.size() - 1);
+	name.append("3");
 	Node* finger2 = getNodeByName(root, name);
 
 	glm::mat4 rotationFinger = glm::rotate(glm::mat4(1.0f), glm::radians(20.f), glm::vec3(0.0f, 0.0f, -1.0f));

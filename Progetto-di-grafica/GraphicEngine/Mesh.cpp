@@ -9,8 +9,6 @@ Mesh::~Mesh(){}
 
 void Mesh::generateVAO(float * vertexes, float * normals, float * uvArray, unsigned int * indices, unsigned int vertices)
 {
-	printf("Generating vao %s\n", getName().c_str());
-
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 
@@ -50,7 +48,6 @@ void Mesh::setNumberOfFaces(unsigned int numberOfFaces){	this->numberOfFaces = n
 
 void Mesh::render(glm::mat4 renderMatrix)
 {
-	//printf("Number of faces %d\n",numberOfFaces);
 	glLoadMatrixf(glm::value_ptr(renderMatrix));
 	glBindVertexArray(vao);
 	glDrawElements(GL_TRIANGLES, numberOfFaces * 3, GL_UNSIGNED_INT, nullptr);

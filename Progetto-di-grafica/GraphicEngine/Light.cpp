@@ -18,6 +18,15 @@ void Light::setDiffuse(glm::vec4 diffuse) { this->diffuse = diffuse; }
 
 void Light::setSpecular(glm::vec4 specular) { this->specular = specular; }
 
+void Light::switchOffLight()
+{
+		if (this->isActive)
+			this->disableLight();
+		else
+			this->enableLight();
+}
+
+
 void Light::render(glm::mat4 renderMatrix)
 {
 	//set renderingMatrix as current OpenGL Matrix
@@ -144,3 +153,23 @@ void Light::setCutoff(float cutoff)
 {
 	this->cutoff = cutoff;
 }
+
+
+	/**
+* enables the current light and put the isactive flag to true
+*/
+	void Light::enableLight()
+	{
+		glEnable(getLightNumber());
+		this->isActive = true;
+	}
+
+	/**
+	* disable this light
+	*/
+	void Light::disableLight()
+	{
+		glDisable(getLightNumber());
+		this->isActive = false;
+	}
+

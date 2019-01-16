@@ -52,7 +52,8 @@ void reshapeCallback(int width, int height) {
   // perspective:							(fieldOfView,		aspectRatio,
   // nearPlane, farPlane)
   perspective = glm::perspective(glm::radians(45.0f),
-                                 (float)width / (float)height, 1.0f, 700.0f);
+          
+	  (float)width / (float)height, 1.0f, 700.0f);
   ortho = glm::ortho(0.f, (float)width, 0.f, (float)height, -1.f, 1.f);
 }
 
@@ -102,6 +103,8 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 		//set nome camera corrente
 		break;
 	case 'p':
+	engine->enableLight(scene, "fix_light");
+	engine->enableLight(scene, "fix_light");
 	engine->enableLight(scene, "fix_light");
 		break;
 
@@ -184,8 +187,8 @@ int main(int argc, char* argv[]) {
 	// set background color
 	engine->clearColor(0.2f, 0.3f, 0.7f);
 
-  // init camera
-  initCamera();
+	// init camera
+	initCamera();
 
 	// read ovo file, load scene and start main loop
 	const char* fileName = "../ovo_files/gauntlet.ovo";
@@ -195,10 +198,8 @@ int main(int argc, char* argv[]) {
 	// TODO setto la camera sull'oggetto principale
 	// TODO:: questo non va nel call back function
     engine->setCameraToNode(scene, "1", "guardia");
-
 	engine->startLoop();
 	// free memory
 	delete (engine);
-	
 	std::cout << "Application terminated" << std::endl;
 }

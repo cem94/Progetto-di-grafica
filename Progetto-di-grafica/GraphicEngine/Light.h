@@ -33,6 +33,9 @@ public:
 	void setRadius(float radius);
 	float getCutoff() const;
 	void setCutoff(float cutoff);
+	void enableLight();
+	void disableLight();
+	void switchOffLight();
 	//Ereditato da object
 	 void render(glm::mat4 renderMatrix) override;
 private:
