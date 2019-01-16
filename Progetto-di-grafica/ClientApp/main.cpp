@@ -27,10 +27,7 @@ void displayCallback() {
   // 3d rendering//
   // renderizza la lista ottenuta dal file OVO
   engine->renderList();
-  /* TODO far muovere il guanto in automatico o qualcosa cosÏ
-   */
-  // engine->rotate(scene, angle);
-  // TODO:: deve essere modulo 360
+  // TODO:: deve essere modulo 360 -> non lo fa da solo`?
 
   if (autoRotate) 
 	  engine->rotateModel(scene, -3);
@@ -39,7 +36,9 @@ void displayCallback() {
   engine->setProjectionMatrix(ortho);
   // necessario (la matrice Ë ortogonale)
   engine->loadIdentity();
+  engine->enableLighting(false);
   engine->renderText();
+  engine->enableLighting(true);
   // TODO testare e vedere se serve
   engine->incrementFrames();
   // swappa il buffer mostrando ciÚ che Ë stato renderizzato
@@ -51,8 +50,7 @@ void reshapeCallback(int width, int height) {
   engine->setViewport(0, 0, width, height);
   // perspective:							(fieldOfView,		aspectRatio,
   // nearPlane, farPlane)
-  perspective = glm::perspective(glm::radians(45.0f),
-                                 (float)width / (float)height, 1.0f, 700.0f);
+  perspective = glm::perspective(glm::radians(45.0f),(float)width / (float)height, 1.0f, 4000.0f);
   ortho = glm::ortho(0.f, (float)width, 0.f, (float)height, -1.f, 1.f);
 }
 
@@ -62,8 +60,14 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 	{
 		//Così dovrebbe essere comoda da usare//
 	case '1':
-		//TODO accendere /spegnere luce1,2 ,3 etc
-
+		engine->enableLight(scene, "fix_light");
+		break;
+	case '2':
+		engine->enableLight(scene, "back_light");
+		break;
+	case '3':
+		engine->enableLight(scene, "front_light");
+		break;
 		//pollice
 	case ' ':
 		engine->closeThumb(scene);
@@ -87,22 +91,19 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 		break;
 	case 'l':
 		//abilita/disabilita illuminazione 
-		engine->switchLights();
+		//engine->switchLights();
 		break;
 		//muovi mano
 	case 'r':
 		engine->rotateModel(scene,1);
 		break;
+		//rotazione automatica
     case 'R':
         autoRotate = !autoRotate;
         break;
         //cambia camera corrente
 	case 'c':
 		engine->changeCamera();
-		//set nome camera corrente
-		break;
-	case 'p':
-	engine->enableLight(scene, "fix_light");
 		break;
 
 	}
@@ -182,13 +183,14 @@ int main(int argc, char* argv[]) {
 	initCallBackFunction();
 	// set background color
 	engine->clearColor(0.2f, 0.3f, 0.7f);
-	
+
 	// init camera
 	initCamera();
 
 	// read ovo file, load scene and start main loop
-	const char* fileName = "../ovo_files/gauntlet.ovo";
+	const char* fileName = "../ovo_files/full_scene.ovo";
 	scene = engine->getScene(fileName);
+
 	//L'ho spostato qua sembra funzionare
 	engine->pass(scene);
 	
@@ -200,6 +202,5 @@ int main(int argc, char* argv[]) {
 	engine->startLoop();
 	// free memory
 	delete (engine);
-	
 	std::cout << "Application terminated" << std::endl;
 }

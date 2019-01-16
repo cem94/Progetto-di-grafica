@@ -5,6 +5,7 @@ class Light : public Node
 {
 public:
 	Light();
+	Light(std::string name);
 	virtual ~Light();
 	enum SubType { OMNI, SPOTLIGHT, DIRECTIONAL };
 
@@ -17,8 +18,6 @@ public:
 	SubType getSubType() const;
 	void setSubType(SubType subtype);
 	int getLightNumber();
-	//void changeState();
-	//void enableLight(bool enable);
 	void setColor(glm::vec4 color);
 	//posizione della luce, per tutte e 3
 	void setPosition(glm::vec4 position);
@@ -33,6 +32,9 @@ public:
 	void setRadius(float radius);
 	float getCutoff() const;
 	void setCutoff(float cutoff);
+	void enableLight();
+	void disableLight();
+	void changeState();
 	//Ereditato da object
 	 void render(glm::mat4 renderMatrix) override;
 private:
@@ -53,4 +55,6 @@ private:
 	float radius;
 	float angle;
 	bool isActive = true;
+	int lightNumber;
+	static int numberOfLights;
 };

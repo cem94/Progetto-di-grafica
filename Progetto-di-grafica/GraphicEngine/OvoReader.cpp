@@ -501,8 +501,7 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
 			f << "   Volumetric  . :  " << (int)isVolumetric << std::endl;
 			position += sizeof(unsigned char);
 			//////////////////////////////////////////////////////////////////////////////////////////7
-			Light *light = new Light();
-			light->setName(lightName);
+			Light *light = new Light(lightName);
 			light->setType(Object::Type::LIGHT);
 			switch ((OvLight::Subtype) subtype)
 			{
