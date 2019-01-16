@@ -40,8 +40,8 @@ void LIB_API Engine::init(int argc, char *argv[])
 	//creo finestra
 	windowId = glutCreateWindow("Engine");
 	glewExperimental = GL_TRUE; // Optional, but recommended
+	//non sicuro siano necessari
 	glLightModelf(GL_LIGHT_MODEL_LOCAL_VIEWER, 1.0f);
-
 	glEnable(GL_NORMALIZE);
 
 	//Init di glew
@@ -56,7 +56,6 @@ void LIB_API Engine::init(int argc, char *argv[])
 		// Required OpenGL version not supported
 		printf("Required OpenGL version not supported\n");
 	}
-
 		// forse si possono spostare in init
         enableZbuffer();
         freeImageInitialize();
@@ -212,7 +211,7 @@ void LIB_API Engine::enableLighting(bool value)
 	}
 }
 
-//abilita/disabilita l'illuminazione(per renderizzare in 2D (testo etc)
+//abilita/disabilita una luce dato il suo nome 
 void LIB_API Engine::enableLight(Node *root, std::string lightName)
 {
 	Light* light = (Light*)getNodeByName(root, lightName);
@@ -224,14 +223,13 @@ void LIB_API Engine::enableLight(Node *root, std::string lightName)
 		std::cout << "Light not present" << std::endl;
 }
 
-
 //scrive info su schermo (FPS etc)
 void LIB_API Engine::renderText()
 {
 	if (lighting)
 		enableLighting(false);
-
 	//TODO scrivere i comandi del guanto / opzioni 
+	//-------------------------------------------------------------------
 	char text[64];
 	//colore testo
 	glColor3f(1.0f, 1.0f, 1.0f);
