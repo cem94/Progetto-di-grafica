@@ -21,7 +21,7 @@ void List::remove(int position)
 	list.erase(it);
 }
 
-Node* List::at(int position)
+Node* List::at(int position) 
 {
 	if (position < this->list.size())
 	{
@@ -36,9 +36,8 @@ void List::insert(std::list<Node*> elements)
 {
 	if (elements.size() == 0) {
 		printf("Nothing to insert\n");
-		return;
-	}
-	list.insert(list.begin(), elements.begin(), elements.end());
+	}else
+		list.insert(list.begin(), elements.begin(), elements.end());
 }
 
 void List::render(glm::mat4 renderMatrix){}
