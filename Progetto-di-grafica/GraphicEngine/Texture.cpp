@@ -3,6 +3,9 @@
 #include <GL/freeglut.h>
 //// FreeImage:
 #include <FreeImage.h>
+//TODO capire come aggiungere estensione asintropia
+#define GL_TEXTURE_MAX_ANISOTROPY_EXT 0x84FE
+#define GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT 0x84FF
 
 Texture::Texture(){}
 
@@ -16,31 +19,23 @@ bool fileExist(const std::string& name) {
 		return false;
 	}
 }
+//////////////////////////////////////////////////////////////////////////////
 
-std::string workingdir()
-{
-	char buf[256];
-	GetCurrentDirectoryA(256, buf);
-	return std::string(buf) + '\\';
-}//////////////////////////////////////////////////
-
-//TODO fix
 Texture::Texture(std::string textureName){
 
-//TODO aggiungere texture valide e rimuovere questo//////////////////////////////////////////////////////////////7
-	if (textureName.compare("[none]")==0) {
-		std::cout << "Texture name not valid " << textureName.c_str() << std::endl;
-	}/////////////////////////////////////////////////////////////////
+	if (textureName.compare("[none]") == 0) {
+		return;
+	}
 	else {
-		std::cout << "Texture name size " << textureName.size() <<std::endl;
 		std::cout << "Texture name " << textureName.c_str() <<std::endl;
+
 		this->setName(textureName);
+	
 		glGenTextures(1, &textureId);
 		std::string texturePath = "../resources/";
 		const char* fileName = texturePath.append(textureName).c_str();
-		//check fileName
 		if (!fileExist(fileName)) {
-			std::cout << "File " << textureName.c_str() << " not found. Current working directory: " << workingdir().c_str() << std::endl;
+			std::cout << "File " << textureName.c_str() << " not found."<< std::endl;
 			exit(-1);
 		}
 		//create bitmap containing our texture
@@ -56,17 +51,13 @@ Texture::Texture(std::string textureName){
 		}
 		// Update texture content:
 		glBindTexture(GL_TEXTURE_2D, textureId);
-		//TODO rimuovere è solo per testare ( genera le texture automaticamente -> non devo definire vertici texture)
-		glEnable(GL_TEXTURE_GEN_S);
-		glEnable(GL_TEXTURE_GEN_T);
-		glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
-		////////////////////////////////////////////////////
+	
 		// Set circular coordinates:
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
 		//TODO aggiungere asintropia
-	//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1);
+//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1);
 		
 	// Set min/mag filters migliorano la texture rimuovendo errori
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -83,7 +74,6 @@ Texture::Texture(std::string textureName){
 //libera risorse
 Texture::~Texture(){	glDeleteTextures(1, &textureId);}
 
-//renderizza la texture TODO capire perché renderMatrix non utilizzata
 void Texture::render(glm::mat4 rendermatrix)
 {
 	glBindTexture(GL_TEXTURE_2D, textureId);

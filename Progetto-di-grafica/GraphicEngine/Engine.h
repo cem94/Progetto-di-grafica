@@ -49,7 +49,6 @@ class LIB_API Engine {
 public:
 	~Engine();
 
-	//void setGuardiaMatrix(Node * root);
 
 	void init(int argc, char* argv[]);
 

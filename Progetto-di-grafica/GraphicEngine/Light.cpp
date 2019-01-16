@@ -2,8 +2,21 @@
 
 // FreeGLUT:
 #include <GL/freeglut.h>
+int Light::numberOfLights = 0;
 
-Light::Light() {}
+Light::Light()
+{
+
+}
+
+Light::Light(std::string name) {
+	printf("Adding light %s",name.c_str());
+	printf("Number of lights %d",numberOfLights+1);
+	numberOfLights = numberOfLights + 1;
+	lightNumber = numberOfLights;
+	this->setName(name);
+	this->setId(lightNumber);
+}
 
 Light::~Light() {}
 
@@ -18,7 +31,7 @@ void Light::setDiffuse(glm::vec4 diffuse) { this->diffuse = diffuse; }
 
 void Light::setSpecular(glm::vec4 specular) { this->specular = specular; }
 
-void Light::switchOffLight()
+void Light::changeState()
 {
 		if (this->isActive)
 			this->disableLight();

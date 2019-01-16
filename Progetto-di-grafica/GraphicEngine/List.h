@@ -14,6 +14,6 @@ public:
 	//Ereditato da object
 	 void render(glm::mat4 renderMatrix) override;
 private:
-	//credo che la lista sia più efficente -> controllare
+	//TODO Cem credo che la lista sia più efficente -> controllare
 	std::list<Node*> list;
 };

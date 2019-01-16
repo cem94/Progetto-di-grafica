@@ -2,7 +2,10 @@
 
 static int counter;
 
-Node::Node(){	this->setId(counter++);}
+Node::Node(){
+	this->setId(counter++);
+
+}
 
 Node::~Node(){}
 
