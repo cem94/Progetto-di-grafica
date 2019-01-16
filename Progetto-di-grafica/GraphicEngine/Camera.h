@@ -7,8 +7,7 @@ public:
 	Camera();
 	virtual ~Camera();
 	void setProjectionMatrix(glm::mat4 projection);
-	//TODO:: GREG sono da rimuovere, non le usiamo ed esistono nella classe NODE
-	//void setMatrix(glm::mat4 matrix);
+
 	//glm::mat4 inverseCamera() const;
 	//Ereditato da object
 	void render(glm::mat4 renderMatrix);

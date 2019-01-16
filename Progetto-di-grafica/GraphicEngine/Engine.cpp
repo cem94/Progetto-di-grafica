@@ -211,9 +211,6 @@ void LIB_API Engine::enableLight(Node *root, std::string lightName)
 		std::cout << "Light not present" << std::endl;
 }
 
-// scrive info su schermo (FPS etc)
-void LIB_API Engine::renderText() {
-  if (lighting) enableLighting(false);
 
 //scrive info su schermo (FPS etc)
 void LIB_API Engine::renderText()
