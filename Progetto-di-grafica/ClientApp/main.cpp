@@ -53,7 +53,7 @@ void reshapeCallback(int width, int height) {
   // nearPlane, farPlane)
   perspective = glm::perspective(glm::radians(45.0f),
           
-	  (float)width / (float)height, 1.0f, 700.0f);
+	  (float)width / (float)height, 1.0f, 4000.0f);
   ortho = glm::ortho(0.f, (float)width, 0.f, (float)height, -1.f, 1.f);
 }
 
@@ -63,8 +63,14 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 	{
 		//Così dovrebbe essere comoda da usare//
 	case '1':
-		//TODO accendere /spegnere luce1,2 ,3 etc
-
+		engine->enableLight(scene, "fix_light");
+		break;
+	case '2':
+		engine->enableLight(scene, "back_light");
+		break;
+	case '3':
+		engine->enableLight(scene, "front_light");
+		break;
 		//pollice
 	case ' ':
 		engine->closeThumb(scene);
@@ -103,9 +109,7 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 		//set nome camera corrente
 		break;
 	case 'p':
-	engine->enableLight(scene, "fix_light");
-	engine->enableLight(scene, "fix_light");
-	engine->enableLight(scene, "fix_light");
+
 		break;
 
 	}
@@ -191,8 +195,10 @@ int main(int argc, char* argv[]) {
 	initCamera();
 
 	// read ovo file, load scene and start main loop
-	const char* fileName = "../ovo_files/gauntlet.ovo";
+	const char* fileName = "../ovo_files/full_scene.ovo";
 	scene = engine->getScene(fileName);
+
+	
 	//L'ho spostato qua sembra funzionare
 	engine->pass(scene);
 	// TODO setto la camera sull'oggetto principale
