@@ -373,6 +373,7 @@ void Engine::changeCamera() {
   printf("Changing camera from %s ", currentCamera->getName().c_str());
   activeCamera = (activeCamera + 1) % cameras.size();
   currentCamera = cameras.at(activeCamera);
+  setCameraToNode(currentCamera, currentCamera->getName(), "guardia");
   printf("to %s\n", currentCamera->getName().c_str());
 }
 
@@ -380,13 +381,13 @@ void Engine::changeCamera() {
  * moves actual camera
  * @param translation matrix
  */
-void Engine::moveCamera(float direction) {
+void LIB_API Engine::moveCamera(float direction) {
   const glm::mat4 mat_current_camera = currentCamera->getMatrix();
-
-	glm::vec3 translation =
-      direction * 0.7f * (glm::vec4(0.0f) - mat_current_camera[0]);
+  glm::vec3  tmp = mat_current_camera[2];
+  tmp[2] *= -1;
+  glm::vec3 z = direction * 3.0f * mat_current_camera[2];
   currentCamera->setMatrix(
-      glm::translate(currentCamera->getMatrix(), translation));
+      glm::translate(currentCamera->getMatrix(), z));
 }
 
 /**
@@ -394,7 +395,11 @@ void Engine::moveCamera(float direction) {
  * @param root node and camera name
  */
 
-//TODO::: GERG questo secondo me non ci serve
+void setCameraToGuardia(Node * root, std::string cameraName, std::string nodeName) {
+	Node * 
+}
+
+
 void Engine::setCameraToNode(Node* root, std::string cameraName,
                              std::string nodeName) {
   // ottengo il nodo cercato
@@ -410,11 +415,10 @@ void Engine::setCameraToNode(Node* root, std::string cameraName,
     if (camera != nullptr) {
       root->remove(camera);
       glm::vec3 pos = searched->getMatrix()[3];
-      glm::vec3 eye = glm::vec3(pos.x, pos.y, pos.z - 1000);
+      glm::vec3 eye = glm::vec3(pos.x, pos.y + 100, pos.z -200);
       glm::vec3 center = pos;
       glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-      // quando aggiungo la camera setMatrix qua setProjectionMatrix perch??
-      camera->setProjectionMatrix(glm::lookAt(eye, center, up));
+      camera->setMatrix(glm::lookAt(eye, center, up));
       searched->insert(camera);
     }
   }

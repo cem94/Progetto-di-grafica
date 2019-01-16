@@ -75,7 +75,6 @@ glm::mat4 Node::getFinalMatrix()
 		if (!parent)
 			return matrix;
 		return parent->getFinalMatrix()*matrix;
-	
 }
 
 int Node::getCapacity() const { return this->children.capacity(); }

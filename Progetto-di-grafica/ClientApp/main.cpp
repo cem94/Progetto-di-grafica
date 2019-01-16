@@ -150,9 +150,8 @@ void mousePressed(int button, int state, int x, int y)
 
 void initCamera()
 {
-	//TODO:: come mai cambiando il valore non cambia la posizione iniziale?
 	// dove si trova la camera
-	glm::vec3 eye = glm::vec3(200.f, 200.f, 200.f);
+	glm::vec3 eye = glm::vec3(420.f, 400.f, 400.f);
 	// verso dove guarda
 	glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
 	// dove è il sopra
@@ -183,18 +182,20 @@ int main(int argc, char* argv[]) {
 	initCallBackFunction();
 	// set background color
 	engine->clearColor(0.2f, 0.3f, 0.7f);
-
-  // init camera
-  initCamera();
+	
+	// init camera
+	initCamera();
 
 	// read ovo file, load scene and start main loop
 	const char* fileName = "../ovo_files/gauntlet.ovo";
 	scene = engine->getScene(fileName);
 	//L'ho spostato qua sembra funzionare
 	engine->pass(scene);
-	// TODO setto la camera sull'oggetto principale
-	// TODO:: questo non va nel call back function
-    engine->setCameraToNode(scene, "1", "guardia");
+	
+	// setto la camera sull'oggetto principale
+    engine->setCameraToNode(scene, "2", "guardia");
+
+	//engine->changeCamera();
 
 	engine->startLoop();
 	// free memory

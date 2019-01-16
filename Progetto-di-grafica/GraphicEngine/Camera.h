@@ -12,6 +12,6 @@ public:
 	//Ereditato da object
 	void render(glm::mat4 renderMatrix);
 	//Type getType() const override;
-private:
+   private:
 	glm::mat4 projectionMatrix;
 };

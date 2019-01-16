@@ -23,7 +23,6 @@ public:
 	int getChildrenSize() const;
 	void setChildrenSize(unsigned int size);
 
-	//TODO:: GREG a cosa serve?
 	glm::mat4 getFinalMatrix();
 
 	// Lo usiamo quando dobbiamo costruire l'albero, non potendo usare getChildrenSize();
