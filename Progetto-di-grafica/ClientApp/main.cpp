@@ -183,6 +183,9 @@ int main(int argc, char* argv[]) {
 	initCallBackFunction();
 	// set background color
 	engine->clearColor(0.2f, 0.3f, 0.7f);
+	
+	// init camera
+	initCamera();
 
 	// init camera
 	initCamera();
