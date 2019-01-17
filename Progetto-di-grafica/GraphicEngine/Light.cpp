@@ -18,21 +18,29 @@ Light::Light(std::string name) {
 	this->setId(lightNumber);
 }
 
-Light::~Light() {}
+Light::~Light() 
+{
+}
 /**
  * Comment
  * @param  name1
  * @param2 name2
  * @return what it returns
  */
-short Light::getIntensity() const { return this->intensity; }
+short Light::getIntensity() const 
+{
+	return this->intensity; 
+}
 /**
  * Comment
  * @param  name1
  * @param2 name2
  * @return what it returns
  */
-void Light::setIntensity(short intensity) { this->intensity = intensity; }
+void Light::setIntensity(short intensity) 
+{
+	this->intensity = intensity;
+}
 /**
  * Comment
  * @param  name1
@@ -40,21 +48,30 @@ void Light::setIntensity(short intensity) { this->intensity = intensity; }
  * @return what it returns
  */
  //forse usare reference & per color,ambient,diffuse,specular
-void Light::setAmbient(glm::vec4 ambient) { this->ambient = ambient; }
+void Light::setAmbient(glm::vec4 ambient) 
+{
+	this->ambient = ambient; 
+}
 /**
  * Comment
  * @param  name1
  * @param2 name2
  * @return what it returns
  */
-void Light::setDiffuse(glm::vec4 diffuse) { this->diffuse = diffuse; }
+void Light::setDiffuse(glm::vec4 diffuse) 
+{
+	this->diffuse = diffuse; 
+}
 /**
  * Comment
  * @param  name1
  * @param2 name2
  * @return what it returns
  */
-void Light::setSpecular(glm::vec4 specular) { this->specular = specular; }
+void Light::setSpecular(glm::vec4 specular) 
+{
+	this->specular = specular;
+}
 /**
  * Comment
  * @param  name1
@@ -100,14 +117,20 @@ void Light::render(glm::mat4 renderMatrix)
  * @param2 name2
  * @return what it returns
  */
-Light::SubType Light::getSubType() const { return this->subType; }
+Light::SubType Light::getSubType() const 
+{
+	return this->subType;
+}
 /**
  * Comment
  * @param  name1
  * @param2 name2
  * @return what it returns
  */
-void Light::setSubType(Light::SubType subtype) { this->subType = subType; }
+void Light::setSubType(Light::SubType subtype) 
+{
+	this->subType = subType; 
+}
 /**
  * Comment
  * @param  name1

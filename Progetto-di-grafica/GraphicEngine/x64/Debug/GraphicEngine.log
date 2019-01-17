@@ -1,2 +1,15 @@
 ﻿  Camera.cpp
+  Engine.cpp
+  Light.cpp
+  List.cpp
+  Material.cpp
+  Mesh.cpp
+  Node.cpp
+  OvoReader.cpp
+c:\users\meyer\source\repos\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(9): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
+  Texture.cpp
+c:\users\meyer\source\repos\progetto-di-grafica\progetto-di-grafica\graphicengine\texture.cpp(16): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
+  Generating Code...
   GraphicEngine.vcxproj -> C:\Users\meyer\source\repos\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.dll

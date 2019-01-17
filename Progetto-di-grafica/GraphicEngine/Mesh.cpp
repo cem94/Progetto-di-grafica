@@ -8,14 +8,18 @@
  * @param2 name2
  * @return what it returns
  */
-Mesh::Mesh(){}
+Mesh::Mesh()
+{
+}
 /**
  * Comment
  * @param  name1
  * @param2 name2
  * @return what it returns
  */
-Mesh::~Mesh(){}
+Mesh::~Mesh()
+{
+}
 /**
  * Comment
  * @param  name1
@@ -56,28 +60,44 @@ void Mesh::generateVAO(float * vertexes, float * normals, float * uvArray, unsig
  * @param2 name2
  * @return what it returns
  */
-Material * Mesh::getMaterial() const{	return material;}
+Material * Mesh::getMaterial() const
+{	
+	return material;
+}
 /**
  * Comment
  * @param  name1
  * @param2 name2
  * @return what it returns
  */
-void Mesh::setMaterial(Material * material){	this->material = material;}
+void Mesh::setMaterial(Material * material)
+{
+	this->material = material;
+}
+float Mesh::getRadius()
+{
+	return this->radius;
+}
 /**
  * Comment
  * @param  name1
  * @param2 name2
  * @return what it returns
  */
-void Mesh::setRadius(float radius){	this->radius = radius;}
+void Mesh::setRadius(float radius)
+{
+	this->radius = radius;
+}
 /**
  * Comment
  * @param  name1
  * @param2 name2
  * @return what it returns
  */
-void Mesh::setNumberOfFaces(unsigned int numberOfFaces){	this->numberOfFaces = numberOfFaces;}
+void Mesh::setNumberOfFaces(unsigned int numberOfFaces)
+{
+	this->numberOfFaces = numberOfFaces;
+}
 /**
  * Comment
  * @param  name1

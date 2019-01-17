@@ -1,18 +1,16 @@
 #include "Engine.h"
+#define GLUT_KEY_LEFT 0x0064
+#define GLUT_KEY_UP 0x0065
+#define GLUT_KEY_RIGHT 0x0066
+#define GLUT_KEY_DOWN 0x0069
 // GLOBALS //
-Engine* engine = new Engine();
+Engine* engine = &Engine::getInstance();
 // matrici di proiezione
 glm::mat4 perspective;
 glm::mat4 ortho;
 Node* scene = NULL;
 bool rotating = false;
-// Ideally, only GLM should be used client-side.
-// TODO If needed, replicate the (few) required definitions in your engineís
-// include files(e.g., the definition of special keys provided by FreeGlut).
-#define GLUT_KEY_LEFT 0x0064
-#define GLUT_KEY_UP 0x0065
-#define GLUT_KEY_RIGHT 0x0066
-#define GLUT_KEY_DOWN 0x0069
+
 /**
  * Comment
  * @param  name1
@@ -180,26 +178,6 @@ void mousePressed(int button, int state, int x, int y)
 {
 	engine->mousePressed(button, state, x, y);
 }
-/**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
- */
-void setCameras()
-{
-	//TODO cem lo zoom funziona solo con x = 0 y = 0
-	// dove si trova la camera
-	glm::vec3 eye = glm::vec3(0.f, 0.f, 400.f);
-	// verso dove guarda
-	glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
-	// dove è il sopra
-	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-	engine->addCamera("2", eye, center, up);
-//si direbbe che renderizza prima l'ultima che gli passi quindi questa è la camera 1
-	eye = glm::vec3(-400.f, 400.f, 400.f);
-	engine->addCamera("1", eye, center, up);
-}
 
 /**
  * Comment
@@ -233,16 +211,16 @@ int main(int argc, char* argv[])
 	setCallBacks();
 	// set background color
 	engine->clearColor(0.2f, 0.3f, 0.7f);
-	// init camera
-	setCameras();
+	// set cameras
+	engine->setCameras();
 	// read ovo file, load scene and start main loop
 	const char* fileName = "../ovo_files/full_scene.ovo";
 	scene = engine->getScene(fileName);
 	//L'ho spostato qua sembra funzionare
-	engine->pass(scene);
-	// setto la camera sull'oggetto principale
+	engine->setRenderList(scene);
 	engine->startLoop();
 	// free memory
+	//engine->free();
 	delete (engine);
 	std::cout << "Application terminated" << std::endl;
 }

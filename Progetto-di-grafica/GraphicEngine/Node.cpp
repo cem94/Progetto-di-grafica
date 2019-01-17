@@ -7,10 +7,10 @@ static int counter;
  * @param2 name2
  * @return what it returns
  */
-Node::Node(){
+Node::Node()
+{
 	//TODO Cem magari spostare il contatore nell'ovoreader e settare l'id da lì
 	this->setId(counter++);
-
 }
 /**
  * Comment
@@ -18,38 +18,55 @@ Node::Node(){
  * @param2 name2
  * @return what it returns
  */
-Node::~Node(){}
+Node::~Node()
+{
+}
 
 // Getters & Setters //
-Node * Node::getParent() const{	return parent;}
+Node * Node::getParent() const
+{
+	return parent;
+}
 /**
  * Comment
  * @param  name1
  * @param2 name2
  * @return what it returns
  */
-void Node::setParent(Node * parent){	this->parent = parent;}
+void Node::setParent(Node * parent)
+{
+	this->parent = parent;
+}
 /**
  * Comment
  * @param  name1
  * @param2 name2
  * @return what it returns
  */
-std::vector<Node*> Node::getChildren() const{	return children;}
+std::vector<Node*> Node::getChildren() const
+{
+	return children;
+}
 /**
  * Comment
  * @param  name1
  * @param2 name2
  * @return what it returns
  */
-glm::mat4 Node::getMatrix(){	return matrix;}
+glm::mat4 Node::getMatrix()
+{
+	return matrix;
+}
 /**
  * Comment
  * @param  name1
  * @param2 name2
  * @return what it returns
  */
-void Node::setMatrix(glm::mat4 matrix){	this->matrix = matrix;}
+void Node::setMatrix(glm::mat4 matrix)
+{
+	this->matrix = matrix;
+}
 
 /**
  * Comment
@@ -57,7 +74,7 @@ void Node::setMatrix(glm::mat4 matrix){	this->matrix = matrix;}
  * @param2 name2
  * @return what it returns
  */
-//Inserisce il nodo fra i  figli del nodo corrente
+ //Inserisce il nodo fra i  figli del nodo corrente
 void Node::insert(Node * node)
 {
 	node->setParent(this);
@@ -75,7 +92,7 @@ void Node::remove(int position)
 	{
 		auto to_remove = children.at(position);
 		children.erase(children.begin() + position);
-        free(to_remove);
+		free(to_remove);
 	}
 }
 /**
@@ -84,7 +101,7 @@ void Node::remove(int position)
  * @param2 name2
  * @return what it returns
  */
-//rimuove node
+ //rimuove node
 void Node::remove(Node * node)
 {
 	int i = 0;
@@ -96,15 +113,7 @@ void Node::remove(Node * node)
 	}
 	remove(i);
 }
-Node * Node::operator[](int position)
-{
-  const int childrenSize = getChildrenSize();
-	if (position >= 0 && position < childrenSize)
-	{
-		return children.at(position);
-	}
-	return nullptr;
-}
+
 //ritorna il numero di figli del nodo corrente
 /**
  * Comment
@@ -136,9 +145,9 @@ void Node::setChildrenSize(unsigned int size)
  */
 glm::mat4 Node::getFinalMatrix()
 {
-		if (!parent)
-			return matrix;
-		return parent->getFinalMatrix()*matrix;
+	if (!parent)
+		return matrix;
+	return parent->getFinalMatrix()*matrix;
 }
 /**
  * Comment
@@ -146,11 +155,16 @@ glm::mat4 Node::getFinalMatrix()
  * @param2 name2
  * @return what it returns
  */
-int Node::getCapacity() const { return (int)this->children.capacity(); }
+int Node::getCapacity() const
+{
+	return (int)this->children.capacity();
+}
 /**
  * Comment
  * @param  name1
  * @param2 name2
  * @return what it returns
  */
-void Node::render(glm::mat4 renderMatrix){}
+void Node::render(glm::mat4 renderMatrix)
+{
+}

@@ -22,16 +22,22 @@ std::vector<Camera*> cameras;
 int activeCamera = 1;
 
 List* toRender = new List();
-
+Engine* instance = nullptr;
 /**
  * Comment
  * @param  name1
  * @param2 name2
  * @return what it returns
  */
-Engine::~Engine() 
+Engine::~Engine()
 {
 	FreeImage_DeInitialise();
+}
+Engine & Engine::getInstance()
+{
+	if (instance == nullptr)
+		instance = new Engine{};
+	return *instance;
 }
 /**
  * Comment
@@ -39,7 +45,7 @@ Engine::~Engine()
  * @param2 name2
  * @return what it returns
  */
-void LIB_API Engine::init(int argc, char* argv[]) 
+void LIB_API Engine::init(int argc, char* argv[])
 {
 	std::cout << "The engine starts" << std::endl;
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
@@ -74,7 +80,7 @@ void LIB_API Engine::init(int argc, char* argv[])
  * @param2 name2
  * @return what it returns
  */
-void LIB_API Engine::startLoop() 
+void LIB_API Engine::startLoop()
 {
 	glutMainLoop();
 }
@@ -84,7 +90,7 @@ void LIB_API Engine::startLoop()
  * @param2 name2
  * @return what it returns
  */
-void LIB_API Engine::loadMatrix(glm::mat4 matrix) 
+void LIB_API Engine::loadMatrix(glm::mat4 matrix)
 {
 	glLoadMatrixf(glm::value_ptr(matrix));
 }
@@ -94,7 +100,7 @@ void LIB_API Engine::loadMatrix(glm::mat4 matrix)
  * @param2 name2
  * @return what it returns
  */
-void LIB_API Engine::clearColor(float r, float g, float b) 
+void LIB_API Engine::clearColor(float r, float g, float b)
 {
 	glClearColor(r, g, b, 1.0f);
 }
@@ -104,7 +110,7 @@ void LIB_API Engine::clearColor(float r, float g, float b)
  * @param2 name2
  * @return what it returns
  */
-void Engine::mouseWheel(void(*mouseWheelFunc)(int, int, int, int)) 
+void Engine::mouseWheel(void(*mouseWheelFunc)(int, int, int, int))
 {
 	glutMouseWheelFunc(mouseWheelFunc);
 }
@@ -131,7 +137,7 @@ void Engine::mousePressed(int button, int state, int x, int y)
  * @param2 name2
  * @return what it returns
  */
-void Engine::mousePressed(void(*mouseFunc)(int, int, int, int)) 
+void Engine::mousePressed(void(*mouseFunc)(int, int, int, int))
 {
 	glutMouseFunc(mouseFunc);
 }
@@ -141,7 +147,7 @@ void Engine::mousePressed(void(*mouseFunc)(int, int, int, int))
  * @param2 name2
  * @return what it returns
  */
-void LIB_API Engine::redisplay() 
+void LIB_API Engine::redisplay()
 {
 	glutPostWindowRedisplay(windowId);
 }
@@ -151,7 +157,7 @@ void LIB_API Engine::redisplay()
  * @param2 name2
  * @return what it returns
  */
-void LIB_API Engine::reshape(void(*reshapeCallback)(int, int)) 
+void LIB_API Engine::reshape(void(*reshapeCallback)(int, int))
 {
 	glutReshapeFunc(reshapeCallback);
 }
@@ -161,7 +167,7 @@ void LIB_API Engine::reshape(void(*reshapeCallback)(int, int))
  * @param2 name2
  * @return what it returns
  */
-void LIB_API Engine::display(void(*displayCallback)()) 
+void LIB_API Engine::display(void(*displayCallback)())
 {
 	glutDisplayFunc(displayCallback);
 }
@@ -171,7 +177,7 @@ void LIB_API Engine::display(void(*displayCallback)())
  * @param2 name2
  * @return what it returns
  */
-void LIB_API Engine::timer(void callback(int)) 
+void LIB_API Engine::timer(void callback(int))
 {
 	// calcolo fps -> da completare
 	fps = frames / 1.0f;
@@ -185,7 +191,7 @@ void LIB_API Engine::timer(void callback(int))
  * @param2 name2
  * @return what it returns
  */
-void LIB_API Engine::keyboard(void(*keyboardCallBack)(unsigned char, int, int)) 
+void LIB_API Engine::keyboard(void(*keyboardCallBack)(unsigned char, int, int))
 {
 	glutKeyboardFunc(keyboardCallBack);
 }
@@ -205,7 +211,7 @@ void LIB_API Engine::specialKeyboard(void(*specialFunc)(int, int, int))
  * @param2 name2
  * @return what it returns
  */
-void LIB_API Engine::setViewport(int x, int y, int width, int height) 
+void LIB_API Engine::setViewport(int x, int y, int width, int height)
 {
 	glViewport(x, y, width, height);
 }
@@ -215,7 +221,7 @@ void LIB_API Engine::setViewport(int x, int y, int width, int height)
  * @param2 name2
  * @return what it returns
  */
-void LIB_API Engine::clearBuffers() 
+void LIB_API Engine::clearBuffers()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
@@ -237,7 +243,7 @@ void LIB_API Engine::swapBuffers()
  */
 void LIB_API Engine::loadIdentity()
 {
-	loadMatrix(glm::mat4(1.0f)); 
+	loadMatrix(glm::mat4(1.0f));
 }
 /**
  * Comment
@@ -258,7 +264,7 @@ void printTree(Node* node, std::string indentation)
  * @param2 name2
  * @return what it returns
  */
-void Engine::freeImageInitialize() 
+void Engine::freeImageInitialize()
 {
 	FreeImage_Initialise();
 }
@@ -268,7 +274,7 @@ void Engine::freeImageInitialize()
  * @param2 name2
  * @return what it returns
  */
-void LIB_API Engine::setProjectionMatrix(glm::mat4 projection) 
+void LIB_API Engine::setProjectionMatrix(glm::mat4 projection)
 {
 	currentCamera->setProjectionMatrix(projection);
 }
@@ -278,9 +284,9 @@ void LIB_API Engine::setProjectionMatrix(glm::mat4 projection)
  * @param2 name2
  * @return what it returns
  */
-void LIB_API Engine::enableZbuffer() 
-{ 
-	glEnable(GL_DEPTH_TEST); 
+void LIB_API Engine::enableZbuffer()
+{
+	glEnable(GL_DEPTH_TEST);
 }
 
 // accende / spegne luci
@@ -376,7 +382,7 @@ void findChildren(Node* currentNode, std::vector<Node*>& nodes)
  * @param2 name2
  * @return what it returns
  */
-Node* Engine::getScene(const char* name) 
+Node* Engine::getScene(const char* name)
 {
 	std::vector<Node*> nodes = OvoReader::readOVOfile(name);
 	Node* root = nodes.at(0);
@@ -396,7 +402,7 @@ Node* Engine::getScene(const char* name)
  * @param2 name2
  * @return what it returns
  */
-Node* Engine::getNodeByName(Node* root, std::string name) 
+Node* Engine::getNodeByName(Node* root, std::string name)
 {
 	if (root->getName().compare(name) == 0) {
 		return root;
@@ -433,20 +439,6 @@ void  Engine::setRenderList(Node* element)
 	{
 		setRenderList(*it);
 	}
-}
-
-/**
- * pass the tree and build several list for elements
- * @param root node and base matrix
- */
- /**
-  * Comment
-  * @param  name1
-  * @param2 name2
-  * @return what it returns
-  */
-void Engine::pass(Node* scene) {
-	setRenderList(scene);
 }
 
 /**
@@ -559,10 +551,12 @@ void Engine::closeThumb(Node * root)
 	Node* finger = getNodeByName(root, "pollice1");
 	Node* finger2 = getNodeByName(root, "pollice2");
 	//le falangi dovrebbero ruotare anche su un altro asse probabilmente r1*r2 
-	glm::mat4 rotationFinger = glm::rotate(glm::mat4(1.0f), glm::radians(10.f), glm::vec3(1.0f, 0.0f, 0.0f));
-	glm::mat4 rotationFinger2 = glm::rotate(glm::mat4(1.0f), glm::radians(5.f), glm::vec3(1.0f, 0.0f, 0.0f));
-	finger->setMatrix(finger->getMatrix()*rotationFinger);
-	finger2->setMatrix(finger2->getMatrix()*rotationFinger2);
+	glm::mat4 rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(10.f), glm::vec3(1.0f, 0.0f, 0.0f));
+	glm::mat4 rotationX2 = glm::rotate(glm::mat4(1.0f), glm::radians(5.f), glm::vec3(1.0f, 0.0f, 0.0f));
+	glm::mat4 rotationZ = glm::rotate(rotationX2, glm::radians(20.f), glm::vec3(0.0f, 0.0f, 1.0f));
+
+	finger->setMatrix(finger->getMatrix()*rotationX);
+	finger2->setMatrix(finger2->getMatrix()*rotationX2);
 }
 //TODO completare (settare assi/angoli giusti etc)
 /**
@@ -590,12 +584,34 @@ void Engine::closeFinger(Node * root, std::string name)
 	finger1->setMatrix(finger1->getMatrix()*rotationFinger1);
 	finger2->setMatrix(finger2->getMatrix()*rotationFinger2);
 }
-
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
 void Engine::closeHand(Node * root)
 {
 	closeThumb(root);
-	closeFinger(root,"indice");
-	closeFinger(root,"medio");
-	closeFinger(root,"anulare");
-	closeFinger(root,"mignolo");
+	closeFinger(root, "indice");
+	closeFinger(root, "medio");
+	closeFinger(root, "anulare");
+	closeFinger(root, "mignolo");
 }
+//TODO cem lo zoom funziona solo con x = 0 y = 0
+void Engine::setCameras() {
+	// dove si trova la camera
+	glm::vec3 eye = glm::vec3(0.f, 0.f, 400.f);
+	// verso dove guarda
+	glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
+	// dove è il sopra
+	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+	Engine::getInstance().addCamera("2", eye, center, up);
+	//si direbbe che renderizza prima l'ultima che gli passi quindi questa è la camera 1
+	eye = glm::vec3(-400.f, 400.f, 400.f);
+	Engine::getInstance().addCamera("1", eye, center, up);
+}
+
+
+
+

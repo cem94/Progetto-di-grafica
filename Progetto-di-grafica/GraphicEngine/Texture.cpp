@@ -7,7 +7,9 @@
 #define GL_TEXTURE_MAX_ANISOTROPY_EXT 0x84FE
 #define GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT 0x84FF
 
-Texture::Texture(){}
+Texture::Texture()
+{
+}
 
 //TODO remove when project ends///////////////////////////////////////////
 bool fileExist(const std::string& name) {
@@ -21,7 +23,8 @@ bool fileExist(const std::string& name) {
 }
 //////////////////////////////////////////////////////////////////////////////
 
-Texture::Texture(std::string textureName){
+Texture::Texture(std::string textureName)
+{
 
 	if (textureName.compare("[none]") == 0) {
 		return;
@@ -72,7 +75,10 @@ Texture::Texture(std::string textureName){
 }
 
 //libera risorse
-Texture::~Texture(){	glDeleteTextures(1, &textureId);}
+Texture::~Texture()
+{	
+	glDeleteTextures(1, &textureId);
+}
 
 void Texture::render(glm::mat4 rendermatrix)
 {

@@ -5,28 +5,38 @@
  * @param2 name2
  * @return what it returns
  */
-List::List(){}
+List::List()
+{
+}
 /**
  * Comment
  * @param  name1
  * @param2 name2
  * @return what it returns
  */
-List::~List(){}
+List::~List()
+{
+}
 /**
  * Comment
  * @param  name1
  * @param2 name2
  * @return what it returns
  */
-std::list<Node*> List::getList() const{	return this->list;}
+std::list<Node*> List::getList() const
+{
+	return this->list;
+}
 /**
  * Comment
  * @param  name1
  * @param2 name2
  * @return what it returns
  */
-void List::setList(std::list<Node*> list){	this->list = list;}
+void List::setList(std::list<Node*> list)
+{
+	this->list = list;
+}
 /**
  * Comment
  * @param  name1
@@ -85,4 +95,6 @@ void List::insert(std::list<Node*> elements)
  * @param2 name2
  * @return what it returns
  */
-void List::render(glm::mat4 renderMatrix){}
+void List::render(glm::mat4 renderMatrix)
+{
+}

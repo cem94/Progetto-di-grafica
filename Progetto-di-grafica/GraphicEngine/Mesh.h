@@ -6,15 +6,13 @@ class  Mesh : public Node
 public:
 	Mesh();
 	virtual ~Mesh();
-	//Getters & Setters
 	Material * getMaterial() const;
 	void setMaterial(Material* material);
+	float getRadius();
 	void setRadius(float radius);
 	void setNumberOfFaces(unsigned int numberOfFaces);
 	void generateVAO(float * vertexArray, float * normalArray, float * uvArray, unsigned int * indices, unsigned int vertices);
-
-	//Ereditato da Object
-	 void render(glm::mat4 renderMatrix) override;
+	void render(glm::mat4 renderMatrix) override;
 private:
 	float radius;
 	unsigned int numberOfFaces;
