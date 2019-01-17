@@ -11,10 +11,10 @@ glm::mat4 ortho;
 Node* scene = NULL;
 bool rotating = false;
 // Cameras
-Camera* currentCamera = nullptr;
+/*Camera* currentCamera = nullptr;
 std::vector<Camera*> cameras;
 int activeCamera = 1;
-
+*/
 /**
  * Comment
  * @param  name1
@@ -198,10 +198,6 @@ void setCallBacks()
 	//eliminare se non lo usiamo
 	engine->mousePressed(mousePressed);
 	engine->timer(timerCallback);
-}
-void changeCamera() {
-	activeCamera = (activeCamera + 1) % cameras.size();
-	currentCamera = cameras.at(activeCamera);
 }
 
 //TODO cem lo zoom funziona solo con x = 0 y = 0
