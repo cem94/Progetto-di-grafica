@@ -204,7 +204,19 @@ void changeCamera() {
 	currentCamera = cameras.at(activeCamera);
 }
 
-
+//TODO cem lo zoom funziona solo con x = 0 y = 0
+void setCameras() {
+	// dove si trova la camera
+	glm::vec3 eye = glm::vec3(0.f, 0.f, 400.f);
+	// verso dove guarda
+	glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
+	// dove è il sopra
+	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+	Engine::getInstance().addCamera("2", eye, center, up);
+	//si direbbe che renderizza prima l'ultima che gli passi quindi questa è la camera 1
+	eye = glm::vec3(-400.f, 400.f, 400.f);
+	Engine::getInstance().addCamera("1", eye, center, up);
+}
 
 /**
  * Comment
@@ -235,6 +247,6 @@ int main(int argc, char* argv[])
 	engine->startLoop();
 	// free memory
 	//engine->free();
-	delete (engine);
+//	delete (engine);
 	std::cout << "Application terminated" << std::endl;
 }
