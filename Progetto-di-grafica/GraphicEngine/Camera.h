@@ -8,6 +8,9 @@ public:
 	virtual ~Camera();
 	void setProjectionMatrix(glm::mat4 projection);
 	void render(glm::mat4 renderMatrix);
-private:
+    void setMovable(bool movable);
+    bool getMovable();
+ private:
 	glm::mat4 projectionMatrix;
+    bool movable = false;
 };

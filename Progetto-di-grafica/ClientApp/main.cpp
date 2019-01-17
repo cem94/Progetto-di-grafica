@@ -162,12 +162,12 @@ void mouseWheel(int wheel, int direction, int x, int y)
 {
 	// TODO: come possiamo usarlo?
 	wheel = 0;
-	if (direction == -1) {
+    if (!engine->isMovableCamera())
+		return;
+	if (direction == -1 )
 		engine->moveCamera(-10.0f);
-	}
-	else if (direction == +1) {
+	else if (direction == +1)
 		engine->moveCamera(10.0f);
-	}
 }
 
 //callback per pressione mouse
@@ -203,15 +203,17 @@ void setCallBacks()
 //TODO cem lo zoom funziona solo con x = 0 y = 0
 void setCameras() {
 	// dove si trova la camera
-	glm::vec3 eye = glm::vec3(0.f, 0.f, 400.f);
+	glm::vec3 eye = glm::vec3(400.f, 400.f, 400.f);
 	// verso dove guarda
 	glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
 	// dove è il sopra
 	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-	Engine::getInstance().addCamera("2", eye, center, up);
+	Engine::getInstance().addCamera("3", false, eye, center, up);
+    eye = glm::vec3(-400.f, 400.f, 400.f);
+    Engine::getInstance().addCamera("2", false, eye, center, up);
 	//si direbbe che renderizza prima l'ultima che gli passi quindi questa è la camera 1
-	eye = glm::vec3(-400.f, 400.f, 400.f);
-	Engine::getInstance().addCamera("1", eye, center, up);
+    eye = glm::vec3(150.f, 40.f, 400.f);
+	Engine::getInstance().addCamera("1", true, eye, center, up);
 }
 
 /**

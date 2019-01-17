@@ -8,7 +8,7 @@
 #define GLM_FORCE_RADIANS
 #ifdef _WINDOWS
 #ifdef GAUNTLET_EXPORTS
- // Windows necessita di questa macro per esportare la libreria come dll
+// Windows necessita di questa macro per esportare la libreria come dll
 #define LIB_API __declspec(dllexport)
 #else
 #define LIB_API __declspec(dllimport)
@@ -20,14 +20,15 @@
 
 // C/C++
 #include <limits.h>
+#include <algorithm>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
 // GLM
-#define GLM_FORCE_CTOR_INIT  // Force constructors to initialize to identity (from v0.9.9)
+#define GLM_FORCE_CTOR_INIT  // Force constructors to initialize to identity
+                             // (from v0.9.9)
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/packing.hpp>
@@ -44,57 +45,61 @@
 #include "Mesh.h"
 #include "OvoReader.h"
 
-//Cambiata in singleton come scritto nelle slides
+// Cambiata in singleton come scritto nelle slides
 class LIB_API Engine {
-public:
-	static Engine& getInstance();
-	void init(int argc, char* argv[]);
-	void loadMatrix(glm::mat4 matrix);
-	void startLoop();
-	void clearColor(float r, float g, float b);
-	void mouseWheel(void(*mouseWheelFunc)(int, int, int, int));
-	void mousePressed(int button, int state, int x, int y);
-	void mousePressed(void(*mouseFunc)(int, int, int, int));
-	void redisplay();
-	void reshape(void(*reshapeCallback)(int, int));
-	void display(void(*displayCallback)());
-	void timer(void callback(int));
-	void keyboard(void(*keyboardCallBack)(unsigned char, int, int));
-	void specialKeyboard(void(*specialFunc)(int, int, int));
-	void setViewport(int x, int y, int width, int height);
-	void clearBuffers();
-	void swapBuffers();
-	void enableLight(Node* root, std::string lightName);
-	void enableLighting(bool value);
-	void renderText();
-	void setProjectionMatrix(glm::mat4 projection);
-	void enableZbuffer();
-	void loadIdentity();
-	void freeImageInitialize();
-	Node* getScene(const char* name);
-	void addCamera(std::string name, glm::vec3 eye, glm::vec3 center,glm::vec3 up);
-	void switchLights();
-	Node* getNodeByName(Node* root, std::string name);
-	void changeCamera();
-	void moveCamera(float direction);
-	void setRenderList(Node* element);
-	void renderList();
-	void incrementFrames();
-	void rotateModel(Node * root, float angle);
-	void closeThumb(Node * root);
-	void closeFinger(Node * root, std::string name);
-	void closeHand(Node * root);
-	void free();
-	void transparentPreRender(Material *material, glm::mat4 renderMatrix);
-	void sortTrasparentMeshesList(std::vector<Node*> transparentMeshes);
-	void setAlphaToMaterial(Node* root, float alpha, std::string nodeName);
-	void setLists(Node * root);
-	void setLists(Node * root,glm::mat4 reflection);
+ public:
+  static Engine& getInstance();
+  void init(int argc, char* argv[]);
+  void loadMatrix(glm::mat4 matrix);
+  void startLoop();
+  void clearColor(float r, float g, float b);
+  void mouseWheel(void (*mouseWheelFunc)(int, int, int, int));
+  void mousePressed(int button, int state, int x, int y);
+  void mousePressed(void (*mouseFunc)(int, int, int, int));
+  void redisplay();
+  void reshape(void (*reshapeCallback)(int, int));
+  void display(void (*displayCallback)());
+  void timer(void callback(int));
+  void keyboard(void (*keyboardCallBack)(unsigned char, int, int));
+  void specialKeyboard(void (*specialFunc)(int, int, int));
+  void setViewport(int x, int y, int width, int height);
+  void clearBuffers();
+  void swapBuffers();
+  void enableLight(Node* root, std::string lightName);
+  void enableLighting(bool value);
+  void renderText();
+  void setProjectionMatrix(glm::mat4 projection);
+  void enableZbuffer();
+  void loadIdentity();
+  void freeImageInitialize();
+  Node* getScene(const char* name);
+  void setCameraToPalm(Node* root, Camera* camera);
+  void addCamera(std::string name, bool movable, glm::vec3 eye,
+                 glm::vec3 center, glm::vec3 up);
+  bool isMovableCamera();
+  void switchLights();
+  Node* getNodeByName(Node* root, std::string name);
+  void changeCamera();
+  void moveCamera(float direction);
+  void setRenderList(Node* element);
+  void renderList();
+  void incrementFrames();
+  void rotateModel(Node* root, float angle);
+  void closeThumb(Node* root);
+  void closeFinger(Node* root, std::string name);
+  void closeHand(Node* root);
+  void free();
+  void transparentPreRender(Material* material, glm::mat4 renderMatrix);
+  void sortTrasparentMeshesList(std::vector<Node*> transparentMeshes);
+  void setAlphaToMaterial(Node* root, float alpha, std::string nodeName);
+  void setLists(Node* root);
+  void setLists(Node* root, glm::mat4 reflection);
+
  private:
-	// Singleton
-	 Engine() {};  // Private so that it can  not be called
-	 ~Engine(); //private destructor
-	 Engine(Engine const&) {};             // copy constructor is private
-	 Engine& operator=(Engine const&);  // assignment operator is private
-	 static Engine* instance;
+  // Singleton
+  Engine(){};                          // Private so that it can  not be called
+  ~Engine();                           // private destructor
+  Engine(Engine const&){};             // copy constructor is private
+  Engine& operator=(Engine const&);  // assignment operator is private
+  static Engine* instance;
 };
