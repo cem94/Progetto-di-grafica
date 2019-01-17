@@ -44,3 +44,25 @@ void Camera::render(glm::mat4 renderMatrix)
 {	
 	glLoadMatrixf(glm::value_ptr(renderMatrix));
 }
+
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+void Camera::setMovable(bool movable) 
+{ 
+	this->movable = movable; 
+}
+
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+bool Camera::getMovable() 
+{ 
+	return movable; 
+}

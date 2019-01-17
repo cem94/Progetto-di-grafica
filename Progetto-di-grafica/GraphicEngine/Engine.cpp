@@ -19,7 +19,7 @@ bool lighting = true;
 // Cameras
 Camera* currentCamera = nullptr;
 std::vector<Camera*> cameras;
-int activeCamera = 1;
+int activeCamera = 0;
 
 //TODO:: se riusciamo a fare un reserve
 List* toRender = new List();
@@ -392,8 +392,31 @@ Node* Engine::getScene(const char* name)
 	Node* root = nodes.at(0);
 	nodes.erase(nodes.begin());
 	findChildren(root, nodes);
+
+	//TODO:: GREG guarda dove puoi spostarlo
+	for (std::vector<Camera*>::iterator it = cameras.begin(); it != cameras.end(); it++)
+		if ((*it)->getMovable()) 
+			setCameraToPalm(root, *it);
+
 	printTree(root, "");
 	return root;
+}
+
+ /**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+void Engine::setCameraToPalm(Node* root, Camera * camera) 
+{
+	Node* palmo = getNodeByName(root, "palmo");
+	if (palmo != nullptr) 
+	{
+		glm::vec3 pos = palmo->getMatrix()[3];
+		glm::vec3 eye = glm::vec3(100, 100, 100);
+		glm::vec3 up = glm::vec3(0, 1, 0);
+  }
 }
 
 /**
@@ -514,12 +537,26 @@ void Engine::incrementFrames()
  * @param2 name2
  * @return what it returns
  */
-void Engine::addCamera(std::string name, glm::vec3 eye, glm::vec3 center, glm::vec3 up)
+void Engine::addCamera(std::string name, bool movable ,glm::vec3 eye, glm::vec3 center, glm::vec3 up)
 {
 	currentCamera = new Camera();
 	currentCamera->setName(name);
 	currentCamera->setMatrix(glm::lookAt(eye, center, up));
+    currentCamera->setMovable(movable);
 	cameras.push_back(currentCamera);
+	//update
+    activeCamera = cameras.size() - 1;
+}
+
+ /**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+bool LIB_API Engine::isMovableCamera() 
+{ 
+	return currentCamera->getMovable(); 
 }
 
 /**
@@ -551,6 +588,7 @@ void LIB_API Engine::moveCamera(float direction)
 {
 	glm::mat4 matrix = currentCamera->getMatrix();
 	glm::vec3 axis = direction * matrix[2];
+    axis[2] *= -1; 
 	currentCamera->setMatrix(glm::translate(matrix, axis));
 }
 
