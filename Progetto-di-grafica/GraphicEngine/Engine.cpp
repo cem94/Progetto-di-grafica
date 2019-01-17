@@ -24,7 +24,7 @@ int activeCamera = 1;
 //TODO:: se riusciamo a fare un reserve
 List* toRender = new List();
 List *trasparentMeshes = new List();
-
+//istanza statica definita in Engine.h
 Engine* Engine::instance = nullptr;
 /**
  * Comment
@@ -36,6 +36,7 @@ Engine::~Engine()
 {
 	FreeImage_DeInitialise();
 }
+
 Engine & Engine::getInstance()
 {
 	if (instance == nullptr)

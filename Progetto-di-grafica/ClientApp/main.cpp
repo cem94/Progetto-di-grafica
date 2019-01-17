@@ -107,7 +107,7 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 		break;
 		//cambia camera corrente
 	case 'c':
-	changeCamera();
+	engine->changeCamera();
 		break;
 		//close hand
 	case 'h':

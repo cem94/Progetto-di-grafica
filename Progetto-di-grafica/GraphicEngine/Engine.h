@@ -47,7 +47,6 @@
 //Cambiata in singleton come scritto nelle slides
 class LIB_API Engine {
 public:
-	~Engine();
 	static Engine& getInstance();
 	void init(int argc, char* argv[]);
 	void loadMatrix(glm::mat4 matrix);
@@ -95,7 +94,8 @@ public:
  private:
 	// Singleton
 	 Engine() {};  // Private so that it can  not be called
+	 ~Engine(); //private destructor
 	 Engine(Engine const&) {};             // copy constructor is private
-	 Engine& operator=(Engine const&) {};  // assignment operator is private
+	 Engine& operator=(Engine const&);  // assignment operator is private
 	 static Engine* instance;
 };
