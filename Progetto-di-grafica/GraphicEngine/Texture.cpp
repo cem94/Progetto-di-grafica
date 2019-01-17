@@ -27,13 +27,12 @@ Texture::Texture(std::string textureName)
 {
 
 	if (textureName.compare("[none]") == 0) {
+
 		return;
 	}
 	else {
-		std::cout << "Texture name " << textureName.c_str() <<std::endl;
-
+		printf("%s\n", textureName.c_str());
 		this->setName(textureName);
-	
 		glGenTextures(1, &textureId);
 		std::string texturePath = "../resources/";
 		const char* fileName = texturePath.append(textureName).c_str();
@@ -54,14 +53,11 @@ Texture::Texture(std::string textureName)
 		}
 		// Update texture content:
 		glBindTexture(GL_TEXTURE_2D, textureId);
-	
 		// Set circular coordinates:
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
 		//TODO aggiungere asintropia
 //	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1);
-		
 	// Set min/mag filters migliorano la texture rimuovendo errori
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		//TODO controllare se OpenGL > 3.0 altrimenti mimapping non funziona

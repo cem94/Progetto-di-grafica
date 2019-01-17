@@ -442,7 +442,7 @@ void  Engine::setRenderList(Node* element)
 		Mesh * mesh = (Mesh *)element;
 		if (mesh->getMaterial() != nullptr && mesh->getMaterial()->isTrasparent())
 		{
-			printf("Aggiungo mesh trasparente\n");
+			printf("Aggiungo mesh trasparente %s \n",mesh->getName().c_str());
 			trasparentMeshes->add(element);
 		}
 	}

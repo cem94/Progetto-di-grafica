@@ -237,8 +237,8 @@ int main(int argc, char* argv[])
 	engine->setLists(scene);
 	//TRASPARENZE per ora non funzionano -> da completare
 
-	engine->setAlphaToMaterial(scene, 0.9f, "plane");
-	glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
+	//engine->setAlphaToMaterial(scene, 0.9f, "plane");
+	//glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
 	//engine->setLists(scene,reflection);	
 	engine->startLoop();
 	// free memory

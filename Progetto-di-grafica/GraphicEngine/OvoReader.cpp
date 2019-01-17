@@ -179,7 +179,6 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
 			memcpy(&children, data + position, sizeof(unsigned int));
 			f << "   Nr. children  :  " << children << std::endl;
 			position += sizeof(unsigned int);
-			std::cout << "children of " << meshName << ": " << children << std::endl;
 			// Optional target node, or [none] if not used:
 			char targetName[FILENAME_MAX];
 			strcpy_s(targetName, data + position);

@@ -10,8 +10,6 @@ Light::Light()
 }
 
 Light::Light(std::string name) {
-	printf("Adding light %s", name.c_str());
-	printf("Number of lights %d", numberOfLights + 1);
 	numberOfLights = numberOfLights + 1;
 	lightNumber = numberOfLights;
 	this->setName(name);
