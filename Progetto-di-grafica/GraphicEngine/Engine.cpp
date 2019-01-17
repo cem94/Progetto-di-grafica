@@ -25,7 +25,7 @@ int activeCamera = 1;
 List* toRender = new List();
 List *trasparentMeshes = new List();
 
-Engine* instance = nullptr;
+Engine* Engine::instance = nullptr;
 /**
  * Comment
  * @param  name1
@@ -470,7 +470,7 @@ void Engine::setLists(Node * root) {
 }
 void Engine::setLists(Node * root, glm::mat4 reflection)
 {
-	//root->setMatrix(root->getFinalMatrix()*reflection);
+	root->setMatrix(reflection);
 	Engine::getInstance().setLists(root);
 }
 void Engine::renderList()
@@ -627,7 +627,7 @@ void Engine::closeHand(Node * root)
 	closeFinger(root, "mignolo");
 }
 //TODO cem lo zoom funziona solo con x = 0 y = 0
-void Engine::setCameras() {
+void setCameras() {
 	// dove si trova la camera
 	glm::vec3 eye = glm::vec3(0.f, 0.f, 400.f);
 	// verso dove guarda

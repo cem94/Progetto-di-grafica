@@ -85,7 +85,6 @@ public:
 	void closeThumb(Node * root);
 	void closeFinger(Node * root, std::string name);
 	void closeHand(Node * root);
-	void setCameras();
 	void free();
 	void transparentPreRender(Material *material, glm::mat4 renderMatrix);
 	void sortTrasparentMeshesList(std::vector<Node*> transparentMeshes);
@@ -95,5 +94,8 @@ public:
 	void setLists(Node * root,glm::mat4 reflection);
  private:
 	// Singleton
-	Engine(){};
+	 Engine() {};  // Private so that it can  not be called
+	 Engine(Engine const&) {};             // copy constructor is private
+	 Engine& operator=(Engine const&) {};  // assignment operator is private
+	 static Engine* instance;
 };

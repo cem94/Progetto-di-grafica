@@ -10,6 +10,10 @@ glm::mat4 perspective;
 glm::mat4 ortho;
 Node* scene = NULL;
 bool rotating = false;
+// Cameras
+Camera* currentCamera = nullptr;
+std::vector<Camera*> cameras;
+int activeCamera = 1;
 
 /**
  * Comment
@@ -17,7 +21,7 @@ bool rotating = false;
  * @param2 name2
  * @return what it returns
  */
-void displayCallback() 
+void displayCallback()
 {
 	// clear dei bit DEPTH etc
 	engine->clearBuffers();
@@ -62,8 +66,8 @@ void reshapeCallback(int width, int height)
  */
 void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 {
-	switch (key) 
-{
+	switch (key)
+	{
 	case '1':
 		engine->enableLight(scene, "fix_light");
 		break;
@@ -103,7 +107,7 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 		break;
 		//cambia camera corrente
 	case 'c':
-		engine->changeCamera();
+	changeCamera();
 		break;
 		//close hand
 	case 'h':
@@ -142,8 +146,8 @@ void specialCallback(int key, int x, int y)
  * @param2 name2
  * @return what it returns
  */
-void timerCallback(int value) 
-{ 
+void timerCallback(int value)
+{
 	engine->timer(timerCallback);
 }
 
@@ -195,6 +199,13 @@ void setCallBacks()
 	engine->mousePressed(mousePressed);
 	engine->timer(timerCallback);
 }
+void changeCamera() {
+	activeCamera = (activeCamera + 1) % cameras.size();
+	currentCamera = cameras.at(activeCamera);
+}
+
+
+
 /**
  * Comment
  * @param  name1
@@ -211,18 +222,16 @@ int main(int argc, char* argv[])
 	// set background color
 	engine->clearColor(0.2f, 0.3f, 0.7f);
 	// set cameras
-	engine->setCameras();
+	setCameras();
 	// read ovo file, load scene and start main loop
 	const char* fileName = "../ovo_files/full_scene.ovo";
 	scene = engine->getScene(fileName);
 	engine->setLists(scene);
 	//TRASPARENZE per ora non funzionano -> da completare
 
-//	engine->setAlphaToMaterial(root, 0.9f, "terreno"); -> inutile secondo me
-	/*glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
-	engine->setLists(scene,reflection);*/
-	//L'ho spostato qua sembra funzionare
-	
+	engine->setAlphaToMaterial(scene, 0.9f, "plane");
+	glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
+	//engine->setLists(scene,reflection);	
 	engine->startLoop();
 	// free memory
 	//engine->free();
