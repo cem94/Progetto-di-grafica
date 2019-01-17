@@ -21,6 +21,7 @@ Camera* currentCamera = nullptr;
 std::vector<Camera*> cameras;
 int activeCamera = 1;
 
+//TODO:: se riusciamo a fare un reserve
 List* toRender = new List();
 List *trasparentMeshes = new List();
 
@@ -462,8 +463,8 @@ void  Engine::setRenderList(Node* element)
 //Temporanea per testare trasparenze
 void Engine::setLists(Node * root) {
 	setRenderList(root);
-	std::list<Node*> render = toRender->getList();
-	std::list<Node*> transparent = toRender->getList();
+	std::vector<Node*> render = toRender->getList();
+	std::vector<Node*> transparent = toRender->getList();
 	sortTrasparentMeshesList(transparent);
 	render.insert(render.end(), transparent.begin(), transparent.end());
 }
@@ -474,8 +475,8 @@ void Engine::setLists(Node * root, glm::mat4 reflection)
 }
 void Engine::renderList()
 {
-	std::list<Node*> render = toRender->getList();
-	for (std::list<Node*>::iterator it = render.begin(); it != render.end();
+	std::vector<Node*> render = toRender->getList();
+	for (std::vector<Node*>::iterator it = render.begin(); it != render.end();
 		++it) {
 		std::string s = (*it)->getName();
 		int size = (*it)->getChildrenSize();
@@ -658,11 +659,11 @@ bool listNodeCompare(Node*a, Node *b)
 * sorts the trasparent meshes list
 * @param list of transparent meshes
 */
-void Engine::sortTrasparentMeshesList(std::list<Node*> transparentMeshes)
+void Engine::sortTrasparentMeshesList(std::vector<Node*> transparentMeshes)
 {
 	glDepthMask(GL_FALSE);
 	//gli passo un comparator
-	transparentMeshes.sort(listNodeCompare);
+    std::sort(transparentMeshes.begin(), transparentMeshes.end(), listNodeCompare);
 	glDepthMask(GL_TRUE);
 }
 //setta valore alpha ad un nodo specifico -> da eliminare
@@ -693,6 +694,3 @@ void Engine::transparentPreRender(Material *material, glm::mat4 renderMatrix)
 	glDepthMask(GL_TRUE);
 	glDisable(GL_CULL_FACE);
 }
-
-
-

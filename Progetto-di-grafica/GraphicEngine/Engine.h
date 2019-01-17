@@ -23,8 +23,8 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
-#include <list>
 #include <vector>
+#include <algorithm>
 
 // GLM
 #define GLM_FORCE_CTOR_INIT  // Force constructors to initialize to identity (from v0.9.9)
@@ -88,9 +88,12 @@ public:
 	void setCameras();
 	void free();
 	void transparentPreRender(Material *material, glm::mat4 renderMatrix);
-	void sortTrasparentMeshesList(std::list<Node*> transparentMeshes);
+	void sortTrasparentMeshesList(std::vector<Node*> transparentMeshes);
 	//TODO eliminare
 	void setAlphaToMaterial(Node* root, float alpha, std::string nodeName);
 	void setLists(Node * root);
 	void setLists(Node * root,glm::mat4 reflection);
+ private:
+	// Singleton
+	Engine(){};
 };

@@ -1,4 +1,5 @@
 #include "Engine.h"
+
 /**
  * Comment
  * @param  name1
@@ -8,6 +9,7 @@
 List::List()
 {
 }
+
 /**
  * Comment
  * @param  name1
@@ -17,26 +19,40 @@ List::List()
 List::~List()
 {
 }
+
 /**
  * Comment
  * @param  name1
  * @param2 name2
  * @return what it returns
  */
-std::list<Node*> List::getList() const
+std::vector<Node*> List::getList() const
 {
-	return this->list;
+	return this->vector; 
 }
+
+/**
+* Comment
+* @param  name1
+* @param2 name2
+* @return what it returns
+*/
+void List::reserve(int dim) 
+{ 
+	this->vector.reserve(dim); 
+}
+
 /**
  * Comment
  * @param  name1
  * @param2 name2
  * @return what it returns
  */
-void List::setList(std::list<Node*> list)
+void List::setList(std::vector<Node*> vector)
 {
-	this->list = list;
+	this->vector = vector;
 }
+
 /**
  * Comment
  * @param  name1
@@ -46,8 +62,9 @@ void List::setList(std::list<Node*> list)
 //aggiunge oggetto a lista istanze
 void List::add(Node* node) 
 {
-	this->list.push_back(node);
+	this->vector.push_back(node);
 }
+
 /**
  * Comment
  * @param  name1
@@ -55,11 +72,10 @@ void List::add(Node* node)
  * @return what it returns
  */
 void List::remove(int position)
-{
-	std::list<Node*>::iterator it;
-	advance(it, position);
-	list.erase(it);
+{ 
+	vector.erase(vector.begin() + position); 
 }
+
 /**
  * Comment
  * @param  name1
@@ -68,11 +84,10 @@ void List::remove(int position)
  */
 Node* List::at(int position) 
 {
-	if (position < this->list.size())
+	// non vogliamo che lanci un eccezione.
+	if (position < this->vector.size() && position >= 0)
 	{
-		std::list<Node*>::iterator it;
-		advance(it, position);
-		return *it;
+		return vector.at(position);
 	}
 	return nullptr;
 }
@@ -82,12 +97,12 @@ Node* List::at(int position)
  * @param2 name2
  * @return what it returns
  */
-void List::insert(std::list<Node*> elements)
+void List::insert(std::vector<Node*> elements)
 {
-	if (elements.size() == 0) {
+	if (elements.size() == 0)
 		printf("Nothing to insert\n");
-	}else
-		list.insert(list.begin(), elements.begin(), elements.end());
+    else
+		vector.insert(vector.end(), elements.begin(), elements.end());
 }
 /**
  * Comment
