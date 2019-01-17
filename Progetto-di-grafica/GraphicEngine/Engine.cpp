@@ -579,9 +579,9 @@ void Engine::closeThumb(Node * root)
 	Node* finger = getNodeByName(root, "pollice1");
 	Node* finger2 = getNodeByName(root, "pollice2");
 	//le falangi dovrebbero ruotare anche su un altro asse probabilmente r1*r2 
-	glm::mat4 rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(10.f), glm::vec3(1.0f, 0.0f, 0.0f));
+	glm::mat4 rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(5.f), glm::vec3(1.0f, 0.0f, 0.0f));
 	glm::mat4 rotationX2 = glm::rotate(glm::mat4(1.0f), glm::radians(5.f), glm::vec3(1.0f, 0.0f, 0.0f));
-	glm::mat4 rotationZ = glm::rotate(rotationX2, glm::radians(20.f), glm::vec3(0.0f, 0.0f, 1.0f));
+	glm::mat4 rotationZ = glm::rotate(rotationX2, glm::radians(5.f), glm::vec3(0.0f, 0.0f, 1.0f));
 
 	finger->setMatrix(finger->getMatrix()*rotationX);
 	finger2->setMatrix(finger2->getMatrix()*rotationX2);
@@ -604,8 +604,8 @@ void Engine::closeFinger(Node * root, std::string name)
 	name.append("3");
 	Node* finger2 = getNodeByName(root, name);
 
-	glm::mat4 rotationFinger = glm::rotate(glm::mat4(1.0f), glm::radians(20.f), glm::vec3(0.0f, 0.0f, -1.0f));
-	glm::mat4 rotationFinger1 = glm::rotate(glm::mat4(1.0f), glm::radians(10.f), glm::vec3(0.0f, 0.0f, -1.0f));
+	glm::mat4 rotationFinger = glm::rotate(glm::mat4(1.0f), glm::radians(5.f), glm::vec3(0.0f, 0.0f, -1.0f));
+	glm::mat4 rotationFinger1 = glm::rotate(glm::mat4(1.0f), glm::radians(5.f), glm::vec3(0.0f, 0.0f, -1.0f));
 	glm::mat4 rotationFinger2 = glm::rotate(glm::mat4(1.0f), glm::radians(5.f), glm::vec3(0.0f, 0.0f, -1.0f));
 
 	finger->setMatrix(finger->getMatrix()*rotationFinger);
