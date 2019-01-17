@@ -22,6 +22,8 @@ std::vector<Camera*> cameras;
 int activeCamera = 1;
 
 List* toRender = new List();
+List *trasparentMeshes = new List();
+
 Engine* instance = nullptr;
 /**
  * Comment
@@ -424,7 +426,6 @@ Node* Engine::getNodeByName(Node* root, std::string name)
 * read the scene graph and put the nodes in List
 * @param initial matrix and root node
 */
-
 /**
  * Comment
  * @param  name1
@@ -435,6 +436,14 @@ void  Engine::setRenderList(Node* element)
 {
 	toRender->add(element);
 	std::vector<Node*> children = element->getChildren();
+	if (element->getType() == Node::Type::MESH) {
+		Mesh * mesh = (Mesh *)element;
+		if (mesh->getMaterial() != nullptr && mesh->getMaterial()->isTrasparent())
+		{
+			printf("Aggiungo mesh trasparente\n");
+			trasparentMeshes->add(element);
+		}
+	}
 	for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
 	{
 		setRenderList(*it);
@@ -450,6 +459,19 @@ void  Engine::setRenderList(Node* element)
   * @param2 name2
   * @return what it returns
   */
+//Temporanea per testare trasparenze
+void Engine::setLists(Node * root) {
+	setRenderList(root);
+	std::list<Node*> render = toRender->getList();
+	std::list<Node*> transparent = toRender->getList();
+	sortTrasparentMeshesList(transparent);
+	render.insert(render.end(), transparent.begin(), transparent.end());
+}
+void Engine::setLists(Node * root, glm::mat4 reflection)
+{
+	//root->setMatrix(root->getFinalMatrix()*reflection);
+	Engine::getInstance().setLists(root);
+}
 void Engine::renderList()
 {
 	std::list<Node*> render = toRender->getList();
@@ -461,9 +483,14 @@ void Engine::renderList()
 		if ((*it)->getType() == Object::Type::MESH) {
 			Mesh* mesh = (Mesh*)(*it);
 			if (mesh->getMaterial() != nullptr) {
-				mesh->getMaterial()->render(renderMatrix);
-				Texture* t = mesh->getMaterial()->getTexture();
-				t->render(renderMatrix);
+				if (mesh->getMaterial()->isTrasparent()) {
+					//TRASPARENZE
+					transparentPreRender(mesh->getMaterial(), renderMatrix);
+				}
+				else {
+					mesh->getMaterial()->render(renderMatrix);
+				}
+				mesh->getMaterial()->getTexture()->render(renderMatrix);
 			}
 		}
 		(*it)->render(currentCamera->getMatrix() * renderMatrix);
@@ -611,7 +638,61 @@ void Engine::setCameras() {
 	eye = glm::vec3(-400.f, 400.f, 400.f);
 	Engine::getInstance().addCamera("1", eye, center, up);
 }
+void Engine::free()
+{
+	//TODO
+}
 
+/**
+* depth-sorting (back to front) method for transparent meshes
+* @param two list element to compare
+*/
+bool listNodeCompare(Node*a, Node *b)
+{
+	glm::mat4 first = currentCamera->getMatrix() * a->getMatrix();
+	glm::mat4 second = currentCamera->getMatrix() * b->getMatrix();
+	return (float)first[3].z > (float)second[3].z;
+}
+
+/**
+* sorts the trasparent meshes list
+* @param list of transparent meshes
+*/
+void Engine::sortTrasparentMeshesList(std::list<Node*> transparentMeshes)
+{
+	glDepthMask(GL_FALSE);
+	//gli passo un comparator
+	transparentMeshes.sort(listNodeCompare);
+	glDepthMask(GL_TRUE);
+}
+//setta valore alpha ad un nodo specifico -> da eliminare
+void Engine::setAlphaToMaterial(Node * root, float alpha, std::string nodeName)
+{
+		Node* node = getNodeByName(root, nodeName);
+		if (node != nullptr)
+		{
+			Mesh* mesh = (Mesh*)node;
+			mesh->getMaterial()->setAlpha(alpha);
+		}
+}
+/**
+* support method for transparent render
+* @param material and render matrix
+*/
+void Engine::transparentPreRender(Material *material, glm::mat4 renderMatrix)
+{
+	glEnable(GL_CULL_FACE);
+	glDepthMask(GL_FALSE);
+	// At first render back faces
+	glCullFace(GL_FRONT);
+	material->render(renderMatrix);
+	// Then render front faces
+	glCullFace(GL_BACK);
+	material->render(renderMatrix);
+	// Enabled z-buffer write
+	glDepthMask(GL_TRUE);
+	glDisable(GL_CULL_FACE);
+}
 
 
 

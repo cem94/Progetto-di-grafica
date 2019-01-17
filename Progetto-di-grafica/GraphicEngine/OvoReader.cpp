@@ -138,14 +138,12 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
 			position += (unsigned int)strlen(metalnessMapName) + 1;
 
 			Material *material = new Material();
-			//TODO aggiungere trasparenze
-			//material->setEmissive(glm::vec4(emission.r, emission.g, emission.b, 1.0f));
-			//
+			material->setEmissive(glm::vec4(emission.r, emission.g, emission.b, 1.0f));	
 			material->setType(Object::Type::MATERIAL);
 			material->setShininess((1 - (float)sqrt((int)roughness)) * 128);
 			material->setName(materialName);
 			material->setTexture(textureName);
-			//material->setAlpha(alpha);
+			material->setAlpha(alpha);
 			material->setAmbient(albedo*0.2f);
 			material->setSpecular(albedo*0.4f);
 			material->setDiffuse(albedo*0.6f);

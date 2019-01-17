@@ -21,14 +21,13 @@ void displayCallback()
 {
 	// clear dei bit DEPTH etc
 	engine->clearBuffers();
-
 	// setto la matrice di proiezione prospettica per il rendering 3d
 	engine->setProjectionMatrix(perspective);
 	// 3d rendering//
 	// renderizza la lista ottenuta dal file OVO
 	engine->renderList();
 	if (rotating)
-		engine->rotateModel(scene, -5);
+		engine->rotateModel(scene, -3);
 	// 2D rendering//
 	// setto la matrice di proiezione ortogonale il rendering 2d
 	engine->setProjectionMatrix(ortho);
@@ -216,8 +215,14 @@ int main(int argc, char* argv[])
 	// read ovo file, load scene and start main loop
 	const char* fileName = "../ovo_files/full_scene.ovo";
 	scene = engine->getScene(fileName);
+	engine->setLists(scene);
+	//TRASPARENZE per ora non funzionano -> da completare
+
+//	engine->setAlphaToMaterial(root, 0.9f, "terreno"); -> inutile secondo me
+	/*glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
+	engine->setLists(scene,reflection);*/
 	//L'ho spostato qua sembra funzionare
-	engine->setRenderList(scene);
+	
 	engine->startLoop();
 	// free memory
 	//engine->free();
