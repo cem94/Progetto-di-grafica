@@ -10,7 +10,7 @@ glm::mat4 perspective;
 glm::mat4 ortho;
 Node* scene = NULL;
 bool rotating = false;
-float angle = 0.0f;
+float angleX = 0.0f;
 #define BUTTON_UP   0
 #define BUTTON_DOWN 1
 
@@ -239,7 +239,7 @@ void setCallBacks()
 	engine->display(displayCallback);
 	engine->reshape(reshapeCallback);
 	engine->keyboard(keyboardCallback);
-	//engine->keyboardUp(keyboardUpCallback);
+	engine->keyboardUp(keyboardUpCallback);
 	engine->specialKeyboard(specialCallback);
 	engine->mouseWheel(mouseWheel);
 	//eliminare se non lo usiamo

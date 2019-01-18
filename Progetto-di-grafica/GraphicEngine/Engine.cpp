@@ -218,6 +218,11 @@ void LIB_API Engine::keyboard(void(*keyboardCallBack)(unsigned char, int, int))
 	glutKeyboardFunc(keyboardCallBack);
 }
 
+void Engine::keyboardUp(void(*keyboardUpCallBack)(unsigned char, int, int))
+{
+	glutKeyboardUpFunc(keyboardUpCallBack);
+}
+
 /**
  * Comment
  * @param  name1
