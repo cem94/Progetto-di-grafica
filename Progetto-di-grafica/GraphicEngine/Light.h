@@ -41,7 +41,7 @@ private:
 	float cutoff;
 	float radius;
 	float angle;
-	bool isActive = true;
+	bool isActive = false;
 	int lightNumber;
 	static int numberOfLights;
 };

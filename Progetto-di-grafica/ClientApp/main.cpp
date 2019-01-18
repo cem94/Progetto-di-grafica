@@ -167,18 +167,23 @@ void keyboardUpCallback(unsigned char key, int x, int y)
 void specialCallback(int key, int x, int y)
 {
 	//muovi luce
+  if (!engine->isMovableCamera()) 
+	  return;
 	switch (key) {
-	case GLUT_KEY_DOWN:
+    case GLUT_KEY_DOWN:
+        engine->moveCameraZ(-1.0f);
 		break;
 	case GLUT_KEY_LEFT:
+        engine->moveCameraX(1.0f);
 		break;
 	case GLUT_KEY_RIGHT:
+		engine->moveCameraX(-1.0f);
 		break;
 	case GLUT_KEY_UP:
+		engine->moveCameraZ(1.0f);
 		break;
 	default:
 		break;
-
 	}
 	engine->redisplay();
 }
@@ -202,14 +207,13 @@ void timerCallback(int value)
  */
 void mouseWheel(int wheel, int direction, int x, int y)
 {
-	// TODO: come possiamo usarlo?
 	wheel = 0;
     if (!engine->isMovableCamera())
 		return;
 	if (direction == -1 )
-		engine->moveCamera(-10.0f);
+		engine->moveCameraY(-1); //engine->moveCamera(glm::vec3(0,-1,0));
 	else if (direction == +1)
-		engine->moveCamera(10.0f);
+		engine->moveCameraY(1);
 }
 
 //callback per pressione mouse
@@ -243,20 +247,19 @@ void setCallBacks()
 	engine->timer(timerCallback);
 }
 
-//TODO cem lo zoom funziona solo con x = 0 y = 0
 void setCameras() {
 	// dove si trova la camera
 	glm::vec3 eye = glm::vec3(0.f, 50.f, 400.f);
 	// verso dove guarda
-	glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
+	glm::vec3 center = glm::vec3(0.0f, -30.0f, 0.0f);
 	// dove è il sopra
 	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-	Engine::getInstance().addCamera("3", false, eye, center, up);
+	engine->addCamera("3", false, eye, center, up);
     eye = glm::vec3(-400.f, 400.f, 400.f);
-    Engine::getInstance().addCamera("2", false, eye, center, up);
+    engine->addCamera("2", false, eye, center, up);
 	//si direbbe che renderizza prima l'ultima che gli passi quindi questa è la camera 1
-    eye = glm::vec3(0.f, 50.f, 400.f);
-	Engine::getInstance().addCamera("1", true, eye, center, up);
+    eye = glm::vec3(200.f, 400.f, 200.f);
+	engine->addCamera("1", true, eye, center, up);
 }
 
 /**
@@ -281,13 +284,10 @@ int main(int argc, char* argv[])
 	scene = engine->getScene(fileName);
 	engine->setLists(scene);
 	//TRASPARENZE per ora non funzionano -> da completare
-
-	engine->setAlphaToMaterial(scene, 0.1f, "plane");
+	engine->setAlphaToMaterial(scene, 0.9f, "plane");
+	//TODO:: GREG GUARDA SULLE SLIDE C'È SCRITTO COME FARE -> (1.0f, 0.0f, 1.0f) ->  così è come ha fatto Gatto io non so come usare quella matrice. Se sai come farlo fallo tu pf
 	glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
 	engine->setLists(scene,reflection);	
 	engine->startLoop();
-	// free memory
-	//engine->free();
-//	delete (engine);
 	std::cout << "Application terminated" << std::endl;
 }
