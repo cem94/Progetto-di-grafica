@@ -2,7 +2,7 @@
 #define GLUT_KEY_LEFT 0x0064
 #define GLUT_KEY_UP 0x0065
 #define GLUT_KEY_RIGHT 0x0066
-#define GLUT_KEY_DOWN 0x0069
+#define GLUT_KEY_DOWN 0x0067
 // GLOBALS //
 Engine* engine = &Engine::getInstance();
 // matrici di proiezione
@@ -211,9 +211,9 @@ void mouseWheel(int wheel, int direction, int x, int y)
     if (!engine->isMovableCamera())
 		return;
 	if (direction == -1 )
-		engine->moveCameraY(-1); //engine->moveCamera(glm::vec3(0,-1,0));
+		engine->moveCamera(-10); //engine->moveCamera(glm::vec3(0,-1,0));
 	else if (direction == +1)
-		engine->moveCameraY(1);
+		engine->moveCamera(10);
 }
 
 //callback per pressione mouse
@@ -258,7 +258,7 @@ void setCameras() {
     eye = glm::vec3(-400.f, 400.f, 400.f);
     engine->addCamera("2", false, eye, center, up);
 	//si direbbe che renderizza prima l'ultima che gli passi quindi questa è la camera 1
-    eye = glm::vec3(200.f, 400.f, 200.f);
+    eye = glm::vec3(200, 200, 0.f);
 	engine->addCamera("1", true, eye, center, up);
 }
 

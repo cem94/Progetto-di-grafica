@@ -433,11 +433,9 @@ void Engine::setCameraToPalm(Node* root)
 	for (Camera * c : cameras)
 		if (c->getMovable())
 		{
-            glm::vec3 eye = glm::vec3(150.0f, 250.0f, 350.0f);
-            //c->getMatrix()[0];
+            glm::vec3 eye = c->getMatrix()[0];
 			glm::vec3 center = palmo->getMatrix()[3];
-            glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-            //c->getMatrix()[2];
+            glm::vec3 up = c->getMatrix()[2];
             c->setMatrix(glm::lookAt(eye, center, up));
             palmo->insert(c);
 		}
