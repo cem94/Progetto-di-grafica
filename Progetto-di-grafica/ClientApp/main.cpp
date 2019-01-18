@@ -3,6 +3,9 @@
 #define GLUT_KEY_UP 0x0065
 #define GLUT_KEY_RIGHT 0x0066
 #define GLUT_KEY_DOWN 0x0067
+#define BUTTON_UP 0
+#define BUTTON_DOWN 1
+
 // GLOBALS //
 Engine* engine = &Engine::getInstance();
 // matrici di proiezione
@@ -11,8 +14,10 @@ glm::mat4 ortho;
 Node* scene = NULL;
 bool rotating = false;
 float angle = 0.0f;
-#define BUTTON_UP   0
-#define BUTTON_DOWN 1
+
+// Windows size
+int sizeX = 0;
+int sizeY = 0;
 
 unsigned char keyState[255];
 unsigned char mouseState[3];
@@ -38,7 +43,7 @@ void displayCallback()
 	// renderizza la lista ottenuta dal file OVO
 	engine->renderList();
 	if (rotating)
-		engine->rotateModel(scene, -3);
+		engine->autoRotateModel(scene, -1.0f);
 	// 2D rendering//
 	// setto la matrice di proiezione ortogonale il rendering 2d
 	engine->setProjectionMatrix(ortho);
@@ -64,6 +69,7 @@ void reshapeCallback(int width, int height)
 	engine->setViewport(0, 0, width, height);
 	perspective = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 1.0f, 4000.0f);
 	ortho = glm::ortho(0.f, (float)width, 0.f, (float)height, -1.f, 1.f);
+	engine->updateSize();
 }
 /**
  * Comment
@@ -98,7 +104,8 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 		break;
 		//cambia camera corrente
 	case 'c':
-		engine->changeCamera();
+		//TODO:: vedere di farlo meglio!
+		engine->changeCamera(scene);
 		break;
 	}
 	//Controlli mano
@@ -211,9 +218,31 @@ void mouseWheel(int wheel, int direction, int x, int y)
     if (!engine->isMovableCamera())
 		return;
 	if (direction == -1 )
-		engine->moveCamera(-10); //engine->moveCamera(glm::vec3(0,-1,0));
+		engine->moveCameraY(-10);
 	else if (direction == +1)
-		engine->moveCamera(10);
+		engine->moveCameraY(10);
+}
+
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+void mouseMoved(int x, int y) {
+  // UP
+  if (x > sizeX * 0.25 && x < sizeX * 0.75 && y < sizeY * 0.25) {
+    std::cout << "UP" << std::endl;
+	// DOWN
+  } else if (x > sizeX * 0.25 && x < sizeX * 0.75 && y > sizeY * 0.75) {
+    std::cout << "DOWN" << std::endl;
+    // LEFT
+  } else if (y > sizeY * 0.25 && y < sizeY * 0.75 && x < sizeX * 0.25) {
+    std::cout << "left" << std::endl;
+    // RIGHT
+  } else if (y > sizeY * 0.25 && y < sizeY * 0.75 && y > sizeX * 0.75) {
+    std::cout << "Right" << std::endl;
+  }
 }
 
 //callback per pressione mouse
@@ -242,6 +271,7 @@ void setCallBacks()
 	//engine->keyboardUp(keyboardUpCallback);
 	engine->specialKeyboard(specialCallback);
 	engine->mouseWheel(mouseWheel);
+    engine->mouseMoved(mouseMoved);
 	//eliminare se non lo usiamo
 	engine->mousePressed(mousePressed);
 	engine->timer(timerCallback);
@@ -259,6 +289,7 @@ void setCameras() {
     engine->addCamera("2", false, eye, center, up);
 	//si direbbe che renderizza prima l'ultima che gli passi quindi questa è la camera 1
     eye = glm::vec3(200, 200, 0.f);
+    center = glm::vec3(0.0f, 200.0f, 0.0f);
 	engine->addCamera("1", true, eye, center, up);
 }
 
@@ -273,10 +304,14 @@ int main(int argc, char* argv[])
 	std::cout << "Client application starts" << std::endl;
 	// init engine settings
 	engine->init(argc, argv);
+	
+	sizeY = engine->getWindowSizeY();
+    sizeX = engine->getWindowSizeX();
+
 	// init call back functions
 	setCallBacks();
 	// set background color
-	engine->clearColor(0.2f, 0.3f, 0.7f);
+	engine->clearColor(1.f, 1.f, 1.f);
 	// set cameras
 	setCameras();
 	// read ovo file, load scene and start main loop
@@ -284,12 +319,16 @@ int main(int argc, char* argv[])
 	scene = engine->getScene(fileName);
 	engine->setLists(scene);
 	//TRASPARENZE per ora non funzionano -> da completare
-	engine->setAlphaToMaterial(scene, 0.9f, "plane");
+	engine->setAlphaToMaterial(scene, 0.95f, "plane");
 	//TODO:: GREG GUARDA SULLE SLIDE C'È SCRITTO COME FARE -> (1.0f, 0.0f, 1.0f) ->  così è come ha fatto Gatto io non so come usare quella matrice. Se sai come farlo fallo tu pf
 	
 	glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
 	engine->setLists(scene,reflection);	
-	
+
+	engine->updateSize();
+    sizeX = engine->getWindowSizeX();
+	sizeY = engine->getWindowSizeY();
+
 	engine->startLoop();
 
 	//TODO:: FreeImage_DeInitialise

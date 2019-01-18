@@ -23,13 +23,21 @@ int activeCamera = 0;
 float totalAngle = 0.f;
 float totalAngleZ = 0.0f;
 float fingerAngles[5];
-//per il pollice
+// per il pollice
 float angleX;
-std::string fingerNames[5] = { "pollice", "indice","medio","anulare","mignolo" };
-//TODO:: se riusciamo a fare un reserve
+std::string fingerNames[5] = {"pollice", "indice", "medio", "anulare", "mignolo"};
+
+// Gauntlet translate
+bool translateUp = false;
+int translateCnt = 0;
+
+// Windows size
+int sizeX = 0;
+int sizeY = 0;
+
 List* toRender = new List();
-;
 List *trasparentMeshes = new List();
+
 //istanza statica definita in Engine.h
 Engine* Engine::instance = nullptr;
 /**
@@ -61,7 +69,11 @@ void LIB_API Engine::init(int argc, char* argv[])
 	std::cout << "The engine starts" << std::endl;
     // setto opzioni finestra
     glutInitWindowSize(1920, 1080);
+
+	//updateSize();
+
     glutInitWindowPosition(0, 0);
+
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 
 	glutInit(&argc, argv);
@@ -94,6 +106,12 @@ void LIB_API Engine::init(int argc, char* argv[])
 
 	enableLighting(true);
 	glEnable(GL_LIGHT0);
+	// abilita la trasparenza
+	// TODO:: GREG ho visto che abilitano questo, è giusto?
+    glEnable(GL_BLEND);
+	// (A * S) + (B * D)
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	enableZbuffer();
 }
 /**
@@ -163,6 +181,52 @@ void Engine::mousePressed(void(*mouseFunc)(int, int, int, int))
 {
 	glutMouseFunc(mouseFunc);
 }
+
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+void Engine::updateSize() 
+{
+  sizeY = glutGet(GLUT_WINDOW_WIDTH);
+  sizeX = glutGet(GLUT_WINDOW_HEIGHT);
+}
+
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+int Engine::getWindowSizeX() 
+{
+	return sizeX; 
+}
+
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+int Engine::getWindowSizeY() 
+{
+	return sizeY; 
+}
+
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+void Engine::mouseMoved(void (*mouseMoved)(int, int)) 
+{
+  glutPassiveMotionFunc(mouseMoved);
+}
+
 /**
  * Comment
  * @param  name1
@@ -356,6 +420,7 @@ void LIB_API Engine::enableLight(Node *root, std::string lightName)
 
 //TODO scrivere i comandi del guanto / opzioni 
 //scrive info su schermo (FPS etc)
+//TODO:: il colore !!
 /**
  * Comment
  * @param  name1
@@ -429,16 +494,14 @@ Node* Engine::getScene(const char* name)
 void Engine::setCameraToPalm(Node* root) 
 {
 	Node* palmo = getNodeByName(root, "guardia");
-
-	for (Camera * c : cameras)
-		if (c->getMovable())
+	for (Node* n : palmo->getChildren()) {
+		if (n->getType() == Object::Type::CAMERA) 
 		{
-            glm::vec3 eye = c->getMatrix()[0];
-			glm::vec3 center = palmo->getMatrix()[3];
-            glm::vec3 up = c->getMatrix()[2];
-            c->setMatrix(glm::lookAt(eye, center, up));
-            palmo->insert(c);
+            n = currentCamera;
+			return;
 		}
+	}
+	palmo->insert(currentCamera);
 }
 
 /**
@@ -506,7 +569,6 @@ void  Engine::setRenderList(Node* element)
   */
   //Temporanea per testare trasparenze
 void Engine::setLists(Node * root) {
-	//toRender = new List();
 	setRenderList(root);
 	std::vector<Node*> render = toRender->getList();
 	std::vector<Node*> transparent = toRender->getList();
@@ -568,11 +630,8 @@ void Engine::addCamera(std::string name, bool movable, glm::vec3 eye, glm::vec3 
 	camera->setName(name);
 	camera->setMovable(movable);
 	camera->setType(Object::Type::CAMERA);
-	// la camera verra settata successivamente, quando la scena verrà caricata.
-	if (movable) 
-		camera->setMatrix(glm::mat3(eye, center, up));//perché questa la setti così?
-    else 
-		camera->setMatrix(glm::lookAt(eye, center, up));
+
+	camera->setMatrix(glm::lookAt(eye, center, up));
     cameras.push_back(camera);
 	// update
     currentCamera = camera;
@@ -600,7 +659,7 @@ void LIB_API Engine::moveCameraX(float direction)
 void LIB_API Engine::moveCameraY(float direction) 
 {
 	glm::mat4 matrix = currentCamera->getMatrix();
-	glm::vec3 mov = direction * glm::vec3(0.0f, 5.0f, 0.0f);
+	glm::vec3 mov = direction * glm::vec3(0.0f, 3.0f, 0.0f);
 	currentCamera->setMatrix(glm::translate(matrix, mov));
 }
 
@@ -611,11 +670,6 @@ void LIB_API Engine::moveCameraZ(float direction)
 	currentCamera->setMatrix(glm::translate(matrix, mov));
 }
 
-/*
-void Engine::moveCamera(float length, glm::vec3 axis) {
-	currentCamera->setMatrix(glm::translate(currentCamera->getMatrix(), axis));
-}
-*/
 /**
  * change current camera
  */
@@ -625,9 +679,10 @@ void Engine::moveCamera(float length, glm::vec3 axis) {
  * @param2 name2
  * @return what it returns
  */
-void Engine::changeCamera() {
+void Engine::changeCamera(Node * root) {
 	activeCamera = (activeCamera + 1) % cameras.size();
 	currentCamera = cameras.at(activeCamera);
+    setCameraToPalm(root);
 }
 
 
@@ -641,12 +696,8 @@ void LIB_API Engine::moveCamera(float direction)
 {
 	glm::mat4 matrix = currentCamera->getMatrix();
 	glm::vec3 axis = 0.2f * direction * matrix[2];
-	axis[2] *= -1;
-	currentCamera->setMatrix(glm::translate(matrix, axis));
-    //glm::vec3 eye = currentCamera->getMatrix()[3];
-    //glm::vec3 center = glm::vec3(0.0f, -30.0f, 0.0f);
-    //glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-    //currentCamera->setMatrix(glm::lookAt(eye, center, up));
+	//axis[2] *= -1;
+	currentCamera->setMatrix(matrix * glm::translate(glm::mat4(1.0f), axis));
 }
 
 /**
@@ -662,6 +713,32 @@ void Engine::rotateModel(Node * root, float angle) {
 		glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
 		guardia->setMatrix(guardia->getMatrix()*rotation);
 	}
+}
+
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+void Engine::autoRotateModel(Node* root, float angle) {
+	Node* guardia = getNodeByName(root, "guardia");
+	if (guardia != nullptr) {
+		glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
+		glm::mat4 translate;
+        translateCnt++;
+		if (translateUp) 
+			translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.1f, 0.0f));
+		else 
+			translate =	glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -0.1f, 0.0f));
+
+		guardia->setMatrix(guardia->getMatrix() * translate * rotation);
+
+        if (translateCnt > 180) {
+			translateCnt = 0;
+			translateUp = !translateUp;
+		}
+  }
 }
 
 
@@ -743,7 +820,6 @@ void Engine::free()
 * depth-sorting (back to front) method for transparent meshes
 * @param two list element to compare
 */
-//TODO:: GREG GUARDA CHE ESISTE LO STENCIL BUFFER PER QUESTO, GUARDA LE SLIDE
 bool listNodeCompare(Node*a, Node *b)
 {
 	glm::mat4 first = currentCamera->getMatrix() * a->getMatrix();
@@ -762,6 +838,7 @@ void Engine::sortTrasparentMeshesList(std::vector<Node*> transparentMeshes)
 	std::sort(transparentMeshes.begin(), transparentMeshes.end(), listNodeCompare);
 	glDepthMask(GL_TRUE);
 }
+
 //setta valore alpha ad un nodo specifico
 void Engine::setAlphaToMaterial(Node * root, float alpha, std::string nodeName)
 {
@@ -772,6 +849,7 @@ void Engine::setAlphaToMaterial(Node * root, float alpha, std::string nodeName)
 		mesh->getMaterial()->setAlpha(alpha);
 	}
 }
+
 /**
 * support method for transparent render
 * @param material and render matrix
