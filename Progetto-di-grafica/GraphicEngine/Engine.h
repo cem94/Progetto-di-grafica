@@ -39,10 +39,10 @@
 #include "Node.h"
 #include "Camera.h"
 #include "Light.h"
-#include "List.h"
 #include "Texture.h"
 #include "Material.h"
 #include "Mesh.h"
+#include "List.h"
 #include "OvoReader.h"
 
 // Cambiata in singleton come scritto nelle slides
@@ -73,10 +73,13 @@ class LIB_API Engine {
   void loadIdentity();
   void freeImageInitialize();
   Node* getScene(const char* name);
-  void setCameraToPalm(Node* root, Camera* camera);
+  void setCameraToPalm(Node* root);
   void addCamera(std::string name, bool movable, glm::vec3 eye,
                  glm::vec3 center, glm::vec3 up);
   bool isMovableCamera();
+  void moveCameraX(float direction);
+  void moveCameraY(float direction);
+  void moveCameraZ(float direction);
   void switchLights();
   Node* getNodeByName(Node* root, std::string name);
   void changeCamera();
@@ -97,9 +100,9 @@ class LIB_API Engine {
 
  private:
   // Singleton
-  Engine(){};                          // Private so that it can  not be called
-  ~Engine();                           // private destructor
-  Engine(Engine const&){};             // copy constructor is private
+  Engine(){};                        // Private so that it can  not be called
+  ~Engine();                         // private destructor
+  Engine(Engine const&){};           // copy constructor is private
   Engine& operator=(Engine const&);  // assignment operator is private
   static Engine* instance;
 };

@@ -257,7 +257,7 @@ void LIB_API Engine::loadIdentity()
  */
 void printTree(Node* node, std::string indentation)
 {
-	auto mat = node->getMatrix();
+	glm::mat4 mat = node->getMatrix();
 	std::cout << indentation.c_str() << node->getName().c_str() << std::endl;
 	for (int i = 0; i < node->getChildrenSize(); i++)
 		printTree(node->getChildren().at(i), "\t - " + indentation);
@@ -330,7 +330,7 @@ void LIB_API Engine::switchLights()
  */
 void LIB_API Engine::enableLight(Node *root, std::string lightName)
 {
-	Light* light = (Light*)getNodeByName(root, lightName);
+	Light* light = static_cast<Light *>(getNodeByName(root, lightName));
 	if (light != nullptr)
 		light->changeState();
 }
@@ -389,14 +389,15 @@ void findChildren(Node* currentNode, std::vector<Node*>& nodes)
 Node* Engine::getScene(const char* name)
 {
 	std::vector<Node*> nodes = OvoReader::readOVOfile(name);
+
+	toRender->reserve(nodes.size());
+
 	Node* root = nodes.at(0);
 	nodes.erase(nodes.begin());
+	
 	findChildren(root, nodes);
-
-	//TODO:: GREG guarda dove puoi spostarlo
-	for (std::vector<Camera*>::iterator it = cameras.begin(); it != cameras.end(); it++)
-		if ((*it)->getMovable()) 
-			setCameraToPalm(root, *it);
+   
+	setCameraToPalm(root);
 
 	printTree(root, "");
 	return root;
@@ -408,15 +409,21 @@ Node* Engine::getScene(const char* name)
  * @param2 name2
  * @return what it returns
  */
-void Engine::setCameraToPalm(Node* root, Camera * camera) 
+void Engine::setCameraToPalm(Node* root) 
 {
-	Node* palmo = getNodeByName(root, "palmo");
-	if (palmo != nullptr) 
-	{
-		glm::vec3 pos = palmo->getMatrix()[3];
-		glm::vec3 eye = glm::vec3(100, 100, 100);
-		glm::vec3 up = glm::vec3(0, 1, 0);
-  }
+	Node* palmo = getNodeByName(root, "guardia");
+
+	for (Camera * c : cameras)
+		if (c->getMovable())
+		{
+            glm::vec3 eye = glm::vec3(150.0f, 250.0f, 350.0f);
+            //c->getMatrix()[0];
+			glm::vec3 center = palmo->getMatrix()[3];
+            glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+            //c->getMatrix()[2];
+            c->setMatrix(glm::lookAt(eye, center, up));
+            palmo->insert(c);
+		}
 }
 
 /**
@@ -431,18 +438,15 @@ void Engine::setCameraToPalm(Node* root, Camera * camera)
  */
 Node* Engine::getNodeByName(Node* root, std::string name)
 {
-	if (root->getName().compare(name) == 0) {
+	if (root->getName().compare(name) == 0)
 		return root;
-	}
-	else {
-		if (root->getChildrenSize() > 0) {
-			for (int i = 0; i < root->getChildrenSize(); i++) {
-				Node* node = getNodeByName(root->getChildren()[i], name);
-				if (node) {
-					return node;
-				}
-			}
-		}
+	else{
+          for (Node* n : root->getChildren()) 
+		  {
+			  Node* founded = getNodeByName(n, name);
+			  if (founded!= nullptr) 
+				  return founded;
+          }
 		return nullptr;
 	}
 }
@@ -459,9 +463,15 @@ Node* Engine::getNodeByName(Node* root, std::string name)
  */
 void  Engine::setRenderList(Node* element)
 {
-	toRender->add(element);
+	if (element->getType() != Object::Type::CAMERA)
+		toRender->add(element);
+	else if (currentCamera->getMovable())
+		toRender->add(currentCamera);
+
 	std::vector<Node*> children = element->getChildren();
-	if (element->getType() == Node::Type::MESH) {
+
+	if (element->getType() == Node::Type::MESH) 
+	{
 		Mesh * mesh = (Mesh *)element;
 		if (mesh->getMaterial() != nullptr && mesh->getMaterial()->isTrasparent())
 		{
@@ -469,10 +479,8 @@ void  Engine::setRenderList(Node* element)
 			trasparentMeshes->add(element);
 		}
 	}
-	for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
-	{
-		setRenderList(*it);
-	}
+    for (Node * n: children)
+		setRenderList(n);
 }
 
 /**
@@ -492,35 +500,38 @@ void Engine::setLists(Node * root) {
 	sortTrasparentMeshesList(transparent);
 	render.insert(render.end(), transparent.begin(), transparent.end());
 }
+
 void Engine::setLists(Node * root, glm::mat4 reflection)
 {
 	root->setMatrix(reflection);
 	Engine::getInstance().setLists(root);
 }
-void Engine::renderList()
-{
-	std::vector<Node*> render = toRender->getList();
-	for (std::vector<Node*>::iterator it = render.begin(); it != render.end();
-		++it) {
-		std::string s = (*it)->getName();
-		int size = (*it)->getChildrenSize();
-		glm::mat4 renderMatrix = (*it)->getFinalMatrix();
-		if ((*it)->getType() == Object::Type::MESH) {
-			Mesh* mesh = (Mesh*)(*it);
-			if (mesh->getMaterial() != nullptr) {
-				if (mesh->getMaterial()->isTrasparent()) {
-					//TRASPARENZE
-					transparentPreRender(mesh->getMaterial(), renderMatrix);
-				}
-				else {
-					mesh->getMaterial()->render(renderMatrix);
-				}
-				mesh->getMaterial()->getTexture()->render(renderMatrix);
-			}
-		}
-		(*it)->render(currentCamera->getMatrix() * renderMatrix);
-	}
+
+void Engine::renderList() { 
+	std::vector<Node*> render = toRender->getList(); 
+	for (Node* n : render) 
+	{
+        glm::mat4 renderMatrix = n->getFinalMatrix();
+        Object::Type type = n->getType();
+
+		if (type == Object::Type::MESH) 
+		{
+            Mesh* m = static_cast<Mesh*>(n);
+            if (m->getMaterial() != nullptr) 
+			{
+              if (m->getMaterial()->isTrasparent()) {
+                // TRASPARENZE
+                transparentPreRender(m->getMaterial(), renderMatrix);
+              } else {
+                m->getMaterial()->render(renderMatrix);
+              }
+              m->getMaterial()->getTexture()->render(renderMatrix);
+            }
+        }
+		n->render(currentCamera->getMatrix() * renderMatrix);
+    }
 }
+
 /**
  * Comment
  * @param  name1
@@ -539,13 +550,20 @@ void Engine::incrementFrames()
  */
 void Engine::addCamera(std::string name, bool movable ,glm::vec3 eye, glm::vec3 center, glm::vec3 up)
 {
-	currentCamera = new Camera();
-	currentCamera->setName(name);
-	currentCamera->setMatrix(glm::lookAt(eye, center, up));
-    currentCamera->setMovable(movable);
-	cameras.push_back(currentCamera);
-	//update
-    activeCamera = cameras.size() - 1;
+	Camera* camera = new Camera();
+	camera->setName(name);
+	camera->setMovable(movable);
+	camera->setType(Object::Type::CAMERA);
+
+	// la camera verra settata successivamente, quando la scena verrà caricata.
+	if (movable) 
+		camera->setMatrix(glm::mat3(eye, center, up));
+    else 
+		camera->setMatrix(glm::lookAt(eye, center, up));
+    cameras.push_back(camera);
+	// update
+    currentCamera = camera;
+    activeCamera =static_cast<int>(cameras.size() - 1);
 }
 
  /**
@@ -557,6 +575,27 @@ void Engine::addCamera(std::string name, bool movable ,glm::vec3 eye, glm::vec3 
 bool LIB_API Engine::isMovableCamera() 
 { 
 	return currentCamera->getMovable(); 
+}
+
+void Engine::moveCameraX(float direction) 
+{
+	glm::mat4 matrix = currentCamera->getMatrix();
+	glm::vec3 mov = direction * glm::vec3(5.0f, 0.0f, 0.0f);
+	currentCamera->setMatrix(glm::translate(matrix, mov));
+}
+
+void Engine::moveCameraY(float direction) 
+{
+	glm::mat4 matrix = currentCamera->getMatrix();
+	glm::vec3 mov = direction * glm::vec3(0.0f, 5.0f, 0.0f);
+	currentCamera->setMatrix(glm::translate(matrix, mov));
+}
+
+void Engine::moveCameraZ(float direction) 
+{
+	glm::mat4 matrix = currentCamera->getMatrix();
+	glm::vec3 mov = direction * glm::vec3(0.0f, 0.0f, 5.0f);
+	currentCamera->setMatrix(glm::translate(matrix, mov));
 }
 
 /**
@@ -573,10 +612,6 @@ void Engine::changeCamera() {
 	currentCamera = cameras.at(activeCamera);
 }
 
-/**
- * moves actual camera
- * @param translation matrix
- */
 
  /**
  * Comment
@@ -587,9 +622,13 @@ void Engine::changeCamera() {
 void LIB_API Engine::moveCamera(float direction)
 {
 	glm::mat4 matrix = currentCamera->getMatrix();
-	glm::vec3 axis = direction * matrix[2];
-    axis[2] *= -1; 
+	glm::vec3 axis = 0.2f * direction * matrix[2];
+	axis[2] *= -1;
 	currentCamera->setMatrix(glm::translate(matrix, axis));
+    //glm::vec3 eye = currentCamera->getMatrix()[3];
+    //glm::vec3 center = glm::vec3(0.0f, -30.0f, 0.0f);
+    //glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+    //currentCamera->setMatrix(glm::lookAt(eye, center, up));
 }
 
 /**
@@ -675,6 +714,7 @@ void Engine::free()
 * depth-sorting (back to front) method for transparent meshes
 * @param two list element to compare
 */
+//TODO:: GREG GUARDA CHE ESISTE LO STENCIL BUFFER PER QUESTO, GUARDA LE SLIDE
 bool listNodeCompare(Node*a, Node *b)
 {
 	glm::mat4 first = currentCamera->getMatrix() * a->getMatrix();

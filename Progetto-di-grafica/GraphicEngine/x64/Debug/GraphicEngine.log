@@ -1,6 +1,6 @@
 ﻿  Camera.cpp
   Engine.cpp
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(548): warning C4267: '=': conversione da 'size_t' a 'int'. Possibile perdita di dati.
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(393): warning C4267: 'argomento': conversione da 'size_t' a 'int'. Possibile perdita di dati.
   Light.cpp
   List.cpp
   Material.cpp
