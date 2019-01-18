@@ -20,7 +20,12 @@ bool lighting = true;
 Camera* currentCamera = nullptr;
 std::vector<Camera*> cameras;
 int activeCamera = 0;
-
+float totalAngle = 0.f;
+float totalAngleZ = 0.0f;
+float fingerAngles[5];
+//per il pollice
+float angleX;
+std::string fingerNames[5] = { "pollice", "indice","medio","anulare","mignolo" };
 //TODO:: se riusciamo a fare un reserve
 List* toRender = new List();
 List *trasparentMeshes = new List();
@@ -198,6 +203,16 @@ void LIB_API Engine::timer(void callback(int))
 void LIB_API Engine::keyboard(void(*keyboardCallBack)(unsigned char, int, int))
 {
 	glutKeyboardFunc(keyboardCallBack);
+}
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+void Engine::keyboardUp(void(*keyboardUpCallBack)(unsigned char, int, int))
+{
+	glutKeyboardUpFunc(keyboardUpCallBack);
 }
 /**
  * Comment
@@ -395,28 +410,28 @@ Node* Engine::getScene(const char* name)
 
 	//TODO:: GREG guarda dove puoi spostarlo
 	for (std::vector<Camera*>::iterator it = cameras.begin(); it != cameras.end(); it++)
-		if ((*it)->getMovable()) 
+		if ((*it)->getMovable())
 			setCameraToPalm(root, *it);
 
 	printTree(root, "");
 	return root;
 }
 
- /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
- */
-void Engine::setCameraToPalm(Node* root, Camera * camera) 
+/**
+* Comment
+* @param  name1
+* @param2 name2
+* @return what it returns
+*/
+void Engine::setCameraToPalm(Node* root, Camera * camera)
 {
 	Node* palmo = getNodeByName(root, "palmo");
-	if (palmo != nullptr) 
+	if (palmo != nullptr)
 	{
 		glm::vec3 pos = palmo->getMatrix()[3];
 		glm::vec3 eye = glm::vec3(100, 100, 100);
 		glm::vec3 up = glm::vec3(0, 1, 0);
-  }
+	}
 }
 
 /**
@@ -465,7 +480,7 @@ void  Engine::setRenderList(Node* element)
 		Mesh * mesh = (Mesh *)element;
 		if (mesh->getMaterial() != nullptr && mesh->getMaterial()->isTrasparent())
 		{
-			printf("Aggiungo mesh trasparente %s \n",mesh->getName().c_str());
+			printf("Aggiungo mesh trasparente %s \n", mesh->getName().c_str());
 			trasparentMeshes->add(element);
 		}
 	}
@@ -484,7 +499,7 @@ void  Engine::setRenderList(Node* element)
   * @param2 name2
   * @return what it returns
   */
-//Temporanea per testare trasparenze
+  //Temporanea per testare trasparenze
 void Engine::setLists(Node * root) {
 	setRenderList(root);
 	std::vector<Node*> render = toRender->getList();
@@ -494,7 +509,8 @@ void Engine::setLists(Node * root) {
 }
 void Engine::setLists(Node * root, glm::mat4 reflection)
 {
-	root->setMatrix(reflection);
+	glScalef(1.0, -1.0, 1.0);
+	//root->setMatrix(root->getFinalMatrix()*reflection);
 	Engine::getInstance().setLists(root);
 }
 void Engine::renderList()
@@ -537,26 +553,26 @@ void Engine::incrementFrames()
  * @param2 name2
  * @return what it returns
  */
-void Engine::addCamera(std::string name, bool movable ,glm::vec3 eye, glm::vec3 center, glm::vec3 up)
+void Engine::addCamera(std::string name, bool movable, glm::vec3 eye, glm::vec3 center, glm::vec3 up)
 {
 	currentCamera = new Camera();
 	currentCamera->setName(name);
 	currentCamera->setMatrix(glm::lookAt(eye, center, up));
-    currentCamera->setMovable(movable);
+	currentCamera->setMovable(movable);
 	cameras.push_back(currentCamera);
 	//update
-    activeCamera = cameras.size() - 1;
+	activeCamera = (int)cameras.size() - 1;
 }
 
- /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
- */
-bool LIB_API Engine::isMovableCamera() 
-{ 
-	return currentCamera->getMovable(); 
+/**
+* Comment
+* @param  name1
+* @param2 name2
+* @return what it returns
+*/
+bool LIB_API Engine::isMovableCamera()
+{
+	return currentCamera->getMovable();
 }
 
 /**
@@ -588,7 +604,7 @@ void LIB_API Engine::moveCamera(float direction)
 {
 	glm::mat4 matrix = currentCamera->getMatrix();
 	glm::vec3 axis = direction * matrix[2];
-    axis[2] *= -1; 
+	axis[2] *= -1;
 	currentCamera->setMatrix(glm::translate(matrix, axis));
 }
 
@@ -606,50 +622,61 @@ void Engine::rotateModel(Node * root, float angle) {
 		guardia->setMatrix(guardia->getMatrix()*rotation);
 	}
 }
-//TODO completare, limitare la rotazione e far si che quando mollo spazio faccia la rotazione inversa (se possibile)
-/**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
- */
-void Engine::closeThumb(Node * root)
-{
-	Node* finger = getNodeByName(root, "pollice1");
-	Node* finger2 = getNodeByName(root, "pollice2");
-	//le falangi dovrebbero ruotare anche su un altro asse probabilmente r1*r2 
-	glm::mat4 rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(5.f), glm::vec3(1.0f, 0.0f, 0.0f));
-	glm::mat4 rotationX2 = glm::rotate(glm::mat4(1.0f), glm::radians(5.f), glm::vec3(1.0f, 0.0f, 0.0f));
-	glm::mat4 rotationZ = glm::rotate(rotationX2, glm::radians(5.f), glm::vec3(0.0f, 0.0f, 1.0f));
 
-	finger->setMatrix(finger->getMatrix()*rotationX);
-	finger2->setMatrix(finger2->getMatrix()*rotationX2);
-}
-//TODO completare (settare assi/angoli giusti etc)
+
+
+//TODO completare risolvere l'errore nel pollice
 /**
  * Comment
  * @param  name1
  * @param2 name2
  * @return what it returns
  */
-void Engine::closeFinger(Node * root, std::string name)
-{
+void Engine::closeFinger(Node * root, int i, float  angle)
+{	
+	std::string name = fingerNames[i];
 	name.append("1");
 	Node* finger = getNodeByName(root, name);
 	name = name.substr(0, name.size() - 1);
 	name.append("2");
 	Node* finger1 = getNodeByName(root, name);
-	name = name.substr(0, name.size() - 1);
-	name.append("3");
-	Node* finger2 = getNodeByName(root, name);
-
-	glm::mat4 rotationFinger = glm::rotate(glm::mat4(1.0f), glm::radians(5.f), glm::vec3(0.0f, 0.0f, -1.0f));
-	glm::mat4 rotationFinger1 = glm::rotate(glm::mat4(1.0f), glm::radians(5.f), glm::vec3(0.0f, 0.0f, -1.0f));
-	glm::mat4 rotationFinger2 = glm::rotate(glm::mat4(1.0f), glm::radians(5.f), glm::vec3(0.0f, 0.0f, -1.0f));
-
-	finger->setMatrix(finger->getMatrix()*rotationFinger);
-	finger1->setMatrix(finger1->getMatrix()*rotationFinger1);
-	finger2->setMatrix(finger2->getMatrix()*rotationFinger2);
+	Node* finger2 = nullptr;
+	if (i > 0) {
+		//non pollice
+		name = name.substr(0, name.size() - 1);
+		name.append("3");
+		Node* finger2 = getNodeByName(root, name);
+	}
+	glm::mat4 rotationZ;
+	//così non ruota le altre dita
+	glm::mat4 rotationX(1.0f);
+	//reset position
+	if (angle < 0) {
+		printf("Moving the hand back of %lf\n", -fingerAngles[i]);
+		rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(-fingerAngles[i]), glm::vec3(0.0f, 0.0f, -1.0f));
+		fingerAngles[i] = 0;
+		if (i == 0) {
+			printf("Resetting thumb. Current angleX %lf \n", angleX);
+			rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(-angleX), glm::vec3(1.0f, 0.0f, 0.0f));
+			angleX = 0;
+		};
+	}//close the finger
+	else {
+		//bug nel pollice
+		if (fingerAngles[i] < 75 && angleX < 35) {
+			rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 0.0f, -1.0f));
+			if (i == 0) {
+			//pollice
+				rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(1.0f, 0.0f, 0.0f));
+				angleX += angle;
+			}
+			fingerAngles[i] += angle;
+		}
+	}
+	finger->setMatrix(finger->getMatrix()*rotationZ*rotationX);
+	finger1->setMatrix(finger1->getMatrix()*rotationZ*rotationX);
+	if(finger2!=nullptr)
+	finger2->setMatrix(finger2->getMatrix()*rotationZ);
 }
 /**
  * Comment
@@ -657,13 +684,13 @@ void Engine::closeFinger(Node * root, std::string name)
  * @param2 name2
  * @return what it returns
  */
-void Engine::closeHand(Node * root)
+void Engine::closeHand(Node * root, float  angle)
 {
-	closeThumb(root);
-	closeFinger(root, "indice");
-	closeFinger(root, "medio");
-	closeFinger(root, "anulare");
-	closeFinger(root, "mignolo");
+		closeFinger(root,0, angle);
+		closeFinger(root, 1, angle);
+		closeFinger(root, 2, angle);
+		closeFinger(root, 3, angle);
+		closeFinger(root, 4, angle);
 }
 
 void Engine::free()
@@ -690,18 +717,18 @@ void Engine::sortTrasparentMeshesList(std::vector<Node*> transparentMeshes)
 {
 	glDepthMask(GL_FALSE);
 	//gli passo un comparator
-    std::sort(transparentMeshes.begin(), transparentMeshes.end(), listNodeCompare);
+	std::sort(transparentMeshes.begin(), transparentMeshes.end(), listNodeCompare);
 	glDepthMask(GL_TRUE);
 }
-//setta valore alpha ad un nodo specifico -> da eliminare
+//setta valore alpha ad un nodo specifico
 void Engine::setAlphaToMaterial(Node * root, float alpha, std::string nodeName)
 {
-		Node* node = getNodeByName(root, nodeName);
-		if (node != nullptr)
-		{
-			Mesh* mesh = (Mesh*)node;
-			mesh->getMaterial()->setAlpha(alpha);
-		}
+	Node* node = getNodeByName(root, nodeName);
+	if (node != nullptr)
+	{
+		Mesh* mesh = (Mesh*)node;
+		mesh->getMaterial()->setAlpha(alpha);
+	}
 }
 /**
 * support method for transparent render
@@ -709,6 +736,8 @@ void Engine::setAlphaToMaterial(Node * root, float alpha, std::string nodeName)
 */
 void Engine::transparentPreRender(Material *material, glm::mat4 renderMatrix)
 {
+	glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
+
 	glEnable(GL_CULL_FACE);
 	glDepthMask(GL_FALSE);
 	// At first render back faces

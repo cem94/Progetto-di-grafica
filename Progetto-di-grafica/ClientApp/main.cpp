@@ -10,6 +10,13 @@ glm::mat4 perspective;
 glm::mat4 ortho;
 Node* scene = NULL;
 bool rotating = false;
+float angle = 0.0f;
+#define BUTTON_UP   0
+#define BUTTON_DOWN 1
+
+unsigned char keyState[255];
+unsigned char mouseState[3];
+
 // Cameras
 /*Camera* currentCamera = nullptr;
 std::vector<Camera*> cameras;
@@ -66,38 +73,22 @@ void reshapeCallback(int width, int height)
  */
 void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 {
+	keyState[key] = BUTTON_DOWN;
 	switch (key)
 	{
 	case '1':
 		engine->enableLight(scene, "fix_light");
 		break;
 	case '2':
-		engine->enableLight(scene, "back_light");
+		engine->enableLight(scene, "Omni1");
 		break;
 	case '3':
-		engine->enableLight(scene, "front_light");
+		engine->enableLight(scene, "Omni2");
 		break;
-		//pollice
-	case ' ':
-		engine->closeThumb(scene);
+	case '4':
+		engine->enableLight(scene, "Omni3");
 		break;
 		//indice
-	case 'f':
-		engine->closeFinger(scene, "indice");
-		break;
-		//medio
-	case 'e':
-		engine->closeFinger(scene, "medio");
-		break;
-		//anulare
-	case 'w':
-		engine->closeFinger(scene, "anulare");
-		break;
-		//mignolo
-	case 'a':
-		engine->closeFinger(scene, "mignolo");
-		break;
-		//muovi mano
 	case 'r':
 		engine->rotateModel(scene, 1);
 		break;
@@ -107,14 +98,65 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 		break;
 		//cambia camera corrente
 	case 'c':
-	engine->changeCamera();
-		break;
-		//close hand
-	case 'h':
-		engine->closeHand(scene);
+		engine->changeCamera();
 		break;
 	}
+	//Controlli mano
+
+	if (keyState[(unsigned char)'h'] == BUTTON_DOWN) 
+	{
+			engine->closeHand(scene, 5.f);	
+	}
+	else if (keyState[(unsigned char)' '] == BUTTON_DOWN) {
+		engine->closeFinger(scene, 0, 5.f);
+	}
+	else if (keyState[(unsigned char)'f'] == BUTTON_DOWN)
+	{
+		engine->closeFinger(scene, 1,5.f);
+	}
+	else if (keyState[(unsigned char)'e'] == BUTTON_DOWN)
+	{
+		engine->closeFinger(scene, 2, 5.f);
+	}
+	else if (keyState[(unsigned char)'w'] == BUTTON_DOWN)
+	{
+		engine->closeFinger(scene, 3, 5.f);
+	}
+	else if (keyState[(unsigned char)'a'] == BUTTON_DOWN)
+	{
+		engine->closeFinger(scene, 4, 5.f);
+	}
 	engine->redisplay();
+}
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+
+void keyboardUpCallback(unsigned char key, int x, int y)
+{
+	keyState[key] = BUTTON_UP;
+	if (keyState[(unsigned char)'h'] == BUTTON_UP) {
+		printf("Up\n");
+		engine->closeHand(scene, -1.f);
+		}
+	else if (keyState[(unsigned char)' '] == BUTTON_UP) {
+		engine->closeFinger(scene,0, -1.f);
+	}
+	else if (keyState[(unsigned char)'f'] == BUTTON_UP) {
+		engine->closeFinger(scene,1, -1.f);
+	}
+	else if (keyState[(unsigned char)'e'] == BUTTON_UP) {
+		engine->closeFinger(scene, 2, -1.f);
+	}
+	else if (keyState[(unsigned char)'w'] == BUTTON_UP) {
+		engine->closeFinger(scene, 3, -1.f);
+	}
+	else if (keyState[(unsigned char)'a'] == BUTTON_UP) {
+		engine->closeFinger(scene, 4, -1.f);
+	}
 }
 /**
  * Comment
@@ -193,6 +235,7 @@ void setCallBacks()
 	engine->display(displayCallback);
 	engine->reshape(reshapeCallback);
 	engine->keyboard(keyboardCallback);
+	engine->keyboardUp(keyboardUpCallback);
 	engine->specialKeyboard(specialCallback);
 	engine->mouseWheel(mouseWheel);
 	//eliminare se non lo usiamo
@@ -203,7 +246,7 @@ void setCallBacks()
 //TODO cem lo zoom funziona solo con x = 0 y = 0
 void setCameras() {
 	// dove si trova la camera
-	glm::vec3 eye = glm::vec3(400.f, 400.f, 400.f);
+	glm::vec3 eye = glm::vec3(0.f, 50.f, 400.f);
 	// verso dove guarda
 	glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
 	// dove è il sopra
@@ -212,7 +255,7 @@ void setCameras() {
     eye = glm::vec3(-400.f, 400.f, 400.f);
     Engine::getInstance().addCamera("2", false, eye, center, up);
 	//si direbbe che renderizza prima l'ultima che gli passi quindi questa è la camera 1
-    eye = glm::vec3(150.f, 40.f, 400.f);
+    eye = glm::vec3(0.f, 50.f, 400.f);
 	Engine::getInstance().addCamera("1", true, eye, center, up);
 }
 
@@ -239,9 +282,9 @@ int main(int argc, char* argv[])
 	engine->setLists(scene);
 	//TRASPARENZE per ora non funzionano -> da completare
 
-	//engine->setAlphaToMaterial(scene, 0.9f, "plane");
-	//glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
-	//engine->setLists(scene,reflection);	
+	engine->setAlphaToMaterial(scene, 0.1f, "plane");
+	glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
+	engine->setLists(scene,reflection);	
 	engine->startLoop();
 	// free memory
 	//engine->free();

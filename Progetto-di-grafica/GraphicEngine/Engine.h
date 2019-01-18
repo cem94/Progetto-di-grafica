@@ -61,6 +61,7 @@ class LIB_API Engine {
   void display(void (*displayCallback)());
   void timer(void callback(int));
   void keyboard(void (*keyboardCallBack)(unsigned char, int, int));
+  void keyboardUp(void (*keyboardCallBack)(unsigned char, int, int));
   void specialKeyboard(void (*specialFunc)(int, int, int));
   void setViewport(int x, int y, int width, int height);
   void clearBuffers();
@@ -85,9 +86,8 @@ class LIB_API Engine {
   void renderList();
   void incrementFrames();
   void rotateModel(Node* root, float angle);
-  void closeThumb(Node* root);
-  void closeFinger(Node* root, std::string name);
-  void closeHand(Node* root);
+  void closeFinger(Node* root, int finger, float angle);
+  void closeHand(Node* root, float angle);
   void free();
   void transparentPreRender(Material* material, glm::mat4 renderMatrix);
   void sortTrasparentMeshesList(std::vector<Node*> transparentMeshes);
