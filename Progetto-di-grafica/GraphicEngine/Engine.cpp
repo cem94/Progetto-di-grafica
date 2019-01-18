@@ -668,8 +668,48 @@ void Engine::rotateModel(Node * root, float angle) {
 		guardia->setMatrix(guardia->getMatrix()*rotation);
 	}
 }
-
-
+void rotateX(float angle,Node *finger, Node *finger1) {
+	glm::mat4 rotationX;
+	if (angle < 0) {
+		//rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(-fingerAngles[0]), glm::vec3(0.0f, 0.0f, -1.0f));
+		 rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(-angleX), glm::vec3(1.0f, 0.0f, 0.0f));
+		angleX = 0;
+		finger->setMatrix(finger->getMatrix()*rotationX);
+		finger1->setMatrix(finger1->getMatrix()*rotationX);
+	}
+	else {
+		//rotazione massima in x
+		if (angleX < 30.f) {
+			rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(1.0f, 0.0f, 0.0f));
+			//oppure: rotationX = glm::rotate(rotationZ, glm::radians(-angleX), glm::vec3(1.0f, 0.0f, 0.0f));
+			//incremento angoloX
+			angleX += angle;
+		}
+		finger->setMatrix(finger->getMatrix()*rotationX);
+		finger1->setMatrix(finger1->getMatrix()*rotationX);
+	}
+}
+void rotateZ(float angle, Node *finger, Node* finger1) {
+	glm::mat4 rotationZ;
+	if (angle < 0) {
+		//rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(-fingerAngles[0]), glm::vec3(0.0f, 0.0f, -1.0f));
+		rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(-fingerAngles[0]), glm::vec3(1.0f, 0.0f, 0.0f));
+		fingerAngles[0]= 0;
+		finger->setMatrix(finger->getMatrix()*rotationZ);
+		finger1->setMatrix(finger1->getMatrix()*rotationZ);
+	}
+	else {
+		//rotazione massima in x
+		if (fingerAngles[0] < 50.f) {
+			rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(1.0f, 0.0f, 0.0f));
+			//oppure: rotationX = glm::rotate(rotationZ, glm::radians(-angleX), glm::vec3(1.0f, 0.0f, 0.0f));
+			//incremento angoloX
+			fingerAngles[0] += angle;
+		}
+		finger->setMatrix(finger->getMatrix()*rotationZ);
+		finger1->setMatrix(finger1->getMatrix()*rotationZ);
+	}
+}
 void Engine::closeThumb(Node *root, float angle) {
 
 	std::string name = fingerNames[0];
@@ -678,36 +718,9 @@ void Engine::closeThumb(Node *root, float angle) {
 	name = name.substr(0, name.size() - 1);
 	name.append("2");
 	Node* finger1 = getNodeByName(root, name);
-	glm::mat4 rotationX(1.0f);
-	glm::mat4 rotationZ(1.0f);
 	//se l'angolo è negativo resetto ruotando di meno l'angolo precedente
-	if (angle < 0) {
-			rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(-fingerAngles[0]), glm::vec3(0.0f, 0.0f, -1.0f));
-			rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(-angleX), glm::vec3(1.0f, 0.0f, 0.0f));
-			//oppure: rotationX = glm::rotate(rotationZ, glm::radians(-angleX), glm::vec3(1.0f, 0.0f, 0.0f));
-			angleX = 0;
-			fingerAngles[0] = 0;
-			finger->setMatrix(finger->getMatrix()*rotationX*rotationZ);
-			finger1->setMatrix(finger1->getMatrix()*rotationX*rotationZ);
-	}
-	else {
-		//rotazione massima in z
-		if (fingerAngles[0] < 50.f) {
-			rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 0.0f, -1.0f));
-			//incremento angolo z
-			fingerAngles[0] += angle;
-		}
-		//rotazione massima in x
-			if (angleX < 30.f) {
-				rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(1.0f, 0.0f, 0.0f));
-				//oppure: rotationX = glm::rotate(rotationZ, glm::radians(-angleX), glm::vec3(1.0f, 0.0f, 0.0f));
-				//incremento angoloX
-				angleX += angle;
-			
-			}
-			finger->setMatrix(finger->getMatrix()*rotationX*rotationZ);
-			finger1->setMatrix(finger1->getMatrix()*rotationX*rotationZ);
-	}
+	rotateX(angle, finger, finger1);
+	rotateZ(angle, finger, finger1);	
 }
 //TODO completare risolvere l'errore nel pollice
 /**
