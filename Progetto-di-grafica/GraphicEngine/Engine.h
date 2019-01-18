@@ -89,6 +89,7 @@ class LIB_API Engine {
   void renderList();
   void incrementFrames();
   void rotateModel(Node* root, float angle);
+  void closeThumb(Node *root,float angle);
   void closeFinger(Node* root, int finger, float angle);
   void closeHand(Node* root, float angle);
   void free();
