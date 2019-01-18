@@ -27,8 +27,9 @@ float fingerAngles[5];
 float angleX;
 std::string fingerNames[5] = { "pollice", "indice","medio","anulare","mignolo" };
 //TODO:: se riusciamo a fare un reserve
-List* toRender;
-List *trasparentMeshes;
+List* toRender = new List();
+;
+List *trasparentMeshes = new List();
 //istanza statica definita in Engine.h
 Engine* Engine::instance = nullptr;
 /**
@@ -507,7 +508,7 @@ void  Engine::setRenderList(Node* element)
   */
   //Temporanea per testare trasparenze
 void Engine::setLists(Node * root) {
-	toRender = new List();
+	//toRender = new List();
 	setRenderList(root);
 	std::vector<Node*> render = toRender->getList();
 	std::vector<Node*> transparent = toRender->getList();
