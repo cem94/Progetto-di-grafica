@@ -27,8 +27,8 @@ float fingerAngles[5];
 float angleX;
 std::string fingerNames[5] = { "pollice", "indice","medio","anulare","mignolo" };
 //TODO:: se riusciamo a fare un reserve
-List* toRender = new List();
-List *trasparentMeshes = new List();
+List* toRender;
+List *trasparentMeshes;
 //istanza statica definita in Engine.h
 Engine* Engine::instance = nullptr;
 /**
@@ -56,32 +56,44 @@ Engine & Engine::getInstance()
  */
 void LIB_API Engine::init(int argc, char* argv[])
 {
+	freeImageInitialize();
 	std::cout << "The engine starts" << std::endl;
+    // setto opzioni finestra
+    glutInitWindowSize(1920, 1080);
+    glutInitWindowPosition(0, 0);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-	// setto opzioni finestra
-	glutInitWindowPosition(0, 0);
-	glutInitWindowSize(1920, 1080);
+
 	glutInit(&argc, argv);
+
 	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
+
 	// creo finestra
 	windowId = glutCreateWindow("Engine");
+
+	//COSA SONO QUESTE DUE COSE ?????
 	glewExperimental = GL_TRUE;  // Optional, but recommended
 	//glLightModelf(GL_LIGHT_MODEL_LOCAL_VIEWER, 1.0f);
 	glEnable(GL_NORMALIZE);
+
 	// Init di glew
 	GLenum err = glewInit();
 	if (err != GLEW_OK) {
 		// Error loading GLEW
 		printf("Error loading GLEW\n");
 	}
-	if (!glewIsSupported("GL_VERSION_2_1")) {
+	else if (!glewIsSupported("GL_VERSION_2_1")) {
 		// Required OpenGL version not supported
 		printf("Required OpenGL version not supported\n");
 	}
+
+	//TODO:: GREG serie 7 riga 579, il sore fa:
+	// glGenTextures(1, &texId);   
+	// buildTexture(false);
+	// a cosa server avere un id per le texture??
+
 	enableLighting(true);
 	glEnable(GL_LIGHT0);
 	enableZbuffer();
-	freeImageInitialize();
 }
 /**
  * Comment
@@ -204,16 +216,7 @@ void LIB_API Engine::keyboard(void(*keyboardCallBack)(unsigned char, int, int))
 {
 	glutKeyboardFunc(keyboardCallBack);
 }
-/**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
- */
-void Engine::keyboardUp(void(*keyboardUpCallBack)(unsigned char, int, int))
-{
-	glutKeyboardUpFunc(keyboardUpCallBack);
-}
+
 /**
  * Comment
  * @param  name1
@@ -405,8 +408,6 @@ Node* Engine::getScene(const char* name)
 {
 	std::vector<Node*> nodes = OvoReader::readOVOfile(name);
 
-	toRender->reserve((int)nodes.size());
-
 	Node* root = nodes.at(0);
 	nodes.erase(nodes.begin());
 	
@@ -478,10 +479,7 @@ Node* Engine::getNodeByName(Node* root, std::string name)
  */
 void  Engine::setRenderList(Node* element)
 {
-	if (element->getType() != Object::Type::CAMERA)
-		toRender->add(element);
-	else if (currentCamera->getMovable())
-		toRender->add(currentCamera);
+	toRender->add(element);
 
 	std::vector<Node*> children = element->getChildren();
 
@@ -509,6 +507,7 @@ void  Engine::setRenderList(Node* element)
   */
   //Temporanea per testare trasparenze
 void Engine::setLists(Node * root) {
+	toRender = new List();
 	setRenderList(root);
 	std::vector<Node*> render = toRender->getList();
 	std::vector<Node*> transparent = toRender->getList();
@@ -592,21 +591,21 @@ bool LIB_API Engine::isMovableCamera()
 	return currentCamera->getMovable();
 }
 
-void Engine::moveCameraX(float direction) 
+void LIB_API Engine::moveCameraX(float direction) 
 {
 	glm::mat4 matrix = currentCamera->getMatrix();
 	glm::vec3 mov = direction * glm::vec3(5.0f, 0.0f, 0.0f);
 	currentCamera->setMatrix(glm::translate(matrix, mov));
 }
 
-void Engine::moveCameraY(float direction) 
+void LIB_API Engine::moveCameraY(float direction) 
 {
 	glm::mat4 matrix = currentCamera->getMatrix();
 	glm::vec3 mov = direction * glm::vec3(0.0f, 5.0f, 0.0f);
 	currentCamera->setMatrix(glm::translate(matrix, mov));
 }
 
-void Engine::moveCameraZ(float direction) 
+void LIB_API Engine::moveCameraZ(float direction) 
 {
 	glm::mat4 matrix = currentCamera->getMatrix();
 	glm::vec3 mov = direction * glm::vec3(0.0f, 0.0f, 5.0f);

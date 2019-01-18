@@ -239,7 +239,7 @@ void setCallBacks()
 	engine->display(displayCallback);
 	engine->reshape(reshapeCallback);
 	engine->keyboard(keyboardCallback);
-	engine->keyboardUp(keyboardUpCallback);
+	//engine->keyboardUp(keyboardUpCallback);
 	engine->specialKeyboard(specialCallback);
 	engine->mouseWheel(mouseWheel);
 	//eliminare se non lo usiamo
@@ -251,7 +251,7 @@ void setCameras() {
 	// dove si trova la camera
 	glm::vec3 eye = glm::vec3(0.f, 50.f, 400.f);
 	// verso dove guarda
-	glm::vec3 center = glm::vec3(0.0f, -30.0f, 0.0f);
+	glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
 	// dove è il sopra
 	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
 	engine->addCamera("3", false, eye, center, up);
@@ -286,8 +286,12 @@ int main(int argc, char* argv[])
 	//TRASPARENZE per ora non funzionano -> da completare
 	engine->setAlphaToMaterial(scene, 0.9f, "plane");
 	//TODO:: GREG GUARDA SULLE SLIDE C'È SCRITTO COME FARE -> (1.0f, 0.0f, 1.0f) ->  così è come ha fatto Gatto io non so come usare quella matrice. Se sai come farlo fallo tu pf
+	
 	glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
 	engine->setLists(scene,reflection);	
+	
 	engine->startLoop();
+
+	//TODO:: FreeImage_DeInitialise
 	std::cout << "Application terminated" << std::endl;
 }
