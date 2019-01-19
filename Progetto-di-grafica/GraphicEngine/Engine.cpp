@@ -85,7 +85,7 @@ void LIB_API Engine::init(int argc, char* argv[])
 	enableLighting(true);
 	glEnable(GL_LIGHT0);
 	// abilita la trasparenza
-	// TODO:: GREG ho visto che abilitano questo su internet, è giusto? NO NOI NON FACCIAMO BLENDING MA ALPHA TESTING
+	// TODO:: GREG ho visto che abilitano questo su internet, è giusto? lo fa già activate transparencies
    // glEnable(GL_BLEND);
 	// (A * S) + (B * D)
    // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -497,10 +497,18 @@ void  LIB_API Engine::setRenderList(Node* element)
 	for (Node * n : children)
 		setRenderList(n);
 }
-
-//TODO Cem ho notato che gli elementi del render sono 45 probabilmente uno è una camera (non credo sia un problema)
-//Mi chiedo non dovremmo copiare la lista da renderizzare settarli tutti ad alpha e con la matrice di riflessione? 
-//Perché gatto setta solo il piano? così non vedo il senso di fare un sort è uno solo l'elemento trasparente
+void setAlpha(float value, std::vector<Node*>& nodes) {
+//glm::mat4 reflection = 	glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
+	for (std::vector<Node*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
+	{
+		if ((*it)->getType() == Node::Type::MESH) {
+			Mesh* m = (Mesh*)(*it);
+			m->getMaterial()->setAlpha(value);
+		}
+		//(*it)->setMatrix((*it)->getMatrix()*reflection);
+		}
+}
+//TODO Cem guarda se riesci a far si che i riflessi vengano renderizzati al posto giusto usando reflection ora sono sovrapposti
  /**
   * Set render and trasparent lists
   * @param  root scene graph
@@ -509,14 +517,16 @@ void  Engine::setLists(Node * root) {
 	//toRender = new List();
 	//set render and trasparent lists
 	setRenderList(root);
-	printf("We have %d elements to render and %d transparent elements\n",toRender->size(), trasparentMeshes->size());
 	glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
-	std::vector<Node*> render = toRender->getList();
-	std::vector<Node*> transparent = trasparentMeshes->getList();
-	Node* plane = transparent[0];
-	//plane->setMatrix(plane->getFinalMatrix()*reflection);	//set reflection LASCIO COMMENTATO SE NO RIFLETTE MALE
-	sortTrasparentMeshesList(transparent);
-	toRender->insert(transparent);
+	std::vector<Node*> copy = toRender->getList();
+	//setto il materiale come trasparente
+	setAlpha(0.7, copy);
+	//ordino la lista
+	sortTrasparentMeshesList(copy);
+	//e la inserisco nelle mesh trasparenti
+	trasparentMeshes->insert(copy);
+	printf("We have %d elements to render and %d transparent elements\n", toRender->size(), trasparentMeshes->size());
+	toRender->insert(trasparentMeshes->getList());
 }
 
 /**
@@ -527,9 +537,8 @@ void LIB_API Engine::renderList() {
 	for (Node* n : render)
 	{
 		glm::mat4 renderMatrix = n->getFinalMatrix();
-		Object::Type type = n->getType();
 
-		if (type == Object::Type::MESH)
+		if (n->getType() == Object::Type::MESH)
 		{
 			Mesh* m = static_cast<Mesh*>(n);
 			if (m->getMaterial() != nullptr)
@@ -663,39 +672,33 @@ void LIB_API Engine::closeThumb(Node *root, float angle) {
 	//ottengo falangi
    	std::string name = fingerNames[0];
 	name.append("1");
+	//usare padre
 	Node* phalanx1 = getNodeByName(root, name);
 	name = name.substr(0, name.size() - 1);
 	name.append("2");
 	Node* phalanx2 = getNodeByName(root, name);
-	glm::mat4 rotationX;
-	glm::mat4 rotationY;
+	glm::mat4 rotation;
 	//ruota in x e in y
 	if (angle < 0) {
 		//resetto posizione iniziale
-		rotationX= glm::rotate(glm::mat4(1.0f), glm::radians(angleX), glm::vec3(-1.0f, 0.0f, 0.0f));
-		rotationY= glm::rotate(glm::mat4(1.0f), glm::radians(fingerAngles[0]), glm::vec3(0.0f, 1.0f, 0.0f));
+		rotation = glm::rotate(glm::mat4(), glm::radians(angleX), glm::vec3(-1.0f, 1.0f, 0.0f));
 		fingerAngles[0] = 0;//l'angolo in y
 		angleX = 0;
 	}
 	else {
 		//muovo le dita in avanti di angle in x  y 
-	
-		if (fingerAngles[0] < 90.f) {
-			rotationY = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, -1.0f, 0.0f));
+		if (fingerAngles[0] < 40.f) {
+			rotation = glm::rotate(glm::mat4(), glm::radians(angle), glm::vec3(1.0f, -1.0f, 0.0f));
 			fingerAngles[0] += angle;//l'angolo in y
-
 			if (angleX < 25.f) {
 				//angolo in x
-				rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(1.0f, 0.0f, 0.0f));
 				angleX += angle;
 			}
 		}
 	}
-	phalanx1->setMatrix(phalanx1->getMatrix()*rotationY);//*rotationX
-	phalanx2->setMatrix(phalanx2->getMatrix()*rotationY);
+	phalanx1->setMatrix(phalanx1->getMatrix()*rotation);
+	phalanx2->setMatrix(phalanx2->getMatrix()*rotation);
 	printf("AngleX %lf AngleY %lf\n", angleX, fingerAngles[0]);
-
-	//setto matrici
 }
 
 
@@ -795,7 +798,7 @@ bool listNodeCompare(Node*a, Node *b)
 * sorts the trasparent meshes list
 * @param list of transparent meshes
 */
-void LIB_API Engine::sortTrasparentMeshesList(std::vector<Node*> transparentMeshes)
+void LIB_API Engine::sortTrasparentMeshesList(std::vector<Node*> &transparentMeshes)
 {
 	glDepthMask(GL_FALSE);
 	//gli passo un comparator
@@ -818,7 +821,6 @@ void LIB_API Engine::setAlphaToMaterial(Node * root, float alpha, std::string no
 */
 void LIB_API Engine::transparentPreRender(Material *material, glm::mat4 renderMatrix)
 {
-	glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
 
 	glEnable(GL_CULL_FACE);
 	glDepthMask(GL_FALSE);

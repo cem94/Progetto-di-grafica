@@ -334,9 +334,6 @@ int main(int argc, char* argv[]) {
   scene = engine->getScene(fileName);
   engine->setAlphaToMaterial(scene, 0.9f, "plane");
   engine->setLists(scene);
-  // TRASPARENZE per ora non funzionano -> da completare
-  engine->setAlphaToMaterial(scene, 0.9f, "plane");
-
   sizeX = engine->getWindowSizeX();
   sizeY = engine->getWindowSizeY();
   //
