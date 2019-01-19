@@ -569,7 +569,7 @@ void LIB_API Engine::addCamera(std::string name, bool movable, glm::vec3 eye, gl
 	camera->setMovable(movable);
 	camera->setType(Object::Type::CAMERA);
 
-	camera->setMatrix(glm::lookAt(eye, center, up));
+	camera->setVec(eye, center, up);
     cameras.push_back(camera);
 	// update
 	currentCamera = camera;
@@ -587,42 +587,76 @@ bool LIB_API Engine::isMovableCamera()
 
 void LIB_API Engine::moveCameraRight(float direction)
 {
-	glm::mat4 matrix = currentCamera->getMatrix();
-	glm::vec3 mov = direction * 5.0f * matrix[0];
-	currentCamera->setMatrix(glm::translate(matrix, mov));
+	/*	old version
+        glm::mat4 matrix = currentCamera->getMatrix();
+        glm::vec3 mov = direction * 5.0f * matrix[0];
+        currentCamera->setMatrix(glm::translate(matrix, mov));
+	*/
+
+	glm::vec3 mov = direction * currentCamera->getMatrix()[0];
+	glm::vec3 eye = currentCamera->getEye() + mov;
+	glm::vec3 center = currentCamera->getCenter() + mov;
+	currentCamera->setVec(eye, center, currentCamera->getUp());
+
 }
 
 void LIB_API Engine::moveCameraUp(float direction)
 {
-	glm::mat4 matrix = currentCamera->getMatrix();
-	glm::vec3 mov = direction* 5.0f * matrix[1];
-	currentCamera->setMatrix(glm::translate(matrix, mov));
+	/*
+        glm::mat4 matrix = currentCamera->getMatrix();
+		glm::vec3 mov = direction* 5.0f * matrix[1];
+		currentCamera->setMatrix(glm::translate(matrix, mov));
+	*/
+
+	glm::vec3 mov = direction * currentCamera->getMatrix()[1];
+	glm::vec3 eye = currentCamera->getEye() + mov;
+	glm::vec3 center = currentCamera->getCenter() + mov;
+	currentCamera->setVec(eye, center, currentCamera->getUp());
 }
 
 void LIB_API Engine::moveCameraForward(float direction) 
 {
-	glm::mat4 matrix = currentCamera->getMatrix();
-	glm::vec3 mov = direction * 5.0f * matrix[2];
-	currentCamera->setMatrix(glm::translate(matrix, mov));
+	/*	old version
+        glm::mat4 matrix = currentCamera->getMatrix();
+		glm::vec3 mov = direction * 5.0f * matrix[2];
+		currentCamera->setMatrix(glm::translate(matrix, mov));
+	*/
+
+	glm::vec3 mov = direction * currentCamera->getMatrix()[2];
+    glm::vec3 eye = currentCamera->getEye() + mov;
+    glm::vec3 center = currentCamera->getCenter() + mov;
+	currentCamera->setVec(eye, center, currentCamera->getUp());
 }
 
 
 void LIB_API Engine::rotateCameraRight(float angle) 
 {
 	std::cout << "angle: " << angle << std::endl;
-	glm::mat4 mat = currentCamera->getMatrix();
-	glm::vec3 vec = mat[1];
-	glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), vec);
-    currentCamera->setMatrix(mat * rotation);
+	/*	old version
+		glm::mat4 mat = currentCamera->getMatrix();
+        glm::vec3 vec = mat[1];
+        glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), vec);
+		currentCamera->setMatrix(mat * rotation);
+	*/
+    glm::vec3 center = currentCamera->getCenter();
+	glm::vec3 mov = 500 * sin(angle) * currentCamera->getMatrix()[0];
+    center += mov;
+    currentCamera->setVec(currentCamera->getEye(), center, currentCamera->getUp());
 }
 
 void LIB_API Engine::rotateCameraUp(float angle) 
 { 
 	std::cout << "angle: " << angle << std::endl;
-	glm::mat4 mat = currentCamera->getMatrix();
-    glm::vec3 vec = mat[0];
-    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle),vec);
-	currentCamera->setMatrix(mat * rotation);
+	/*
+		glm::mat4 mat = currentCamera->getMatrix();
+		glm::vec3 vec = mat[0];
+		glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle),vec);
+		currentCamera->setMatrix(mat * rotation);
+	*/
+	glm::vec3 center = currentCamera->getCenter();
+	glm::vec3 mov = 50 * sin(angle) * currentCamera->getMatrix()[1];
+    center += mov;
+	currentCamera->setVec(currentCamera->getEye(), center, currentCamera->getUp());
 }
 
  /**

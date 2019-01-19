@@ -30,7 +30,8 @@ void displayCallback()
   engine->setProjectionMatrix(perspective);
   // 3d rendering//
   engine->renderList();
-  if (rotating) engine->autoRotateModel(scene, -1.0f);
+  if (rotating) 
+	  engine->autoRotateModel(scene, -1.0f);
   // 2D rendering//
   engine->setProjectionMatrix(ortho);
   engine->loadIdentity();
@@ -135,32 +136,32 @@ void keyboardUpCallback(unsigned char key, int x, int y)
   switch (key) {
     case 'h':
       if (keyState[(unsigned char)'h'] == false) {
-        engine->closeHand(scene, -1.f);
+        engine->closeHand(scene, -0.001f);
       }
       break;
     case ' ':
       if (keyState[(unsigned char)' '] == false) {
-        engine->closeThumb(scene, -1.f);
+        engine->closeThumb(scene, -0.001f);
       }
       break;
     case 'f':
       if (keyState[(unsigned char)'f'] == false) {
-        engine->closeFinger(scene, 1, -1.f);
+        engine->closeFinger(scene, 1, -0.001f);
       }
       break;
     case 'e':
       if (keyState[(unsigned char)'e'] == false) {
-        engine->closeFinger(scene, 2, -1.f);
+        engine->closeFinger(scene, 2, -0.001f);
       }
       break;
     case 'w':
       if (keyState[(unsigned char)'w'] == false) {
-        engine->closeFinger(scene, 3, -1.f);
+        engine->closeFinger(scene, 3, -0.001f);
       }
       break;
     case 'a':
       if (keyState[(unsigned char)'a'] == false) {
-        engine->closeFinger(scene, 4, -1.f);
+        engine->closeFinger(scene, 4, -0.001f);
       }
       break;
   }
@@ -179,16 +180,16 @@ void specialCallback(int key, int x, int y)
   if (!engine->isMovableCamera()) return;
   switch (key) {
     case GLUT_KEY_DOWN:
-      engine->moveCameraForward(-1.0f);
+      engine->moveCameraForward(5.0f);
       break;
     case GLUT_KEY_UP:
-      engine->moveCameraForward(1.0f);
+      engine->moveCameraForward(-5.0f);
       break;
     case GLUT_KEY_LEFT:
-      engine->moveCameraRight(1.0f);
+      engine->moveCameraRight(-5.0f);
       break;
     case GLUT_KEY_RIGHT:
-      engine->moveCameraRight(-1.0f);
+      engine->moveCameraRight(5.0f);
       break;
     default:
       break;
@@ -217,9 +218,9 @@ void mouseWheel(int wheel, int direction, int x, int y)
 	if (!engine->isMovableCamera())
 		return;
 	else if (direction == -1)
-		engine->moveCameraUp(1.0f);
+		engine->moveCameraUp(-3.0f);
 	else if (direction == +1)
-		engine->moveCameraUp(-1.0f);
+		engine->moveCameraUp(3.0f);
 }
 
 /**
@@ -241,22 +242,22 @@ void mouseMoved(int x, int y)
 		return;
 	} else if (x > sizeXMin && x < sizeXMax && y < sizeYMin) {
 		std::cout << "UP" << std::endl;
-		const float angle = (10.0f / sizeYMin) * (sizeYMin - y);
+		const float angle = (90.0f / sizeYMin) * (sizeYMin - y);
 		engine->rotateCameraUp(-angle);
 		// DOWN
 	} else if (x > sizeXMin && x < sizeXMax && y > sizeYMax) {
 		std::cout << "DOWN" << std::endl;
-		const float angle = (10.0f / (sizeY - sizeYMax)) * (y - sizeYMax);
+		const float angle = (90.0f / (sizeY - sizeYMax)) * (y - sizeYMax);
 		engine->rotateCameraUp(angle);
 		// LEFT
 	} else if (y > sizeYMin && y < sizeYMax && x < sizeXMin) {
 		std::cout << "LEFT" << std::endl;
-		const float angle = (10.0f / sizeXMin) * (sizeXMin - x);
+		const float angle = (90.0f / sizeXMin) * (sizeXMin - x);
 		engine->rotateCameraRight(-angle);
 		// RIGHT
 	} else if (y > sizeYMin && y < sizeYMax && x > sizeXMax) {
 		std::cout << "RIGHT" << std::endl;
-		const float angle = (10.0f / (sizeX - sizeXMax)) * (x - sizeXMax);
+		const float angle = (90.0f / (sizeX - sizeXMax)) * (x - sizeXMax);
 		engine->rotateCameraRight(angle);
 	}
 }
@@ -307,8 +308,8 @@ void setCameras()
   // si direbbe che renderizza prima l'ultima che gli passi quindi questa è la
   // camera 1
   // lascialo così se no non vedo la scena
-  eye = glm::vec3(0, 50, 400.f);
-  center = glm::vec3(0.0f, 0.0f, 0.0f);
+  eye = glm::vec3(0.0f, 50.0f, 400.f);
+  center = glm::vec3(0.0f, 50.0f, 200.0f);
   engine->addCamera("1", true, eye, center, up);
 }
 
