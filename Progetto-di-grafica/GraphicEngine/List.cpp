@@ -1,114 +1,92 @@
 #include "Engine.h"
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * List constructor
  */
 List::List()
 {
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
- */
+* List Destructor
+*/
 List::~List()
 {
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Getter for list
+ * @return list
  */
 std::vector<Node*> List::getList() const
 {
-	return this->vector; 
+	return this->list; 
 }
-
 /**
-* Comment
-* @param  name1
-* @param2 name2
-* @return what it returns
-*/
-void List::reserve(int dim) 
-{ 
-	this->vector.reserve(dim); 
-}
-
-/**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Setter for list
+ * @param  list
  */
-void List::setList(std::vector<Node*> vector)
+void List::setList(std::vector<Node*> list)
 {
-	this->vector = vector;
+	this->list = list;
+}
+/**
+* Reserve memory for list
+* @param  size how much we want to reserve
+*/
+void List::reserve(int size) 
+{ 
+	this->list.reserve(size); 
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Add a node to the list
+ * @param  node the node we want to add
  */
-//aggiunge oggetto a lista istanze
 void List::add(Node* node) 
 {
-	this->vector.push_back(node);
+	this->list.push_back(node);
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Removes a node from the list given its position
+ * @param  position
  */
 void List::remove(int position)
 { 
-	vector.erase(vector.begin() + position); 
+	list.erase(list.begin() + position); 
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Return the element at the position passed as an argument or nullptr if out of range
+ * @param  position the position of the desired element
+ * @return if the range is valid it returns the requested node, otherwise it return nullptr
  */
 Node* List::at(int position) 
 {
 	// non vogliamo che lanci un eccezione.
-	if (position < this->vector.size() && position >= 0)
+	if (position < this->list.size() && position >= 0)
 	{
-		return vector.at(position);
+		return list.at(position);
 	}
 	return nullptr;
 }
+
+//TODO remove
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * insert a list of elements at the end of our list
+ * @param  list of elements to add
  */
 void List::insert(std::vector<Node*> elements)
 {
 	if (elements.size() == 0)
 		printf("Nothing to insert\n");
     else
-		vector.insert(vector.end(), elements.begin(), elements.end());
+		list.insert(list.end(), elements.begin(), elements.end());
 }
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Render for list (empty)
+ * @param  renderMatrix render matrix
  */
 void List::render(glm::mat4 renderMatrix)
 {

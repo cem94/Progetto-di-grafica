@@ -1,6 +1,10 @@
 #include "Engine.h"
 
-//legge ovoFile e ritorna una lista di oggetti 
+/**
+ * Read a OVO file and returns a list of node containing OVO file's data
+ * @param  name the filename of the OVO file
+ * @return a list of node containing the scene elements
+ */
 std::vector<Node *> OvoReader::readOVOfile(const char *name)
 {
 	std::vector<Node*> objects;
@@ -503,13 +507,13 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
 			switch ((OvLight::Subtype) subtype)
 			{
 			case OvLight::Subtype::DIRECTIONAL: strcpy_s(subtypeName, "directional");
-				light->setSubType(Light::SubType::DIRECTIONAL);
+				light->setSubtype(Light::Subtype::DIRECTIONAL);
 				break;
 			case OvLight::Subtype::OMNI: strcpy_s(subtypeName, "omni");
-				light->setSubType(Light::SubType::OMNI);
+				light->setSubtype(Light::Subtype::OMNI);
 				break;
 			case OvLight::Subtype::SPOT: strcpy_s(subtypeName, "spot");
-				light->setSubType(Light::SubType::SPOTLIGHT);
+				light->setSubtype(Light::Subtype::SPOTLIGHT);
 				break;
 			default:
 				strcpy_s(subtypeName, "UNDEFINED");
