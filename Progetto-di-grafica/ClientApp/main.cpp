@@ -13,14 +13,11 @@ glm::mat4 perspective;
 glm::mat4 ortho;
 Node* scene = NULL;
 bool rotating = false;
-float angle = 0.0f;
-
-// Windows size
 int sizeX = 0;
 int sizeY = 0;
+float angleX = 0.0f;
 
-unsigned char keyState[255];
-unsigned char mouseState[3];
+bool keyState[255];
 
 // Cameras
 /*Camera* currentCamera = nullptr;
@@ -79,7 +76,8 @@ void reshapeCallback(int width, int height)
  */
 void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 {
-	keyState[key] = BUTTON_DOWN;
+	//pressed
+	keyState[key] = true;
 	switch (key)
 	{
 	case '1':
@@ -107,31 +105,38 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 		//TODO:: vedere di farlo meglio!
 		engine->changeCamera(scene);
 		break;
-	}
-	//Controlli mano
-
-	if (keyState[(unsigned char)'h'] == BUTTON_DOWN) 
-	{
+	case 'h':
+		if (keyState[(unsigned char)'h'] == true)
+		{
 			engine->closeHand(scene, 5.f);	
-	}
-	else if (keyState[(unsigned char)' '] == BUTTON_DOWN) {
-		engine->closeFinger(scene, 0, 5.f);
-	}
-	else if (keyState[(unsigned char)'f'] == BUTTON_DOWN)
-	{
-		engine->closeFinger(scene, 1,5.f);
-	}
-	else if (keyState[(unsigned char)'e'] == BUTTON_DOWN)
-	{
-		engine->closeFinger(scene, 2, 5.f);
-	}
-	else if (keyState[(unsigned char)'w'] == BUTTON_DOWN)
-	{
-		engine->closeFinger(scene, 3, 5.f);
-	}
-	else if (keyState[(unsigned char)'a'] == BUTTON_DOWN)
-	{
-		engine->closeFinger(scene, 4, 5.f);
+		}
+		break;
+	case ' ':
+		if (keyState[(unsigned char)' '] == true) {
+			engine->closeThumb(scene, 5.f);
+		}
+		break;
+	case 'f':
+		if (keyState[(unsigned char)'f'] == true) {
+			engine->closeFinger(scene, 1, 5.f);
+		}
+		break;
+	case 'e':
+		if (keyState[(unsigned char)'e'] == true) {
+			engine->closeFinger(scene, 2, 5.f);
+		}
+		break;
+
+	case 'w':
+		if (keyState[(unsigned char)'w'] == true) {
+			engine->closeFinger(scene, 3, 5.f);
+		}
+		break;
+	case 'a':
+		if (keyState[(unsigned char)'a'] == true) {
+			engine->closeFinger(scene, 4, 5.f);
+		}
+		break;
 	}
 	engine->redisplay();
 }
@@ -144,25 +149,53 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 
 void keyboardUpCallback(unsigned char key, int x, int y)
 {
-	keyState[key] = BUTTON_UP;
-	if (keyState[(unsigned char)'h'] == BUTTON_UP) {
-		printf("Up\n");
-		engine->closeHand(scene, -1.f);
+	//not pressed
+	keyState[key] = false;
+	switch (key) {
+	case 'h':
+		if (keyState[(unsigned char)'h'] == false) {
+			printf("h up\n");
+			engine->closeHand(scene, -1.f);
 		}
-	else if (keyState[(unsigned char)' '] == BUTTON_UP) {
-		engine->closeFinger(scene,0, -1.f);
-	}
-	else if (keyState[(unsigned char)'f'] == BUTTON_UP) {
-		engine->closeFinger(scene,1, -1.f);
-	}
-	else if (keyState[(unsigned char)'e'] == BUTTON_UP) {
-		engine->closeFinger(scene, 2, -1.f);
-	}
-	else if (keyState[(unsigned char)'w'] == BUTTON_UP) {
-		engine->closeFinger(scene, 3, -1.f);
-	}
-	else if (keyState[(unsigned char)'a'] == BUTTON_UP) {
-		engine->closeFinger(scene, 4, -1.f);
+		break;
+	case ' ':
+		if (keyState[(unsigned char)' '] == false) {
+			engine->closeThumb(scene, -1.f);
+		}
+		break;
+	case 'f':
+		if (keyState[(unsigned char)'f'] == false) {
+			engine->closeFinger(scene, 1, -1.f);
+		}
+		break;
+	case 'e':
+		if (keyState[(unsigned char)'e'] == false) {
+			engine->closeFinger(scene, 2, -1.f);
+		}
+		break;
+	case 'w':
+		if (keyState[(unsigned char)'w'] == false) {
+			engine->closeFinger(scene, 3, -1.f);
+		}
+		break;
+	case 'a':
+		if (keyState[(unsigned char)'a'] == false) {
+			engine->closeFinger(scene, 4, -1.f);
+
+		}
+		break;
+		/*else if (keyState[(unsigned char)'f'] == false) {
+			engine->closeFinger(scene,1, -1.f);
+		}
+		else if (keyState[(unsigned char)'e'] == false) {
+			engine->closeFinger(scene, 2, -1.f);
+		}
+		else if (keyState[(unsigned char)'w'] == false) {
+			engine->closeFinger(scene, 3, -1.f);
+		}
+		else if (keyState[(unsigned char)'a'] == false) {
+			engine->closeFinger(scene, 4, -1.f);
+		}*/
 	}
 }
 /**
@@ -268,7 +301,8 @@ void setCallBacks()
 	engine->display(displayCallback);
 	engine->reshape(reshapeCallback);
 	engine->keyboard(keyboardCallback);
-	//engine->keyboardUp(keyboardUpCallback);
+	//necessario
+	engine->keyboardUp(keyboardUpCallback);
 	engine->specialKeyboard(specialCallback);
 	engine->mouseWheel(mouseWheel);
     engine->mouseMoved(mouseMoved);
@@ -319,9 +353,8 @@ int main(int argc, char* argv[])
 	scene = engine->getScene(fileName);
 	engine->setLists(scene);
 	//TRASPARENZE per ora non funzionano -> da completare
-	engine->setAlphaToMaterial(scene, 0.95f, "plane");
-	//TODO:: GREG GUARDA SULLE SLIDE C'È SCRITTO COME FARE -> (1.0f, 0.0f, 1.0f) ->  così è come ha fatto Gatto io non so come usare quella matrice. Se sai come farlo fallo tu pf
-	
+	engine->setAlphaToMaterial(scene, 0.9f, "plane");
+	//TODO:  così è come ha fatto Gatto io non so come usare quella matrice. Se sai come farlo fallo tu pf
 	glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
 	engine->setLists(scene,reflection);	
 
@@ -330,7 +363,6 @@ int main(int argc, char* argv[])
 	sizeY = engine->getWindowSizeY();
 
 	engine->startLoop();
-
 	//TODO:: FreeImage_DeInitialise
 	std::cout << "Application terminated" << std::endl;
 }
