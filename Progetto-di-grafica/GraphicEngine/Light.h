@@ -6,14 +6,14 @@ public:
 	Light();
 	Light(std::string name);
 	virtual ~Light();
-	enum SubType {OMNI, SPOTLIGHT, DIRECTIONAL};
+	enum Subtype {OMNI, SPOTLIGHT, DIRECTIONAL};
 	short getIntensity() const;
 	void setIntensity(short intensity);
 	void setAmbient(glm::vec4 ambient);
 	void setDiffuse(glm::vec4 diffuse);
 	void setSpecular(glm::vec4 specular);
-	SubType getSubType() const;
-	void setSubType(SubType subtype);
+	Subtype getSubtype() const;
+	void setSubtype(Subtype subtype);
 	int getLightNumber();
 	void setColor(glm::vec4 color);
 	void setPosition(glm::vec4 position);
@@ -37,7 +37,7 @@ private:
 	glm::vec4 ambient;
 	glm::vec4 diffuse;
 	glm::vec4 specular;
-	SubType subType;
+	Subtype subtype;
 	float cutoff;
 	float radius;
 	float angle;

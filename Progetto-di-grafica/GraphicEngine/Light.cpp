@@ -2,79 +2,80 @@
 
 // FreeGLUT:
 #include <GL/freeglut.h>
+
 int Light::numberOfLights = 0;
 
+/**
+ * Light constructor
+ */
 Light::Light()
 {
 
 }
-
+//TODO Cem magari spostare la parte che assegna id luci
+/**
+ * Light constructor it also set the light number
+ * @param  name a string containing the name of the light
+ * @param2 name2
+ * @return what it returns
+ */
 Light::Light(std::string name) {
 	numberOfLights = numberOfLights + 1;
 	lightNumber = numberOfLights;
 	this->setName(name);
 	this->setId(lightNumber);
 }
+/**
+ * Light destructor
+ */
+Light::~Light()
+{
+}
+/**
+ * Getter for intensity
+ * @return intensity light intensity
+ */
+short Light::getIntensity() const
+{
+	return this->intensity;
+}
 
-Light::~Light() 
-{
-}
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Setter for intensity
+ * @param  intensity light intensity
  */
-short Light::getIntensity() const 
-{
-	return this->intensity; 
-}
-/**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
- */
-void Light::setIntensity(short intensity) 
+void Light::setIntensity(short intensity)
 {
 	this->intensity = intensity;
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Setter for ambient
+ * @param  ambient light ambient value
  */
- //forse usare reference & per color,ambient,diffuse,specular
-void Light::setAmbient(glm::vec4 ambient) 
+void Light::setAmbient(glm::vec4 ambient)
 {
-	this->ambient = ambient; 
+	this->ambient = ambient;
+}
+
+/**
+ * Setter for diffuse
+ * @param  diffuse light diffuse value
+ */
+void Light::setDiffuse(glm::vec4 diffuse)
+{
+	this->diffuse = diffuse;
 }
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Setter for specular
+ * @param  specular light specular value
  */
-void Light::setDiffuse(glm::vec4 diffuse) 
-{
-	this->diffuse = diffuse; 
-}
-/**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
- */
-void Light::setSpecular(glm::vec4 specular) 
+void Light::setSpecular(glm::vec4 specular)
 {
 	this->specular = specular;
 }
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Switch that change the state of the light
  */
 void Light::changeState()
 {
@@ -85,10 +86,8 @@ void Light::changeState()
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Render render method for light
+ * @param  renderMatrix light render matrix
  */
 void Light::render(glm::mat4 renderMatrix)
 {
@@ -101,39 +100,34 @@ void Light::render(glm::mat4 renderMatrix)
 	// DIRECTIONL, OMNI AND SPOTLIGHT
 	glLightfv(getLightNumber(), GL_POSITION, glm::value_ptr(this->position));
 	// OMNI OR SPOTLIGHT
-	if (this->subType != DIRECTIONAL) {
+	if (this->subtype != DIRECTIONAL) {
 		glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &angle);
 		// ONLY SPOTLIGHT
-		if (this->subType != OMNI)
+		if (this->subtype != OMNI)
 			glLightfv(getLightNumber(), GL_SPOT_DIRECTION, glm::value_ptr(direction));
 	}
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Getter for light subtype
+ * @return subtype value
  */
-Light::SubType Light::getSubType() const 
+Light::Subtype Light::getSubtype() const
 {
-	return this->subType;
+	return this->subtype;
 }
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Setter for light subtype
+ * @param  An enum containing the light subtype
  */
-void Light::setSubType(Light::SubType subtype) 
+void Light::setSubtype(Light::Subtype subtype)
 {
-	this->subType = subType; 
+	this->subtype = subtype;
 }
-/**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+//TODO riprovare metodo Cem
+/*
+ * Getter for light number
+ * @return an OpenGL enum representing a light
  */
 int Light::getLightNumber()
 {
@@ -174,11 +168,10 @@ int Light::getLightNumber()
 	else
 		return GL_LIGHT0;*/
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Setter for Light color
+ * @param  color light color
  */
 void Light::setColor(glm::vec4 color)
 {
@@ -187,103 +180,86 @@ void Light::setColor(glm::vec4 color)
 	this->setDiffuse(glm::vec4(color));
 	this->setSpecular(glm::vec4(color));
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Setter for light position
+ * @param  position
  */
 void Light::setPosition(glm::vec4 position)
 {
 	this->position = position;
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Getter for light direction
+ * @return light direction
  */
 glm::vec3 Light::getDirection()
 {
 	return this->direction;
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Setteer for light direction
+ * @param  direction light direction
  */
 void Light::setDirection(glm::vec4 direction)
 {
 	this->direction = direction;
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Setter for light angle
+ * @param  angle light angle
  */
 void Light::setAngle(float angle)
 {
 	this->angle = angle;
 }
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Getter for light angle
+ * @return light angle
  */
 float Light::getAngle() const
 {
 	return this->angle;
 }
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Getter for light radius
+ * @return light radius
  */
 float Light::getRadius() const
 {
 	return this->radius;
 }
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Setter for light radius
+ * @param light radius
  */
 void Light::setRadius(float radius)
 {
 	this->radius = radius;
 }
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Getter for light cutoff
+ * @return light cutoff
  */
 float Light::getCutoff() const
 {
 	return this->cutoff;
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Setter for light cutoff
+ * @param  cutoff light cutoff
  */
 void Light::setCutoff(float cutoff)
 {
 	this->cutoff = cutoff;
 }
 
-
 /**
-* Comment
-* @param  name1
-* @param2 name2
-* @return what it returns
+* Enable light
 */
 void Light::enableLight()
 {
@@ -292,10 +268,7 @@ void Light::enableLight()
 }
 
 /**
-* Comment
-* @param  name1
-* @param2 name2
-* @return what it returns
+* Disable Light
 */
 void Light::disableLight()
 {

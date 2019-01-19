@@ -2,48 +2,47 @@
 #include <GL/glew.h>
 // FreeGLUT:
 #include <GL/freeglut.h>
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Mesh constructor
  */
 Mesh::Mesh()
 {
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Mesh destructor
  */
 Mesh::~Mesh()
 {
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Generate vao (vertex array objects)
+ * @param  vertexes vertexes array
+ * @param normals normals vertexes array
+ * @param uvArray uv vertexes array
+ * @param indices indices array
+ * @param numberOfVertexes number of vertexes
  */
-void Mesh::generateVAO(float * vertexes, float * normals, float * uvArray, unsigned int * indices, unsigned int vertices)
+void Mesh::generateVAO(float * vertexes, float * normals, float * uvArray, unsigned int * indices, unsigned int numberOfVertexes)
 {
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 
 	glGenBuffers(1, &vertexVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexVBO);
-	glBufferData(GL_ARRAY_BUFFER, vertices * 3 * sizeof(float), vertexes, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, numberOfVertexes * 3 * sizeof(float), vertexes, GL_STATIC_DRAW);
 	glVertexPointer(3, GL_FLOAT, 0, nullptr);
 
 	glGenBuffers(1, &normalVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, normalVBO);
-	glBufferData(GL_ARRAY_BUFFER, vertices * 3 * sizeof(float), normals, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, numberOfVertexes * 3 * sizeof(float), normals, GL_STATIC_DRAW);
 	glNormalPointer(GL_FLOAT, 0, nullptr);
 
 	glGenBuffers(1, &uvVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, uvVBO);
-	glBufferData(GL_ARRAY_BUFFER, vertices * 2 * sizeof(float), uvArray, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, numberOfVertexes * 2 * sizeof(float), uvArray, GL_STATIC_DRAW);
 	glTexCoordPointer(2, GL_FLOAT, 0, nullptr);
 
 	glGenBuffers(1, &indicesVBO);
@@ -54,55 +53,54 @@ void Mesh::generateVAO(float * vertexes, float * normals, float * uvArray, unsig
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glBindVertexArray(0);
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Getter for material
+ * @return mesh material
  */
 Material * Mesh::getMaterial() const
 {	
 	return material;
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Setter for material
+ * @param  material mesh material
  */
 void Mesh::setMaterial(Material * material)
 {
 	this->material = material;
 }
+
+/**
+* Getter for radius
+* @return mesh radius
+*/
 float Mesh::getRadius()
 {
 	return this->radius;
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Setter for radius
+ * @param  radius mesh radius
  */
 void Mesh::setRadius(float radius)
 {
 	this->radius = radius;
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Setter for numberOfFaces
+ * @param  numberOfFaces number of mesh faces
  */
 void Mesh::setNumberOfFaces(unsigned int numberOfFaces)
 {
 	this->numberOfFaces = numberOfFaces;
 }
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Render for mesh
+ * @param  mesh render matrix
  */
 void Mesh::render(glm::mat4 renderMatrix)
 {

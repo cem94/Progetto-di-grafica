@@ -16,14 +16,11 @@ bool rotating = false;
 int sizeX = 0;
 int sizeY = 0;
 float angleX = 0.0f;
-
+//button state machine
 bool keyState[255];
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Display callback
  */
 void displayCallback()
 {
@@ -32,29 +29,23 @@ void displayCallback()
 	// setto la matrice di proiezione prospettica per il rendering 3d
 	engine->setProjectionMatrix(perspective);
 	// 3d rendering//
-	// renderizza la lista ottenuta dal file OVO
 	engine->renderList();
 	if (rotating)
 		engine->autoRotateModel(scene, -1.0f);
 	// 2D rendering//
-	// setto la matrice di proiezione ortogonale il rendering 2d
 	engine->setProjectionMatrix(ortho);
-	// necessario (la matrice Ë ortogonale)
 	engine->loadIdentity();
 	engine->enableLighting(false);
 	engine->renderText();
 	engine->enableLighting(true);
-	// TODO testare e vedere se serve
 	engine->incrementFrames();
-	// swappa il buffer mostrando cio che e stato renderizzato
 	engine->swapBuffers();
 	engine->redisplay();
 }
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Reshape callback
+ * @param width screen width
+ * @param height screen height
  */
 void reshapeCallback(int width, int height)
 {
@@ -64,10 +55,10 @@ void reshapeCallback(int width, int height)
 	engine->updateSize();
 }
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Keyboard callback
+ * @param  key the button that was pressed
+ * @param mouseX mouse X coordinate
+ * @param mouseY mouse Y coordinate
  */
 void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 {
@@ -87,15 +78,12 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 	case '4':
 		engine->enableLight(scene, "Omni3");
 		break;
-		//indice
 	case 'r':
 		engine->rotateModel(scene, 1);
 		break;
-		//rotazione automatica
 	case 'R':
 		rotating = !rotating;
 		break;
-		//cambia camera corrente
 	case 'c':
 		//TODO:: vedere di farlo meglio!
 		engine->changeCamera(scene);
@@ -103,7 +91,7 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 	case 'h':
 		if (keyState[(unsigned char)'h'] == true)
 		{
-			engine->closeHand(scene, 5.f);	
+			engine->closeHand(scene, 5.f);
 		}
 		break;
 	case ' ':
@@ -135,13 +123,13 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 	}
 	engine->redisplay();
 }
-/**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
- */
 
+/**
+ * Keyboard up callback
+ * @param  key the button that was released
+ * @param x x coordinate
+ * @param x y coordinate
+ */
 void keyboardUpCallback(unsigned char key, int x, int y)
 {
 	//not pressed
@@ -149,7 +137,6 @@ void keyboardUpCallback(unsigned char key, int x, int y)
 	switch (key) {
 	case 'h':
 		if (keyState[(unsigned char)'h'] == false) {
-			printf("h up\n");
 			engine->closeHand(scene, -1.f);
 		}
 		break;
@@ -179,37 +166,26 @@ void keyboardUpCallback(unsigned char key, int x, int y)
 
 		}
 		break;
-		/*else if (keyState[(unsigned char)'f'] == false) {
-			engine->closeFinger(scene,1, -1.f);
-		}
-		else if (keyState[(unsigned char)'e'] == false) {
-			engine->closeFinger(scene, 2, -1.f);
-		}
-		else if (keyState[(unsigned char)'w'] == false) {
-			engine->closeFinger(scene, 3, -1.f);
-		}
-		else if (keyState[(unsigned char)'a'] == false) {
-			engine->closeFinger(scene, 4, -1.f);
-		}*/
 	}
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Special callback
+ * @param  key an integer representing a special key
+ * @param x x coordinate
+ * @param y y coordinate
  */
 void specialCallback(int key, int x, int y)
 {
 	//muovi luce
-  if (!engine->isMovableCamera()) 
-	  return;
+	if (!engine->isMovableCamera())
+		return;
 	switch (key) {
-    case GLUT_KEY_DOWN:
-        engine->moveCameraZ(-1.0f);
+	case GLUT_KEY_DOWN:
+		engine->moveCameraZ(-1.0f);
 		break;
 	case GLUT_KEY_LEFT:
-        engine->moveCameraX(1.0f);
+		engine->moveCameraX(1.0f);
 		break;
 	case GLUT_KEY_RIGHT:
 		engine->moveCameraX(-1.0f);
@@ -223,30 +199,28 @@ void specialCallback(int key, int x, int y)
 	engine->redisplay();
 }
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Timer callback
+ * @param  value
  */
 void timerCallback(int value)
 {
 	engine->timer(timerCallback);
 }
 
-//zoom in / out
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Mouse wheel callback that implement a zoom function
+ * @param wheel the value of the mouse wheel
+ * @param direction the direction in which the wheel is scrolled
+ * @param x x coordinate
+ * @param y y coordinate
  */
 void mouseWheel(int wheel, int direction, int x, int y)
 {
 	wheel = 0;
-    if (!engine->isMovableCamera())
+	if (!engine->isMovableCamera())
 		return;
-	if (direction == -1 )
-		engine->moveCameraY(-10);
+	if (direction == -1)
+		engine->moveCamera(-10); //engine->moveCamera(glm::vec3(0,-1,0));
 	else if (direction == +1)
 		engine->moveCameraY(10);
 }
@@ -273,12 +247,12 @@ void mouseMoved(int x, int y) {
   }
 }
 
-//callback per pressione mouse
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Mouse pressed callback
+ * @param  button mouse button that was pressed
+ * @param state the state of the button
+ * @param x x coordinate
+ * @param y y coordinate
  */
 void mousePressed(int button, int state, int x, int y)
 {
@@ -286,10 +260,7 @@ void mousePressed(int button, int state, int x, int y)
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Callback setter
  */
 void setCallBacks()
 {
@@ -305,7 +276,9 @@ void setCallBacks()
 	engine->mousePressed(mousePressed);
 	engine->timer(timerCallback);
 }
-
+/**
+ * Camera setter
+ */
 void setCameras() {
 	// dove si trova la camera
 	glm::vec3 eye = glm::vec3(0.f, 50.f, 400.f);
@@ -314,8 +287,8 @@ void setCameras() {
 	// dove è il sopra
 	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
 	engine->addCamera("3", false, eye, center, up);
-    eye = glm::vec3(-400.f, 400.f, 400.f);
-    engine->addCamera("2", false, eye, center, up);
+	eye = glm::vec3(-400.f, 400.f, 400.f);
+	engine->addCamera("2", false, eye, center, up);
 	//si direbbe che renderizza prima l'ultima che gli passi quindi questa è la camera 1
     eye = glm::vec3(200, 200, 0.f);
     center = glm::vec3(0.0f, 200.0f, 0.0f);
@@ -323,10 +296,10 @@ void setCameras() {
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Application entry point.
+ * @param argc number of command-line arguments passed
+ * @param argv array containing up to argc passed arguments
+ * @return error code (0 on success, error code otherwise)
  */
 int main(int argc, char* argv[])
 {
@@ -358,6 +331,6 @@ int main(int argc, char* argv[])
 	sizeY = engine->getWindowSizeY();
 
 	engine->startLoop();
-	//TODO:: FreeImage_DeInitialise
+	engine->freeImageDeInitialize();
 	std::cout << "Application terminated" << std::endl;
 }

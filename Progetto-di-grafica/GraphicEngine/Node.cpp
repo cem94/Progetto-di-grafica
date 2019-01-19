@@ -1,67 +1,62 @@
 #include "Engine.h"
 
 static int counter;
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Node constructor
  */
 Node::Node()
 {
 	//TODO Cem magari spostare il contatore nell'ovoreader e settare l'id da lì
 	this->setId(counter++);
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Node destructor
  */
 Node::~Node()
 {
 }
 
-// Getters & Setters //
+/**
+ * Getter for node parent
+ * @return node parent
+ */
 Node * Node::getParent() const
 {
 	return parent;
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Setter for node parent
+ * @param  parent node parent
  */
 void Node::setParent(Node * parent)
 {
 	this->parent = parent;
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Getter for node children
+ * @return node children
  */
 std::vector<Node*> Node::getChildren() const
 {
 	return children;
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Getter for node matrix
+ * @return node matrix
  */
 glm::mat4 Node::getMatrix()
 {
 	return matrix;
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Setter for node matrix
+ * @param  matrix node matrix
  */
 void Node::setMatrix(glm::mat4 matrix)
 {
@@ -69,22 +64,17 @@ void Node::setMatrix(glm::mat4 matrix)
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Insert a node in the current node childrens and set the current node as the father
  */
- //Inserisce il nodo fra i  figli del nodo corrente
 void Node::insert(Node * node)
 {
 	node->setParent(this);
 	children.push_back(node);
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Remove a node from current node childrens given its position
+ * @param  position of the node to remove
  */
 void Node::remove(int position)
 {
@@ -95,13 +85,11 @@ void Node::remove(int position)
 		free(to_remove);
 	}
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Remove a node from the current node childrens
+ * @param  node the node to remove
  */
- //rimuove node
 void Node::remove(Node * node)
 {
 	int i = 0;
@@ -114,12 +102,9 @@ void Node::remove(Node * node)
 	remove(i);
 }
 
-//ritorna il numero di figli del nodo corrente
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Getter for the children size
+ * @return current node children size
  */
 int Node::getChildrenSize() const
 {
@@ -127,10 +112,8 @@ int Node::getChildrenSize() const
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Method that reserves memory for this node's childrens
+ * @param  size children size
  */
 void Node::setChildrenSize(unsigned int size)
 {
@@ -138,10 +121,8 @@ void Node::setChildrenSize(unsigned int size)
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Getter for node final matrix
+ * @return this node final matrix
  */
 glm::mat4 Node::getFinalMatrix()
 {
@@ -149,21 +130,19 @@ glm::mat4 Node::getFinalMatrix()
 		return matrix;
 	return parent->getFinalMatrix()*matrix;
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Getter for childrens capacity
+ * @return this node's childrens capacity
  */
 int Node::getCapacity() const
 {
 	return (int)this->children.capacity();
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Render for node (empty)
+ * @param  renderMatrix node render matrix
  */
 void Node::render(glm::mat4 renderMatrix)
 {

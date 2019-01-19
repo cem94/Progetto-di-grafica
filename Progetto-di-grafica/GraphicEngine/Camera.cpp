@@ -2,30 +2,24 @@
 
 //FreeGlut
 #include <GL/freeglut.h>
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Camera constructor
  */
 Camera::Camera()
 {
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Camera destructor
  */
 Camera::~Camera()
 {
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Setter for projection matrix
+ * @param  projection projection matrix
  */
 void Camera::setProjectionMatrix(glm::mat4 projection)
 {
@@ -34,35 +28,30 @@ void Camera::setProjectionMatrix(glm::mat4 projection)
 	glLoadMatrixf(glm::value_ptr(projection));
 	glMatrixMode(GL_MODELVIEW);
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Render camera rendering method
+ * @param  render matrix
  */
 void Camera::render(glm::mat4 renderMatrix)
-{	
+{
 	glLoadMatrixf(glm::value_ptr(renderMatrix));
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
- */
-void Camera::setMovable(bool movable) 
-{ 
-	this->movable = movable; 
+ * Setter for movable
+ * @param  movable boolean value (true if movable false otherwise)
+*/
+void Camera::setMovable(bool movable)
+{
+	this->movable = movable;
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Getter for movable
+ * @return movable value (true if movable false otherwise)
  */
-bool Camera::getMovable() 
-{ 
-	return movable; 
+bool Camera::getMovable()
+{
+	return movable;
 }

@@ -20,8 +20,7 @@ bool lighting = true;
 Camera* currentCamera = nullptr;
 std::vector<Camera*> cameras;
 int activeCamera = 0;
-float totalAngle = 0.f;
-float totalAngleZ = 0.0f;
+
 float fingerAngles[5];
 // per il pollice
 float angleX;
@@ -37,40 +36,31 @@ int sizeY = 0;
 
 List* toRender = new List();
 List *trasparentMeshes = new List();
-
-//istanza statica definita in Engine.h
 Engine* Engine::instance = nullptr;
-/**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
- */
-Engine::~Engine()
-{
-	FreeImage_DeInitialise();
-}
 
-Engine & Engine::getInstance()
+/**
+ * Getter for engine instance
+ * @return a instance of engine. A new instance is created if engine is still nullptr
+ */
+Engine LIB_API & Engine::getInstance()
 {
 	if (instance == nullptr)
 		instance = new Engine{};
 	return *instance;
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Init function
+ * @param  argc number of command-line arguments passed
+ * @param argv  containing up to argc passed arguments
  */
 void LIB_API Engine::init(int argc, char* argv[])
 {
 	freeImageInitialize();
 	std::cout << "The engine starts" << std::endl;
-    // setto opzioni finestra
-    glutInitWindowSize(1920, 1080);
-    glutInitWindowPosition(0, 0);
-
+	// setto opzioni finestra
+	glutInitWindowSize(1920, 1080);
+	glutInitWindowPosition(0, 0);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 
 	glutInit(&argc, argv);
@@ -106,53 +96,51 @@ void LIB_API Engine::init(int argc, char* argv[])
 
 	enableZbuffer();
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Start the main loop
  */
 void LIB_API Engine::startLoop()
 {
 	glutMainLoop();
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Wrapper function that loads matrix as the current Opengl matrix
+ * @param  matrix the matrix to set
  */
 void LIB_API Engine::loadMatrix(glm::mat4 matrix)
 {
 	glLoadMatrixf(glm::value_ptr(matrix));
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ *Setter for clear color 
+ * @param r r component of the color
+ * @param g g component of the color
+ * @param b b component of the color
  */
 void LIB_API Engine::clearColor(float r, float g, float b)
 {
 	glClearColor(r, g, b, 1.0f);
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Setter for mouse wheel callback
+ * @param  mouseWheelFunc the mouse callback to set
  */
-void Engine::mouseWheel(void(*mouseWheelFunc)(int, int, int, int))
+void LIB_API Engine::mouseWheel(void(*mouseWheelFunc)(int, int, int, int))
 {
 	glutMouseWheelFunc(mouseWheelFunc);
 }
+
 /**
  * Comment
  * @param  name1
  * @param2 name2
  * @return what it returns
  */
-void Engine::mousePressed(int button, int state, int x, int y)
+void LIB_API Engine::mousePressed(int button, int state, int x, int y)
 {
 	if (state == GLUT_UP) {
 		// isMousePressed = false;
@@ -163,22 +151,18 @@ void Engine::mousePressed(int button, int state, int x, int y)
 		// mousePosition.y = y;
 	}
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Setter for mouse pressed callback
+ * @param mouseFunc mouse pressed callback function to set
  */
-void Engine::mousePressed(void(*mouseFunc)(int, int, int, int))
+void LIB_API Engine::mousePressed(void(*mouseFunc)(int, int, int, int))
 {
 	glutMouseFunc(mouseFunc);
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Wrapper for redisplay
  */
 void Engine::updateSize() 
 {
@@ -229,156 +213,148 @@ void LIB_API Engine::redisplay()
 {
 	glutPostWindowRedisplay(windowId);
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Setter for reshape callback
+ * @param  reshapeCallback reshape callback to set
  */
 void LIB_API Engine::reshape(void(*reshapeCallback)(int, int))
 {
 	glutReshapeFunc(reshapeCallback);
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Setter for display callback
+ * @param  displayCallback display callback to set
  */
 void LIB_API Engine::display(void(*displayCallback)())
 {
 	glutDisplayFunc(displayCallback);
 }
+
 /**
- * Comment
- * @param  name1
+ * Setter for timer callback
+ * @param  timerCallback
  * @param2 name2
- * @return what it returns
  */
-void LIB_API Engine::timer(void callback(int))
+void LIB_API Engine::timer(void timerCallback(int))
 {
 	// calcolo fps -> da completare
 	fps = frames / 1.0f;
 	frames = 0;
 	// Register the next update:
-	glutTimerFunc(1000, callback, 0);
+	glutTimerFunc(1000, timerCallback, 0);
 }
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Setter for keyboard callback
+ * @param  keyboardCallBack keyboard callback to set
  */
 void LIB_API Engine::keyboard(void(*keyboardCallBack)(unsigned char, int, int))
 {
 	glutKeyboardFunc(keyboardCallBack);
 }
-
-void Engine::keyboardUp(void(*keyboardUpCallBack)(unsigned char, int, int))
+/**
+ * Setter for keyboard up callback
+ * @param  keyboardUpCallBack keyboard up callback to set
+ */
+void LIB_API Engine::keyboardUp(void(*keyboardUpCallBack)(unsigned char, int, int))
 {
 	glutKeyboardUpFunc(keyboardUpCallBack);
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Setter for special keyboard callback
+ * @param  specialFunc special keyboard callback to set
  */
 void LIB_API Engine::specialKeyboard(void(*specialFunc)(int, int, int))
 {
 	glutSpecialFunc(specialFunc);
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Setter for OpenGL viewport
+ * @param x x coordinate
+ * @param y y coordinate
+ * @param width viewport width
+ * @param height viewport height
  */
 void LIB_API Engine::setViewport(int x, int y, int width, int height)
 {
 	glViewport(x, y, width, height);
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Clear the color and depth buffer bit
  */
 void LIB_API Engine::clearBuffers()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Wrapper for glutSwapBuffers
  */
 void LIB_API Engine::swapBuffers()
 {
 	glutSwapBuffers();
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Loads the identity matrix
  */
 void LIB_API Engine::loadIdentity()
 {
 	loadMatrix(glm::mat4(1.0f));
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Function that prints the scene graph
+ * @param  scene the scene graph to print
+ * @param indentation text intentation
  */
-void printTree(Node* node, std::string indentation)
+void printTree(Node* scene, std::string indentation)
 {
-	glm::mat4 mat = node->getMatrix();
-	std::cout << indentation.c_str() << node->getName().c_str() << std::endl;
-	for (int i = 0; i < node->getChildrenSize(); i++)
-		printTree(node->getChildren().at(i), "\t - " + indentation);
+	glm::mat4 mat = scene->getMatrix();
+	std::cout << indentation.c_str() << scene->getName().c_str() << std::endl;
+	for (int i = 0; i < scene->getChildrenSize(); i++)
+		printTree(scene->getChildren().at(i), "\t - " + indentation);
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Initialize Free Image 
  */
 void Engine::freeImageInitialize()
 {
 	FreeImage_Initialise();
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+* DeInitialize Free Image
+*/
+void Engine::freeImageDeInitialize()
+{
+	FreeImage_DeInitialise();
+}
+
+/**
+ * Setter for current camera projection matrix
+ * @param  projection
  */
 void LIB_API Engine::setProjectionMatrix(glm::mat4 projection)
 {
 	currentCamera->setProjectionMatrix(projection);
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Enable Z buffer
  */
 void LIB_API Engine::enableZbuffer()
 {
 	glEnable(GL_DEPTH_TEST);
 }
 
-// accende / spegne luci
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Turn on/off lights
  */
 void LIB_API Engine::switchLights()
 {
@@ -387,10 +363,8 @@ void LIB_API Engine::switchLights()
 }
 //accende / spegne illuminazione
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Enable / disable illumination
+ * @param  value true = enable lights false = disable lights
  */void LIB_API Engine::enableLighting(bool value)
 {
 	if (value) {
@@ -401,28 +375,20 @@ void LIB_API Engine::switchLights()
 	}
 }
 
-//abilita/disabilita una luce dato il suo nome 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Change light state given its name
+ * @param  scene scene graph
+ * @param2 lightName
  */
-void LIB_API Engine::enableLight(Node *root, std::string lightName)
+void LIB_API Engine::enableLight(Node *scene, std::string lightName)
 {
-	Light* light = static_cast<Light *>(getNodeByName(root, lightName));
+	Light* light = static_cast<Light *>(getNodeByName(scene, lightName));
 	if (light != nullptr)
 		light->changeState();
 }
 
-//TODO scrivere i comandi del guanto / opzioni 
-//scrive info su schermo (FPS etc)
-//TODO:: il colore !!
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Render some 2D text with various information
  */
 void LIB_API Engine::renderText()
 {
@@ -444,14 +410,12 @@ void LIB_API Engine::renderText()
 	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
 }
 
-// parte dal nodo corrente  e popola l'albero
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Starting from current node it recursively populate the scene graph
+ * @param  currentNode the current node
+ * @param2 nodes the list of remaining nodes to insert
  */
-void findChildren(Node* currentNode, std::vector<Node*>& nodes)
+void LIB_API findChildren(Node* currentNode, std::vector<Node*>& nodes)
 {
 	const int capacity = currentNode->getCapacity();
 	for (int i = 0; i < capacity; i++) {
@@ -461,34 +425,34 @@ void findChildren(Node* currentNode, std::vector<Node*>& nodes)
 		currentNode->insert(next);
 	}
 }
+
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Returns the scene graph given its name
+ * @param  name OVO file name
+ * @return root node of the scene graph
  */
-Node* Engine::getScene(const char* name)
+Node* LIB_API Engine::getScene(const char* name)
 {
 	std::vector<Node*> nodes = OvoReader::readOVOfile(name);
 
 	Node* root = nodes.at(0);
 	nodes.erase(nodes.begin());
-	
+
 	findChildren(root, nodes);
-   
+
 	setCameraToPalm(root);
 
 	printTree(root, "");
 	return root;
 }
 
- /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
- */
-void Engine::setCameraToPalm(Node* root) 
+/**
+* Comment
+* @param  name1
+* @param2 name2
+* @return what it returns
+*/
+void LIB_API Engine::setCameraToPalm(Node* root)
 {
 	Node* palmo = getNodeByName(root, "guardia");
 	for (Node* n : palmo->getChildren()) {
@@ -511,17 +475,17 @@ void Engine::setCameraToPalm(Node* root)
  * @param2 name2
  * @return what it returns
  */
-Node* Engine::getNodeByName(Node* root, std::string name)
+Node* LIB_API Engine::getNodeByName(Node* root, std::string name)
 {
 	if (root->getName().compare(name) == 0)
 		return root;
-	else{
-          for (Node* n : root->getChildren()) 
-		  {
-			  Node* founded = getNodeByName(n, name);
-			  if (founded!= nullptr) 
-				  return founded;
-          }
+	else {
+		for (Node* n : root->getChildren())
+		{
+			Node* founded = getNodeByName(n, name);
+			if (founded != nullptr)
+				return founded;
+		}
 		return nullptr;
 	}
 }
@@ -536,13 +500,13 @@ Node* Engine::getNodeByName(Node* root, std::string name)
  * @param2 name2
  * @return what it returns
  */
-void  Engine::setRenderList(Node* element)
+void  LIB_API Engine::setRenderList(Node* element)
 {
 	toRender->add(element);
 
 	std::vector<Node*> children = element->getChildren();
 
-	if (element->getType() == Node::Type::MESH) 
+	if (element->getType() == Node::Type::MESH)
 	{
 		Mesh * mesh = (Mesh *)element;
 		if (mesh->getMaterial() != nullptr && mesh->getMaterial()->isTrasparent())
@@ -551,20 +515,16 @@ void  Engine::setRenderList(Node* element)
 			trasparentMeshes->add(element);
 		}
 	}
-    for (Node * n: children)
+	for (Node * n : children)
 		setRenderList(n);
 }
 
-/**
- * render elements from list
- */
  /**
-  * Comment
-  * @param  name1
+  * Set render and trasparent lists
+  * @param  scene
   * @param2 name2
   * @return what it returns
   */
-  //Temporanea per testare trasparenze
 void Engine::setLists(Node * root) {
 	setRenderList(root);
 	std::vector<Node*> render = toRender->getList();
@@ -572,46 +532,49 @@ void Engine::setLists(Node * root) {
 	sortTrasparentMeshesList(transparent);
 	render.insert(render.end(), transparent.begin(), transparent.end());
 }
-
-void Engine::setLists(Node * root, glm::mat4 reflection)
+ /**
+ * Set reflection
+ * @param scene scene graph
+ * @param reflection reflection matrix
+ */
+void LIB_API Engine::setLists(Node * scene, glm::mat4 reflection)
 {
-	//glScalef(1.0, -1.0, 1.0);
-	//root->setMatrix(reflection);
-	Engine::getInstance().setLists(root);
+	scene->setMatrix(reflection);
+	Engine::getInstance().setLists(scene);
 }
-
-void Engine::renderList() { 
-	std::vector<Node*> render = toRender->getList(); 
-	for (Node* n : render) 
+/**
+ * Render list
+ */
+void LIB_API Engine::renderList() {
+	std::vector<Node*> render = toRender->getList();
+	for (Node* n : render)
 	{
-        glm::mat4 renderMatrix = n->getFinalMatrix();
-        Object::Type type = n->getType();
+		glm::mat4 renderMatrix = n->getFinalMatrix();
+		Object::Type type = n->getType();
 
-		if (type == Object::Type::MESH) 
+		if (type == Object::Type::MESH)
 		{
-            Mesh* m = static_cast<Mesh*>(n);
-            if (m->getMaterial() != nullptr) 
+			Mesh* m = static_cast<Mesh*>(n);
+			if (m->getMaterial() != nullptr)
 			{
-              if (m->getMaterial()->isTrasparent()) {
-                // TRASPARENZE
-                transparentPreRender(m->getMaterial(), renderMatrix);
-              } else {
-                m->getMaterial()->render(renderMatrix);
-              }
-              m->getMaterial()->getTexture()->render(renderMatrix);
-            }
-        }
+				if (m->getMaterial()->isTrasparent()) {
+					// TRASPARENZE
+					transparentPreRender(m->getMaterial(), renderMatrix);
+				}
+				else {
+					m->getMaterial()->render(renderMatrix);
+				}
+				m->getMaterial()->getTexture()->render(renderMatrix);
+			}
+		}
 		n->render(currentCamera->getMatrix() * renderMatrix);
-    }
+	}
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Increment current frames
  */
-void Engine::incrementFrames()
+void LIB_API Engine::incrementFrames()
 {
 	frames++;
 }
@@ -621,7 +584,7 @@ void Engine::incrementFrames()
  * @param2 name2
  * @return what it returns
  */
-void Engine::addCamera(std::string name, bool movable, glm::vec3 eye, glm::vec3 center, glm::vec3 up)
+void LIB_API Engine::addCamera(std::string name, bool movable, glm::vec3 eye, glm::vec3 center, glm::vec3 up)
 {
 	Camera* camera = new Camera();
 	camera->setName(name);
@@ -631,36 +594,34 @@ void Engine::addCamera(std::string name, bool movable, glm::vec3 eye, glm::vec3 
 	camera->setMatrix(glm::lookAt(eye, center, up));
     cameras.push_back(camera);
 	// update
-    currentCamera = camera;
-    activeCamera = static_cast<int>(cameras.size() - 1);
+	currentCamera = camera;
+	activeCamera = static_cast<int>(cameras.size() - 1);
 }
 
 /**
-* Comment
-* @param  name1
-* @param2 name2
-* @return what it returns
+* Getter for current camera movable
+* @return  true if the current camera is movable false otherwise
 */
 bool LIB_API Engine::isMovableCamera()
 {
 	return currentCamera->getMovable();
 }
 
-void LIB_API Engine::moveCameraX(float direction) 
+void LIB_API Engine::moveCameraX(float direction)
 {
 	glm::mat4 matrix = currentCamera->getMatrix();
 	glm::vec3 mov = direction * glm::vec3(5.0f, 0.0f, 0.0f);
 	currentCamera->setMatrix(glm::translate(matrix, mov));
 }
 
-void LIB_API Engine::moveCameraY(float direction) 
+void LIB_API Engine::moveCameraY(float direction)
 {
 	glm::mat4 matrix = currentCamera->getMatrix();
 	glm::vec3 mov = direction* 5.0f * matrix[1];//  glm::vec3(0.0f, 3.0f, 0.0f);
 	currentCamera->setMatrix(glm::translate(matrix, mov));
 }
 
-void LIB_API Engine::moveCameraZ(float direction) 
+void LIB_API Engine::moveCameraZ(float direction)
 {
 	glm::mat4 matrix = currentCamera->getMatrix();
 	glm::vec3 mov = direction * 5.0f * matrix[2];//  glm::vec3(0.0f, 0.0f, 5.0f);
@@ -671,10 +632,7 @@ void LIB_API Engine::moveCameraZ(float direction)
  * change current camera
  */
  /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Change the current camera
  */
 void Engine::changeCamera(Node * root) {
 	activeCamera = (activeCamera + 1) % cameras.size();
@@ -682,13 +640,10 @@ void Engine::changeCamera(Node * root) {
     setCameraToPalm(root);
 }
 
-
- /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
- */
+/**
+* Move camera
+* @param  direction movement direction
+*/
 void LIB_API Engine::moveCamera(float direction)
 {
 	glm::mat4 matrix = currentCamera->getMatrix();
@@ -698,24 +653,24 @@ void LIB_API Engine::moveCamera(float direction)
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
+ * Rotate the model around its y axis
+ * @param  scene scene graph
+ * @param angle rotation angle
  * @return what it returns
  */
-void Engine::rotateModel(Node * root, float angle) {
-	Node* guardia = getNodeByName(root, "guardia");
+void LIB_API Engine::rotateModel(Node * scene, float angle) {
+	Node* guardia = getNodeByName(scene, "guardia");
 	if (guardia != nullptr)
 	{
 		glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
 		guardia->setMatrix(guardia->getMatrix()*rotation);
 	}
 }
-void rotateX(float angle,Node *finger, Node *finger1) {
+
+void LIB_API rotateX(float angle, Node *finger, Node *finger1) {
 	glm::mat4 rotationX;
 	if (angle < 0) {
-		//rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(-fingerAngles[0]), glm::vec3(0.0f, 0.0f, -1.0f));
-		 rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(-angleX), glm::vec3(1.0f, 0.0f, 0.0f));
+		rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(-angleX), glm::vec3(1.0f, 0.0f, 0.0f));
 		angleX = 0;
 		finger->setMatrix(finger->getMatrix()*rotationX);
 		finger1->setMatrix(finger1->getMatrix()*rotationX);
@@ -724,45 +679,43 @@ void rotateX(float angle,Node *finger, Node *finger1) {
 		//rotazione massima in x
 		if (angleX < 30.f) {
 			rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(1.0f, 0.0f, 0.0f));
-			//oppure: rotationX = glm::rotate(rotationZ, glm::radians(-angleX), glm::vec3(1.0f, 0.0f, 0.0f));
-			//incremento angoloX
 			angleX += angle;
 		}
 		finger->setMatrix(finger->getMatrix()*rotationX);
 		finger1->setMatrix(finger1->getMatrix()*rotationX);
 	}
 }
-void rotateZ(float angle, Node *finger, Node* finger1) {
+
+void LIB_API rotateZ(float angle, Node *finger, Node* finger1) {
 	glm::mat4 rotationZ;
 	if (angle < 0) {
-		//rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(-fingerAngles[0]), glm::vec3(0.0f, 0.0f, -1.0f));
 		rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(-fingerAngles[0]), glm::vec3(1.0f, 0.0f, 0.0f));
-		fingerAngles[0]= 0;
+		fingerAngles[0] = 0;
 		finger->setMatrix(finger->getMatrix()*rotationZ);
 		finger1->setMatrix(finger1->getMatrix()*rotationZ);
 	}
 	else {
-		//rotazione massima in x
+		//rotazione massima in z
 		if (fingerAngles[0] < 50.f) {
 			rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(1.0f, 0.0f, 0.0f));
-			//oppure: rotationX = glm::rotate(rotationZ, glm::radians(-angleX), glm::vec3(1.0f, 0.0f, 0.0f));
-			//incremento angoloX
 			fingerAngles[0] += angle;
 		}
 		finger->setMatrix(finger->getMatrix()*rotationZ);
 		finger1->setMatrix(finger1->getMatrix()*rotationZ);
 	}
 }
-void Engine::closeThumb(Node *root, float angle) {
-  std::string name = fingerNames[0];
-  name.append("1");
-  Node* finger = getNodeByName(root, name);
-  name = name.substr(0, name.size() - 1);
-  name.append("2");
-  Node* finger1 = getNodeByName(root, name);
-  // se l'angolo è negativo resetto ruotando di meno l'angolo precedente
-  rotateX(angle, finger, finger1);
-  rotateZ(angle, finger, finger1);
+
+void LIB_API Engine::closeThumb(Node *scene, float angle) {
+
+	std::string name = fingerNames[0];
+	name.append("1");
+	Node* finger = getNodeByName(scene, name);
+	name = name.substr(0, name.size() - 1);
+	name.append("2");
+	Node* finger1 = getNodeByName(scene, name);
+	//se l'angolo è negativo resetto ruotando di meno l'angolo precedente
+	rotateX(angle, finger, finger1);
+	rotateZ(angle, finger, finger1);
 }
 
 /**
@@ -791,40 +744,32 @@ void Engine::autoRotateModel(Node* root, float angle) {
   }
 }
 
-
-
-//TODO completare risolvere l'errore nel pollice
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Close a finger of the hand
+ * @param  scene scene graph
+ * @param i number of the finger to close (starting from 0)
+ * @param angle rotation angle
  */
-void Engine::closeFinger(Node * root, int i, float  angle)
-               {	
-	if (i == 0) {
-		closeThumb(root, angle);
-		return;
-	}
+void LIB_API Engine::closeFinger(Node * scene, int i, float  angle)
+{
 	std::string name = fingerNames[i];
 	name.append("1");
-	Node* finger = getNodeByName(root, name);
+	Node* finger = getNodeByName(scene, name);
 	name = name.substr(0, name.size() - 1);
 	name.append("2");
-	Node* finger1 = getNodeByName(root, name);
-		name = name.substr(0, name.size() - 1);
-		name.append("3");
-		Node* finger2 = getNodeByName(root, name);
+	Node* finger1 = getNodeByName(scene, name);
+	name = name.substr(0, name.size() - 1);
+	name.append("3");
+	Node* finger2 = getNodeByName(scene, name);
 	glm::mat4 rotationZ;
-	//reset position
+	//open finger
 	if (angle < 0) {
 		rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(-fingerAngles[i]), glm::vec3(0.0f, 0.0f, -1.0f));
 		fingerAngles[i] = 0;
-	
-	}//close the finger
+
+	}//close  finger
 	else {
-		//bug nel pollice
-		if (fingerAngles[i] < 75 ) {
+		if (fingerAngles[i] < 75) {
 			rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 0.0f, -1.0f));
 			fingerAngles[i] += angle;
 		}
@@ -835,21 +780,23 @@ void Engine::closeFinger(Node * root, int i, float  angle)
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Close the hand
+ * @param  scene scene graph
+ * @param angle rotation angle
  */
-void Engine::closeHand(Node * root, float  angle)
+void LIB_API Engine::closeHand(Node * root, float  angle)
 {
-		closeFinger(root,0, angle);
-		closeFinger(root, 1, angle);
-		closeFinger(root, 2, angle);
-		closeFinger(root, 3, angle);
-		closeFinger(root, 4, angle);
+	closeFinger(root, 0, angle);
+	closeFinger(root, 1, angle);
+	closeFinger(root, 2, angle);
+	closeFinger(root, 3, angle);
+	closeFinger(root, 4, angle);
 }
 
-void Engine::free()
+/**
+ * Free resources
+ */
+void LIB_API Engine::free()
 {
 	//TODO
 }
@@ -866,10 +813,10 @@ bool listNodeCompare(Node*a, Node *b)
 }
 
 /**
-* sorts the trasparent meshes list
+* Sorts the trasparent meshes list
 * @param list of transparent meshes
 */
-void Engine::sortTrasparentMeshesList(std::vector<Node*> transparentMeshes)
+void LIB_API Engine::sortTrasparentMeshesList(std::vector<Node*> transparentMeshes)
 {
 	glDepthMask(GL_FALSE);
 	//gli passo un comparator
@@ -877,10 +824,15 @@ void Engine::sortTrasparentMeshesList(std::vector<Node*> transparentMeshes)
 	glDepthMask(GL_TRUE);
 }
 
-//setta valore alpha ad un nodo specifico
-void Engine::setAlphaToMaterial(Node * root, float alpha, std::string nodeName)
+/**
+* Set alpha to a specific material
+* @param scene scene graph
+* @param alpha alpha value
+* @param meshName name of the mesh containing the searched material  
+*/
+void LIB_API Engine::setAlphaToMaterial(Node * root, float alpha, std::string meshName)
 {
-	Node* node = getNodeByName(root, nodeName);
+	Node* node = getNodeByName(root, meshName);
 	if (node != nullptr)
 	{
 		Mesh* mesh = (Mesh*)node;
@@ -889,10 +841,10 @@ void Engine::setAlphaToMaterial(Node * root, float alpha, std::string nodeName)
 }
 
 /**
-* support method for transparent render
+* Support method for transparent render
 * @param material and render matrix
 */
-void Engine::transparentPreRender(Material *material, glm::mat4 renderMatrix)
+void LIB_API Engine::transparentPreRender(Material *material, glm::mat4 renderMatrix)
 {
 	glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
 

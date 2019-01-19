@@ -77,6 +77,7 @@ class LIB_API Engine {
   void enableZbuffer();
   void loadIdentity();
   void freeImageInitialize();
+  void  freeImageDeInitialize();
   Node* getScene(const char* name);
   void setCameraToPalm(Node* root);
   void addCamera(std::string name, bool movable, glm::vec3 eye,

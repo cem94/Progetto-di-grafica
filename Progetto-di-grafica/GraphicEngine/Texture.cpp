@@ -7,6 +7,9 @@
 #define GL_TEXTURE_MAX_ANISOTROPY_EXT 0x84FE
 #define GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT 0x84FF
 
+/**
+ * Texture constructor
+ */
 Texture::Texture()
 {
 }
@@ -23,11 +26,14 @@ bool fileExist(const std::string& name) {
 }
 //////////////////////////////////////////////////////////////////////////////
 
+/**
+ * Texture constructor if textureName is valid it generates the corresponding texture
+ * @param  textureName the name of the texture
+ */
 Texture::Texture(std::string textureName)
 {
 
 	if (textureName.compare("[none]") == 0) {
-
 		return;
 	}
 	else {
@@ -73,12 +79,18 @@ Texture::Texture(std::string textureName)
 	}
 }
 
-//libera risorse
+/**
+* Texture destructor frees unused resources
+*/
 Texture::~Texture()
 {	
 	glDeleteTextures(1, &textureId);
 }
 
+/**
+* Render for textures
+* @param renderMatrix texture render matrix (not used by this method)
+*/
 void Texture::render(glm::mat4 rendermatrix)
 {
 	glBindTexture(GL_TEXTURE_2D, textureId);
