@@ -87,7 +87,7 @@ void List::insert(std::vector<Node*> elements)
  * @return size of the list
  */
 unsigned int List::size() {
-	return this->list.size();
+	return (unsigned int)this->list.size();
 }
 
 /**

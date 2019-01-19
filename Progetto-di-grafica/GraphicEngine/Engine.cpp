@@ -668,15 +668,43 @@ void LIB_API Engine::rotateModel(Node * root, float angle) {
  */
 
 void LIB_API Engine::closeThumb(Node *root, float angle) {
-
-	std::string name = fingerNames[0];
+	//ottengo falangi
+   	std::string name = fingerNames[0];
 	name.append("1");
-	Node* finger = getNodeByName(root, name);
+	Node* phalanx1 = getNodeByName(root, name);
 	name = name.substr(0, name.size() - 1);
 	name.append("2");
-	Node* finger1 = getNodeByName(root, name);
-
+	Node* phalanx2 = getNodeByName(root, name);
+	glm::mat4 rotationX;
+	glm::mat4 rotationY;
 	//ruota in x e in y
+	if (angle < 0) {
+		//resetto posizione iniziale
+		rotationX= glm::rotate(glm::mat4(1.0f), glm::radians(angleX), glm::vec3(-1.0f, 0.0f, 0.0f));
+
+		rotationY= glm::rotate(glm::mat4(1.0f), glm::radians(fingerAngles[0]), glm::vec3(0.0f, 1.0f, 0.0f));
+		fingerAngles[0] = 0;//l'angolo in y
+		angleX = 0;
+	}
+	else {
+		//muovo le dita in avanti di angle in x  y 
+	
+		if (fingerAngles[0] < 90.f) {
+			rotationY = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, -1.0f, 0.0f));
+			fingerAngles[0] += angle;//l'angolo in y
+
+			if (angleX < 25.f) {
+				//angolo in x
+				rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(1.0f, 0.0f, 0.0f));
+				angleX += angle;
+			}
+		}
+	}
+	phalanx1->setMatrix(phalanx1->getMatrix()*rotationY*rotationX);
+	phalanx2->setMatrix(phalanx2->getMatrix()*rotationY*rotationX);
+	printf("AngleX %lf AngleY %lf\n", angleX, fingerAngles[0]);
+
+	//setto matrici
 }
 
 
@@ -717,35 +745,35 @@ void LIB_API Engine::closeFinger(Node * root, int i, float  angle)
 {
 	std::string name = fingerNames[i];
 	name.append("1");
-	Node* finger = getNodeByName(root, name);
+	Node* phalanx1 = getNodeByName(root, name);
 	name = name.substr(0, name.size() - 1);
 	name.append("2");
-	Node* finger1 = getNodeByName(root, name);
+	Node* phalanx2 = getNodeByName(root, name);
 	name = name.substr(0, name.size() - 1);
 	name.append("3");
-	Node* finger2 = getNodeByName(root, name);
+	Node* phalanx3 = getNodeByName(root, name);
+
 	glm::mat4 rotationZ;
-	//reset position
+	//open the finger by resetting its initial position
 	if (angle < 0) {
 		rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(-fingerAngles[i]), glm::vec3(0.0f, 0.0f, -1.0f));
 		fingerAngles[i] = 0;
-
 	}//close the finger
-	else {
-		if (fingerAngles[i] < 75) {
+	else {//75.0 is our threshold angle for fingers rotation in z
+		if (fingerAngles[i] < 75.f) {
 			rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 0.0f, -1.0f));
 			fingerAngles[i] += angle;
 		}
 	}
-	finger->setMatrix(finger->getMatrix()*rotationZ);
-	finger1->setMatrix(finger1->getMatrix()*rotationZ);
-	finger2->setMatrix(finger2->getMatrix()*rotationZ);
+	phalanx1->setMatrix(phalanx1->getMatrix()*rotationZ);
+	phalanx2->setMatrix(phalanx2->getMatrix()*rotationZ);
+	phalanx3->setMatrix(phalanx3->getMatrix()*rotationZ);
 }
 
 /**
  * Close hand
- * @param  root
- * @param angle
+ * @param  root scene graph
+ * @param angle rotation angle of fingers
  */
 void LIB_API Engine::closeHand(Node * root, float  angle)
 {
