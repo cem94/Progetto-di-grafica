@@ -65,6 +65,7 @@ class LIB_API Engine {
   void display(void (*displayCallback)());
   void timer(void callback(int));
   void keyboard(void (*keyboardCallBack)(unsigned char, int, int));
+  void keyboardUp(void (*keyboardUpCallBack)(unsigned char, int, int));
   void specialKeyboard(void (*specialFunc)(int, int, int));
   void setViewport(int x, int y, int width, int height);
   void clearBuffers();

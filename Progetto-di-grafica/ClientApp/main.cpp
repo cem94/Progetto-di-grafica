@@ -19,11 +19,6 @@ float angleX = 0.0f;
 
 bool keyState[255];
 
-// Cameras
-/*Camera* currentCamera = nullptr;
-std::vector<Camera*> cameras;
-int activeCamera = 1;
-*/
 /**
  * Comment
  * @param  name1
@@ -353,7 +348,7 @@ int main(int argc, char* argv[])
 	scene = engine->getScene(fileName);
 	engine->setLists(scene);
 	//TRASPARENZE per ora non funzionano -> da completare
-	engine->setAlphaToMaterial(scene, 0.9f, "plane");
+	engine->setAlphaToMaterial(scene, 0.99999f, "plane");
 	//TODO:  così è come ha fatto Gatto io non so come usare quella matrice. Se sai come farlo fallo tu pf
 	glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
 	engine->setLists(scene,reflection);	

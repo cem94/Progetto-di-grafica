@@ -96,15 +96,10 @@ void LIB_API Engine::init(int argc, char* argv[])
 		printf("Required OpenGL version not supported\n");
 	}
 
-	//TODO:: GREG serie 7 riga 579, il sore fa:
-	// glGenTextures(1, &texId);   
-	// buildTexture(false);
-	// a cosa server avere un id per le texture??
-
 	enableLighting(true);
 	glEnable(GL_LIGHT0);
 	// abilita la trasparenza
-	// TODO:: GREG ho visto che abilitano questo, è giusto?
+	// TODO:: GREG ho visto che abilitano questo su internet, è giusto?
     glEnable(GL_BLEND);
 	// (A * S) + (B * D)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -661,14 +656,14 @@ void LIB_API Engine::moveCameraX(float direction)
 void LIB_API Engine::moveCameraY(float direction) 
 {
 	glm::mat4 matrix = currentCamera->getMatrix();
-	glm::vec3 mov = direction * glm::vec3(0.0f, 3.0f, 0.0f);
+	glm::vec3 mov = direction* 5.0f * matrix[1];//  glm::vec3(0.0f, 3.0f, 0.0f);
 	currentCamera->setMatrix(glm::translate(matrix, mov));
 }
 
 void LIB_API Engine::moveCameraZ(float direction) 
 {
 	glm::mat4 matrix = currentCamera->getMatrix();
-	glm::vec3 mov = direction * glm::vec3(0.0f, 0.0f, 5.0f);
+	glm::vec3 mov = direction * 5.0f * matrix[2];//  glm::vec3(0.0f, 0.0f, 5.0f);
 	currentCamera->setMatrix(glm::translate(matrix, mov));
 }
 
