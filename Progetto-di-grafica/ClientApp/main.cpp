@@ -3,8 +3,6 @@
 #define GLUT_KEY_UP 0x0065
 #define GLUT_KEY_RIGHT 0x0066
 #define GLUT_KEY_DOWN 0x0067
-#define BUTTON_UP 0
-#define BUTTON_DOWN 1
 
 // GLOBALS //
 Engine* engine = &Engine::getInstance();
@@ -13,8 +11,10 @@ glm::mat4 perspective;
 glm::mat4 ortho;
 Node* scene = NULL;
 bool rotating = false;
+
 int sizeX = 0;
 int sizeY = 0;
+
 float angleX = 0.0f;
 //button state machine
 bool keyState[255];
@@ -50,9 +50,10 @@ void displayCallback()
 void reshapeCallback(int width, int height)
 {
 	engine->setViewport(0, 0, width, height);
+	sizeX = width;
+	sizeY = height;
 	perspective = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 1.0f, 4000.0f);
 	ortho = glm::ortho(0.f, (float)width, 0.f, (float)height, -1.f, 1.f);
-	engine->updateSize();
 }
 /**
  * Keyboard callback
@@ -85,7 +86,6 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 		rotating = !rotating;
 		break;
 	case 'c':
-		//TODO:: vedere di farlo meglio!
 		engine->changeCamera(scene);
 		break;
 	case 'h':
@@ -163,7 +163,6 @@ void keyboardUpCallback(unsigned char key, int x, int y)
 	case 'a':
 		if (keyState[(unsigned char)'a'] == false) {
 			engine->closeFinger(scene, 4, -1.f);
-
 		}
 		break;
 	}
@@ -177,21 +176,22 @@ void keyboardUpCallback(unsigned char key, int x, int y)
  */
 void specialCallback(int key, int x, int y)
 {
-	//muovi luce
+	//muove camere
+	//TODO:: Cem ancora da completare
 	if (!engine->isMovableCamera())
 		return;
 	switch (key) {
 	case GLUT_KEY_DOWN:
-		engine->moveCameraZ(-1.0f);
-		break;
-	case GLUT_KEY_LEFT:
-		engine->moveCameraX(1.0f);
-		break;
-	case GLUT_KEY_RIGHT:
-		engine->moveCameraX(-1.0f);
+		engine->moveCameraForward(1.0f);
 		break;
 	case GLUT_KEY_UP:
-		engine->moveCameraZ(1.0f);
+		engine->moveCameraForward(-1.0f);
+		break;
+	case GLUT_KEY_LEFT:
+		engine->moveCameraRight(-1.0f);
+		break;
+	case GLUT_KEY_RIGHT:
+		engine->moveCameraRight(1.0f);
 		break;
 	default:
 		break;
@@ -220,9 +220,9 @@ void mouseWheel(int wheel, int direction, int x, int y)
 	if (!engine->isMovableCamera())
 		return;
 	if (direction == -1)
-		engine->moveCamera(-10); //engine->moveCamera(glm::vec3(0,-1,0));
+		engine->moveCameraUp(-1.0f);
 	else if (direction == +1)
-		engine->moveCameraY(10);
+		engine->moveCameraUp(1.0f);
 }
 
 /**
@@ -231,19 +231,32 @@ void mouseWheel(int wheel, int direction, int x, int y)
  * @param2 name2
  * @return what it returns
  */
+//TODO:: Cem completares
 void mouseMoved(int x, int y) {
   // UP
-  if (x > sizeX * 0.25 && x < sizeX * 0.75 && y < sizeY * 0.25) {
+  const float sizeYMin = sizeY * 0.20;
+  const float sizeXMin = sizeX * 0.20;
+  const float sizeYMax = sizeY * 0.80;
+  const float sizeXMax = sizeX * 0.80;
+  if (x > sizeXMin && x < sizeXMax && y < sizeYMin) {
     std::cout << "UP" << std::endl;
+    const float angle = (10.0f / sizeYMin) * (sizeYMin - y);
+    engine->rotateCameraUp(angle);
 	// DOWN
-  } else if (x > sizeX * 0.25 && x < sizeX * 0.75 && y > sizeY * 0.75) {
+  } else if (x > sizeXMin && x < sizeXMax && y > sizeYMax) {
     std::cout << "DOWN" << std::endl;
+    const float angle = (10.0f / (sizeY - sizeYMax)) * (y - sizeYMax);
+    engine->rotateCameraUp(-angle);
     // LEFT
-  } else if (y > sizeY * 0.25 && y < sizeY * 0.75 && x < sizeX * 0.25) {
-    std::cout << "left" << std::endl;
+  } else if (y > sizeYMin && y < sizeYMax && x < sizeXMin) {
+    std::cout << "LEFT" << std::endl;
+    const float angle = (10.0f / sizeXMin) * (sizeXMin - x);
+    engine->rotateCameraRight(-angle);
     // RIGHT
-  } else if (y > sizeY * 0.25 && y < sizeY * 0.75 && y > sizeX * 0.75) {
-    std::cout << "Right" << std::endl;
+  } else if (y > sizeYMin && y < sizeYMax && x > sizeXMax) {
+    std::cout << "RIGHT" << std::endl;
+    const float angle = (10.0f / (sizeX - sizeXMax)) * (x - sizeXMax);
+    engine->rotateCameraRight(angle);
   }
 }
 
@@ -306,9 +319,6 @@ int main(int argc, char* argv[])
 	std::cout << "Client application starts" << std::endl;
 	// init engine settings
 	engine->init(argc, argv);
-	
-	sizeY = engine->getWindowSizeY();
-    sizeX = engine->getWindowSizeX();
 
 	// init call back functions
 	setCallBacks();
@@ -321,12 +331,11 @@ int main(int argc, char* argv[])
 	scene = engine->getScene(fileName);
 	engine->setLists(scene);
 	//TRASPARENZE per ora non funzionano -> da completare
-	engine->setAlphaToMaterial(scene, 0.99999f, "plane");
+	engine->setAlphaToMaterial(scene, 0.9f, "plane");
 	//TODO:  così è come ha fatto Gatto io non so come usare quella matrice. Se sai come farlo fallo tu pf
 	glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
 	engine->setLists(scene,reflection);	
 
-	engine->updateSize();
     sizeX = engine->getWindowSizeX();
 	sizeY = engine->getWindowSizeY();
 

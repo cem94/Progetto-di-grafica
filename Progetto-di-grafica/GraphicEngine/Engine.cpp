@@ -30,10 +30,6 @@ std::string fingerNames[5] = {"pollice", "indice", "medio", "anulare", "mignolo"
 bool translateUp = false;
 int translateCnt = 0;
 
-// Windows size
-int sizeX = 0;
-int sizeY = 0;
-
 List* toRender = new List();
 List *trasparentMeshes = new List();
 Engine* Engine::instance = nullptr;
@@ -116,9 +112,9 @@ void LIB_API Engine::loadMatrix(glm::mat4 matrix)
 
 /**
  *Setter for clear color 
- * @param r r component of the color
- * @param g g component of the color
- * @param b b component of the color
+ * @param r red component of the color
+ * @param g greegn component of the color
+ * @param b blue component of the color
  */
 void LIB_API Engine::clearColor(float r, float g, float b)
 {
@@ -140,6 +136,7 @@ void LIB_API Engine::mouseWheel(void(*mouseWheelFunc)(int, int, int, int))
  * @param2 name2
  * @return what it returns
  */
+//TODO:: credo che non lo useremo
 void LIB_API Engine::mousePressed(int button, int state, int x, int y)
 {
 	if (state == GLUT_UP) {
@@ -162,12 +159,14 @@ void LIB_API Engine::mousePressed(void(*mouseFunc)(int, int, int, int))
 }
 
 /**
- * Wrapper for redisplay
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
  */
-void Engine::updateSize() 
+int LIB_API Engine::getWindowSizeX() 
 {
-  sizeY = glutGet(GLUT_WINDOW_WIDTH);
-  sizeX = glutGet(GLUT_WINDOW_HEIGHT);
+	return glutGet(GLUT_WINDOW_WIDTH); 
 }
 
 /**
@@ -176,9 +175,9 @@ void Engine::updateSize()
  * @param2 name2
  * @return what it returns
  */
-int Engine::getWindowSizeX() 
-{
-	return sizeX; 
+int LIB_API Engine::getWindowSizeY() 
+{ 
+	return glutGet(GLUT_WINDOW_HEIGHT); 
 }
 
 /**
@@ -187,18 +186,7 @@ int Engine::getWindowSizeX()
  * @param2 name2
  * @return what it returns
  */
-int Engine::getWindowSizeY() 
-{
-	return sizeY; 
-}
-
-/**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
- */
-void Engine::mouseMoved(void (*mouseMoved)(int, int)) 
+void LIB_API Engine::mouseMoved(void (*mouseMoved)(int, int)) 
 {
   glutPassiveMotionFunc(mouseMoved);
 }
@@ -312,6 +300,7 @@ void LIB_API Engine::loadIdentity()
  * @param  scene the scene graph to print
  * @param indentation text intentation
  */
+//TODO:: renderlo privato!
 void printTree(Node* scene, std::string indentation)
 {
 	glm::mat4 mat = scene->getMatrix();
@@ -323,6 +312,7 @@ void printTree(Node* scene, std::string indentation)
 /**
  * Initialize Free Image 
  */
+//TODO:: GREG quando ci vuole il LIB_API?
 void Engine::freeImageInitialize()
 {
 	FreeImage_Initialise();
@@ -361,11 +351,12 @@ void LIB_API Engine::switchLights()
 	lighting = !lighting;
 	enableLighting(lighting);
 }
-//accende / spegne illuminazione
+
 /**
  * Enable / disable illumination
  * @param  value true = enable lights false = disable lights
- */void LIB_API Engine::enableLighting(bool value)
+ */
+void LIB_API Engine::enableLighting(bool value)
 {
 	if (value) {
 		glEnable(GL_LIGHTING);
@@ -431,7 +422,7 @@ void LIB_API findChildren(Node* currentNode, std::vector<Node*>& nodes)
  * @param  name OVO file name
  * @return root node of the scene graph
  */
-Node* LIB_API Engine::getScene(const char* name)
+Node* Engine::getScene(const char* name)
 {
 	std::vector<Node*> nodes = OvoReader::readOVOfile(name);
 
@@ -469,13 +460,7 @@ void LIB_API Engine::setCameraToPalm(Node* root)
  * takes a node from scene graph searching it by his name
  * @param root node and node name
  */
- /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
- */
-Node* LIB_API Engine::getNodeByName(Node* root, std::string name)
+Node* Engine::getNodeByName(Node* root, std::string name)
 {
 	if (root->getName().compare(name) == 0)
 		return root;
@@ -494,12 +479,6 @@ Node* LIB_API Engine::getNodeByName(Node* root, std::string name)
 * read the scene graph and put the nodes in List
 * @param initial matrix and root node
 */
-/**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
- */
 void  LIB_API Engine::setRenderList(Node* element)
 {
 	toRender->add(element);
@@ -525,6 +504,7 @@ void  LIB_API Engine::setRenderList(Node* element)
   * @param2 name2
   * @return what it returns
   */
+//TODO:: lib_api non manca?
 void Engine::setLists(Node * root) {
 	setRenderList(root);
 	std::vector<Node*> render = toRender->getList();
@@ -539,8 +519,8 @@ void Engine::setLists(Node * root) {
  */
 void LIB_API Engine::setLists(Node * scene, glm::mat4 reflection)
 {
-	scene->setMatrix(reflection);
-	Engine::getInstance().setLists(scene);
+	//scene->setMatrix(reflection);
+	//Engine::getInstance().setLists(scene);
 }
 /**
  * Render list
@@ -607,50 +587,67 @@ bool LIB_API Engine::isMovableCamera()
 	return currentCamera->getMovable();
 }
 
-void LIB_API Engine::moveCameraX(float direction)
+void LIB_API Engine::moveCameraRight(float direction)
 {
 	glm::mat4 matrix = currentCamera->getMatrix();
-	glm::vec3 mov = direction * glm::vec3(5.0f, 0.0f, 0.0f);
+	glm::vec3 mov = direction * 5.0f * matrix[0];
 	currentCamera->setMatrix(glm::translate(matrix, mov));
 }
 
-void LIB_API Engine::moveCameraY(float direction)
+void LIB_API Engine::moveCameraUp(float direction)
 {
 	glm::mat4 matrix = currentCamera->getMatrix();
-	glm::vec3 mov = direction* 5.0f * matrix[1];//  glm::vec3(0.0f, 3.0f, 0.0f);
+	glm::vec3 mov = direction* 5.0f * matrix[1];
 	currentCamera->setMatrix(glm::translate(matrix, mov));
 }
 
-void LIB_API Engine::moveCameraZ(float direction)
+void LIB_API Engine::moveCameraForward(float direction) 
 {
 	glm::mat4 matrix = currentCamera->getMatrix();
-	glm::vec3 mov = direction * 5.0f * matrix[2];//  glm::vec3(0.0f, 0.0f, 5.0f);
+	glm::vec3 mov = direction * 5.0f * matrix[2];
 	currentCamera->setMatrix(glm::translate(matrix, mov));
 }
 
-/**
- * change current camera
- */
+/*
+                glm::mat4 rotation = glm::rotate(glm::mat4(1.0f),
+   glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f)); glm::mat4 translate;
+        translateCnt++;
+                if (translateUp)
+                        translate = glm::translate(glm::mat4(1.0f),
+   glm::vec3(0.0f, 0.1f, 0.0f)); else translate =
+   glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -0.1f, 0.0f));
+
+                guardia->setMatrix(guardia->getMatrix() * translate * rotation);
+*/
+
+void LIB_API Engine::rotateCameraRight(float angle) 
+{
+	std::cout << "angle: " << angle << std::endl;
+	glm::mat4 mat = currentCamera->getMatrix();
+	glm::vec3 vec = mat[1];
+	glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), vec);
+    currentCamera->setMatrix(mat * rotation);
+}
+
+void LIB_API Engine::rotateCameraUp(float angle) 
+{ 
+	std::cout << "angle: " << angle << std::endl;
+	glm::mat4 mat = currentCamera->getMatrix();
+    glm::vec3 vec = mat[0];
+    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle),vec);
+	currentCamera->setMatrix(mat * rotation);
+}
+
  /**
  * Change the current camera
  */
+//TODO:: lib_api non manca ?
 void Engine::changeCamera(Node * root) {
 	activeCamera = (activeCamera + 1) % cameras.size();
 	currentCamera = cameras.at(activeCamera);
     setCameraToPalm(root);
 }
 
-/**
-* Move camera
-* @param  direction movement direction
-*/
-void LIB_API Engine::moveCamera(float direction)
-{
-	glm::mat4 matrix = currentCamera->getMatrix();
-	glm::vec3 axis = 0.2f * direction * matrix[2];
-	//axis[2] *= -1;
-	currentCamera->setMatrix(matrix * glm::translate(glm::mat4(1.0f), axis));
-}
 
 /**
  * Rotate the model around its y axis
