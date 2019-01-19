@@ -455,6 +455,7 @@ void LIB_API Engine::setCameraToPalm(Node* root)
 	palmo->insert(currentCamera);
 }
 
+//TODO questo potrebbe anche stare in node 
 /**
  * takes a node from scene graph searching it by his name
  * @param root node and node name
@@ -629,7 +630,7 @@ void LIB_API Engine::rotateCameraUp(float angle)
  * Change the current camera
  */
 //TODO:: lib_api non manca ?
-void Engine::changeCamera(Node * root) {
+void LIB_API Engine::changeCamera(Node * root) {
 	activeCamera = (activeCamera + 1) % cameras.size();
 	currentCamera = cameras.at(activeCamera);
     setCameraToPalm(root);
@@ -672,7 +673,6 @@ void LIB_API Engine::closeThumb(Node *root, float angle) {
 	if (angle < 0) {
 		//resetto posizione iniziale
 		rotationX= glm::rotate(glm::mat4(1.0f), glm::radians(angleX), glm::vec3(-1.0f, 0.0f, 0.0f));
-
 		rotationY= glm::rotate(glm::mat4(1.0f), glm::radians(fingerAngles[0]), glm::vec3(0.0f, 1.0f, 0.0f));
 		fingerAngles[0] = 0;//l'angolo in y
 		angleX = 0;
@@ -691,8 +691,8 @@ void LIB_API Engine::closeThumb(Node *root, float angle) {
 			}
 		}
 	}
-	phalanx1->setMatrix(phalanx1->getMatrix()*rotationY*rotationX);
-	phalanx2->setMatrix(phalanx2->getMatrix()*rotationY*rotationX);
+	phalanx1->setMatrix(phalanx1->getMatrix()*rotationY);//*rotationX
+	phalanx2->setMatrix(phalanx2->getMatrix()*rotationY);
 	printf("AngleX %lf AngleY %lf\n", angleX, fingerAngles[0]);
 
 	//setto matrici
