@@ -22,10 +22,18 @@ std::vector<Camera*> cameras;
 int activeCamera = 0;
 
 float fingerAngles[5];
-//per il pollice
+// per il pollice
 float angleX;
-std::string fingerNames[5] = { "pollice", "indice","medio","anulare","mignolo" };
-//TODO:: se riusciamo a fare un reserve
+std::string fingerNames[5] = {"pollice", "indice", "medio", "anulare", "mignolo"};
+
+// Gauntlet translate
+bool translateUp = false;
+int translateCnt = 0;
+
+// Window size
+int sizeX = 0;
+int sizeY = 0;
+
 List* toRender = new List();
 List *trasparentMeshes = new List();
 Engine* Engine::instance = nullptr;
@@ -78,13 +86,14 @@ void LIB_API Engine::init(int argc, char* argv[])
 		printf("Required OpenGL version not supported\n");
 	}
 
-	//TODO:: GREG serie 7 riga 579, il sore fa:
-	// glGenTextures(1, &texId);   
-	// buildTexture(false);
-	// a cosa server avere un id per le texture??
-
 	enableLighting(true);
 	glEnable(GL_LIGHT0);
+	// abilita la trasparenza
+	// TODO:: GREG ho visto che abilitano questo su internet, è giusto?
+    glEnable(GL_BLEND);
+	// (A * S) + (B * D)
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	enableZbuffer();
 }
 
@@ -154,6 +163,51 @@ void LIB_API Engine::mousePressed(void(*mouseFunc)(int, int, int, int))
 
 /**
  * Wrapper for redisplay
+ */
+void Engine::updateSize() 
+{
+  sizeY = glutGet(GLUT_WINDOW_WIDTH);
+  sizeX = glutGet(GLUT_WINDOW_HEIGHT);
+}
+
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+int Engine::getWindowSizeX() 
+{
+	return sizeX; 
+}
+
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+int Engine::getWindowSizeY() 
+{
+	return sizeY; 
+}
+
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+void Engine::mouseMoved(void (*mouseMoved)(int, int)) 
+{
+  glutPassiveMotionFunc(mouseMoved);
+}
+
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
  */
 void LIB_API Engine::redisplay()
 {
@@ -401,15 +455,14 @@ Node*  Engine::getScene(const char* name)
 void LIB_API Engine::setCameraToPalm(Node* root)
 {
 	Node* palmo = getNodeByName(root, "guardia");
-	for (Camera * c : cameras)
-		if (c->getMovable())
+	for (Node* n : palmo->getChildren()) {
+		if (n->getType() == Object::Type::CAMERA) 
 		{
-			glm::vec3 eye = c->getMatrix()[0];
-			glm::vec3 center = palmo->getMatrix()[3];
-			glm::vec3 up = c->getMatrix()[2];
-			c->setMatrix(glm::lookAt(eye, center, up));
-			palmo->insert(c);
+            n = currentCamera;
+			return;
 		}
+	}
+	palmo->insert(currentCamera);
 }
 
 /**
@@ -470,7 +523,7 @@ void LIB_API Engine::setLists(Node * root) {
 void LIB_API Engine::setLists(Node * root, glm::mat4 reflection)
 {
 	//glScalef(1.0, -1.0, 1.0);
-	root->setMatrix(root->getFinalMatrix()*reflection);
+	//root->setMatrix(root->getFinalMatrix()*reflection);
 	Engine::getInstance().setLists(root);
 }
 /**
@@ -523,12 +576,9 @@ void LIB_API Engine::addCamera(std::string name, bool movable, glm::vec3 eye, gl
 	camera->setName(name);
 	camera->setMovable(movable);
 	camera->setType(Object::Type::CAMERA);
-	// la camera verra settata successivamente, quando la scena verrà caricata.
-	if (movable)
-		camera->setMatrix(glm::mat3(eye, center, up));//perché questa la setti così?
-	else
-		camera->setMatrix(glm::lookAt(eye, center, up));
-	cameras.push_back(camera);
+
+	camera->setMatrix(glm::lookAt(eye, center, up));
+    cameras.push_back(camera);
 	// update
 	currentCamera = camera;
 	activeCamera = static_cast<int>(cameras.size() - 1);
@@ -553,14 +603,14 @@ void LIB_API Engine::moveCameraX(float direction)
 void LIB_API Engine::moveCameraY(float direction)
 {
 	glm::mat4 matrix = currentCamera->getMatrix();
-	glm::vec3 mov = direction * glm::vec3(0.0f, 5.0f, 0.0f);
+	glm::vec3 mov = direction* 5.0f * matrix[1];//  glm::vec3(0.0f, 3.0f, 0.0f);
 	currentCamera->setMatrix(glm::translate(matrix, mov));
 }
 
 void LIB_API Engine::moveCameraZ(float direction)
 {
 	glm::mat4 matrix = currentCamera->getMatrix();
-	glm::vec3 mov = direction * glm::vec3(0.0f, 0.0f, 5.0f);
+	glm::vec3 mov = direction * 5.0f * matrix[2];//  glm::vec3(0.0f, 0.0f, 5.0f);
 	currentCamera->setMatrix(glm::translate(matrix, mov));
 }
 
@@ -570,15 +620,13 @@ void Engine::moveCamera(float length, glm::vec3 axis) {
 }
 */
 
- /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+/**
+ * change current camera
  */
-void LIB_API Engine::changeCamera() {
+void Engine::changeCamera(Node * root) {
 	activeCamera = (activeCamera + 1) % cameras.size();
 	currentCamera = cameras.at(activeCamera);
+    setCameraToPalm(root);
 }
 
 
@@ -592,12 +640,8 @@ void LIB_API Engine::moveCamera(float direction)
 {
 	glm::mat4 matrix = currentCamera->getMatrix();
 	glm::vec3 axis = 0.2f * direction * matrix[2];
-	axis[2] *= -1;
-	currentCamera->setMatrix(glm::translate(matrix, axis));
-	//glm::vec3 eye = currentCamera->getMatrix()[3];
-	//glm::vec3 center = glm::vec3(0.0f, -30.0f, 0.0f);
-	//glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-	//currentCamera->setMatrix(glm::lookAt(eye, center, up));
+	//axis[2] *= -1;
+	currentCamera->setMatrix(matrix * glm::translate(glm::mat4(1.0f), axis));
 }
 
 /**
@@ -640,6 +684,32 @@ void LIB_API Engine::closeThumb(Node *root, float angle) {
  * @param  name1
  * @param2 name2
  * @return what it returns
+ */
+void Engine::autoRotateModel(Node* root, float angle) {
+	Node* guardia = getNodeByName(root, "guardia");
+	if (guardia != nullptr) {
+		glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
+		glm::mat4 translate;
+        translateCnt++;
+		if (translateUp) 
+			translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.1f, 0.0f));
+		else 
+			translate =	glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -0.1f, 0.0f));
+
+		guardia->setMatrix(guardia->getMatrix() * translate * rotation);
+
+        if (translateCnt > 180) {
+			translateCnt = 0;
+			translateUp = !translateUp;
+		}
+  }
+}
+
+/**
+ * Close a finger of the hand
+ * @param  scene scene graph
+ * @param i number of the finger to close (starting from 0)
+ * @param angle rotation angle
  */
 void LIB_API Engine::closeFinger(Node * root, int i, float  angle)
 {
@@ -692,8 +762,8 @@ void LIB_API Engine::free()
 * depth-sorting (back to front) method for transparent meshes
 * @param two list element to compare
 */
-//TODO:: GREG GUARDA CHE ESISTE LO STENCIL BUFFER PER QUESTO, GUARDA LE SLIDE -> no questo serve leggiti le slide sulle trasparenze. Lo stencil buffer non centra nulla
-bool LIB_API listNodeCompare(Node*a, Node *b)
+
+bool listNodeCompare(Node*a, Node *b)
 {
 	glm::mat4 first = currentCamera->getMatrix() * a->getMatrix();
 	glm::mat4 second = currentCamera->getMatrix() * b->getMatrix();

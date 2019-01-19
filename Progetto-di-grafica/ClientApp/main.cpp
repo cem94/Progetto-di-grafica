@@ -3,6 +3,9 @@
 #define GLUT_KEY_UP 0x0065
 #define GLUT_KEY_RIGHT 0x0066
 #define GLUT_KEY_DOWN 0x0067
+#define BUTTON_UP 0
+#define BUTTON_DOWN 1
+
 // GLOBALS //
 Engine* engine = &Engine::getInstance();
 // matrici di proiezione
@@ -10,6 +13,8 @@ glm::mat4 perspective;
 glm::mat4 ortho;
 Node* scene = NULL;
 bool rotating = false;
+int sizeX = 0;
+int sizeY = 0;
 float angleX = 0.0f;
 //button state machine
 bool keyState[255];
@@ -26,7 +31,7 @@ void displayCallback()
 	// 3d rendering//
 	engine->renderList();
 	if (rotating)
-		engine->rotateModel(scene, -3);
+		engine->autoRotateModel(scene, -1.0f);
 	// 2D rendering//
 	engine->setProjectionMatrix(ortho);
 	engine->loadIdentity();
@@ -47,6 +52,7 @@ void reshapeCallback(int width, int height)
 	engine->setViewport(0, 0, width, height);
 	perspective = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 1.0f, 4000.0f);
 	ortho = glm::ortho(0.f, (float)width, 0.f, (float)height, -1.f, 1.f);
+	engine->updateSize();
 }
 /**
  * Keyboard callback
@@ -79,7 +85,8 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 		rotating = !rotating;
 		break;
 	case 'c':
-		engine->changeCamera();
+		//TODO:: vedere di farlo meglio!
+		engine->changeCamera(scene);
 		break;
 	case 'h':
 		if (keyState[(unsigned char)'h'] == true)
@@ -215,7 +222,29 @@ void mouseWheel(int wheel, int direction, int x, int y)
 	if (direction == -1)
 		engine->moveCamera(-10); //engine->moveCamera(glm::vec3(0,-1,0));
 	else if (direction == +1)
-		engine->moveCamera(10);
+		engine->moveCameraY(10);
+}
+
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+void mouseMoved(int x, int y) {
+  // UP
+  if (x > sizeX * 0.25 && x < sizeX * 0.75 && y < sizeY * 0.25) {
+    std::cout << "UP" << std::endl;
+	// DOWN
+  } else if (x > sizeX * 0.25 && x < sizeX * 0.75 && y > sizeY * 0.75) {
+    std::cout << "DOWN" << std::endl;
+    // LEFT
+  } else if (y > sizeY * 0.25 && y < sizeY * 0.75 && x < sizeX * 0.25) {
+    std::cout << "left" << std::endl;
+    // RIGHT
+  } else if (y > sizeY * 0.25 && y < sizeY * 0.75 && y > sizeX * 0.75) {
+    std::cout << "Right" << std::endl;
+  }
 }
 
 /**
@@ -242,6 +271,7 @@ void setCallBacks()
 	engine->keyboardUp(keyboardUpCallback);
 	engine->specialKeyboard(specialCallback);
 	engine->mouseWheel(mouseWheel);
+    engine->mouseMoved(mouseMoved);
 	//eliminare se non lo usiamo
 	engine->mousePressed(mousePressed);
 	engine->timer(timerCallback);
@@ -260,7 +290,9 @@ void setCameras() {
 	eye = glm::vec3(-400.f, 400.f, 400.f);
 	engine->addCamera("2", false, eye, center, up);
 	//si direbbe che renderizza prima l'ultima che gli passi quindi questa è la camera 1
+  //lascialo così se no non vedo la scena
 	eye = glm::vec3(0, 50, 400.f);
+    center = glm::vec3(0.0f, 0.0f, 0.0f);
 	engine->addCamera("1", true, eye, center, up);
 }
 
@@ -275,10 +307,14 @@ int main(int argc, char* argv[])
 	std::cout << "Client application starts" << std::endl;
 	// init engine settings
 	engine->init(argc, argv);
+	
+	sizeY = engine->getWindowSizeY();
+    sizeX = engine->getWindowSizeX();
+
 	// init call back functions
 	setCallBacks();
 	// set background color
-	engine->clearColor(0.2f, 0.3f, 0.7f);
+	engine->clearColor(1.f, 1.f, 1.f);
 	// set cameras
 	setCameras();
 	// read ovo file, load scene and start main loop
@@ -289,7 +325,12 @@ int main(int argc, char* argv[])
 	engine->setAlphaToMaterial(scene, 0.9f, "plane");
 	//TODO:  così è come ha fatto Gatto io non so come usare quella matrice. Se sai come farlo fallo tu pf
 	glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
-	engine->setLists(scene, reflection);
+	engine->setLists(scene,reflection);	
+
+	engine->updateSize();
+    sizeX = engine->getWindowSizeX();
+	sizeY = engine->getWindowSizeY();
+
 	engine->startLoop();
 	engine->freeImageDeInitialize();
 	std::cout << "Application terminated" << std::endl;
