@@ -15,6 +15,8 @@ public:
 	Node* at(int position);
 	void insert(std::vector<Node*> elements);
 	void render(glm::mat4 renderMatrix) override;
+	unsigned int size();
+
 private:
 	//ok l'ho solo rinominato in list visto che la classe rappresenta una lista
 	std::vector<Node*> list;

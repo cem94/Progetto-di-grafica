@@ -307,7 +307,7 @@ int main(int argc, char* argv[])
 	std::cout << "Client application starts" << std::endl;
 	// init engine settings
 	engine->init(argc, argv);
-	
+	//CEM si può spostare il callback di qua e fare un a funzione che lo setta -> così evitiamo sti metodi
 	sizeY = engine->getWindowSizeY();
     sizeX = engine->getWindowSizeX();
 
@@ -321,16 +321,14 @@ int main(int argc, char* argv[])
 	const char* fileName = "../ovo_files/full_scene.ovo";
 	scene = engine->getScene(fileName);
 	engine->setLists(scene);
-	//TRASPARENZE per ora non funzionano -> da completare
 	engine->setAlphaToMaterial(scene, 0.9f, "plane");
-	//TODO:  così è come ha fatto Gatto io non so come usare quella matrice. Se sai come farlo fallo tu pf
-	glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
-	engine->setLists(scene,reflection);	
 
+	//TRASPARENZE per ora non funzionano -> da completare
+	//anche evitabile credo
 	engine->updateSize();
     sizeX = engine->getWindowSizeX();
 	sizeY = engine->getWindowSizeY();
-
+	//
 	engine->startLoop();
 	engine->freeImageDeInitialize();
 	std::cout << "Application terminated" << std::endl;

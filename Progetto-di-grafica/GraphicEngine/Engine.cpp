@@ -70,9 +70,9 @@ void LIB_API Engine::init(int argc, char* argv[])
 	// creo finestra
 	windowId = glutCreateWindow("Engine");
 
-	//COSA SONO QUESTE DUE COSE ?????
+	//aablita glew (un gestore di estensioni che usiamo per includere i metodi per vao usati per renderizzare le mesh)
 	glewExperimental = GL_TRUE;  // Optional, but recommended
-	//glLightModelf(GL_LIGHT_MODEL_LOCAL_VIEWER, 1.0f);
+//normalizza i vettori per il modello di illuminazione
 	glEnable(GL_NORMALIZE);
 
 	// Init di glew
@@ -89,11 +89,10 @@ void LIB_API Engine::init(int argc, char* argv[])
 	enableLighting(true);
 	glEnable(GL_LIGHT0);
 	// abilita la trasparenza
-	// TODO:: GREG ho visto che abilitano questo su internet, è giusto?
-    glEnable(GL_BLEND);
+	// TODO:: GREG ho visto che abilitano questo su internet, è giusto? NO NOI NON FACCIAMO BLENDING MA ALPHA TESTING
+   // glEnable(GL_BLEND);
 	// (A * S) + (B * D)
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
+   // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	enableZbuffer();
 }
 
@@ -513,19 +512,18 @@ void  LIB_API Engine::setRenderList(Node* element)
   */
 void LIB_API Engine::setLists(Node * root) {
 	//toRender = new List();
+	//set render and trasparent lists
 	setRenderList(root);
+	printf("We have %d elements to render and %d transparent elements\n",toRender->size(), trasparentMeshes->size());
+	glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
 	std::vector<Node*> render = toRender->getList();
-	std::vector<Node*> transparent = toRender->getList();
+	std::vector<Node*> transparent = trasparentMeshes->getList();
+	Node* element = transparent[0];
+	element->setMatrix(element->getFinalMatrix()*reflection);	//set reflection
 	sortTrasparentMeshesList(transparent);
 	toRender->insert(transparent);
 }
 
-void LIB_API Engine::setLists(Node * root, glm::mat4 reflection)
-{
-	//glScalef(1.0, -1.0, 1.0);
-	//root->setMatrix(root->getFinalMatrix()*reflection);
-	Engine::getInstance().setLists(root);
-}
 /**
  * Render all elements in the list
  */
@@ -685,6 +683,7 @@ void LIB_API Engine::closeThumb(Node *root, float angle) {
  * @param2 name2
  * @return what it returns
  */
+//TODO mi sembra un po' inutile non si può chiamare rotateModel e incrementare l'angolo?
 void Engine::autoRotateModel(Node* root, float angle) {
 	Node* guardia = getNodeByName(root, "guardia");
 	if (guardia != nullptr) {
