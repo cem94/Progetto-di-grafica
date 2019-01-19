@@ -176,20 +176,18 @@ void keyboardUpCallback(unsigned char key, int x, int y)
 void specialCallback(int key, int x, int y) 
 {
   // muove camere
-  // TODO:: Cem ancora da completare
-  if (!engine->isMovableCamera()) return;
   switch (key) {
     case GLUT_KEY_DOWN:
-      engine->moveCameraForward(5.0f);
+      engine->moveCameraForward(-3.0f);
       break;
     case GLUT_KEY_UP:
-      engine->moveCameraForward(-5.0f);
+      engine->moveCameraForward(3.0f);
       break;
     case GLUT_KEY_LEFT:
-      engine->moveCameraRight(-5.0f);
+      engine->moveCameraRight(3.0f);
       break;
     case GLUT_KEY_RIGHT:
-      engine->moveCameraRight(5.0f);
+      engine->moveCameraRight(-3.0f);
       break;
     default:
       break;
@@ -218,9 +216,9 @@ void mouseWheel(int wheel, int direction, int x, int y)
 	if (!engine->isMovableCamera())
 		return;
 	else if (direction == -1)
-		engine->moveCameraUp(-3.0f);
+		engine->moveCameraUp(1.0f);
 	else if (direction == +1)
-		engine->moveCameraUp(3.0f);
+		engine->moveCameraUp(-1.0f);
 }
 
 /**
@@ -232,32 +230,31 @@ void mouseWheel(int wheel, int direction, int x, int y)
 // TODO:: Cem completares
 void mouseMoved(int x, int y) 
 {
+	//TODO:: chiedere a Marco
 	// UP
 	const float sizeYMin = sizeY * 0.20;
 	const float sizeXMin = sizeX * 0.20;
 	const float sizeYMax = sizeY * 0.80;
 	const float sizeXMax = sizeX * 0.80;
 
-	if (!engine->isMovableCamera()) {
-		return;
-	} else if (x > sizeXMin && x < sizeXMax && y < sizeYMin) {
+	if (x > sizeXMin && x < sizeXMax && y < sizeYMin) {
 		std::cout << "UP" << std::endl;
-		const float angle = (90.0f / sizeYMin) * (sizeYMin - y);
+		const float angle = (10.0f / sizeYMin) * (sizeYMin - y);
 		engine->rotateCameraUp(-angle);
 		// DOWN
 	} else if (x > sizeXMin && x < sizeXMax && y > sizeYMax) {
 		std::cout << "DOWN" << std::endl;
-		const float angle = (90.0f / (sizeY - sizeYMax)) * (y - sizeYMax);
+		const float angle = (10.0f / (sizeY - sizeYMax)) * (y - sizeYMax);
 		engine->rotateCameraUp(angle);
 		// LEFT
 	} else if (y > sizeYMin && y < sizeYMax && x < sizeXMin) {
 		std::cout << "LEFT" << std::endl;
-		const float angle = (90.0f / sizeXMin) * (sizeXMin - x);
+		const float angle = (10.0f / sizeXMin) * (sizeXMin - x);
 		engine->rotateCameraRight(-angle);
 		// RIGHT
 	} else if (y > sizeYMin && y < sizeYMax && x > sizeXMax) {
 		std::cout << "RIGHT" << std::endl;
-		const float angle = (90.0f / (sizeX - sizeXMax)) * (x - sizeXMax);
+		const float angle = (10.0f / (sizeX - sizeXMax)) * (x - sizeXMax);
 		engine->rotateCameraRight(angle);
 	}
 }
@@ -303,7 +300,7 @@ void setCameras()
   // dove è il sopra
   glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
   engine->addCamera("3", false, eye, center, up);
-  eye = glm::vec3(-400.f, 400.f, 400.f);
+  eye = glm::vec3(400.f, 400.f, 400.f);
   engine->addCamera("2", false, eye, center, up);
   // si direbbe che renderizza prima l'ultima che gli passi quindi questa è la
   // camera 1

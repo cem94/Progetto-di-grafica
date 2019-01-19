@@ -11,16 +11,9 @@ class Camera : public Node {
   void render(glm::mat4 renderMatrix);
   void setMovable(bool movable);
   bool getMovable();
-  
-  void setVec(glm::vec3 eye, glm::vec3 center, glm::vec3 up);
-  glm::vec3 getEye();
-  glm::vec3 getCenter();
-  glm::vec3 getUp();
 
  private:
   glm::mat4 projectionMatrix;
-  glm::vec3 eye;
-  glm::vec3 center;
-  glm::vec3 up;
+
   bool movable = false;
 };
