@@ -71,8 +71,6 @@ Node* List::at(int position)
 	}
 	return nullptr;
 }
-
-//TODO remove
 /**
  * insert a list of elements at the end of our list
  * @param  list of elements to add
@@ -80,10 +78,18 @@ Node* List::at(int position)
 void List::insert(std::vector<Node*> elements)
 {
 	if (elements.size() == 0)
-		printf("Nothing to insert\n");
+		printf("Nothing to insert\n");//TODO remove
     else
 		list.insert(list.end(), elements.begin(), elements.end());
 }
+/**
+ * Give the size of the list
+ * @return size of the list
+ */
+unsigned int List::size() {
+	return this->list.size();
+}
+
 /**
  * Render for list (empty)
  * @param  renderMatrix render matrix

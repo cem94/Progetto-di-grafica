@@ -66,9 +66,9 @@ void LIB_API Engine::init(int argc, char* argv[])
 	// creo finestra
 	windowId = glutCreateWindow("Engine");
 
-	//COSA SONO QUESTE DUE COSE ?????
+	//aablita glew (un gestore di estensioni che usiamo per includere i metodi per vao usati per renderizzare le mesh)
 	glewExperimental = GL_TRUE;  // Optional, but recommended
-	//glLightModelf(GL_LIGHT_MODEL_LOCAL_VIEWER, 1.0f);
+//normalizza i vettori per il modello di illuminazione
 	glEnable(GL_NORMALIZE);
 
 	// Init di glew
@@ -85,11 +85,10 @@ void LIB_API Engine::init(int argc, char* argv[])
 	enableLighting(true);
 	glEnable(GL_LIGHT0);
 	// abilita la trasparenza
-	// TODO:: GREG ho visto che abilitano questo su internet, è giusto?
-    glEnable(GL_BLEND);
+	// TODO:: GREG ho visto che abilitano questo su internet, è giusto? NO NOI NON FACCIAMO BLENDING MA ALPHA TESTING
+   // glEnable(GL_BLEND);
 	// (A * S) + (B * D)
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
+   // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	enableZbuffer();
 }
 
@@ -418,11 +417,11 @@ void LIB_API findChildren(Node* currentNode, std::vector<Node*>& nodes)
 }
 
 /**
- * Returns the scene graph given its name
- * @param  name OVO file name
- * @return root node of the scene graph
- */
-Node* Engine::getScene(const char* name)
+* Returns the scene graph given its name
+* @param  name OVO file name
+* @return root node of the scene graph
+*/
+Node*  Engine::getScene(const char* name)
 {
 	std::vector<Node*> nodes = OvoReader::readOVOfile(name);
 
@@ -436,7 +435,7 @@ Node* Engine::getScene(const char* name)
 	printTree(root, "");
 	return root;
 }
-
+//
 /**
 * Comment
 * @param  name1
@@ -460,7 +459,7 @@ void LIB_API Engine::setCameraToPalm(Node* root)
  * takes a node from scene graph searching it by his name
  * @param root node and node name
  */
-Node* Engine::getNodeByName(Node* root, std::string name)
+Node*  Engine::getNodeByName(Node* root, std::string name)
 {
 	if (root->getName().compare(name) == 0)
 		return root;
@@ -498,32 +497,29 @@ void  LIB_API Engine::setRenderList(Node* element)
 		setRenderList(n);
 }
 
+//TODO Cem ho notato che gli elementi del render sono 45 probabilmente uno è una camera (non credo sia un problema)
+//Mi chiedo non dovremmo copiare la lista da renderizzare settarli tutti ad alpha e con la matrice di riflessione? 
+//Perché gatto setta solo il piano? così non vedo il senso di fare un sort è uno solo l'elemento trasparente
  /**
   * Set render and trasparent lists
-  * @param  scene
-  * @param2 name2
-  * @return what it returns
+  * @param  root scene graph
   */
-//TODO:: lib_api non manca?
-void Engine::setLists(Node * root) {
+void LIB_API Engine::setLists(Node * root) {
+	//toRender = new List();
+	//set render and trasparent lists
 	setRenderList(root);
+	printf("We have %d elements to render and %d transparent elements\n",toRender->size(), trasparentMeshes->size());
+	glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
 	std::vector<Node*> render = toRender->getList();
-	std::vector<Node*> transparent = toRender->getList();
+	std::vector<Node*> transparent = trasparentMeshes->getList();
+	Node* plane = transparent[0];
+	//plane->setMatrix(plane->getFinalMatrix()*reflection);	//set reflection LASCIO COMMENTATO SE NO RIFLETTE MALE
 	sortTrasparentMeshesList(transparent);
-	render.insert(render.end(), transparent.begin(), transparent.end());
+	toRender->insert(transparent);
 }
- /**
- * Set reflection
- * @param scene scene graph
- * @param reflection reflection matrix
- */
-void LIB_API Engine::setLists(Node * scene, glm::mat4 reflection)
-{
-	//scene->setMatrix(reflection);
-	//Engine::getInstance().setLists(scene);
-}
+
 /**
- * Render list
+ * Render all elements in the list
  */
 void LIB_API Engine::renderList() {
 	std::vector<Node*> render = toRender->getList();
@@ -552,17 +548,19 @@ void LIB_API Engine::renderList() {
 }
 
 /**
- * Increment current frames
+ * Increment frames
  */
 void LIB_API Engine::incrementFrames()
 {
 	frames++;
 }
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Add a camera to cameras list
+ * @param  name camera name
+ * @param movable movable value
+ * @param eye where the eye is
+ * @param center center of the scene
+ * @param up orientation vector
  */
 void LIB_API Engine::addCamera(std::string name, bool movable, glm::vec3 eye, glm::vec3 center, glm::vec3 up)
 {
@@ -580,7 +578,7 @@ void LIB_API Engine::addCamera(std::string name, bool movable, glm::vec3 eye, gl
 
 /**
 * Getter for current camera movable
-* @return  true if the current camera is movable false otherwise
+* @return true if current camera is movable false otherwise
 */
 bool LIB_API Engine::isMovableCamera()
 {
@@ -608,17 +606,6 @@ void LIB_API Engine::moveCameraForward(float direction)
 	currentCamera->setMatrix(glm::translate(matrix, mov));
 }
 
-/*
-                glm::mat4 rotation = glm::rotate(glm::mat4(1.0f),
-   glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f)); glm::mat4 translate;
-        translateCnt++;
-                if (translateUp)
-                        translate = glm::translate(glm::mat4(1.0f),
-   glm::vec3(0.0f, 0.1f, 0.0f)); else translate =
-   glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -0.1f, 0.0f));
-
-                guardia->setMatrix(guardia->getMatrix() * translate * rotation);
-*/
 
 void LIB_API Engine::rotateCameraRight(float angle) 
 {
@@ -650,69 +637,18 @@ void Engine::changeCamera(Node * root) {
 
 
 /**
- * Rotate the model around its y axis
- * @param  scene scene graph
- * @param angle rotation angle
+ * Comment
+ * @param  name1
+ * @param2 name2
  * @return what it returns
  */
-void LIB_API Engine::rotateModel(Node * scene, float angle) {
-	Node* guardia = getNodeByName(scene, "guardia");
+void LIB_API Engine::rotateModel(Node * root, float angle) {
+	Node* guardia = getNodeByName(root, "guardia");
 	if (guardia != nullptr)
 	{
 		glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
 		guardia->setMatrix(guardia->getMatrix()*rotation);
 	}
-}
-
-void LIB_API rotateX(float angle, Node *finger, Node *finger1) {
-	glm::mat4 rotationX;
-	if (angle < 0) {
-		rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(-angleX), glm::vec3(1.0f, 0.0f, 0.0f));
-		angleX = 0;
-		finger->setMatrix(finger->getMatrix()*rotationX);
-		finger1->setMatrix(finger1->getMatrix()*rotationX);
-	}
-	else {
-		//rotazione massima in x
-		if (angleX < 30.f) {
-			rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(1.0f, 0.0f, 0.0f));
-			angleX += angle;
-		}
-		finger->setMatrix(finger->getMatrix()*rotationX);
-		finger1->setMatrix(finger1->getMatrix()*rotationX);
-	}
-}
-
-void LIB_API rotateZ(float angle, Node *finger, Node* finger1) {
-	glm::mat4 rotationZ;
-	if (angle < 0) {
-		rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(-fingerAngles[0]), glm::vec3(1.0f, 0.0f, 0.0f));
-		fingerAngles[0] = 0;
-		finger->setMatrix(finger->getMatrix()*rotationZ);
-		finger1->setMatrix(finger1->getMatrix()*rotationZ);
-	}
-	else {
-		//rotazione massima in z
-		if (fingerAngles[0] < 50.f) {
-			rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(1.0f, 0.0f, 0.0f));
-			fingerAngles[0] += angle;
-		}
-		finger->setMatrix(finger->getMatrix()*rotationZ);
-		finger1->setMatrix(finger1->getMatrix()*rotationZ);
-	}
-}
-
-void LIB_API Engine::closeThumb(Node *scene, float angle) {
-
-	std::string name = fingerNames[0];
-	name.append("1");
-	Node* finger = getNodeByName(scene, name);
-	name = name.substr(0, name.size() - 1);
-	name.append("2");
-	Node* finger1 = getNodeByName(scene, name);
-	//se l'angolo è negativo resetto ruotando di meno l'angolo precedente
-	rotateX(angle, finger, finger1);
-	rotateZ(angle, finger, finger1);
 }
 
 /**
@@ -721,6 +657,27 @@ void LIB_API Engine::closeThumb(Node *scene, float angle) {
  * @param2 name2
  * @return what it returns
  */
+
+void LIB_API Engine::closeThumb(Node *root, float angle) {
+
+	std::string name = fingerNames[0];
+	name.append("1");
+	Node* finger = getNodeByName(root, name);
+	name = name.substr(0, name.size() - 1);
+	name.append("2");
+	Node* finger1 = getNodeByName(root, name);
+
+	//ruota in x e in y
+}
+
+
+/**
+ * Comment
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+//TODO mi sembra un po' inutile non si può chiamare rotateModel e incrementare l'angolo?
 void Engine::autoRotateModel(Node* root, float angle) {
 	Node* guardia = getNodeByName(root, "guardia");
 	if (guardia != nullptr) {
@@ -747,24 +704,24 @@ void Engine::autoRotateModel(Node* root, float angle) {
  * @param i number of the finger to close (starting from 0)
  * @param angle rotation angle
  */
-void LIB_API Engine::closeFinger(Node * scene, int i, float  angle)
+void LIB_API Engine::closeFinger(Node * root, int i, float  angle)
 {
 	std::string name = fingerNames[i];
 	name.append("1");
-	Node* finger = getNodeByName(scene, name);
+	Node* finger = getNodeByName(root, name);
 	name = name.substr(0, name.size() - 1);
 	name.append("2");
-	Node* finger1 = getNodeByName(scene, name);
+	Node* finger1 = getNodeByName(root, name);
 	name = name.substr(0, name.size() - 1);
 	name.append("3");
-	Node* finger2 = getNodeByName(scene, name);
+	Node* finger2 = getNodeByName(root, name);
 	glm::mat4 rotationZ;
-	//open finger
+	//reset position
 	if (angle < 0) {
 		rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(-fingerAngles[i]), glm::vec3(0.0f, 0.0f, -1.0f));
 		fingerAngles[i] = 0;
 
-	}//close  finger
+	}//close the finger
 	else {
 		if (fingerAngles[i] < 75) {
 			rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 0.0f, -1.0f));
@@ -777,22 +734,18 @@ void LIB_API Engine::closeFinger(Node * scene, int i, float  angle)
 }
 
 /**
- * Close the hand
- * @param  scene scene graph
- * @param angle rotation angle
+ * Close hand
+ * @param  root
+ * @param angle
  */
 void LIB_API Engine::closeHand(Node * root, float  angle)
 {
-	closeFinger(root, 0, angle);
+	closeThumb(root, angle);
 	closeFinger(root, 1, angle);
 	closeFinger(root, 2, angle);
 	closeFinger(root, 3, angle);
 	closeFinger(root, 4, angle);
 }
-
-/**
- * Free resources
- */
 void LIB_API Engine::free()
 {
 	//TODO
@@ -802,6 +755,7 @@ void LIB_API Engine::free()
 * depth-sorting (back to front) method for transparent meshes
 * @param two list element to compare
 */
+
 bool listNodeCompare(Node*a, Node *b)
 {
 	glm::mat4 first = currentCamera->getMatrix() * a->getMatrix();
@@ -810,7 +764,7 @@ bool listNodeCompare(Node*a, Node *b)
 }
 
 /**
-* Sorts the trasparent meshes list
+* sorts the trasparent meshes list
 * @param list of transparent meshes
 */
 void LIB_API Engine::sortTrasparentMeshesList(std::vector<Node*> transparentMeshes)
@@ -820,25 +774,18 @@ void LIB_API Engine::sortTrasparentMeshesList(std::vector<Node*> transparentMesh
 	std::sort(transparentMeshes.begin(), transparentMeshes.end(), listNodeCompare);
 	glDepthMask(GL_TRUE);
 }
-
-/**
-* Set alpha to a specific material
-* @param scene scene graph
-* @param alpha alpha value
-* @param meshName name of the mesh containing the searched material  
-*/
-void LIB_API Engine::setAlphaToMaterial(Node * root, float alpha, std::string meshName)
+//setta valore alpha ad un nodo specifico
+void LIB_API Engine::setAlphaToMaterial(Node * root, float alpha, std::string nodeName)
 {
-	Node* node = getNodeByName(root, meshName);
+	Node* node = getNodeByName(root, nodeName);
 	if (node != nullptr)
 	{
 		Mesh* mesh = (Mesh*)node;
 		mesh->getMaterial()->setAlpha(alpha);
 	}
 }
-
 /**
-* Support method for transparent render
+* support method for transparent render
 * @param material and render matrix
 */
 void LIB_API Engine::transparentPreRender(Material *material, glm::mat4 renderMatrix)

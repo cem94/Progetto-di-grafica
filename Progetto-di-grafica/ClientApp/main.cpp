@@ -303,8 +303,9 @@ void setCameras() {
 	eye = glm::vec3(-400.f, 400.f, 400.f);
 	engine->addCamera("2", false, eye, center, up);
 	//si direbbe che renderizza prima l'ultima che gli passi quindi questa è la camera 1
-    eye = glm::vec3(200, 200, 0.f);
-    center = glm::vec3(0.0f, 200.0f, 0.0f);
+  //lascialo così se no non vedo la scena
+	eye = glm::vec3(0, 50, 400.f);
+    center = glm::vec3(0.0f, 0.0f, 0.0f);
 	engine->addCamera("1", true, eye, center, up);
 }
 
@@ -329,6 +330,7 @@ int main(int argc, char* argv[])
 	// read ovo file, load scene and start main loop
 	const char* fileName = "../ovo_files/full_scene.ovo";
 	scene = engine->getScene(fileName);
+	engine->setAlphaToMaterial(scene, 0.9f, "plane");
 	engine->setLists(scene);
 	//TRASPARENZE per ora non funzionano -> da completare
 	engine->setAlphaToMaterial(scene, 0.9f, "plane");
@@ -338,7 +340,7 @@ int main(int argc, char* argv[])
 
     sizeX = engine->getWindowSizeX();
 	sizeY = engine->getWindowSizeY();
-
+	//
 	engine->startLoop();
 	engine->freeImageDeInitialize();
 	std::cout << "Application terminated" << std::endl;

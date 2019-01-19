@@ -4,9 +4,9 @@
 //// FreeImage:
 #include <FreeImage.h>
 //TODO capire come aggiungere estensione asintropia
-#define GL_TEXTURE_MAX_ANISOTROPY_EXT 0x84FE
+/*#define GL_TEXTURE_MAX_ANISOTROPY_EXT 0x84FE
 #define GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT 0x84FF
-
+*/
 /**
  * Texture constructor
  */
