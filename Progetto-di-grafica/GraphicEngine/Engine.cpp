@@ -506,6 +506,9 @@ void  LIB_API Engine::setRenderList(Node* element)
 		setRenderList(n);
 }
 
+//TODO Cem ho notato che gli elementi del render sono 45 probabilmente uno è una camera (non credo sia un problema)
+//Mi chiedo non dovremmo copiare la lista da renderizzare settarli tutti ad alpha e con la matrice di riflessione? 
+//Perché gatto setta solo il piano? così non vedo il senso di fare un sort è uno solo l'elemento trasparente
  /**
   * Set render and trasparent lists
   * @param  root scene graph
@@ -518,8 +521,8 @@ void LIB_API Engine::setLists(Node * root) {
 	glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
 	std::vector<Node*> render = toRender->getList();
 	std::vector<Node*> transparent = trasparentMeshes->getList();
-	Node* element = transparent[0];
-	element->setMatrix(element->getFinalMatrix()*reflection);	//set reflection
+	Node* plane = transparent[0];
+	//plane->setMatrix(plane->getFinalMatrix()*reflection);	//set reflection LASCIO COMMENTATO SE NO RIFLETTE MALE
 	sortTrasparentMeshesList(transparent);
 	toRender->insert(transparent);
 }

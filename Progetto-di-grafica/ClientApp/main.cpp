@@ -320,9 +320,8 @@ int main(int argc, char* argv[])
 	// read ovo file, load scene and start main loop
 	const char* fileName = "../ovo_files/full_scene.ovo";
 	scene = engine->getScene(fileName);
-	engine->setLists(scene);
 	engine->setAlphaToMaterial(scene, 0.9f, "plane");
-
+	engine->setLists(scene);
 	//TRASPARENZE per ora non funzionano -> da completare
 	//anche evitabile credo
 	engine->updateSize();
