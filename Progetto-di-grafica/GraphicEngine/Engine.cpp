@@ -504,7 +504,7 @@ void  LIB_API Engine::setRenderList(Node* element)
   * Set render and trasparent lists
   * @param  root scene graph
   */
-void LIB_API Engine::setLists(Node * root) {
+void  Engine::setLists(Node * root) {
 	//toRender = new List();
 	//set render and trasparent lists
 	setRenderList(root);

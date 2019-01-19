@@ -103,7 +103,6 @@ class LIB_API Engine {
   void sortTrasparentMeshesList(std::vector<Node*> transparentMeshes);
   void setAlphaToMaterial(Node* root, float alpha, std::string nodeName);
   void setLists(Node* root);
-  void setLists(Node* root, glm::mat4 reflection);
 
  private:
   // Singleton
