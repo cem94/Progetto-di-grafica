@@ -56,7 +56,6 @@ class LIB_API Engine {
   void mouseWheel(void (*mouseWheelFunc)(int, int, int, int));
   void mousePressed(int button, int state, int x, int y);
   void mousePressed(void (*mouseFunc)(int, int, int, int));
-  void updateSize();
   int getWindowSizeX();
   int getWindowSizeY();
   void mouseMoved(void (*mouseFunc)(int, int));
@@ -77,24 +76,25 @@ class LIB_API Engine {
   void enableZbuffer();
   void loadIdentity();
   void freeImageInitialize();
-  void  freeImageDeInitialize();
+  void freeImageDeInitialize();
   Node* getScene(const char* name);
   void setCameraToPalm(Node* root);
   void addCamera(std::string name, bool movable, glm::vec3 eye,
                  glm::vec3 center, glm::vec3 up);
   bool isMovableCamera();
-  void moveCameraX(float direction);
-  void moveCameraY(float direction);
-  void moveCameraZ(float direction);
+  void moveCameraRight(float direction);
+  void moveCameraUp(float direction);
+  void moveCameraForward(float direction);
+  void rotateCameraRight(float angle);
+  void rotateCameraUp(float angle);
   void switchLights();
   Node* getNodeByName(Node* root, std::string name);
-  void changeCamera(Node * root);
-  void moveCamera(float direction);
+  void changeCamera(Node* root);
   void setRenderList(Node* element);
   void renderList();
   void incrementFrames();
   void rotateModel(Node* root, float angle);
-  void closeThumb(Node *root,float angle);
+  void closeThumb(Node* root, float angle);
   void autoRotateModel(Node* root, float angle);
   void closeFinger(Node* root, int finger, float angle);
   void closeHand(Node* root, float angle);
@@ -103,7 +103,6 @@ class LIB_API Engine {
   void sortTrasparentMeshesList(std::vector<Node*> transparentMeshes);
   void setAlphaToMaterial(Node* root, float alpha, std::string nodeName);
   void setLists(Node* root);
-  void setLists(Node* root, glm::mat4 reflection);
 
  private:
   // Singleton
