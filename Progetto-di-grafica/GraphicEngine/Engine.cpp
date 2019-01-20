@@ -387,22 +387,38 @@ void LIB_API Engine::enableLight(Node *scene, std::string lightName)
  */
 void LIB_API Engine::renderText()
 {
+	glDisable(GL_LIGHTING);
+	//glDisable(GL_BLEND);
+	//glDisable(GL_TEXTURE);
+	glDisable(GL_TEXTURE_2D);
     char text[64];
     //colore testo
-    glColor3f(1.0f, 1.0f, 1.0f);
-    strcpy(text, "[1, 2, 3, 4] turn on/off lights");
+    
+	strcpy(text, "[1] [2] [3] [4] turn on/off lights");
+	glColor3f(1.0f, 1.0f, 1.0f);
     glRasterPos2f(10.0f, 20.0f);
     glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
-    //glColor3f(1.0f, 1.0f, 1.0f);
-    sprintf(text, "FPS: %.1f", fps);
+    
+	sprintf(text, "FPS: %.1f", fps);
+	glColor3f(1.0f, 1.0f, 1.0f);
     glRasterPos2f(10.0f, 40.0f);
     glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
+
     strcpy(text, "[c] change camera");
+	glColor3f(1.0f, 1.0f, 1.0f);
     glRasterPos2f(10.0f, 60.0f);
     glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
-    sprintf(text, "[r] rotate model ");
+    
+	sprintf(text, "[r] rotate model");
+	glColor3f(1.0f, 1.0f, 1.0f);
     glRasterPos2f(10.0f, 80.0f);
     glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
+	//glEnable(GL_TEXTURE);
+	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_LIGHTING);
+	//glEnable(GL_BLEND);
+
+	//lighting = true;
 }
 
 /**
@@ -708,8 +724,11 @@ void LIB_API Engine::rotateModel(Node * root, float angle)
     }
 }
 
+//void LIB_API Engine::openThumb(Node *root,)
+
+
 /**
- * Comment
+ * Close the thumb
  * @param  name1
  * @param2 name2
  * @return what it returns
@@ -722,7 +741,10 @@ void LIB_API Engine::closeThumb(Node *root, float angle)
     name.append("1");
     //usare padre
     Node* phalanx1 = getNodeByName(root, name);
+
+//	Node* phalanx1 = phalanx2->getParent();
     name = name.substr(0, name.size() - 1);
+
     name.append("2");
     Node* phalanx2 = getNodeByName(root, name);
     glm::mat4 rotation;
