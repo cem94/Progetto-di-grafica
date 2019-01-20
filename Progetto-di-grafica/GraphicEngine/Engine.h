@@ -105,7 +105,7 @@ public:
     void setAlphaToMaterial(Node* root, float alpha, std::string nodeName);
     void setLists(Node* root);
 	Camera * getCurrentCamera();
-
+	std::vector<List*> static getLists();
 private:
     // Singleton
     Engine() {};                       // Private so that it can  not be called
@@ -113,4 +113,5 @@ private:
     Engine(Engine const&) {};          // copy constructor is private
     Engine& operator=(Engine const&);  // assignment operator is private
     static Engine* instance;
+	static std::vector<List*> lists;
 };

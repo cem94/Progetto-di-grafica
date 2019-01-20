@@ -30,6 +30,9 @@ void displayCallback()
     engine->setProjectionMatrix(perspective);
     // 3d rendering//
     engine->renderList();
+	std::vector<List*> lists = Engine::getLists();
+	for (int i = 0; i < lists.size(); i++)
+		lists.at(i)->render(glm::mat4());
     if (rotating)
         engine->autoRotateModel(scene, -1.0f);
     // 2D rendering//
@@ -358,7 +361,6 @@ int main(int argc, char* argv[])
 
     sizeX = engine->getWindowSizeX();
     sizeY = engine->getWindowSizeY();
-    //
     engine->startLoop();
     engine->freeImageDeInitialize();
     std::cout << "Application terminated" << std::endl;

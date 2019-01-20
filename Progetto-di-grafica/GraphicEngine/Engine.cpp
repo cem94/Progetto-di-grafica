@@ -31,9 +31,9 @@ bool translateUp = false;
 int translateCnt = 0;
 
 List* toRender = new List();
-List *trasparentMeshes = new List();
+List *transparentMeshes = new List();
 Engine* Engine::instance = nullptr;
-
+std::vector<List*> Engine::lists = {};
 /**
  * Getter for engine instance
  * @return a instance of engine. A new instance is created if engine is still nullptr
@@ -493,7 +493,7 @@ void  LIB_API Engine::createLists(Node* element)
         if (mesh->getMaterial() != nullptr && mesh->getMaterial()->isTrasparent())
         {
             printf("Aggiungo mesh trasparente %s \n", mesh->getName().c_str());
-            trasparentMeshes->add(element);
+            transparentMeshes->add(element);
         }
     }
     if (element->getType() == Node::Type::LIGHT)
@@ -522,25 +522,23 @@ void setAlpha(float value, std::vector<Node*> nodes)
   */
 void  LIB_API Engine::setLists(Node * root)
 {
-    //toRender = new List();
     //set render and trasparent lists
-
     createLists(root);
     //qua dovrei inserire le liste di luci etc
     glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
     std::vector<Node*> copy = toRender->getList(); // Qua dovremmo crearne una copia
-
     //ordino la lista
     sortTrasparentMeshesList(copy);
     //setto alpha < 1 per la copia della scena ->  problema visto che sono puntatori mi cambia anche la lista originale
    // setAlpha(0.7f, copy);
-    trasparentMeshes->insert(copy);
-    //moltiplicando il riflesso per la root tutti i figli si girano essendo un puntatore però giriamo entrambe le scene
+    transparentMeshes->insert(copy);
     //Commentato perché gira la scena
-    //toRender->at(0)->setMatrix(toRender->at(0)->getMatrix()*reflection);
+    printf("We have %d elements to render and %d transparent elements\n", toRender->size(), transparentMeshes->size());
 
-    printf("We have %d elements to render and %d transparent elements\n", toRender->size(), trasparentMeshes->size());
-    toRender->insert(trasparentMeshes->getList());
+	lists.push_back(toRender);
+	//moltiplicando il riflesso per la root tutti i figli si girano essendo un puntatore però giriamo entrambe le scene
+//	transparentMeshes->at(0)->setMatrix(transparentMeshes->at(0)->getMatrix()*reflection); //toRender->
+	lists.push_back(transparentMeshes);
     //stampo la lista finale solo per debug
     for (unsigned int i = 0; i < toRender->size(); i++)
     {
@@ -552,12 +550,16 @@ void  LIB_API Engine::setLists(Node * root)
 
         }
     }
-
 }
 
 Camera * Engine::getCurrentCamera()
 {
 	return currentCamera;
+}
+
+std::vector<List*> Engine::getLists()
+{
+	return lists;
 }
 
 /**
@@ -566,30 +568,6 @@ Camera * Engine::getCurrentCamera()
 void LIB_API Engine::renderList()
 {
 	toRender->render(glm::mat4());
-    //std::vector<Node*> render = toRender->getList();
-    //for (Node* n : render)
-    //{
-    //    glm::mat4 renderMatrix = n->getFinalMatrix();
-
-    //    if (n->getType() == Object::Type::MESH)
-    //    {
-    //        Mesh* m = static_cast<Mesh*>(n);
-    //        if (m->getMaterial() != nullptr)
-    //        {
-    //            if (m->getMaterial()->isTrasparent())
-    //            {
-    //                // TRASPARENZE
-    //                transparentPreRender(m->getMaterial(), renderMatrix);
-    //            }
-    //            else
-    //            {
-    //                m->getMaterial()->render(renderMatrix);
-    //            }
-    //        }
-    //    }
-    //   // n->render(currentCamera->getMatrix() * renderMatrix);
-    //    n->render(currentCamera->getMatrix() * renderMatrix);
-    //}
 }
 
 /**

@@ -3,7 +3,7 @@
  * perspective projections, and the necessary math to retrieve the camera
  * inverse matrix.*/
 
-class Camera : public Node
+class LIB_API Camera : public Node
 {
 public:
     Camera();
@@ -15,6 +15,5 @@ public:
 
 private:
     glm::mat4 projectionMatrix;
-
     bool movable = false;
 };

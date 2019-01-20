@@ -1,6 +1,6 @@
 #pragma once
 /*Extends the Object class with the required functions to locate the object in the 3D space (through a matrix) and in a hierarchy (through a hierarchical structure).*/
-class Node : public Object
+class LIB_API Node : public Object
 {
 public:
     Node();

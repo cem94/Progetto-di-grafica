@@ -1,6 +1,6 @@
 #pragma once
 /*Contains all the parameters necessary to define a material. It enables to change material properties and it is responsible for transferring its settings to OpenGL through the necessary methods.*/
-class  Material : public Object
+class LIB_API Material : public Object
 {
 public:
     Material();

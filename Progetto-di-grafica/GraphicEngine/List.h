@@ -1,7 +1,7 @@
 #pragma once
 /*Contains a list of instances, each one with its own properties(such as position, material, etc.).Matrices are stored in world coordinates after being evaluated according to their hierarchy.*/
 
-class List : public Object
+class LIB_API List : public Object
 {
 public:
     List();

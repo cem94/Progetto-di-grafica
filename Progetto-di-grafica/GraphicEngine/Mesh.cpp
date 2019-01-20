@@ -29,26 +29,26 @@ void Mesh::generateVAO(float * vertexes, float * normals, float * uvArray, unsig
 {
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
-
+	//vertex vbo
     glGenBuffers(1, &vertexVBO);
     glBindBuffer(GL_ARRAY_BUFFER, vertexVBO);
     glBufferData(GL_ARRAY_BUFFER, numberOfVertexes * 3 * sizeof(float), vertexes, GL_STATIC_DRAW);
     glVertexPointer(3, GL_FLOAT, 0, nullptr);
-
+	//normals
     glGenBuffers(1, &normalVBO);
     glBindBuffer(GL_ARRAY_BUFFER, normalVBO);
     glBufferData(GL_ARRAY_BUFFER, numberOfVertexes * 3 * sizeof(float), normals, GL_STATIC_DRAW);
     glNormalPointer(GL_FLOAT, 0, nullptr);
-
+	//array uv
     glGenBuffers(1, &uvVBO);
     glBindBuffer(GL_ARRAY_BUFFER, uvVBO);
     glBufferData(GL_ARRAY_BUFFER, numberOfVertexes * 2 * sizeof(float), uvArray, GL_STATIC_DRAW);
     glTexCoordPointer(2, GL_FLOAT, 0, nullptr);
-
+	//indices vbo
     glGenBuffers(1, &indicesVBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indicesVBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, numberOfFaces * 3 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
-    glEnableClientState(GL_NORMAL_ARRAY);
+	glEnableClientState(GL_NORMAL_ARRAY);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
     glEnableClientState(GL_VERTEX_ARRAY);
     glBindVertexArray(0);

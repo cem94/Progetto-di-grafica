@@ -92,6 +92,7 @@
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="OvoReader.cpp" />
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
