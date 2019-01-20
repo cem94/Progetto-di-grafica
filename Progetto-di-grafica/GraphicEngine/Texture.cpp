@@ -4,9 +4,9 @@
 //// FreeImage:
 #include <FreeImage.h>
 //TODO capire come aggiungere estensione asintropia
-/*#define GL_TEXTURE_MAX_ANISOTROPY_EXT 0x84FE
+#define GL_TEXTURE_MAX_ANISOTROPY_EXT 0x84FE
 #define GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT 0x84FF
-*/
+
 /**
  * Texture constructor
  */
@@ -69,9 +69,22 @@ Texture::Texture(std::string textureName)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         //TODO aggiungere asintropia
-        //	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1);
-        // Set min/mag filters migliorano la texture rimuovendo errori
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		//check for anisotropic
+		bool isAnisotropicSupported = false;
+		int anisotropicLevel = 1;
+
+		if (strstr((const char *)glGetString(GL_EXTENSIONS), "GL_EXT_texture_filter_anisotropic"))
+		{
+			isAnisotropicSupported = true;
+			glGetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &anisotropicLevel);
+		}
+
+		if (isAnisotropicSupported)
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, anisotropicLevel);
+		else
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1);       // Set min/mag filters migliorano la texture rimuovendo errori
+      
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         //TODO controllare se OpenGL > 3.0 altrimenti mimapping non funziona
         // Using mipmapping
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
@@ -80,7 +93,7 @@ Texture::Texture(std::string textureName)
         //crea le mipmap
 			//ATTENZIONE NON FUNZIONA SU LINUX -> DOBBIAMO TROVARE UNA SOLUZIONE
 			//   gluBuild2DMipmaps()
-            gluBuild2DMipmaps(GL_TEXTURE_2D, format, FreeImage_GetWidth(bitmap), FreeImage_GetHeight(bitmap), extFormat, GL_UNSIGNED_BYTE, (void *)FreeImage_GetBits(bitmap));
+           gluBuild2DMipmaps(GL_TEXTURE_2D, format, FreeImage_GetWidth(bitmap), FreeImage_GetHeight(bitmap), extFormat, GL_UNSIGNED_BYTE, (void *)FreeImage_GetBits(bitmap));
 
         // Free resources: TODO usare metodi di Engine
         FreeImage_Unload(bitmap);

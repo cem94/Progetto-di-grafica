@@ -38,9 +38,9 @@ void displayCallback()
     // 2D rendering//
     engine->setProjectionMatrix(ortho);
     engine->loadIdentity();
-    engine->enableLighting(false);
+   // engine->enableLighting(false);
     engine->renderText();
-    engine->enableLighting(true);
+   // engine->enableLighting(true);
     engine->incrementFrames();
     engine->swapBuffers();
     engine->redisplay();

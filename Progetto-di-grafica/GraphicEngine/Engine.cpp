@@ -393,7 +393,7 @@ void LIB_API Engine::renderText()
     strcpy(text, "[1, 2, 3, 4] turn on/off lights");
     glRasterPos2f(10.0f, 20.0f);
     glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
-    glColor3f(1.0f, 1.0f, 1.0f);
+    //glColor3f(1.0f, 1.0f, 1.0f);
     sprintf(text, "FPS: %.1f", fps);
     glRasterPos2f(10.0f, 40.0f);
     glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
@@ -524,21 +524,22 @@ void  LIB_API Engine::setLists(Node * root)
 {
     //set render and trasparent lists
     createLists(root);
+
     //qua dovrei inserire le liste di luci etc
     glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
     std::vector<Node*> copy = toRender->getList(); // Qua dovremmo crearne una copia
     //ordino la lista
     sortTrasparentMeshesList(copy);
     //setto alpha < 1 per la copia della scena ->  problema visto che sono puntatori mi cambia anche la lista originale
-   // setAlpha(0.7f, copy);
+    //setAlpha(0.7f, copy);
     transparentMeshes->insert(copy);
     //Commentato perché gira la scena
     printf("We have %d elements to render and %d transparent elements\n", toRender->size(), transparentMeshes->size());
 
 	lists.push_back(toRender);
 	//moltiplicando il riflesso per la root tutti i figli si girano essendo un puntatore però giriamo entrambe le scene
-//	transparentMeshes->at(0)->setMatrix(transparentMeshes->at(0)->getMatrix()*reflection); //toRender->
-	lists.push_back(transparentMeshes);
+	//toRender->at(0)->setMatrix(toRender->at(0)->getMatrix()*reflection); //toRender->
+	//lists.push_back(transparentMeshes);
     //stampo la lista finale solo per debug
     for (unsigned int i = 0; i < toRender->size(); i++)
     {
