@@ -19,11 +19,12 @@ Light::Light()
  * @param2 name2
  * @return what it returns
  */
-Light::Light(std::string name) {
-	numberOfLights = numberOfLights + 1;
-	lightNumber = numberOfLights;
-	this->setName(name);
-	this->setId(lightNumber);
+Light::Light(std::string name)
+{
+    numberOfLights = numberOfLights + 1;
+    lightNumber = numberOfLights;
+    this->setName(name);
+    this->setId(lightNumber);
 }
 /**
  * Light destructor
@@ -37,7 +38,7 @@ Light::~Light()
  */
 short Light::getIntensity() const
 {
-	return this->intensity;
+    return this->intensity;
 }
 
 /**
@@ -46,7 +47,7 @@ short Light::getIntensity() const
  */
 void Light::setIntensity(short intensity)
 {
-	this->intensity = intensity;
+    this->intensity = intensity;
 }
 
 /**
@@ -55,7 +56,7 @@ void Light::setIntensity(short intensity)
  */
 void Light::setAmbient(glm::vec4 ambient)
 {
-	this->ambient = ambient;
+    this->ambient = ambient;
 }
 
 /**
@@ -64,7 +65,7 @@ void Light::setAmbient(glm::vec4 ambient)
  */
 void Light::setDiffuse(glm::vec4 diffuse)
 {
-	this->diffuse = diffuse;
+    this->diffuse = diffuse;
 }
 /**
  * Setter for specular
@@ -72,17 +73,17 @@ void Light::setDiffuse(glm::vec4 diffuse)
  */
 void Light::setSpecular(glm::vec4 specular)
 {
-	this->specular = specular;
+    this->specular = specular;
 }
 /**
  * Switch that change the state of the light
  */
 void Light::changeState()
 {
-	if (this->isActive)
-		this->disableLight();
-	else
-		this->enableLight();
+    if (this->isActive)
+        this->disableLight();
+    else
+        this->enableLight();
 }
 
 /**
@@ -91,21 +92,22 @@ void Light::changeState()
  */
 void Light::render(glm::mat4 renderMatrix)
 {
-	//set renderingMatrix as current OpenGL Matrix
-	glLoadMatrixf(glm::value_ptr(renderMatrix));
-	//setto le componenti
-	glLightfv(getLightNumber(), GL_AMBIENT, glm::value_ptr(this->ambient));
-	glLightfv(getLightNumber(), GL_DIFFUSE, glm::value_ptr(this->diffuse));
-	glLightfv(getLightNumber(), GL_SPECULAR, glm::value_ptr(this->specular));
-	// DIRECTIONL, OMNI AND SPOTLIGHT
-	glLightfv(getLightNumber(), GL_POSITION, glm::value_ptr(this->position));
-	// OMNI OR SPOTLIGHT
-	if (this->subtype != DIRECTIONAL) {
-		glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &angle);
-		// ONLY SPOTLIGHT
-		if (this->subtype != OMNI)
-			glLightfv(getLightNumber(), GL_SPOT_DIRECTION, glm::value_ptr(direction));
-	}
+    //set renderingMatrix as current OpenGL Matrix
+    glLoadMatrixf(glm::value_ptr(renderMatrix));
+    //setto le componenti
+    glLightfv(getLightNumber(), GL_AMBIENT, glm::value_ptr(this->ambient));
+    glLightfv(getLightNumber(), GL_DIFFUSE, glm::value_ptr(this->diffuse));
+    glLightfv(getLightNumber(), GL_SPECULAR, glm::value_ptr(this->specular));
+    // DIRECTIONL, OMNI AND SPOTLIGHT
+    glLightfv(getLightNumber(), GL_POSITION, glm::value_ptr(this->position));
+    // OMNI OR SPOTLIGHT
+    if (this->subtype != DIRECTIONAL)
+    {
+        glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &angle);
+        // ONLY SPOTLIGHT
+        if (this->subtype != OMNI)
+            glLightfv(getLightNumber(), GL_SPOT_DIRECTION, glm::value_ptr(direction));
+    }
 }
 
 /**
@@ -114,7 +116,7 @@ void Light::render(glm::mat4 renderMatrix)
  */
 Light::Subtype Light::getSubtype() const
 {
-	return this->subtype;
+    return this->subtype;
 }
 /**
  * Setter for light subtype
@@ -122,7 +124,7 @@ Light::Subtype Light::getSubtype() const
  */
 void Light::setSubtype(Light::Subtype subtype)
 {
-	this->subtype = subtype;
+    this->subtype = subtype;
 }
 //TODO riprovare metodo Cem
 /*
@@ -131,42 +133,42 @@ void Light::setSubtype(Light::Subtype subtype)
  */
 int Light::getLightNumber()
 {
-	switch (this->getId())
-	{
-	case 0:
-		return GL_LIGHT0;
-		break;
-	case 1:
-		return GL_LIGHT1;
-		break;
-	case 2:
-		return GL_LIGHT2;
-		break;
-	case 3:
-		return GL_LIGHT3;
-		break;
-	case 4:
-		return GL_LIGHT4;
-		break;
-	case 5:
-		return GL_LIGHT5;
-		break;
-	case 6:
-		return GL_LIGHT6;
-		break;
-	case 7:
-		return GL_LIGHT7;
-		break;
-	default:
-		return GL_LIGHT0;
-		break;
-	}
-	/*const int n_light = this->getId();
-	// we have 7 light, 0 = 0x4000 and 7 = 0x4007
-	if (0 <= n_light && n_light <= 7)
-		return GL_LIGHT0 + n_light;
-	else
-		return GL_LIGHT0;*/
+    switch (this->getId())
+    {
+    case 0:
+        return GL_LIGHT0;
+        break;
+    case 1:
+        return GL_LIGHT1;
+        break;
+    case 2:
+        return GL_LIGHT2;
+        break;
+    case 3:
+        return GL_LIGHT3;
+        break;
+    case 4:
+        return GL_LIGHT4;
+        break;
+    case 5:
+        return GL_LIGHT5;
+        break;
+    case 6:
+        return GL_LIGHT6;
+        break;
+    case 7:
+        return GL_LIGHT7;
+        break;
+    default:
+        return GL_LIGHT0;
+        break;
+    }
+    /*const int n_light = this->getId();
+    // we have 7 light, 0 = 0x4000 and 7 = 0x4007
+    if (0 <= n_light && n_light <= 7)
+    	return GL_LIGHT0 + n_light;
+    else
+    	return GL_LIGHT0;*/
 }
 
 /**
@@ -175,10 +177,10 @@ int Light::getLightNumber()
  */
 void Light::setColor(glm::vec4 color)
 {
-	this->color = color;
-	this->setAmbient(glm::vec4(color));
-	this->setDiffuse(glm::vec4(color));
-	this->setSpecular(glm::vec4(color));
+    this->color = color;
+    this->setAmbient(glm::vec4(color));
+    this->setDiffuse(glm::vec4(color));
+    this->setSpecular(glm::vec4(color));
 }
 
 /**
@@ -187,7 +189,7 @@ void Light::setColor(glm::vec4 color)
  */
 void Light::setPosition(glm::vec4 position)
 {
-	this->position = position;
+    this->position = position;
 }
 
 /**
@@ -196,7 +198,7 @@ void Light::setPosition(glm::vec4 position)
  */
 glm::vec3 Light::getDirection()
 {
-	return this->direction;
+    return this->direction;
 }
 
 /**
@@ -205,7 +207,7 @@ glm::vec3 Light::getDirection()
  */
 void Light::setDirection(glm::vec4 direction)
 {
-	this->direction = direction;
+    this->direction = direction;
 }
 
 /**
@@ -214,7 +216,7 @@ void Light::setDirection(glm::vec4 direction)
  */
 void Light::setAngle(float angle)
 {
-	this->angle = angle;
+    this->angle = angle;
 }
 /**
  * Getter for light angle
@@ -222,7 +224,7 @@ void Light::setAngle(float angle)
  */
 float Light::getAngle() const
 {
-	return this->angle;
+    return this->angle;
 }
 /**
  * Getter for light radius
@@ -230,7 +232,7 @@ float Light::getAngle() const
  */
 float Light::getRadius() const
 {
-	return this->radius;
+    return this->radius;
 }
 /**
  * Setter for light radius
@@ -238,7 +240,7 @@ float Light::getRadius() const
  */
 void Light::setRadius(float radius)
 {
-	this->radius = radius;
+    this->radius = radius;
 }
 /**
  * Getter for light cutoff
@@ -246,7 +248,7 @@ void Light::setRadius(float radius)
  */
 float Light::getCutoff() const
 {
-	return this->cutoff;
+    return this->cutoff;
 }
 
 /**
@@ -255,7 +257,7 @@ float Light::getCutoff() const
  */
 void Light::setCutoff(float cutoff)
 {
-	this->cutoff = cutoff;
+    this->cutoff = cutoff;
 }
 
 /**
@@ -263,8 +265,8 @@ void Light::setCutoff(float cutoff)
 */
 void Light::enableLight()
 {
-	glEnable(getLightNumber());
-	this->isActive = true;
+    glEnable(getLightNumber());
+    this->isActive = true;
 }
 
 /**
@@ -272,6 +274,6 @@ void Light::enableLight()
 */
 void Light::disableLight()
 {
-	glDisable(getLightNumber());
-	this->isActive = false;
+    glDisable(getLightNumber());
+    this->isActive = false;
 }

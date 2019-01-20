@@ -23,7 +23,7 @@ Material::~Material()
  */
 Texture * Material::getTexture() const
 {
-	return this->texture;
+    return this->texture;
 }
 
 /**
@@ -31,8 +31,8 @@ Texture * Material::getTexture() const
  * @param  texture material texture
  */
 void Material::setTexture(Texture * texture)
-{	
-	this->texture = texture;
+{
+    this->texture = texture;
 }
 
 /**
@@ -41,7 +41,7 @@ void Material::setTexture(Texture * texture)
  */
 glm::vec3 Material::getAmbient()
 {
-	return this->ambient;
+    return this->ambient;
 }
 
 /**
@@ -50,7 +50,7 @@ glm::vec3 Material::getAmbient()
  */
 void Material::setAmbient(glm::vec3 ambient)
 {
-	this->ambient = ambient;
+    this->ambient = ambient;
 }
 
 /**
@@ -59,16 +59,16 @@ void Material::setAmbient(glm::vec3 ambient)
  */
 glm::vec3 Material::getDiffuse()
 {
-	return this->diffuse;
+    return this->diffuse;
 }
 
 /**
- * Setter for diffuse 
+ * Setter for diffuse
  * @param  diffuse material diffuse
  */
 void Material::setDiffuse(glm::vec3 diffuse)
 {
-	this->diffuse = diffuse;
+    this->diffuse = diffuse;
 }
 
 /**
@@ -77,7 +77,7 @@ void Material::setDiffuse(glm::vec3 diffuse)
  */
 glm::vec3 Material::getSpecular()
 {
-	return this->specular;
+    return this->specular;
 }
 
 /**
@@ -86,7 +86,7 @@ glm::vec3 Material::getSpecular()
  */
 void Material::setSpecular(glm::vec3 specular)
 {
-	this->specular = specular;
+    this->specular = specular;
 }
 
 /**
@@ -95,7 +95,7 @@ void Material::setSpecular(glm::vec3 specular)
  */
 float Material::getShininess() const
 {
-	return this->shininess;
+    return this->shininess;
 }
 
 /**
@@ -104,7 +104,7 @@ float Material::getShininess() const
  */
 void Material::setShininess(float shininess)
 {
-	this->shininess = shininess;
+    this->shininess = shininess;
 }
 /**
  * Getter for alpha
@@ -112,7 +112,7 @@ void Material::setShininess(float shininess)
  */
 float Material::getAlpha() const
 {
-	return this->alpha;
+    return this->alpha;
 }
 /**
  * Setter for alpha
@@ -120,10 +120,10 @@ float Material::getAlpha() const
  */
 void Material::setAlpha(float alpha)
 {
-	//TODO cambiare
-	if (isTrasparent())
-		activeTransparencies();
-	this->alpha = alpha;
+    //TODO cambiare
+    if (isTrasparent())
+        activeTransparencies();
+    this->alpha = alpha;
 }
 /**
  * Getter for emissive
@@ -131,7 +131,7 @@ void Material::setAlpha(float alpha)
  */
 glm::vec4 Material::getEmissive() const
 {
-	return this->emissive;
+    return this->emissive;
 }
 /**
  * Setter for emissive
@@ -139,7 +139,7 @@ glm::vec4 Material::getEmissive() const
  */
 void Material::setEmissive(glm::vec4 emissive)
 {
-	this->emissive = emissive;
+    this->emissive = emissive;
 }
 
 /**
@@ -148,7 +148,7 @@ void Material::setEmissive(glm::vec4 emissive)
  */
 void Material::setTexture(std::string textureName)
 {
-	this->setTexture(new Texture(textureName));
+    this->setTexture(new Texture(textureName));
 }
 
 /**
@@ -157,24 +157,24 @@ void Material::setTexture(std::string textureName)
  */
 void Material::render(glm::mat4 renderMatrix)
 {
-	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, glm::value_ptr(glm::vec4(ambient[0], ambient[1], ambient[2],alpha)));
-	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, glm::value_ptr(glm::vec4(diffuse[0], diffuse[1], diffuse[2],alpha)));
-	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, glm::value_ptr(glm::vec4(specular[0], specular[1], specular[2],alpha)));
-	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, glm::value_ptr(glm::vec3(emissive[0], emissive[1], emissive[2])));
+    glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, glm::value_ptr(glm::vec4(ambient[0], ambient[1], ambient[2],alpha)));
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, glm::value_ptr(glm::vec4(diffuse[0], diffuse[1], diffuse[2],alpha)));
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, glm::value_ptr(glm::vec4(specular[0], specular[1], specular[2],alpha)));
+    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, glm::value_ptr(glm::vec3(emissive[0], emissive[1], emissive[2])));
 }
 /**
 * Method that verifies if the material is transparent (alpha = 1 not transparent transparent otherwise)
 */
 bool Material::isTrasparent()
 {
-	return this->alpha != 1;
+    return this->alpha != 1;
 }
 /**
 * Method that enables transparencies
 */
 void Material::activeTransparencies()
 {
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }

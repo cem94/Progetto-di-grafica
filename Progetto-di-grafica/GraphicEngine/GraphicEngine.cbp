@@ -20,6 +20,8 @@
 				<Linker>
 					<Add library="../../../../../../../usr/lib/x86_64-linux-gnu/libGL.so" />
 					<Add library="../../../../../../../usr/lib/x86_64-linux-gnu/libglut.so" />
+					<Add library="../../../../../../usr/lib/x86_64-linux-gnu/libfreeimage.so" />
+					<Add library="../../../../../../usr/lib/x86_64-linux-gnu/libGLEW.so" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -58,6 +60,8 @@
 		<Unit filename="Node.h" />
 		<Unit filename="Object.cpp" />
 		<Unit filename="Object.h" />
+		<Unit filename="OvoReader.cpp" />
+		<Unit filename="OvoReader.h" />
 		<Unit filename="Texture.cpp" />
 		<Unit filename="Texture.h" />
 		<Extensions>

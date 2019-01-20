@@ -4,20 +4,20 @@
 class List : public Object
 {
 public:
-	List();
-	virtual ~List();
-	std::vector<Node*> getList() const;
-	// se si riserva la memoria, la velocità aumenta.
+    List();
+    virtual ~List();
+    std::vector<Node*> getList() const;
+    // se si riserva la memoria, la velocità aumenta.
     void reserve(int dimension);
-	void setList(std::vector<Node*> list);
-	void add(Node* node);
-	void remove(int position);
-	Node* at(int position);
-	void insert(std::vector<Node*> elements);
-	void render(glm::mat4 renderMatrix) override;
-	unsigned int size();
+    void setList(std::vector<Node*> list);
+    void add(Node* node);
+    void remove(int position);
+    Node* at(int position);
+    void insert(std::vector<Node*> elements);
+    void render(glm::mat4 renderMatrix) override;
+    unsigned int size();
 
 private:
-	//ok l'ho solo rinominato in list visto che la classe rappresenta una lista
-	std::vector<Node*> list;
+    //ok l'ho solo rinominato in list visto che la classe rappresenta una lista
+    std::vector<Node*> list;
 };

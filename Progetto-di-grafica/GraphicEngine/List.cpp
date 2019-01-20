@@ -20,7 +20,7 @@ List::~List()
  */
 std::vector<Node*> List::getList() const
 {
-	return this->list; 
+    return this->list;
 }
 /**
  * Setter for list
@@ -28,24 +28,24 @@ std::vector<Node*> List::getList() const
  */
 void List::setList(std::vector<Node*> list)
 {
-	this->list = list;
+    this->list = list;
 }
 /**
 * Reserve memory for list
 * @param  size how much we want to reserve
 */
-void List::reserve(int size) 
-{ 
-	this->list.reserve(size); 
+void List::reserve(int size)
+{
+    this->list.reserve(size);
 }
 
 /**
  * Add a node to the list
  * @param  node the node we want to add
  */
-void List::add(Node* node) 
+void List::add(Node* node)
 {
-	this->list.push_back(node);
+    this->list.push_back(node);
 }
 
 /**
@@ -53,8 +53,8 @@ void List::add(Node* node)
  * @param  position
  */
 void List::remove(int position)
-{ 
-	list.erase(list.begin() + position); 
+{
+    list.erase(list.begin() + position);
 }
 
 /**
@@ -62,14 +62,14 @@ void List::remove(int position)
  * @param  position the position of the desired element
  * @return if the range is valid it returns the requested node, otherwise it return nullptr
  */
-Node* List::at(int position) 
+Node* List::at(int position)
 {
-	// non vogliamo che lanci un eccezione.
-	if (position < this->list.size() && position >= 0)
-	{
-		return list.at(position);
-	}
-	return nullptr;
+    // non vogliamo che lanci un eccezione.
+    if (position < this->list.size() && position >= 0)
+    {
+        return list.at(position);
+    }
+    return nullptr;
 }
 /**
  * insert a list of elements at the end of our list
@@ -77,17 +77,18 @@ Node* List::at(int position)
  */
 void List::insert(std::vector<Node*> elements)
 {
-	if (elements.size() == 0)
-		printf("Nothing to insert\n");//TODO remove
+    if (elements.size() == 0)
+        printf("Nothing to insert\n");//TODO remove
     else
-		list.insert(list.end(), elements.begin(), elements.end());
+        list.insert(list.end(), elements.begin(), elements.end());
 }
 /**
  * Give the size of the list
  * @return size of the list
  */
-unsigned int List::size() {
-	return (unsigned int)this->list.size();
+unsigned int List::size()
+{
+    return (unsigned int)this->list.size();
 }
 
 /**

@@ -3,10 +3,10 @@
 class Texture : public Object
 {
 public:
-	Texture();
-	Texture(std::string textureName);
-	virtual ~Texture();
-	void render(glm::mat4 rendermatrix) override;
+    Texture();
+    Texture(std::string textureName);
+    virtual ~Texture();
+    void render(glm::mat4 rendermatrix) override;
 private:
-	unsigned int textureId;
+    unsigned int textureId;
 };
