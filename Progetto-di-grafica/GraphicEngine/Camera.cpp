@@ -51,29 +51,4 @@ void Camera::setMovable(bool movable)
  * Getter for movable
  * @return movable value (true if movable false otherwise)
  */
-bool Camera::getMovable()
-{
-	return movable; }
-
-void Camera::setVec(glm::vec3 eye, glm::vec3 center, glm::vec3 up) 
-{
-  this->eye = eye;
-  this->center = center;
-  this->up = up;
-  this->setMatrix(glm::lookAt(eye, center, up));
-}
-
-glm::vec3 Camera::getEye() 
-{ 
-	return eye; 
-}
-
-glm::vec3 Camera::getCenter() 
-{ 
-	return center; 
-}
-
-glm::vec3 Camera::getUp() 
-{ 
-	return up; 
-}
+bool Camera::getMovable() { return movable; }

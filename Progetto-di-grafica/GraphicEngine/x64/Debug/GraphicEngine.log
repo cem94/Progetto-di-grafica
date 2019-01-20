@@ -1,3 +1,5 @@
 ﻿  Engine.cpp
 c:\users\meyer\source\repos\progetto-di-grafica\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(536): warning C4018: '<': signed/unsigned mismatch
+  LINK : C:\Users\meyer\source\repos\Progetto-di-grafica\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.dll not found or not built by the last incremental link; performing full link
+     Creating library C:\Users\meyer\source\repos\Progetto-di-grafica\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.lib and object C:\Users\meyer\source\repos\Progetto-di-grafica\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.exp
   GraphicEngine.vcxproj -> C:\Users\meyer\source\repos\Progetto-di-grafica\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.dll

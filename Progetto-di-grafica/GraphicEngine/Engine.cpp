@@ -311,7 +311,6 @@ void printTree(Node* scene, std::string indentation)
 /**
  * Initialize Free Image 
  */
-//TODO:: GREG quando ci vuole il LIB_API?
 void Engine::freeImageInitialize()
 {
 	FreeImage_Initialise();
@@ -513,7 +512,7 @@ void setAlpha(float value, std::vector<Node*> nodes) {
   * Set render and trasparent lists
   * @param  root scene graph
   */
-void  Engine::setLists(Node * root) {
+void  LIB_API Engine::setLists(Node * root) {
 	//toRender = new List();
 	//set render and trasparent lists
 
@@ -521,6 +520,7 @@ void  Engine::setLists(Node * root) {
 	//qua dovrei inserire le liste di luci etc
 	glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
 	std::vector<Node*> copy = toRender->getList(); // Qua dovremmo crearne una copia
+
 	//ordino la lista
 	sortTrasparentMeshesList(copy);
 	//setto alpha < 1 per la copia della scena ->  problema visto che sono puntatori mi cambia anche la lista originale
@@ -533,7 +533,7 @@ void  Engine::setLists(Node * root) {
 	printf("We have %d elements to render and %d transparent elements\n", toRender->size(), trasparentMeshes->size());
 	toRender->insert(trasparentMeshes->getList());
 	//stampo la lista finale solo per debug
-	for (int i = 0; i < toRender->size(); i++) {
+	for (unsigned int i = 0; i < toRender->size(); i++) {
 		if (toRender->at(i)->getType() == Node::Type::MESH) {
 			printf("Node %s ", toRender->at(i)->getName().c_str());
 			Mesh * m = (Mesh*)toRender->at(i);
@@ -594,7 +594,7 @@ void LIB_API Engine::addCamera(std::string name, bool movable, glm::vec3 eye, gl
 	camera->setMovable(movable);
 	camera->setType(Object::Type::CAMERA);
 
-	camera->setVec(eye, center, up);
+	camera->setMatrix(glm::lookAt(eye, center, up));
     cameras.push_back(camera);
 	// update
 	currentCamera = camera;
@@ -611,83 +611,80 @@ bool LIB_API Engine::isMovableCamera()
 }
 
 void LIB_API Engine::moveCameraRight(float direction)
-{
+{	
+	if (!isMovableCamera()) 
+		return;
+	glm::mat4 matrix = currentCamera->getMatrix();
+	glm::vec3 mov = direction * 5.0f * matrix[0];
+	currentCamera->setMatrix(glm::translate(matrix, mov));
+	
 	/*	old version
-        glm::mat4 matrix = currentCamera->getMatrix();
-        glm::vec3 mov = direction * 5.0f * matrix[0];
-        currentCamera->setMatrix(glm::translate(matrix, mov));
+		glm::vec3 mov = direction * currentCamera->getMatrix()[0];
+		glm::vec3 eye = currentCamera->getEye() + mov;
+		glm::vec3 center = currentCamera->getCenter() + mov;
+		currentCamera->setVec(eye, center, currentCamera->getUp());
 	*/
-
-	glm::vec3 mov = direction * currentCamera->getMatrix()[0];
-	glm::vec3 eye = currentCamera->getEye() + mov;
-	glm::vec3 center = currentCamera->getCenter() + mov;
-	currentCamera->setVec(eye, center, currentCamera->getUp());
-
 }
 
 void LIB_API Engine::moveCameraUp(float direction)
 {
-	/*
-        glm::mat4 matrix = currentCamera->getMatrix();
-		glm::vec3 mov = direction* 5.0f * matrix[1];
-		currentCamera->setMatrix(glm::translate(matrix, mov));
-	*/
+	if (!isMovableCamera()) 
+		return;
+	glm::mat4 matrix = currentCamera->getMatrix();
+	glm::vec3 mov = direction * 5.0f * matrix[1];
+	currentCamera->setMatrix(glm::translate(matrix, mov));
 
-	glm::vec3 mov = direction * currentCamera->getMatrix()[1];
-	glm::vec3 eye = currentCamera->getEye() + mov;
-	glm::vec3 center = currentCamera->getCenter() + mov;
-	currentCamera->setVec(eye, center, currentCamera->getUp());
+	/*  old verion
+		glm::vec3 mov = direction * currentCamera->getMatrix()[1];
+		glm::vec3 eye = currentCamera->getEye() + mov;
+		glm::vec3 center = currentCamera->getCenter() + mov;
+		currentCamera->setVec(eye, center, currentCamera->getUp());
+	*/
 }
 
 void LIB_API Engine::moveCameraForward(float direction) 
 {
+	if (!isMovableCamera()) 
+		 return;
+	glm::mat4 matrix = currentCamera->getMatrix();
+	glm::vec3 mov = direction * 5.0f * matrix[2];
+	currentCamera->setMatrix(glm::translate(matrix, mov));
+	
 	/*	old version
-        glm::mat4 matrix = currentCamera->getMatrix();
-		glm::vec3 mov = direction * 5.0f * matrix[2];
-		currentCamera->setMatrix(glm::translate(matrix, mov));
+		glm::vec3 mov = direction * currentCamera->getMatrix()[2];
+		glm::vec3 eye = currentCamera->getEye() + mov;
+		glm::vec3 center = currentCamera->getCenter() + mov;
+		currentCamera->setVec(eye, center, currentCamera->getUp());
 	*/
 
-	glm::vec3 mov = direction * currentCamera->getMatrix()[2];
-    glm::vec3 eye = currentCamera->getEye() + mov;
-    glm::vec3 center = currentCamera->getCenter() + mov;
-	currentCamera->setVec(eye, center, currentCamera->getUp());
 }
 
 
 void LIB_API Engine::rotateCameraRight(float angle) 
 {
+	if (isMovableCamera()) 
+		return;
 	std::cout << "angle: " << angle << std::endl;
-	/*	old version
-		glm::mat4 mat = currentCamera->getMatrix();
-        glm::vec3 vec = mat[1];
-        glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), vec);
-		currentCamera->setMatrix(mat * rotation);
-	*/
-    glm::vec3 center = currentCamera->getCenter();
-	glm::vec3 mov = 500 * sin(angle) * currentCamera->getMatrix()[0];
-    center += mov;
-    currentCamera->setVec(currentCamera->getEye(), center, currentCamera->getUp());
+	glm::mat4 mat = currentCamera->getMatrix();
+    glm::vec3 vec = mat[1];
+    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), vec);
+    currentCamera->setMatrix(rotation * mat);
 }
 
 void LIB_API Engine::rotateCameraUp(float angle) 
 { 
+	if (isMovableCamera()) 
+		return;
 	std::cout << "angle: " << angle << std::endl;
-	/*
-		glm::mat4 mat = currentCamera->getMatrix();
-		glm::vec3 vec = mat[0];
-		glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle),vec);
-		currentCamera->setMatrix(mat * rotation);
-	*/
-	glm::vec3 center = currentCamera->getCenter();
-	glm::vec3 mov = 50 * sin(angle) * currentCamera->getMatrix()[1];
-    center += mov;
-	currentCamera->setVec(currentCamera->getEye(), center, currentCamera->getUp());
+	glm::mat4 mat = currentCamera->getMatrix();
+	glm::vec3 vec = mat[0];
+	glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle),vec);
+	currentCamera->setMatrix(rotation * mat);
 }
 
  /**
  * Change the current camera
  */
-//TODO:: lib_api non manca ?
 void LIB_API Engine::changeCamera(Node * root) {
 	activeCamera = (activeCamera + 1) % cameras.size();
 	currentCamera = cameras.at(activeCamera);
