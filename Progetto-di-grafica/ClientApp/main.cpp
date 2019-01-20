@@ -11,10 +11,8 @@ glm::mat4 perspective;
 glm::mat4 ortho;
 Node* scene = NULL;
 bool rotating = false;
-
 int sizeX = 0;
 int sizeY = 0;
-
 float angleX = 0.0f;
 // button state machine
 bool keyState[255];
@@ -29,7 +27,6 @@ void displayCallback()
     // setto la matrice di proiezione prospettica per il rendering 3d
     engine->setProjectionMatrix(perspective);
     // 3d rendering//
-    engine->renderList();
 	std::vector<List*> lists = Engine::getLists();
 	for (int i = 0; i < lists.size(); i++)
 		lists.at(i)->render(glm::mat4());
@@ -38,9 +35,7 @@ void displayCallback()
     // 2D rendering//
     engine->setProjectionMatrix(ortho);
     engine->loadIdentity();
-   // engine->enableLighting(false);
     engine->renderText();
-   // engine->enableLighting(true);
     engine->incrementFrames();
     engine->swapBuffers();
     engine->redisplay();
@@ -55,8 +50,7 @@ void reshapeCallback(int width, int height)
     engine->setViewport(0, 0, width, height);
     sizeX = width;
     sizeY = height;
-    perspective = glm::perspective(glm::radians(45.0f),
-                                   (float)width / (float)height, 1.0f, 4000.0f);
+    perspective = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 1.0f, 4000.0f);
     ortho = glm::ortho(0.f, (float)width, 0.f, (float)height, -1.f, 1.f);
 }
 /**
@@ -95,38 +89,38 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
     case 'h':
         if (keyState[(unsigned char)'h'] == true)
         {
-            engine->closeHand(scene, 5.f);
+            engine->closeHand(scene);
         }
         break;
     case ' ':
         if (keyState[(unsigned char)' '] == true)
         {
-            engine->closeThumb(scene, 5.f);
+            engine->closeThumb(scene);
         }
         break;
     case 'f':
         if (keyState[(unsigned char)'f'] == true)
         {
-            engine->closeFinger(scene, 1, 5.f);
+            engine->closeFinger(scene, 1);
         }
         break;
     case 'e':
         if (keyState[(unsigned char)'e'] == true)
         {
-            engine->closeFinger(scene, 2, 5.f);
+            engine->closeFinger(scene, 2);
         }
         break;
 
     case 'w':
         if (keyState[(unsigned char)'w'] == true)
         {
-            engine->closeFinger(scene, 3, 5.f);
+            engine->closeFinger(scene, 3);
         }
         break;
     case 'a':
         if (keyState[(unsigned char)'a'] == true)
         {
-            engine->closeFinger(scene, 4, 5.f);
+            engine->closeFinger(scene, 4);
         }
         break;
     }
@@ -148,37 +142,38 @@ void keyboardUpCallback(unsigned char key, int x, int y)
     case 'h':
         if (keyState[(unsigned char)'h'] == false)
         {
-            engine->closeHand(scene, -0.001f);
+            engine->openHand(scene);
         }
         break;
     case ' ':
         if (keyState[(unsigned char)' '] == false)
         {
-            engine->closeThumb(scene, -0.001f);
+			//NON FUNZIONA IL POLLICE SI DEFORMA
+           // engine->openThumb(scene);
         }
         break;
     case 'f':
         if (keyState[(unsigned char)'f'] == false)
         {
-            engine->closeFinger(scene, 1, -0.001f);
+            engine->openFinger(scene, 1);
         }
         break;
     case 'e':
         if (keyState[(unsigned char)'e'] == false)
         {
-            engine->closeFinger(scene, 2, -0.001f);
+            engine->openFinger(scene, 2);
         }
         break;
     case 'w':
         if (keyState[(unsigned char)'w'] == false)
         {
-            engine->closeFinger(scene, 3, -0.001f);
+            engine->openFinger(scene, 3);
         }
         break;
     case 'a':
         if (keyState[(unsigned char)'a'] == false)
         {
-            engine->closeFinger(scene, 4, -0.001f);
+            engine->openFinger(scene, 4);
         }
         break;
     }
@@ -346,7 +341,6 @@ int main(int argc, char* argv[])
     std::cout << "Client application starts" << std::endl;
     // init engine settings
     engine->init(argc, argv);
-
     // init call back functions
     setCallBacks();
     // set background color
@@ -358,10 +352,12 @@ int main(int argc, char* argv[])
     scene = engine->getScene(fileName);
     engine->setAlphaToMaterial(scene, 0.9f, "plane");
     engine->setLists(scene);
-
+	//TODO Cem ti conviene farlo in reshape callback o i dati non saranno corretti se ridimensioni la finestra tanto lo chiama una volta anche all'inizio
     sizeX = engine->getWindowSizeX();
     sizeY = engine->getWindowSizeY();
+	//start main loop
     engine->startLoop();
-    engine->freeImageDeInitialize();
+    //free resources
+	engine->free();
     std::cout << "Application terminated" << std::endl;
 }

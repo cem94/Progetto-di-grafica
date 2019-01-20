@@ -3,7 +3,7 @@
 #include <GL/freeglut.h>
 //// FreeImage:
 #include <FreeImage.h>
-//TODO capire come aggiungere estensione asintropia
+//Defines for Anisotropic filtering
 #define GL_TEXTURE_MAX_ANISOTROPY_EXT 0x84FE
 #define GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT 0x84FF
 
@@ -84,19 +84,16 @@ Texture::Texture(std::string textureName)
 		else
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1);       // Set min/mag filters migliorano la texture rimuovendo errori
       
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        //TODO controllare se OpenGL > 3.0 altrimenti mimapping non funziona
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);//TODO capire se non è meglio GL_LINEAR_MIPMAP_LINEAR
         // Using mipmapping
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-        //TODO:: aggiunto
-        glTexEnvf(GL_TEXTURE_2D, GL_TEXTURE_ENV_MODE, GL_DECAL);
+		glTexEnvf(GL_TEXTURE_2D, GL_TEXTURE_ENV_MODE, GL_DECAL);
         //crea le mipmap
 			//ATTENZIONE NON FUNZIONA SU LINUX -> DOBBIAMO TROVARE UNA SOLUZIONE
 			//   gluBuild2DMipmaps()
            gluBuild2DMipmaps(GL_TEXTURE_2D, format, FreeImage_GetWidth(bitmap), FreeImage_GetHeight(bitmap), extFormat, GL_UNSIGNED_BYTE, (void *)FreeImage_GetBits(bitmap));
-
-        // Free resources: TODO usare metodi di Engine
-        FreeImage_Unload(bitmap);
+        // Free resources: TODO wrappare forse?
+		   FreeImage_Unload(bitmap);
     }
 }
 
