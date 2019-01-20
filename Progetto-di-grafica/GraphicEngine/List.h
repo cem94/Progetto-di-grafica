@@ -14,6 +14,7 @@ public:
     void remove(int position);
     Node* at(int position);
     void insert(std::vector<Node*> elements);
+	void transparentPreRender(Material *material, glm::mat4 renderMatrix);
     void render(glm::mat4 renderMatrix) override;
     unsigned int size();
 

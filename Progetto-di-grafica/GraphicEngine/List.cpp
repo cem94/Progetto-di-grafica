@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include <GL/freeglut.h>
 
 /**
  * List constructor
@@ -90,12 +91,52 @@ unsigned int List::size()
 {
     return (unsigned int)this->list.size();
 }
-
+/**
+* support method for transparent render
+* @param material and render matrix
+*/
+void List::transparentPreRender(Material *material, glm::mat4 renderMatrix)
+{
+	glEnable(GL_CULL_FACE);
+	glDepthMask(GL_FALSE);
+	// At first render back faces
+	glCullFace(GL_FRONT);
+	material->render(renderMatrix);
+	// Then render front faces
+	glCullFace(GL_BACK);
+	material->render(renderMatrix);
+	// Enabled z-buffer write
+	glDepthMask(GL_TRUE);
+	glDisable(GL_CULL_FACE);
+}
 /**
  * Render for list (empty)
  * @param  renderMatrix render matrix
  */
 void List::render(glm::mat4 renderMatrix)
 {
+	for (Node* n : list)
+	{
+		glm::mat4 renderMatrix = n->getFinalMatrix();
 
+		if (n->getType() == Object::Type::MESH)
+		{
+			Mesh* m = static_cast<Mesh*>(n);
+			if (m->getMaterial() != nullptr)
+			{
+				if (m->getMaterial()->isTrasparent())
+				{
+					// TRASPARENZE
+					transparentPreRender(m->getMaterial(), renderMatrix);
+				}
+				//else
+				//{
+				//	m->getMaterial()->render(renderMatrix);
+				//}
+			}
+		}
+		// n->render(currentCamera->getMatrix() * renderMatrix);
+
+		n->render(renderMatrix);
+	}
 }

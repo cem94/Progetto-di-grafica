@@ -78,8 +78,8 @@ Texture::Texture(std::string textureName)
         //TODO:: aggiunto
         glTexEnvf(GL_TEXTURE_2D, GL_TEXTURE_ENV_MODE, GL_DECAL);
         //crea le mipmap
-//ATTENZIONE NON FUNZIONA SU LINUX
-     //   gluBuild2DMipmaps()
+			//ATTENZIONE NON FUNZIONA SU LINUX -> DOBBIAMO TROVARE UNA SOLUZIONE
+			//   gluBuild2DMipmaps()
             gluBuild2DMipmaps(GL_TEXTURE_2D, format, FreeImage_GetWidth(bitmap), FreeImage_GetHeight(bitmap), extFormat, GL_UNSIGNED_BYTE, (void *)FreeImage_GetBits(bitmap));
 
         // Free resources: TODO usare metodi di Engine

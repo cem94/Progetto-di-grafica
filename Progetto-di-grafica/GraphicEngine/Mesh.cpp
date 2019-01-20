@@ -104,7 +104,11 @@ void Mesh::setNumberOfFaces(unsigned int numberOfFaces)
  */
 void Mesh::render(glm::mat4 renderMatrix)
 {
-    glLoadMatrixf(glm::value_ptr(renderMatrix));
+	glm::mat4 camera = Engine::getInstance().getCurrentCamera()->getMatrix();
+	//glLoadMatrixf(glm::value_ptr(camera * this->getFinalMatrix()));
+	glLoadMatrixf(glm::value_ptr(camera * renderMatrix));
+	material->render(renderMatrix);
+    //glLoadMatrixf(glm::value_ptr(renderMatrix));
     glBindVertexArray(vao);
     glDrawElements(GL_TRIANGLES, numberOfFaces * 3, GL_UNSIGNED_INT, nullptr);
 }

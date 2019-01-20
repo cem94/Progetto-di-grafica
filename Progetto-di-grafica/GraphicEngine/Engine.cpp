@@ -390,7 +390,7 @@ void LIB_API Engine::renderText()
     char text[64];
     //colore testo
     glColor3f(1.0f, 1.0f, 1.0f);
-    strcpy(text, "[1, 2, 3] turn on/off lights");
+    strcpy(text, "[1, 2, 3, 4] turn on/off lights");
     glRasterPos2f(10.0f, 20.0f);
     glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
     glColor3f(1.0f, 1.0f, 1.0f);
@@ -430,14 +430,10 @@ void LIB_API findChildren(Node* currentNode, std::vector<Node*>& nodes)
 Node*  Engine::getScene(const char* name)
 {
     std::vector<Node*> nodes = OvoReader::readOVOfile(name);
-
     Node* root = nodes.at(0);
     nodes.erase(nodes.begin());
-
     findChildren(root, nodes);
-
     setCameraToPalm(root);
-
     printTree(root, "");
     return root;
 }
@@ -537,7 +533,7 @@ void  LIB_API Engine::setLists(Node * root)
     //ordino la lista
     sortTrasparentMeshesList(copy);
     //setto alpha < 1 per la copia della scena ->  problema visto che sono puntatori mi cambia anche la lista originale
-    setAlpha(0.7f, copy);
+   // setAlpha(0.7f, copy);
     trasparentMeshes->insert(copy);
     //moltiplicando il riflesso per la root tutti i figli si girano essendo un puntatore però giriamo entrambe le scene
     //Commentato perché gira la scena
@@ -559,35 +555,41 @@ void  LIB_API Engine::setLists(Node * root)
 
 }
 
+Camera * Engine::getCurrentCamera()
+{
+	return currentCamera;
+}
+
 /**
  * Render all elements in the list
  */
 void LIB_API Engine::renderList()
 {
-    std::vector<Node*> render = toRender->getList();
-    for (Node* n : render)
-    {
-        glm::mat4 renderMatrix = n->getFinalMatrix();
+	toRender->render(glm::mat4());
+    //std::vector<Node*> render = toRender->getList();
+    //for (Node* n : render)
+    //{
+    //    glm::mat4 renderMatrix = n->getFinalMatrix();
 
-        if (n->getType() == Object::Type::MESH)
-        {
-            Mesh* m = static_cast<Mesh*>(n);
-            if (m->getMaterial() != nullptr)
-            {
-                if (m->getMaterial()->isTrasparent())
-                {
-                    // TRASPARENZE
-                    transparentPreRender(m->getMaterial(), renderMatrix);
-                }
-                else
-                {
-                    m->getMaterial()->render(renderMatrix);
-                }
-                m->getMaterial()->getTexture()->render(renderMatrix);
-            }
-        }
-        n->render(currentCamera->getMatrix() * renderMatrix);
-    }
+    //    if (n->getType() == Object::Type::MESH)
+    //    {
+    //        Mesh* m = static_cast<Mesh*>(n);
+    //        if (m->getMaterial() != nullptr)
+    //        {
+    //            if (m->getMaterial()->isTrasparent())
+    //            {
+    //                // TRASPARENZE
+    //                transparentPreRender(m->getMaterial(), renderMatrix);
+    //            }
+    //            else
+    //            {
+    //                m->getMaterial()->render(renderMatrix);
+    //            }
+    //        }
+    //    }
+    //   // n->render(currentCamera->getMatrix() * renderMatrix);
+    //    n->render(currentCamera->getMatrix() * renderMatrix);
+    //}
 }
 
 /**
@@ -892,22 +894,4 @@ void LIB_API Engine::setAlphaToMaterial(Node * root, float alpha, std::string no
         mesh->getMaterial()->setAlpha(alpha);
     }
 }
-/**
-* support method for transparent render
-* @param material and render matrix
-*/
-void LIB_API Engine::transparentPreRender(Material *material, glm::mat4 renderMatrix)
-{
 
-    glEnable(GL_CULL_FACE);
-    glDepthMask(GL_FALSE);
-    // At first render back faces
-    glCullFace(GL_FRONT);
-    material->render(renderMatrix);
-    // Then render front faces
-    glCullFace(GL_BACK);
-    material->render(renderMatrix);
-    // Enabled z-buffer write
-    glDepthMask(GL_TRUE);
-    glDisable(GL_CULL_FACE);
-}

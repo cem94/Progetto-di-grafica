@@ -100,10 +100,11 @@ public:
     void closeFinger(Node* root, int finger, float angle);
     void closeHand(Node* root, float angle);
     void free();
-    void transparentPreRender(Material* material, glm::mat4 renderMatrix);
+   // void transparentPreRender(Material* material, glm::mat4 renderMatrix);
     void sortTrasparentMeshesList(std::vector<Node*> transparentMeshes);
     void setAlphaToMaterial(Node* root, float alpha, std::string nodeName);
     void setLists(Node* root);
+	Camera * getCurrentCamera();
 
 private:
     // Singleton

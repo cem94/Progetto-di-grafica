@@ -20,6 +20,8 @@ public:
     glm::vec4 getEmissive() const;
     void setEmissive(glm::vec4 emissive);
     void setTexture(std::string textureName);
+	bool hasTexture();
+
     void render(glm::mat4 renderMatrix) override;
 
     bool isTrasparent();
