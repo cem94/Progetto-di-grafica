@@ -335,6 +335,7 @@ int main(int argc, char* argv[]) {
   scene = engine->getScene(fileName);
   engine->setAlphaToMaterial(scene, 0.9f, "plane");
   engine->setLists(scene);
+  
   sizeX = engine->getWindowSizeX();
   sizeY = engine->getWindowSizeY();
   //

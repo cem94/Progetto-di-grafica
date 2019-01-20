@@ -11,6 +11,7 @@ Node::Node()
 	this->setId(counter++);
 }
 
+
 /**
  * Node destructor
  */

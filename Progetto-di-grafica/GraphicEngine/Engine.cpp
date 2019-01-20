@@ -479,12 +479,10 @@ Node*  Engine::getNodeByName(Node* root, std::string name)
 * read the scene graph and put the nodes in List
 * @param initial matrix and root node
 */
-void  LIB_API Engine::setRenderList(Node* element)
+void  LIB_API Engine::createLists(Node* element)
 {
-	toRender->add(element);
-
 	std::vector<Node*> children = element->getChildren();
-
+		toRender->add(element);
 	if (element->getType() == Node::Type::MESH)
 	{
 		Mesh * mesh = (Mesh *)element;
@@ -494,39 +492,56 @@ void  LIB_API Engine::setRenderList(Node* element)
 			trasparentMeshes->add(element);
 		}
 	}
+	if (element->getType() == Node::Type::LIGHT) {
+	//lista luci
+	}
 	for (Node * n : children)
-		setRenderList(n);
+		createLists(n);
 }
-void setAlpha(float value, std::vector<Node*>& nodes) {
-//glm::mat4 reflection = 	glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
+//set alpha value to nodes
+void setAlpha(float value, std::vector<Node*> nodes) {
 	for (std::vector<Node*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
 	{
 		if ((*it)->getType() == Node::Type::MESH) {
 			Mesh* m = (Mesh*)(*it);
 			m->getMaterial()->setAlpha(value);
 		}
-		//(*it)->setMatrix((*it)->getMatrix()*reflection);
 		}
 }
-//TODO Cem guarda se riesci a far si che i riflessi vengano renderizzati al posto giusto usando reflection ora sono sovrapposti
- /**
+//TODO CEM NON SO COME COPIARE la lista. visto che sono puntatori se cambio alpha/setto il riflesso nella root lo fa su entrambe le mesh
+/**
   * Set render and trasparent lists
   * @param  root scene graph
   */
 void  Engine::setLists(Node * root) {
 	//toRender = new List();
 	//set render and trasparent lists
-	setRenderList(root);
+
+	createLists(root);
+	//qua dovrei inserire le liste di luci etc
 	glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
-	std::vector<Node*> copy = toRender->getList();
-	//setto il materiale come trasparente
-	setAlpha(0.7, copy);
+	std::vector<Node*> copy = toRender->getList(); // Qua dovremmo crearne una copia
 	//ordino la lista
 	sortTrasparentMeshesList(copy);
-	//e la inserisco nelle mesh trasparenti
+	//setto alpha < 1 per la copia della scena ->  problema visto che sono puntatori mi cambia anche la lista originale
+	setAlpha(0.7f, copy);
 	trasparentMeshes->insert(copy);
+	//moltiplicando il riflesso per la root tutti i figli si girano essendo un puntatore però giriamo entrambe le scene
+	//Commentato perché gira la scena
+	//toRender->at(0)->setMatrix(toRender->at(0)->getMatrix()*reflection);
+	
 	printf("We have %d elements to render and %d transparent elements\n", toRender->size(), trasparentMeshes->size());
 	toRender->insert(trasparentMeshes->getList());
+	//stampo la lista finale solo per debug
+	for (int i = 0; i < toRender->size(); i++) {
+		if (toRender->at(i)->getType() == Node::Type::MESH) {
+			printf("Node %s ", toRender->at(i)->getName().c_str());
+			Mesh * m = (Mesh*)toRender->at(i);
+			printf(" trasparent: %lf %d\n", m->getMaterial()->getAlpha(),i);
+		
+		}
+	}
+
 }
 
 /**
@@ -832,7 +847,7 @@ bool listNodeCompare(Node*a, Node *b)
 * sorts the trasparent meshes list
 * @param list of transparent meshes
 */
-void LIB_API Engine::sortTrasparentMeshesList(std::vector<Node*> &transparentMeshes)
+void LIB_API Engine::sortTrasparentMeshesList(std::vector<Node*> transparentMeshes)
 {
 	glDepthMask(GL_FALSE);
 	//gli passo un comparator
