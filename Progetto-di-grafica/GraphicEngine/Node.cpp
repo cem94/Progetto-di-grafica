@@ -7,12 +7,15 @@ static int counter;
  */
 Node::Node()
 {
-    //TODO Cem magari spostare il contatore nell'ovoreader e settare l'id da lì
-    this->setId(counter++);
+    this->setId(counter);
+	counter++;
+
 }
 
 Node::Node(Node * parent)
-{
+{ 
+	if (parent != nullptr) 
+		this->parent = parent;
 }
 
 
@@ -20,7 +23,24 @@ Node::Node(Node * parent)
  * Node destructor
  */
 Node::~Node()
-{
+{ 
+	//remove children
+	for (Node* n : this->children) 
+		delete (n);
+	//clear vector
+	this->children.clear();
+
+	//remove it from parent
+	int cnt = 0;
+	for (Node* n : this->parent->getChildren()) 
+	{
+		//remove children
+		if (n->getId() == this->getId()) {
+			this->parent->remove(cnt);
+			break;
+		}
+		cnt++;
+	}
 }
 
 /**

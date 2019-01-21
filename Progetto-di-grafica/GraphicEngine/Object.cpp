@@ -1,3 +1,5 @@
+/*
+//TODO:: da eliminare! IL SORE HA DETTO CHE DEVE ESSERE UNA CLASSE ASTRATTA! QUINDI NESSUN CPP FILE.
 #include "Engine.h"
 
 int Object::getId() const
@@ -29,3 +31,4 @@ Object::Type Object::getType() const
 {
 		return type;
 }
+*/

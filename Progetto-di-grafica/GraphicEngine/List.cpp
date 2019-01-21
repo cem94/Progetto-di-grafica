@@ -102,7 +102,9 @@ void List::getTreeAsList(Node *root, std::vector<Node*>& nodes) {
 
  void List::sort(Node * root)
  {
-	  std::vector<Node*> allNodes;
+	 //TODO:: GREG COME MAI ORDIANIAMO COSI?
+	 //RISPONDIMI SU WHATSAPP ED ELIMINA IL COMMENTO
+	 std::vector<Node*> allNodes;
 	 getTreeAsList(root,allNodes);
 	 //I create a vector of pure nodes
 	 std::vector<Node*> pureNodes;
@@ -160,6 +162,8 @@ void List::getTreeAsList(Node *root, std::vector<Node*>& nodes) {
 */
 void List::transparentPreRender(Material *material, glm::mat4 renderMatrix)
 {
+	//TODO:: GREG DEVI SPIEGARMI PERCHÈ SI FA IN QUESTO ORDINE.
+	//RISPONDIMI SU WHATSAPP E RIMUOVI QUESTO COMMENTO
 	glEnable(GL_CULL_FACE);
 	glDepthMask(GL_FALSE);
 	// At first render back faces
@@ -199,4 +203,27 @@ void List::render(glm::mat4 renderMatrix)
 
 		n->render(renderMatrix);
 	}
+
+	//TODO:: GREG COSI FUNZIONA MA NON COMPLETAMENTE
+        /*
+	glm::mat4 scaling =  glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, -1.0f, 1.0f));
+	glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -50.0f, 0.0f));
+	for (Node* n : list) {
+		glm::mat4 renderMatrix = n->getFinalMatrix()  * scaling;
+
+		if (n->getType() == Object::Type::MESH) {
+            Mesh* m = static_cast<Mesh*>(n);
+            if (m->getMaterial() != nullptr) {
+              if (m->getMaterial()->isTrasparent()) {
+                // TRASPARENZE
+                transparentPreRender(m->getMaterial(), renderMatrix);
+                // printf("Trasparent\n");
+              }
+            }
+          }
+          // n->render(currentCamera->getMatrix() * renderMatrix);
+
+          n->render(renderMatrix);
+        }
+		*/
 }

@@ -32,6 +32,8 @@ void displayCallback()
 		lists.at(i)->render(glm::mat4(1.0f));
 		//printf("Rendering %d\n",i);
 	}
+
+	// printf("Rendering %d\n",i);
     if (rotating)
         engine->autoRotateModel(scene, -1.0f);
     // 2D rendering//
@@ -242,7 +244,6 @@ void mouseWheel(int wheel, int direction, int x, int y)
  * @param2 name2
  * @return what it returns
  */
-// TODO:: Cem completares
 void mouseMoved(int x, int y)
 {
     //TODO:: chiedere a Marco
@@ -353,8 +354,8 @@ int main(int argc, char* argv[])
     const char* fileName = "../ovo_files/full_scene.ovo";
     scene = engine->getScene(fileName);
 
-   // engine->setAlphaToMaterial(scene, 0.9f, "plane");
-   engine->setLists(scene);
+	// engine->setAlphaToMaterial(scene, 0.9f, "plane");
+	engine->setLists(scene);
    
 	//TODO Cem basta farlo in reshape callback lo chiama una volta anche all'inizio
     sizeX = engine->getWindowSizeX();

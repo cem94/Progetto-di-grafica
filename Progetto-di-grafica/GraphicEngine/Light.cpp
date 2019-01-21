@@ -10,9 +10,10 @@ int Light::numberOfLights = 0;
  */
 Light::Light()
 {
-
 }
+
 //TODO Cem magari spostare la parte che assegna id luci
+//TODO:: GREG perchè vuoi spostarlo?
 /**
  * Light constructor it also set the light number
  * @param  name a string containing the name of the light
@@ -21,7 +22,7 @@ Light::Light()
  */
 Light::Light(std::string name)
 {
-    numberOfLights = numberOfLights + 1;
+	numberOfLights++;
     lightNumber = numberOfLights;
     this->setName(name);
     this->setId(lightNumber);
@@ -32,6 +33,8 @@ Light::Light(std::string name)
 Light::~Light()
 {
 }
+
+//TODO:: GREG NON LO USIAMO! POSSIAMO RIMUOVERLO
 /**
  * Getter for intensity
  * @return intensity light intensity
@@ -118,6 +121,7 @@ Light::Subtype Light::getSubtype() const
 {
     return this->subtype;
 }
+
 /**
  * Setter for light subtype
  * @param  An enum containing the light subtype
@@ -126,6 +130,7 @@ void Light::setSubtype(Light::Subtype subtype)
 {
     this->subtype = subtype;
 }
+
 //TODO riprovare metodo Cem
 /*
  * Getter for light number
