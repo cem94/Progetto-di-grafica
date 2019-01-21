@@ -17,7 +17,8 @@ public:
 	void transparentPreRender(Material *material, glm::mat4 renderMatrix);
     void render(glm::mat4 renderMatrix) override;
     unsigned int size();
-
+	void getTreeAsList(Node *root, std::vector<Node*>& nodes);
+	void sort(Node * root);
 private:
     //ok l'ho solo rinominato in list visto che la classe rappresenta una lista
     std::vector<Node*> list;

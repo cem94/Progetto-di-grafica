@@ -4,6 +4,7 @@ class LIB_API Node : public Object
 {
 public:
     Node();
+	Node(Node* parent);
     virtual ~Node();
     Node* getParent() const;
     void setParent(Node* parent);

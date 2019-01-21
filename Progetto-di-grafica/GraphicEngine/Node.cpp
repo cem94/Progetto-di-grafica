@@ -11,6 +11,10 @@ Node::Node()
     this->setId(counter++);
 }
 
+Node::Node(Node * parent)
+{
+}
+
 
 /**
  * Node destructor

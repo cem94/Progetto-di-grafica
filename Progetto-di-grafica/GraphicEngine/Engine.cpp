@@ -33,9 +33,8 @@ bool translateUp = false;
 int translateCnt = 0;
 
 //lists
-List* toRender = new List();
-List *transparentMeshes = new List();
-List *lights = new List();
+//List* toRender = new List();
+List *reflectedList = new List();
 
 Engine* Engine::instance = nullptr;
 //complete set of lists
@@ -418,7 +417,6 @@ void LIB_API Engine::renderText()
 	glEnable(GL_TEXTURE_2D);
 	enableLighting(true);
 	//glEnable(GL_BLEND);
-
 	//lighting = true;
 }
 
@@ -450,6 +448,7 @@ Node*  Engine::getScene(const char* name)
     Node* root = nodes.at(0);
     nodes.erase(nodes.begin());
     findChildren(root, nodes);
+
     setCameraToPalm(root);
     printTree(root, "");
     return root;
@@ -500,28 +499,29 @@ Node*  Engine::getNodeByName(Node* root, std::string name)
 * read the scene graph and create various lists for lights, meshes and nodes
 * @param  element root node
 */
-void  LIB_API Engine::createLists(Node* element)
-{
-    std::vector<Node*> children = element->getChildren();
-    toRender->add(element);
-  
-	if (element->getType() == Node::Type::MESH)
-    {
-        Mesh * mesh = (Mesh *)element;
-        if (mesh->getMaterial() != nullptr && mesh->getMaterial()->isTrasparent())
-        {
-            printf("Aggiungo mesh trasparente %s \n", mesh->getName().c_str());
-            transparentMeshes->add(element);
-        }
-    }
-    if (element->getType() == Node::Type::LIGHT)
-    {
-        //lista luci
-
-    }
-    for (Node * n : children)
-        createLists(n);
-}
+//void  LIB_API Engine::createLists(Node* root)
+//{
+//    std::vector<Node*> children = root->getChildren();
+//    toRender->add(root);
+//	std::vector<Node*> allNodes;
+//	getTreeAsList(root, allNodes);
+//	if (root->getType() == Node::Type::MESH)
+//    {
+//        Mesh * mesh = (Mesh *)root;
+//        if (mesh->getMaterial() != nullptr && mesh->getMaterial()->isTrasparent())
+//        {
+//            printf("Aggiungo mesh trasparente %s \n", mesh->getName().c_str());
+//            transparentMeshes->add(element);
+//        }
+//    }
+//    if (element->getType() == Node::Type::LIGHT)
+//    {
+//        //lista luci
+//
+//    }
+//    for (Node * n : children)
+//        createLists(n);
+//}
 
 /**
   * Set render and trasparent lists
@@ -529,32 +529,21 @@ void  LIB_API Engine::createLists(Node* element)
   */
 void  LIB_API Engine::setLists(Node * root)
 {
-    //set render and trasparent lists
-    createLists(root);
-    //qua dovrei inserire le liste di luci etc
-    glm::mat4 reflection = glm::scale(glm::mat4(), glm::vec3(1.0f, -1.0f, 1.0));
-    //std::vector<Node*> copy = toRender->getList(); // Qua dovremmo crearne una copia
-    //ordino la lista
-    //sortTrasparentMeshesList(copy);
-    //setto alpha < 1 per la copia della scena ->  problema visto che sono puntatori mi cambia anche la lista originale
-   // transparentMeshes->insert(copy);
-    //Commentato perché gira la scena
-    printf("We have %d elements to render and %d transparent elements\n", toRender->size(), transparentMeshes->size());
-	lists.push_back(toRender);
-	//moltiplicando il riflesso per la root giriamo la scena
-	//toRender->at(0)->setMatrix(toRender->at(0)->getMatrix()*reflection); //toRender->
-	lists.push_back(transparentMeshes);
-    //stampo la lista finale solo per debug
-    for (unsigned int i = 0; i < toRender->size(); i++)
-    {
-        if (toRender->at(i)->getType() == Node::Type::MESH)
-        {
-            printf("Node %s ", toRender->at(i)->getName().c_str());
-            Mesh * m = (Mesh*)toRender->at(i);
-            printf(" trasparent: %lf %d\n", m->getMaterial()->getAlpha(),i);
-
-        }
-    }
+	//CEM se commento questo lo gira se no no non capisco perché -> mi una copia di root per fare le trasparenze
+	Node* node = new Node{*root};
+	printTree(node,"");
+	setAlphaToMaterial(node, 0.9f, "plane");
+	//riempie e ordina lista
+	reflectedList->sort(node);
+	lists.push_back(reflectedList);
+	printf("We have %d elements to render\n", reflectedList->size());
+	glm::mat4 reflection = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, -1.0f, 1.0));
+	sortTrasparentMeshesList(reflectedList->getList());
+	Node *r = reflectedList->at(0);
+	r->setMatrix(r->getMatrix()*reflection);
+	//std::vector<Node*> nodes;
+	//reflectedList->getTreeAsList(node,nodes);
+	//printf("size %d\n",nodes.size());
 }
 
 Camera * Engine::getCurrentCamera()

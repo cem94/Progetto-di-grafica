@@ -91,6 +91,69 @@ unsigned int List::size()
 {
     return (unsigned int)this->list.size();
 }
+
+void List::getTreeAsList(Node *root, std::vector<Node*>& nodes) {
+	const int size = root->getChildrenSize();
+	nodes.push_back(root);
+	for (int i = 0; i < size; i++) {
+		getTreeAsList(root->getChildren().at(i), nodes);
+	}
+}
+
+ void List::sort(Node * root)
+ {
+	  std::vector<Node*> allNodes;
+	 getTreeAsList(root,allNodes);
+	 //I create a vector of pure nodes
+	 std::vector<Node*> pureNodes;
+
+	 //I create a vector of lights
+	 std::vector<Light*> lights;
+
+	 //I create a vector of meshes
+	 std::vector<Mesh*> meshes;
+
+	 for (int i = 0; i < allNodes.size(); i++) {
+		 if (allNodes.at(i)->getType() == Object::NODE) {
+			 pureNodes.push_back(allNodes.at(i));
+			 continue;
+		 }
+		 if (allNodes.at(i)->getType() == Object::LIGHT) {
+			 lights.push_back(dynamic_cast<Light*>(allNodes.at(i)));
+			 continue;
+		 }
+		 if (allNodes.at(i)->getType() == Object::MESH) {
+			 meshes.push_back(dynamic_cast<Mesh*>(allNodes.at(i)));
+			 continue;
+		 }
+	 }
+
+	 //Now I place the items in the order I want them to be renderized
+	 for (int i = 0; i < pureNodes.size(); i++) {
+		 list.push_back(pureNodes.at(i));
+	 }
+	 for (int i = 0; i < lights.size(); i++) {
+		 list.push_back(lights.at(i));
+	 }
+	 for (int i = 0; i < meshes.size(); i++) {
+		 list.push_back(meshes.at(i));
+	 }
+	 //if (root->getType() == Node::Type::MESH)
+	 //{
+		// Mesh * mesh = (Mesh *)root;
+		// /*if (mesh->getMaterial() != nullptr && mesh->getMaterial()->isTrasparent())
+		// {
+		//	 printf("Aggiungo mesh trasparente %s \n", mesh->getName().c_str());
+		//	// transparentMeshes->add(element);
+		// }*/
+	 //}
+	 //if (root->getType() == Node::Type::LIGHT)
+	 //{
+		// //lista luci
+
+	 //}
+
+ }
 /**
 * support method for transparent render
 * @param material and render matrix
@@ -128,11 +191,8 @@ void List::render(glm::mat4 renderMatrix)
 				{
 					// TRASPARENZE
 					transparentPreRender(m->getMaterial(), renderMatrix);
+					//printf("Trasparent\n");
 				}
-				//else
-				//{
-				//	m->getMaterial()->render(renderMatrix);
-				//}
 			}
 		}
 		// n->render(currentCamera->getMatrix() * renderMatrix);

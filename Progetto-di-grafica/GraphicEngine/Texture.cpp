@@ -42,16 +42,19 @@ Texture::Texture(std::string textureName)
     }
     else
     {
-        printf("%s\n", textureName.c_str());
         this->setName(textureName);
+		//TODO capire se è un problema
+		textureId = getId();
         glGenTextures(1, &textureId);
         std::string texturePath = "../resources/";
         const char* fileName = texturePath.append(textureName).c_str();
+		///////////////////////////////////////////////////////////////////////////////
         if (!fileExist(fileName))
         {
             std::cout << "File " << textureName.c_str() << " not found."<< std::endl;
             exit(-1);
         }
+		//////////////////////////////////////////////////////////////////////////////77
         //create bitmap containing our texture
         FIBITMAP* bitmap = FreeImage_Load(FreeImage_GetFileType(fileName, 0), fileName);
         //formati in/out
@@ -84,7 +87,7 @@ Texture::Texture(std::string textureName)
 		else
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1);       // Set min/mag filters migliorano la texture rimuovendo errori
       
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);//TODO capire se non è meglio GL_LINEAR_MIPMAP_LINEAR
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         // Using mipmapping
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glTexEnvf(GL_TEXTURE_2D, GL_TEXTURE_ENV_MODE, GL_DECAL);

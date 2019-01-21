@@ -28,8 +28,10 @@ void displayCallback()
     engine->setProjectionMatrix(perspective);
     // 3d rendering//
 	std::vector<List*> lists = Engine::getLists();
-	for (int i = 0; i < lists.size(); i++)
-		lists.at(i)->render(glm::mat4());
+	for (int i = 0; i < lists.size(); i++) {
+		lists.at(i)->render(glm::mat4(1.0f));
+		//printf("Rendering %d\n",i);
+	}
     if (rotating)
         engine->autoRotateModel(scene, -1.0f);
     // 2D rendering//
@@ -252,28 +254,28 @@ void mouseMoved(int x, int y)
 
     if (x > sizeXMin && x < sizeXMax && y < sizeYMin)
     {
-        std::cout << "UP" << std::endl;
+       // std::cout << "UP" << std::endl;
         const float angle = (10.0f / sizeYMin) * (sizeYMin - y);
         engine->rotateCameraUp(-angle);
         // DOWN
     }
     else if (x > sizeXMin && x < sizeXMax && y > sizeYMax)
     {
-        std::cout << "DOWN" << std::endl;
+      //  std::cout << "DOWN" << std::endl;
         const float angle = (10.0f / (sizeY - sizeYMax)) * (y - sizeYMax);
         engine->rotateCameraUp(angle);
         // LEFT
     }
     else if (y > sizeYMin && y < sizeYMax && x < sizeXMin)
     {
-        std::cout << "LEFT" << std::endl;
+      //  std::cout << "LEFT" << std::endl;
         const float angle = (10.0f / sizeXMin) * (sizeXMin - x);
         engine->rotateCameraRight(-angle);
         // RIGHT
     }
     else if (y > sizeYMin && y < sizeYMax && x > sizeXMax)
     {
-        std::cout << "RIGHT" << std::endl;
+     //   std::cout << "RIGHT" << std::endl;
         const float angle = (10.0f / (sizeX - sizeXMax)) * (x - sizeXMax);
         engine->rotateCameraRight(angle);
     }
@@ -319,15 +321,15 @@ void setCameras()
     glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
     // dove è il sopra
     glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-    engine->addCamera("3", false, eye, center, up);
+    engine->addCamera("Camera3", false, eye, center, up);
     eye = glm::vec3(400.f, 400.f, 400.f);
-    engine->addCamera("2", false, eye, center, up);
+    engine->addCamera("Camera2", false, eye, center, up);
     // si direbbe che renderizza prima l'ultima che gli passi quindi questa è la
     // camera 1
     // lascialo così se no non vedo la scena
     eye = glm::vec3(0.0f, 50.0f, 400.f);
     center = glm::vec3(0.0f, 50.0f, 200.0f);
-    engine->addCamera("1", true, eye, center, up);
+    engine->addCamera("Camera1", true, eye, center, up);
 }
 
 /**
@@ -350,9 +352,11 @@ int main(int argc, char* argv[])
     // read ovo file, load scene and start main loop
     const char* fileName = "../ovo_files/full_scene.ovo";
     scene = engine->getScene(fileName);
-    engine->setAlphaToMaterial(scene, 0.9f, "plane");
-    engine->setLists(scene);
-	//TODO Cem ti conviene farlo in reshape callback o i dati non saranno corretti se ridimensioni la finestra tanto lo chiama una volta anche all'inizio
+
+   // engine->setAlphaToMaterial(scene, 0.9f, "plane");
+   engine->setLists(scene);
+   
+	//TODO Cem basta farlo in reshape callback lo chiama una volta anche all'inizio
     sizeX = engine->getWindowSizeX();
     sizeY = engine->getWindowSizeY();
 	//start main loop
