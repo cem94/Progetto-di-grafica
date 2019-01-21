@@ -73,7 +73,7 @@ void LIB_API Engine::init(int argc, char* argv[])
 
     //aablita glew (un gestore di estensioni che usiamo per includere i metodi per vao usati per renderizzare le mesh)
     glewExperimental = GL_TRUE;  // Optional, but recommended
-//normalizza i vettori per il modello di illuminazione
+	//normalizza i vettori per il modello di illuminazione
     glEnable(GL_NORMALIZE);
 
     // Init di glew
@@ -89,6 +89,7 @@ void LIB_API Engine::init(int argc, char* argv[])
         printf("Required OpenGL version not supported\n");
     }
 
+	// attiva la luce sopra il guanto
     enableLighting(true);
     glEnable(GL_LIGHT0);
     enableZbuffer();
@@ -532,7 +533,7 @@ void  LIB_API Engine::setLists(Node * root)
 	toRender->add(root);
 	for (Node * n : root->getChildren()) {
 		if (n->getName() == "plane") {
-			setAlphaToMaterial(root, 0.9f, "plane");
+			setAlphaToMaterial(root, 0.95f, "plane");
 		}
 		setLists(n);
 	}
@@ -566,7 +567,7 @@ void LIB_API Engine::render()
 	glFrontFace(GL_CW);
 	toRender->render(mat);
 	glFrontFace(GL_CCW);
-	toRender->render(glm::mat4(1.0f));
+	toRender->render(mat);
 }
 
 std::vector<List*> Engine::getLists()

@@ -356,7 +356,7 @@ int main(int argc, char* argv[])
     const char* fileName = "../ovo_files/full_scene.ovo";
     scene = engine->getScene(fileName);
 
-	// engine->setAlphaToMaterial(scene, 0.9f, "plane");
+	//engine->setAlphaToMaterial(scene, 0.95f, "plane");
 	engine->setLists(scene);
    
 	//TODO Cem basta farlo in reshape callback lo chiama una volta anche all'inizio

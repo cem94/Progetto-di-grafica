@@ -26,6 +26,7 @@
 #include <iostream>
 #include <vector>
 #include <cstring>
+
 // GLM
 #define GLM_FORCE_CTOR_INIT  // Force constructors to initialize to identity
 // (from v0.9.9)

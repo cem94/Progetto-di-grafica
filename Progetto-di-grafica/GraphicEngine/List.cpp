@@ -232,9 +232,12 @@ void List::render(glm::mat4 renderMatrix)
 
 void List::render(glm::mat4 scaling)
 {
+	Node * root = list.at(0);
+	root->setMatrix(root->getMatrix() * scaling);
+
 	for (Node* n : list)
 	{
-		glm::mat4 renderMatrix = n->getFinalMatrix() * scaling;
+		glm::mat4 renderMatrix = n->getFinalMatrix();
 
 		if (n->getType() == Object::Type::MESH)
 		{
