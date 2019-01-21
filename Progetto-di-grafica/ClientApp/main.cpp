@@ -13,7 +13,6 @@ Node* scene = NULL;
 bool rotating = false;
 int sizeX = 0;
 int sizeY = 0;
-float angleX = 0.0f;
 // button state machine
 bool keyState[255];
 
@@ -27,20 +26,7 @@ void displayCallback()
     // setto la matrice di proiezione prospettica per il rendering 3d
     engine->setProjectionMatrix(perspective);
     // 3d rendering//
-
 	engine->render();
-	/*std::vector<List*> lists = Engine::getLists();
-	for (int i = 0; i < lists.size(); i++) {
-<<<<<<< HEAD
-		lists.at(i)->render();
-	}
-=======
-		lists.at(i)->render(glm::mat4(1.0f));
-		//printf("Rendering %d\n",i);
-	}*/
-
-	// printf("Rendering %d\n",i);
-//>>>>>>> 8f2bd5dd8490ca662d342c5c230112b91e41c0c6
     if (rotating)
         engine->autoRotateModel(scene, -1.0f);
     // 2D rendering//
@@ -97,44 +83,31 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
     case 'c':
         engine->changeCamera(scene);
         break;
-    case 'h':
-        if (keyState[(unsigned char)'h'] == true)
-        {
-            engine->closeHand(scene);
-        }
-        break;
-    case ' ':
-        if (keyState[(unsigned char)' '] == true)
-        {
-            engine->closeThumb(scene);
-        }
-        break;
-    case 'f':
-        if (keyState[(unsigned char)'f'] == true)
-        {
-            engine->closeFinger(scene, 1);
-        }
-        break;
-    case 'e':
-        if (keyState[(unsigned char)'e'] == true)
-        {
-            engine->closeFinger(scene, 2);
-        }
-        break;
-
-    case 'w':
-        if (keyState[(unsigned char)'w'] == true)
-        {
-            engine->closeFinger(scene, 3);
-        }
-        break;
-    case 'a':
-        if (keyState[(unsigned char)'a'] == true)
-        {
-            engine->closeFinger(scene, 4);
-        }
-        break;
     }
+	//guardo se sono tenuti premuti uno o più bottoni
+	if (keyState[(unsigned char)'h'] == true)
+	{
+		engine->closeHand(scene);
+	}
+	 if (keyState[(unsigned char)' '] == true)
+	{
+		engine->closeThumb(scene);
+	} 
+	if (keyState[(unsigned char)'f'] == true)
+	{
+		engine->closeFinger(scene, 1);
+	} if (keyState[(unsigned char)'e'] == true)
+	{
+		engine->closeFinger(scene, 2);
+	}
+	if (keyState[(unsigned char)'w'] == true)
+	{
+		engine->closeFinger(scene, 3);
+	}
+	if (keyState[(unsigned char)'a'] == true)
+	{
+		engine->closeFinger(scene, 4);
+	}
     engine->redisplay();
 }
 
@@ -290,18 +263,6 @@ void mouseMoved(int x, int y)
 }
 
 /**
- * Mouse pressed callback
- * @param  button mouse button that was pressed
- * @param state the state of the button
- * @param x x coordinate
- * @param y y coordinate
- */
-void mousePressed(int button, int state, int x, int y)
-{
-    engine->mousePressed(button, state, x, y);
-}
-
-/**
  * Callback setter
  */
 void setCallBacks()
@@ -314,8 +275,6 @@ void setCallBacks()
     engine->specialKeyboard(specialCallback);
     engine->mouseWheel(mouseWheel);
     engine->mouseMoved(mouseMoved);
-    // eliminare se non lo usiamo
-    engine->mousePressed(mousePressed);
     engine->timer(timerCallback);
 }
 /**
@@ -360,13 +319,7 @@ int main(int argc, char* argv[])
     // read ovo file, load scene and start main loop
     const char* fileName = "../ovo_files/full_scene.ovo";
     scene = engine->getScene(fileName);
-
-	//engine->setAlphaToMaterial(scene, 0.95f, "plane");
-	engine->setLists(scene);
-   
-	//TODO Cem basta farlo in reshape callback lo chiama una volta anche all'inizio
-   // sizeX = engine->getWindowSizeX();
-   // sizeY = engine->getWindowSizeY();
+	engine->createRenderList(scene);
 	//start main loop
     engine->startLoop();
     //free resources

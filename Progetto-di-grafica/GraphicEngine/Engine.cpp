@@ -20,12 +20,9 @@ bool lighting = true;
 Camera* currentCamera = nullptr;
 std::vector<Camera*> cameras;
 int activeCamera = 0;
-
+//finger sensitivity
 float angle = 5.f;
-
 float fingerAngles[5];
-// per il pollice
-float angleX;
 std::string fingerNames[5] = {"pollice", "indice", "medio", "anulare", "mignolo"};
 
 // Gauntlet translate
@@ -33,10 +30,7 @@ bool translateUp = false;
 int translateCnt = 0;
 
 List* toRender = new List();
-//List *reflectedList = new List();
 Engine* Engine::instance = nullptr;
-//complete set of lists
-//std::vector<List*> Engine::lists = {};
 
 /**
  * Getter for engine instance
@@ -129,36 +123,6 @@ void LIB_API Engine::clearColor(float r, float g, float b)
 void LIB_API Engine::mouseWheel(void(*mouseWheelFunc)(int, int, int, int))
 {
     glutMouseWheelFunc(mouseWheelFunc);
-}
-
-/**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
- */
-//TODO:: credo che non lo useremo
-void LIB_API Engine::mousePressed(int button, int state, int x, int y)
-{
-    if (state == GLUT_UP)
-    {
-        // isMousePressed = false;
-    }
-    if (state == GLUT_DOWN)
-    {
-        // isMousePressed = true;
-        // mousePosition.x = x;
-        // mousePosition.y = y;
-    }
-}
-
-/**
- * Setter for mouse pressed callback
- * @param mouseFunc mouse pressed callback function to set
- */
-void LIB_API Engine::mousePressed(void(*mouseFunc)(int, int, int, int))
-{
-    glutMouseFunc(mouseFunc);
 }
 
 /**
@@ -423,7 +387,7 @@ void LIB_API Engine::renderText()
 /**
  * Starting from current node it recursively populate the scene graph
  * @param  currentNode the current node
- * @param2 nodes the list of remaining nodes to insert
+ * @param nodes the list of remaining nodes to insert
  */
 void LIB_API findChildren(Node* currentNode, std::vector<Node*>& nodes)
 {
@@ -448,7 +412,6 @@ Node*  Engine::getScene(const char* name)
     Node* root = nodes.at(0);
     nodes.erase(nodes.begin());
     findChildren(root, nodes);
-
     setCameraToPalm(root);
     printTree(root, "");
     return root;
@@ -499,17 +462,10 @@ Node*  Engine::getNodeByName(Node* root, std::string name)
   * Set render and trasparent lists
   * @param  root scene graph
   */
-void  LIB_API Engine::setLists(Node * root)
+void  LIB_API Engine::createRenderList(Node * root)
 {
 	setAlphaToMaterial(root, 0.9f, "plane");
 	toRender = new List(root);
-	
-	//for (Node * n : root->getChildren()) {
-	//	if (n->getName() == "plane") {
-	//	}
-	//	setLists(n);
-	//}
-	//printf("Render list: %d",toRender->size());
 }
 
 Camera * Engine::getCurrentCamera()
@@ -827,6 +783,7 @@ void LIB_API Engine::setAlphaToMaterial(Node * root, float alpha, std::string no
     {
         Mesh* mesh = (Mesh*)node;
         mesh->getMaterial()->setAlpha(alpha);
+		printf("Setted alpha of %s\n",mesh->getName().c_str());
     }
 }
 

@@ -1,7 +1,7 @@
 #pragma once
 /*Class responsible for storing a single 3D object (including its vertices, texturing coordinates, and a reference to the used material). The class includes the necessary methods for transferring data to OpenGL.*/
 #include "Engine.h"
-class  LIB_API Mesh : public Node
+class Mesh : public Node
 {
 public:
     Mesh();

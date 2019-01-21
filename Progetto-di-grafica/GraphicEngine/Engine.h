@@ -56,8 +56,6 @@ public:
     void startLoop();
     void clearColor(float r, float g, float b);
     void mouseWheel(void (*mouseWheelFunc)(int, int, int, int));
-    void mousePressed(int button, int state, int x, int y);
-    void mousePressed(void (*mouseFunc)(int, int, int, int));
     int getWindowSizeX();
     int getWindowSizeY();
     void mouseMoved(void (*mouseFunc)(int, int));
@@ -92,7 +90,6 @@ public:
     void switchLights();
     Node* getNodeByName(Node* root, std::string name);
     void changeCamera(Node* root);
-    void createLists(Node* element);
     void incrementFrames();
     void rotateModel(Node* root, float angle);
     void closeThumb(Node* root);
@@ -105,11 +102,9 @@ public:
     void free();
     void sortTrasparentMeshesList(std::vector<Node*> transparentMeshes);
     void setAlphaToMaterial(Node* root, float alpha, std::string nodeName);
-    void setLists(Node* root);
+    void createRenderList(Node* root);
 	Camera * getCurrentCamera();
-
 	void render();
-	std::vector<List*> static getLists();
 private:
     // Singleton
     Engine() {};                       // Private so that it can  not be called
@@ -117,5 +112,4 @@ private:
     Engine(Engine const&) {};          // copy constructor is private
     Engine& operator=(Engine const&);  // assignment operator is private
     static Engine* instance;
-	static std::vector<List*> lists;
 };

@@ -3,7 +3,7 @@
  * perspective projections, and the necessary math to retrieve the camera
  * inverse matrix.*/
 
-class LIB_API Camera : public Node
+class  Camera : public Node
 {
 public:
     Camera();
