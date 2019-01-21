@@ -615,11 +615,13 @@ void LIB_API Engine::openThumb(Node *root) {
 	name.append("2");
 	Node* phalanx2 = getNodeByName(root, name);
 	Node* phalanx1 = phalanx2->getParent();
-	glm::mat4 rotationY = glm::rotate(glm::mat4(1.0f), glm::radians(fingerAngles[0]), glm::vec3(0.0f, 1.0f, 0.0f));
-	glm::mat4 rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(fingerAngles[0]), glm::vec3(0.0f, 0.0f, 1.0f));
-
+	Node* gemma = phalanx1->getChildren().at(1);
+	std::cout << gemma->getName().c_str() << std::endl;
+	glm::mat4 rotationY = glm::rotate(glm::mat4(1.0f), glm::radians(fingerAngles[0]), glm::vec3(0.0f, 1.0f, 1.0f));
+	//glm::mat4 rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(fingerAngles[0]), glm::vec3(0.0f, 0.0f, 1.0f));
 	phalanx1->setMatrix(phalanx1->getMatrix()*rotationY);
-	phalanx2->setMatrix(phalanx2->getMatrix()*rotationY*rotationZ);
+	phalanx2->setMatrix(phalanx2->getMatrix()*rotationY);
+//	gemma->setMatrix(gemma->getMatrix()*rotationY);
 	fingerAngles[0] = 0;
 }
 
@@ -636,18 +638,17 @@ void LIB_API Engine::closeThumb(Node *root)
 	if (fingerAngles[0] > 70.f) {
 		return;
 	}
+	
 	fingerAngles[0] += angle;
-
-	glm::mat4 rotationY = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, -1.0f, 0.0f));
-	glm::mat4 rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 0.0f, -1.0f));
-
+	glm::mat4 rotationY = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, -1.0f, -1.0f));
 	std::string name = fingerNames[0];
 	name.append("2");
 	Node* phalanx2 = getNodeByName(root, name);
 	Node* phalanx1 = phalanx2->getParent();
-
+	Node* gemma = phalanx1->getChildren().at(1);
 	phalanx1->setMatrix(phalanx1->getMatrix()*rotationY);
-	phalanx2->setMatrix(phalanx2->getMatrix()*rotationY*rotationZ);
+	phalanx2->setMatrix(phalanx2->getMatrix()*rotationY);
+	//gemma->setMatrix(gemma->getMatrix()*rotationY);
 }
 
 /**
@@ -693,8 +694,8 @@ void LIB_API Engine::closeFinger(Node * root, int i)
 	std::string name = fingerNames[i];
 	name.append("3");
 	Node* phalanx3 = getNodeByName(root, name);
-	Node* phalanx2 = phalanx3->getParent();//padre di 3
-	Node* phalanx1 = phalanx2->getParent();//padre di 2
+	Node* phalanx2 = phalanx3->getParent();
+	Node* phalanx1 = phalanx2->getParent();
 	fingerAngles[i] += angle;
 	glm::mat4 rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 0.0f, -1.0f));
 	phalanx1->setMatrix(phalanx1->getMatrix()*rotationZ);
@@ -707,8 +708,8 @@ void LIB_API Engine::openFinger(Node * root, int i)
 	std::string name = fingerNames[i];
 	name.append("3");
 	Node* phalanx3 = getNodeByName(root, name);
-	Node* phalanx2 = phalanx3->getParent();//padre di 3
-	Node* phalanx1 = phalanx2->getParent();//padre di 2
+	Node* phalanx2 = phalanx3->getParent();
+	Node* phalanx1 = phalanx2->getParent();
 	glm::mat4 rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(fingerAngles[i]), glm::vec3(0.0f, 0.0f, 1.0f));
 	fingerAngles[i] = 0;
 	phalanx1->setMatrix(phalanx1->getMatrix()*rotationZ);
@@ -748,32 +749,32 @@ void LIB_API Engine::free()
 * @param two list element to compare
 */
 
-bool listNodeCompare(Node*a, Node *b)
-{
-	glm::mat4 first = currentCamera->getMatrix()* a->getMatrix();
-	glm::mat4 second = currentCamera->getMatrix()*b->getMatrix();
-	return (float)first[3].z > (float)second[3].z;
-}
+//bool listNodeCompare(Node*a, Node *b)
+//{
+//	glm::mat4 first = currentCamera->getMatrix()* a->getMatrix();
+//	glm::mat4 second = currentCamera->getMatrix()*b->getMatrix();
+//	return (float)first[3].z > (float)second[3].z;
+//}
 
-//TODO attenzione questo metodo ribalta la scena e non sembra cambiare la lista forse inutile per noi
-/**
-* sorts the trasparent meshes list
-* @param list of transparent meshes
-*/
-void LIB_API Engine::sortTrasparentMeshesList(std::vector<Node*>& transparentMeshes)
-{
-	//Specifies whether the depth buffer is enabled for writing.If flag is GL_FALSE, depth buffer writing is disabled.
-	/*There are certain scenarios imaginable where you want to perform the depth test on all fragments and discard them accordingly,
-	but not update the depth buffer. Basically, you're using a read-only depth buffer. OpenGL allows us to disable writing to the depth buffer by setting its depth mask to GL_FALSE: */
-	glDepthMask(GL_FALSE);
-	//gli passo un comparator
-	printList(transparentMeshes);
-
-	std::sort(transparentMeshes.begin(), transparentMeshes.end(), listNodeCompare);
-	printList(transparentMeshes);
-	//Otherwise, it is enabled.Initially, depth buffer writing is enabled.
-	glDepthMask(GL_TRUE);
-}
+////TODO attenzione questo metodo ribalta la scena e non sembra cambiare la lista forse inutile per noi
+///**
+//* sorts the trasparent meshes list
+//* @param list of transparent meshes
+//*/
+//void LIB_API Engine::sortTrasparentMeshesList(std::vector<Node*>& transparentMeshes)
+//{
+//	//Specifies whether the depth buffer is enabled for writing.If flag is GL_FALSE, depth buffer writing is disabled.
+//	/*There are certain scenarios imaginable where you want to perform the depth test on all fragments and discard them accordingly,
+//	but not update the depth buffer. Basically, you're using a read-only depth buffer. OpenGL allows us to disable writing to the depth buffer by setting its depth mask to GL_FALSE: */
+//	glDepthMask(GL_FALSE);
+//	//gli passo un comparator
+//	printList(transparentMeshes);
+//
+//	std::sort(transparentMeshes.begin(), transparentMeshes.end(), listNodeCompare);
+//	printList(transparentMeshes);
+//	//Otherwise, it is enabled.Initially, depth buffer writing is enabled.
+//	glDepthMask(GL_TRUE);
+//}
 //setta valore alpha ad un nodo specifico
 void LIB_API Engine::setAlphaToMaterial(Node * root, float alpha, std::string nodeName)
 {
