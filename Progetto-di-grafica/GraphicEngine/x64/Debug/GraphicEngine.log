@@ -1,12 +1,1 @@
-﻿  Camera.cpp
-  Engine.cpp
-  Light.cpp
-  List.cpp
-  Material.cpp
-  Mesh.cpp
-  Node.cpp
-  OvoReader.cpp
-  Texture.cpp
-  Generating Code...
-     Creating library C:\Users\meyer\source\repos\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.lib and object C:\Users\meyer\source\repos\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.exp
-  GraphicEngine.vcxproj -> C:\Users\meyer\source\repos\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.dll
+﻿  GraphicEngine.vcxproj -> C:\Users\meyer\source\repos\Progetto-di-grafica\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.dll
