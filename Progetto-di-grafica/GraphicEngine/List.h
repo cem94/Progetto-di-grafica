@@ -5,6 +5,7 @@ class LIB_API List : public Object
 {
 public:
     List();
+    List(Node *root);
     virtual ~List();
     std::vector<Node*> getList() const;
     // se si riserva la memoria, la velocità aumenta.
@@ -15,7 +16,7 @@ public:
     Node* at(int position);
     void insert(std::vector<Node*> elements);
 	void transparentPreRender(Material *material, glm::mat4 renderMatrix);
-    void render(glm::mat4 renderMatrix) override;
+    void render(glm::mat4 renderMatrix=glm::mat4(1.0f)) override;
     unsigned int size();
 	void getTreeAsList(Node *root, std::vector<Node*>& nodes);
 	void sort(Node * root);

@@ -35,7 +35,7 @@ c:\users\meyer\source\repos\progetto-di-grafica\progetto-di-grafica\graphicengin
   c:\users\meyer\source\repos\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: see declaration of 'glm::tvec3<float,0>'
 c:\users\meyer\source\repos\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' needs to have dll-interface to be used by clients of class 'Material'
   c:\users\meyer\source\repos\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: see declaration of 'glm::tvec4<float,0>'
-c:\users\meyer\source\repos\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'List'
+c:\users\meyer\source\repos\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(25): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'List'
           with
           [
               _Ty=Node *

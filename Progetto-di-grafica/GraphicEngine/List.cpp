@@ -8,6 +8,11 @@ List::List()
 {
 }
 
+List::List(Node * root)
+{
+	getTreeAsList(root, list);
+}
+
 /**
 * List Destructor
 */
@@ -102,8 +107,8 @@ void List::getTreeAsList(Node *root, std::vector<Node*>& nodes) {
 
  void List::sort(Node * root)
  {
-	  std::vector<Node*> allNodes;
-	 getTreeAsList(root,allNodes);
+	/*  std::vector<Node*> allNodes;
+	 getTreeAsList(root,allNodes);*/
 	 //I create a vector of pure nodes
 	 std::vector<Node*> pureNodes;
 
@@ -113,22 +118,23 @@ void List::getTreeAsList(Node *root, std::vector<Node*>& nodes) {
 	 //I create a vector of meshes
 	 std::vector<Mesh*> meshes;
 
-	 for (int i = 0; i < allNodes.size(); i++) {
-		 if (allNodes.at(i)->getType() == Object::NODE) {
-			 pureNodes.push_back(allNodes.at(i));
+	 for (int i = 0; i < list.size(); i++) {
+		 if (list.at(i)->getType() == Object::NODE) {
+			 pureNodes.push_back(list.at(i));
 			 continue;
 		 }
-		 if (allNodes.at(i)->getType() == Object::LIGHT) {
-			 lights.push_back(dynamic_cast<Light*>(allNodes.at(i)));
+		 if (list.at(i)->getType() == Object::LIGHT) {
+			 lights.push_back(dynamic_cast<Light*>(list.at(i)));
 			 continue;
 		 }
-		 if (allNodes.at(i)->getType() == Object::MESH) {
-			 meshes.push_back(dynamic_cast<Mesh*>(allNodes.at(i)));
+		 if (list.at(i)->getType() == Object::MESH) {
+			 meshes.push_back(dynamic_cast<Mesh*>(list.at(i)));
 			 continue;
 		 }
 	 }
-
-	 //Now I place the items in the order I want them to be renderized
+	 //Svuoto lista
+	 list.clear();
+	 //TODO inserisco elementi in ordine
 	 for (int i = 0; i < pureNodes.size(); i++) {
 		 list.push_back(pureNodes.at(i));
 	 }
@@ -138,21 +144,6 @@ void List::getTreeAsList(Node *root, std::vector<Node*>& nodes) {
 	 for (int i = 0; i < meshes.size(); i++) {
 		 list.push_back(meshes.at(i));
 	 }
-	 //if (root->getType() == Node::Type::MESH)
-	 //{
-		// Mesh * mesh = (Mesh *)root;
-		// /*if (mesh->getMaterial() != nullptr && mesh->getMaterial()->isTrasparent())
-		// {
-		//	 printf("Aggiungo mesh trasparente %s \n", mesh->getName().c_str());
-		//	// transparentMeshes->add(element);
-		// }*/
-	 //}
-	 //if (root->getType() == Node::Type::LIGHT)
-	 //{
-		// //lista luci
-
-	 //}
-
  }
 /**
 * support method for transparent render
@@ -173,11 +164,12 @@ void List::transparentPreRender(Material *material, glm::mat4 renderMatrix)
 	glDisable(GL_CULL_FACE);
 }
 /**
- * Render for list (empty)
- * @param  renderMatrix render matrix
+ * Render for list 
+ * @param  matrix render matrix (not used)
  */
-void List::render(glm::mat4 renderMatrix)
+void List::render(glm::mat4 matrix)
 {
+	glm::mat4 camera = Engine::getInstance().getCurrentCamera()->getMatrix();
 	for (Node* n : list)
 	{
 		glm::mat4 renderMatrix = n->getFinalMatrix();
@@ -189,14 +181,12 @@ void List::render(glm::mat4 renderMatrix)
 			{
 				if (m->getMaterial()->isTrasparent())
 				{
-					// TRASPARENZE
 					transparentPreRender(m->getMaterial(), renderMatrix);
-					//printf("Trasparent\n");
 				}
 			}
 		}
-		// n->render(currentCamera->getMatrix() * renderMatrix);
+		n->render(camera * renderMatrix);
 
-		n->render(renderMatrix);
+		//n->render(renderMatrix);
 	}
 }

@@ -6,7 +6,7 @@ public:
     Texture();
     Texture(std::string textureName);
     virtual ~Texture();
-    void render(glm::mat4 rendermatrix) override;
+    void render(glm::mat4 rendermatrix = glm::mat4(1.0f)) override;
 private:
     unsigned int textureId;
 	static unsigned int id;

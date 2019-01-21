@@ -29,8 +29,7 @@ void displayCallback()
     // 3d rendering//
 	std::vector<List*> lists = Engine::getLists();
 	for (int i = 0; i < lists.size(); i++) {
-		lists.at(i)->render(glm::mat4(1.0f));
-		//printf("Rendering %d\n",i);
+		lists.at(i)->render();
 	}
     if (rotating)
         engine->autoRotateModel(scene, -1.0f);
@@ -357,8 +356,8 @@ int main(int argc, char* argv[])
    engine->setLists(scene);
    
 	//TODO Cem basta farlo in reshape callback lo chiama una volta anche all'inizio
-    sizeX = engine->getWindowSizeX();
-    sizeY = engine->getWindowSizeY();
+   // sizeX = engine->getWindowSizeX();
+   // sizeY = engine->getWindowSizeY();
 	//start main loop
     engine->startLoop();
     //free resources

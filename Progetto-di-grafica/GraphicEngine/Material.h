@@ -22,7 +22,7 @@ public:
     void setTexture(std::string textureName);
 	bool hasTexture();
 
-    void render(glm::mat4 renderMatrix) override;
+    void render(glm::mat4 renderMatrix = glm::mat4(1.0f)) override;
 
     bool isTrasparent();
     void activeTransparencies();
