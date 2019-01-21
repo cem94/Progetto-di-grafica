@@ -27,11 +27,13 @@ void displayCallback()
     // setto la matrice di proiezione prospettica per il rendering 3d
     engine->setProjectionMatrix(perspective);
     // 3d rendering//
-	std::vector<List*> lists = Engine::getLists();
+
+	engine->render();
+	/*std::vector<List*> lists = Engine::getLists();
 	for (int i = 0; i < lists.size(); i++) {
 		lists.at(i)->render(glm::mat4(1.0f));
 		//printf("Rendering %d\n",i);
-	}
+	}*/
 
 	// printf("Rendering %d\n",i);
     if (rotating)

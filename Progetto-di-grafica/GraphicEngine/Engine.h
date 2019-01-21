@@ -25,7 +25,7 @@
 #include <iomanip>
 #include <iostream>
 #include <vector>
-
+#include <cstring>
 // GLM
 #define GLM_FORCE_CTOR_INIT  // Force constructors to initialize to identity
 // (from v0.9.9)
@@ -107,6 +107,8 @@ public:
     void setAlphaToMaterial(Node* root, float alpha, std::string nodeName);
     void setLists(Node* root);
 	Camera * getCurrentCamera();
+
+	void render();
 	std::vector<List*> static getLists();
 private:
     // Singleton

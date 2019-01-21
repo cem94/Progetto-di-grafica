@@ -33,7 +33,7 @@ bool translateUp = false;
 int translateCnt = 0;
 
 //lists
-//List* toRender = new List();
+List* toRender = new List();
 List *reflectedList = new List();
 
 Engine* Engine::instance = nullptr;
@@ -432,8 +432,8 @@ void LIB_API findChildren(Node* currentNode, std::vector<Node*>& nodes)
     {
         Node* next = nodes.at(0);
         nodes.erase(nodes.begin());
-        findChildren(next, nodes);
         currentNode->insert(next);
+		findChildren(next, nodes);
     }
 }
 
@@ -529,6 +529,14 @@ Node*  Engine::getNodeByName(Node* root, std::string name)
   */
 void  LIB_API Engine::setLists(Node * root)
 {
+	toRender->add(root);
+	for (Node * n : root->getChildren()) {
+		if (n->getName() == "plane") {
+			setAlphaToMaterial(root, 0.9f, "plane");
+		}
+		setLists(n);
+	}
+	/*
 	//CEM se commento questo lo gira se no no non capisco perché -> mi una copia di root per fare le trasparenze
 	Node* node = new Node{*root};
 	printTree(node,"");
@@ -544,11 +552,21 @@ void  LIB_API Engine::setLists(Node * root)
 	//std::vector<Node*> nodes;
 	//reflectedList->getTreeAsList(node,nodes);
 	//printf("size %d\n",nodes.size());
+	*/
 }
 
 Camera * Engine::getCurrentCamera()
 {
 	return currentCamera;
+}
+
+void LIB_API Engine::render()
+{
+	glm::mat4 mat = glm::scale(glm::mat4(1), glm::vec3(1.0f, -1.0f, 1.0f));
+	glFrontFace(GL_CW);
+	toRender->render(mat);
+	glFrontFace(GL_CCW);
+	toRender->render(glm::mat4(1.0f));
 }
 
 std::vector<List*> Engine::getLists()

@@ -1,577 +1,577 @@
 ﻿  Camera.cpp
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(21): warning C4251: 'Object::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Object'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(21): warning C4251: 'Object::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Object'
   c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\xstring(4373): note: vedere la dichiarazione di 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(25): warning C4251: 'Node::children': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(25): warning C4251: 'Node::children': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
           with
           [
               _Ty=Node *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
           with
           [
               _Ty=Node *
           ]
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(26): warning C4251: 'Node::matrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\camera.h(17): warning C4251: 'Camera::projectionMatrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Camera'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(33): warning C4251: 'Light::color': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(34): warning C4251: 'Light::direction': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(35): warning C4251: 'Light::position': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(37): warning C4251: 'Light::ambient': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(38): warning C4251: 'Light::diffuse': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(39): warning C4251: 'Light::specular': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(31): warning C4251: 'Material::ambient': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(32): warning C4251: 'Material::diffuse': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(33): warning C4251: 'Material::specular': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(26): warning C4251: 'Node::matrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\camera.h(17): warning C4251: 'Camera::projectionMatrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Camera'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(33): warning C4251: 'Light::color': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(34): warning C4251: 'Light::direction': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(35): warning C4251: 'Light::position': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(37): warning C4251: 'Light::ambient': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(38): warning C4251: 'Light::diffuse': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(39): warning C4251: 'Light::specular': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(31): warning C4251: 'Material::ambient': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(32): warning C4251: 'Material::diffuse': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(33): warning C4251: 'Material::specular': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
           with
           [
               _Ty=Node *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
           with
           [
               _Ty=Node *
           ]
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(118): warning C4251: 'Engine::lists': class 'std::vector<List *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Engine'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(120): warning C4251: 'Engine::lists': class 'std::vector<List *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Engine'
           with
           [
               _Ty=List *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(110): note: vedere la dichiarazione di 'std::vector<List *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(112): note: vedere la dichiarazione di 'std::vector<List *,std::allocator<_Ty>>'
           with
           [
               _Ty=List *
           ]
   Engine.cpp
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(21): warning C4251: 'Object::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Object'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(21): warning C4251: 'Object::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Object'
   c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\xstring(4373): note: vedere la dichiarazione di 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(25): warning C4251: 'Node::children': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(25): warning C4251: 'Node::children': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
           with
           [
               _Ty=Node *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
           with
           [
               _Ty=Node *
           ]
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(26): warning C4251: 'Node::matrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\camera.h(17): warning C4251: 'Camera::projectionMatrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Camera'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(33): warning C4251: 'Light::color': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(34): warning C4251: 'Light::direction': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(35): warning C4251: 'Light::position': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(37): warning C4251: 'Light::ambient': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(38): warning C4251: 'Light::diffuse': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(39): warning C4251: 'Light::specular': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(31): warning C4251: 'Material::ambient': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(32): warning C4251: 'Material::diffuse': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(33): warning C4251: 'Material::specular': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(26): warning C4251: 'Node::matrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\camera.h(17): warning C4251: 'Camera::projectionMatrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Camera'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(33): warning C4251: 'Light::color': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(34): warning C4251: 'Light::direction': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(35): warning C4251: 'Light::position': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(37): warning C4251: 'Light::ambient': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(38): warning C4251: 'Light::diffuse': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(39): warning C4251: 'Light::specular': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(31): warning C4251: 'Material::ambient': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(32): warning C4251: 'Material::diffuse': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(33): warning C4251: 'Material::specular': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
           with
           [
               _Ty=Node *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
           with
           [
               _Ty=Node *
           ]
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(118): warning C4251: 'Engine::lists': class 'std::vector<List *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Engine'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(120): warning C4251: 'Engine::lists': class 'std::vector<List *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Engine'
           with
           [
               _Ty=List *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(110): note: vedere la dichiarazione di 'std::vector<List *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(112): note: vedere la dichiarazione di 'std::vector<List *,std::allocator<_Ty>>'
           with
           [
               _Ty=List *
           ]
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(397): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(402): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vedere la dichiarazione di 'sprintf'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(407): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(412): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vedere la dichiarazione di 'sprintf'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(397): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(402): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1774): note: vedere la dichiarazione di 'sprintf'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(407): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(412): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1774): note: vedere la dichiarazione di 'sprintf'
   Light.cpp
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(21): warning C4251: 'Object::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Object'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(21): warning C4251: 'Object::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Object'
   c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\xstring(4373): note: vedere la dichiarazione di 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(25): warning C4251: 'Node::children': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(25): warning C4251: 'Node::children': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
           with
           [
               _Ty=Node *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
           with
           [
               _Ty=Node *
           ]
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(26): warning C4251: 'Node::matrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\camera.h(17): warning C4251: 'Camera::projectionMatrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Camera'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(33): warning C4251: 'Light::color': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(34): warning C4251: 'Light::direction': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(35): warning C4251: 'Light::position': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(37): warning C4251: 'Light::ambient': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(38): warning C4251: 'Light::diffuse': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(39): warning C4251: 'Light::specular': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(31): warning C4251: 'Material::ambient': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(32): warning C4251: 'Material::diffuse': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(33): warning C4251: 'Material::specular': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(26): warning C4251: 'Node::matrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\camera.h(17): warning C4251: 'Camera::projectionMatrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Camera'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(33): warning C4251: 'Light::color': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(34): warning C4251: 'Light::direction': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(35): warning C4251: 'Light::position': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(37): warning C4251: 'Light::ambient': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(38): warning C4251: 'Light::diffuse': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(39): warning C4251: 'Light::specular': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(31): warning C4251: 'Material::ambient': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(32): warning C4251: 'Material::diffuse': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(33): warning C4251: 'Material::specular': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
           with
           [
               _Ty=Node *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
           with
           [
               _Ty=Node *
           ]
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(118): warning C4251: 'Engine::lists': class 'std::vector<List *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Engine'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(120): warning C4251: 'Engine::lists': class 'std::vector<List *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Engine'
           with
           [
               _Ty=List *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(110): note: vedere la dichiarazione di 'std::vector<List *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(112): note: vedere la dichiarazione di 'std::vector<List *,std::allocator<_Ty>>'
           with
           [
               _Ty=List *
           ]
   List.cpp
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(21): warning C4251: 'Object::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Object'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(21): warning C4251: 'Object::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Object'
   c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\xstring(4373): note: vedere la dichiarazione di 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(25): warning C4251: 'Node::children': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(25): warning C4251: 'Node::children': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
           with
           [
               _Ty=Node *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
           with
           [
               _Ty=Node *
           ]
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(26): warning C4251: 'Node::matrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\camera.h(17): warning C4251: 'Camera::projectionMatrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Camera'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(33): warning C4251: 'Light::color': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(34): warning C4251: 'Light::direction': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(35): warning C4251: 'Light::position': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(37): warning C4251: 'Light::ambient': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(38): warning C4251: 'Light::diffuse': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(39): warning C4251: 'Light::specular': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(31): warning C4251: 'Material::ambient': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(32): warning C4251: 'Material::diffuse': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(33): warning C4251: 'Material::specular': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(26): warning C4251: 'Node::matrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\camera.h(17): warning C4251: 'Camera::projectionMatrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Camera'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(33): warning C4251: 'Light::color': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(34): warning C4251: 'Light::direction': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(35): warning C4251: 'Light::position': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(37): warning C4251: 'Light::ambient': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(38): warning C4251: 'Light::diffuse': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(39): warning C4251: 'Light::specular': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(31): warning C4251: 'Material::ambient': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(32): warning C4251: 'Material::diffuse': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(33): warning C4251: 'Material::specular': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
           with
           [
               _Ty=Node *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
           with
           [
               _Ty=Node *
           ]
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(118): warning C4251: 'Engine::lists': class 'std::vector<List *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Engine'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(120): warning C4251: 'Engine::lists': class 'std::vector<List *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Engine'
           with
           [
               _Ty=List *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(110): note: vedere la dichiarazione di 'std::vector<List *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(112): note: vedere la dichiarazione di 'std::vector<List *,std::allocator<_Ty>>'
           with
           [
               _Ty=List *
           ]
   Material.cpp
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(21): warning C4251: 'Object::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Object'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(21): warning C4251: 'Object::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Object'
   c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\xstring(4373): note: vedere la dichiarazione di 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(25): warning C4251: 'Node::children': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(25): warning C4251: 'Node::children': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
           with
           [
               _Ty=Node *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
           with
           [
               _Ty=Node *
           ]
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(26): warning C4251: 'Node::matrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\camera.h(17): warning C4251: 'Camera::projectionMatrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Camera'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(33): warning C4251: 'Light::color': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(34): warning C4251: 'Light::direction': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(35): warning C4251: 'Light::position': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(37): warning C4251: 'Light::ambient': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(38): warning C4251: 'Light::diffuse': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(39): warning C4251: 'Light::specular': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(31): warning C4251: 'Material::ambient': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(32): warning C4251: 'Material::diffuse': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(33): warning C4251: 'Material::specular': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(26): warning C4251: 'Node::matrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\camera.h(17): warning C4251: 'Camera::projectionMatrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Camera'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(33): warning C4251: 'Light::color': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(34): warning C4251: 'Light::direction': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(35): warning C4251: 'Light::position': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(37): warning C4251: 'Light::ambient': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(38): warning C4251: 'Light::diffuse': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(39): warning C4251: 'Light::specular': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(31): warning C4251: 'Material::ambient': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(32): warning C4251: 'Material::diffuse': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(33): warning C4251: 'Material::specular': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
           with
           [
               _Ty=Node *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
           with
           [
               _Ty=Node *
           ]
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(118): warning C4251: 'Engine::lists': class 'std::vector<List *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Engine'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(120): warning C4251: 'Engine::lists': class 'std::vector<List *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Engine'
           with
           [
               _Ty=List *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(110): note: vedere la dichiarazione di 'std::vector<List *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(112): note: vedere la dichiarazione di 'std::vector<List *,std::allocator<_Ty>>'
           with
           [
               _Ty=List *
           ]
   Mesh.cpp
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(21): warning C4251: 'Object::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Object'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(21): warning C4251: 'Object::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Object'
   c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\xstring(4373): note: vedere la dichiarazione di 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(25): warning C4251: 'Node::children': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(25): warning C4251: 'Node::children': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
           with
           [
               _Ty=Node *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
           with
           [
               _Ty=Node *
           ]
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(26): warning C4251: 'Node::matrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\camera.h(17): warning C4251: 'Camera::projectionMatrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Camera'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(33): warning C4251: 'Light::color': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(34): warning C4251: 'Light::direction': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(35): warning C4251: 'Light::position': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(37): warning C4251: 'Light::ambient': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(38): warning C4251: 'Light::diffuse': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(39): warning C4251: 'Light::specular': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(31): warning C4251: 'Material::ambient': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(32): warning C4251: 'Material::diffuse': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(33): warning C4251: 'Material::specular': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(26): warning C4251: 'Node::matrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\camera.h(17): warning C4251: 'Camera::projectionMatrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Camera'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(33): warning C4251: 'Light::color': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(34): warning C4251: 'Light::direction': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(35): warning C4251: 'Light::position': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(37): warning C4251: 'Light::ambient': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(38): warning C4251: 'Light::diffuse': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(39): warning C4251: 'Light::specular': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(31): warning C4251: 'Material::ambient': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(32): warning C4251: 'Material::diffuse': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(33): warning C4251: 'Material::specular': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
           with
           [
               _Ty=Node *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
           with
           [
               _Ty=Node *
           ]
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(118): warning C4251: 'Engine::lists': class 'std::vector<List *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Engine'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(120): warning C4251: 'Engine::lists': class 'std::vector<List *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Engine'
           with
           [
               _Ty=List *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(110): note: vedere la dichiarazione di 'std::vector<List *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(112): note: vedere la dichiarazione di 'std::vector<List *,std::allocator<_Ty>>'
           with
           [
               _Ty=List *
           ]
   Node.cpp
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(21): warning C4251: 'Object::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Object'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(21): warning C4251: 'Object::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Object'
   c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\xstring(4373): note: vedere la dichiarazione di 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(25): warning C4251: 'Node::children': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(25): warning C4251: 'Node::children': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
           with
           [
               _Ty=Node *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
           with
           [
               _Ty=Node *
           ]
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(26): warning C4251: 'Node::matrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\camera.h(17): warning C4251: 'Camera::projectionMatrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Camera'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(33): warning C4251: 'Light::color': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(34): warning C4251: 'Light::direction': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(35): warning C4251: 'Light::position': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(37): warning C4251: 'Light::ambient': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(38): warning C4251: 'Light::diffuse': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(39): warning C4251: 'Light::specular': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(31): warning C4251: 'Material::ambient': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(32): warning C4251: 'Material::diffuse': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(33): warning C4251: 'Material::specular': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(26): warning C4251: 'Node::matrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\camera.h(17): warning C4251: 'Camera::projectionMatrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Camera'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(33): warning C4251: 'Light::color': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(34): warning C4251: 'Light::direction': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(35): warning C4251: 'Light::position': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(37): warning C4251: 'Light::ambient': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(38): warning C4251: 'Light::diffuse': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(39): warning C4251: 'Light::specular': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(31): warning C4251: 'Material::ambient': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(32): warning C4251: 'Material::diffuse': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(33): warning C4251: 'Material::specular': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
           with
           [
               _Ty=Node *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
           with
           [
               _Ty=Node *
           ]
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(118): warning C4251: 'Engine::lists': class 'std::vector<List *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Engine'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(120): warning C4251: 'Engine::lists': class 'std::vector<List *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Engine'
           with
           [
               _Ty=List *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(110): note: vedere la dichiarazione di 'std::vector<List *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(112): note: vedere la dichiarazione di 'std::vector<List *,std::allocator<_Ty>>'
           with
           [
               _Ty=List *
           ]
   Object.cpp
   OvoReader.cpp
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(21): warning C4251: 'Object::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Object'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(21): warning C4251: 'Object::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Object'
   c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\xstring(4373): note: vedere la dichiarazione di 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(25): warning C4251: 'Node::children': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(25): warning C4251: 'Node::children': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
           with
           [
               _Ty=Node *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
           with
           [
               _Ty=Node *
           ]
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(26): warning C4251: 'Node::matrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\camera.h(17): warning C4251: 'Camera::projectionMatrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Camera'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(33): warning C4251: 'Light::color': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(34): warning C4251: 'Light::direction': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(35): warning C4251: 'Light::position': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(37): warning C4251: 'Light::ambient': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(38): warning C4251: 'Light::diffuse': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(39): warning C4251: 'Light::specular': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(31): warning C4251: 'Material::ambient': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(32): warning C4251: 'Material::diffuse': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(33): warning C4251: 'Material::specular': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(26): warning C4251: 'Node::matrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\camera.h(17): warning C4251: 'Camera::projectionMatrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Camera'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(33): warning C4251: 'Light::color': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(34): warning C4251: 'Light::direction': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(35): warning C4251: 'Light::position': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(37): warning C4251: 'Light::ambient': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(38): warning C4251: 'Light::diffuse': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(39): warning C4251: 'Light::specular': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(31): warning C4251: 'Material::ambient': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(32): warning C4251: 'Material::diffuse': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(33): warning C4251: 'Material::specular': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
           with
           [
               _Ty=Node *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
           with
           [
               _Ty=Node *
           ]
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(118): warning C4251: 'Engine::lists': class 'std::vector<List *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Engine'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(120): warning C4251: 'Engine::lists': class 'std::vector<List *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Engine'
           with
           [
               _Ty=List *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(110): note: vedere la dichiarazione di 'std::vector<List *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(112): note: vedere la dichiarazione di 'std::vector<List *,std::allocator<_Ty>>'
           with
           [
               _Ty=List *
           ]
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(13): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: vedere la dichiarazione di 'fopen'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(57): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(73): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(91): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(120): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(125): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(130): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(140): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(172): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(188): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(198): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(201): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(204): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(207): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(222): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(308): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(441): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(460): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(518): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(522): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(526): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(530): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(551): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(570): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(13): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(208): note: vedere la dichiarazione di 'fopen'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(57): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(73): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(91): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(120): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(125): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(130): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(140): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(172): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(188): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(198): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(201): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(204): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(207): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(222): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(308): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(441): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(460): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(518): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(522): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(526): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(530): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(551): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(570): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: vedere la dichiarazione di 'strcpy'
   Texture.cpp
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(21): warning C4251: 'Object::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Object'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(21): warning C4251: 'Object::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Object'
   c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\xstring(4373): note: vedere la dichiarazione di 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(25): warning C4251: 'Node::children': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(25): warning C4251: 'Node::children': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
           with
           [
               _Ty=Node *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
           with
           [
               _Ty=Node *
           ]
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(26): warning C4251: 'Node::matrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\camera.h(17): warning C4251: 'Camera::projectionMatrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Camera'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(33): warning C4251: 'Light::color': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(34): warning C4251: 'Light::direction': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(35): warning C4251: 'Light::position': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(37): warning C4251: 'Light::ambient': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(38): warning C4251: 'Light::diffuse': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(39): warning C4251: 'Light::specular': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(31): warning C4251: 'Material::ambient': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(32): warning C4251: 'Material::diffuse': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(33): warning C4251: 'Material::specular': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(26): warning C4251: 'Node::matrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Node'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\camera.h(17): warning C4251: 'Camera::projectionMatrix': struct 'glm::tmat4x4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Camera'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_mat.hpp(304): note: vedere la dichiarazione di 'glm::tmat4x4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(33): warning C4251: 'Light::color': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(34): warning C4251: 'Light::direction': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(35): warning C4251: 'Light::position': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(37): warning C4251: 'Light::ambient': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(38): warning C4251: 'Light::diffuse': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\light.h(39): warning C4251: 'Light::specular': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Light'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(31): warning C4251: 'Material::ambient': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(32): warning C4251: 'Material::diffuse': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(33): warning C4251: 'Material::specular': struct 'glm::tvec3<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
           with
           [
               _Ty=Node *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\node.h(11): note: vedere la dichiarazione di 'std::vector<Node *,std::allocator<_Ty>>'
           with
           [
               _Ty=Node *
           ]
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(118): warning C4251: 'Engine::lists': class 'std::vector<List *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Engine'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(120): warning C4251: 'Engine::lists': class 'std::vector<List *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Engine'
           with
           [
               _Ty=List *
           ]
-  c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(110): note: vedere la dichiarazione di 'std::vector<List *,std::allocator<_Ty>>'
+  c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(112): note: vedere la dichiarazione di 'std::vector<List *,std::allocator<_Ty>>'
           with
           [
               _Ty=List *
           ]
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\texture.cpp(20): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: vedere la dichiarazione di 'fopen'
+c:\users\julian\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\texture.cpp(20): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(208): note: vedere la dichiarazione di 'fopen'
   Generazione del codice in corso...
-     Creazione della libreria C:\Users\cem\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.lib e dell'oggetto C:\Users\cem\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.exp
-  GraphicEngine.vcxproj -> C:\Users\cem\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.dll
+     Creazione della libreria C:\Users\Julian\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.lib e dell'oggetto C:\Users\Julian\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.exp
+  GraphicEngine.vcxproj -> C:\Users\Julian\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.dll

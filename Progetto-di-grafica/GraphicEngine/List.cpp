@@ -180,6 +180,7 @@ void List::transparentPreRender(Material *material, glm::mat4 renderMatrix)
  * Render for list (empty)
  * @param  renderMatrix render matrix
  */
+/*
 void List::render(glm::mat4 renderMatrix)
 {
 	for (Node* n : list)
@@ -205,7 +206,7 @@ void List::render(glm::mat4 renderMatrix)
 	}
 
 	//TODO:: GREG COSI FUNZIONA MA NON COMPLETAMENTE
-        /*
+     
 	glm::mat4 scaling =  glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, -1.0f, 1.0f));
 	glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -50.0f, 0.0f));
 	for (Node* n : list) {
@@ -225,5 +226,29 @@ void List::render(glm::mat4 renderMatrix)
 
           n->render(renderMatrix);
         }
-		*/
+		
+}
+*/
+
+void List::render(glm::mat4 scaling)
+{
+	for (Node* n : list)
+	{
+		glm::mat4 renderMatrix = n->getFinalMatrix() * scaling;
+
+		if (n->getType() == Object::Type::MESH)
+		{
+			Mesh* m = static_cast<Mesh*>(n);
+			if (m->getMaterial() != nullptr)
+			{
+				if (m->getMaterial()->isTrasparent())
+				{
+					// TRASPARENZE
+					transparentPreRender(m->getMaterial(), renderMatrix);
+					//printf("Trasparent\n");
+				}
+			}
+		}
+		n->render(renderMatrix);
+	}
 }
