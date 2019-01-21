@@ -19,7 +19,7 @@ public:
     void render(glm::mat4 renderMatrix) override;
      int size();
 	void getTreeAsList(Node *root, std::vector<Node*>& nodes);
-	void sort(Node * root);
+	void sort();
 	void setIsRefletcion(bool isReflection);
     bool getIsReflection();
 private:

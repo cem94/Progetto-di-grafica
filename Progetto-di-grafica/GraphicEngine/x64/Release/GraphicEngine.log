@@ -1,18 +1,15 @@
 ﻿  Camera.cpp
-c:\users\meyer\source\repos\progetto\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(4): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
   Engine.cpp
-c:\users\meyer\source\repos\progetto\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(13): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
   Light.cpp
-c:\users\meyer\source\repos\progetto\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(4): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
   List.cpp
-c:\users\meyer\source\repos\progetto\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(4): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
   Material.cpp
-c:\users\meyer\source\repos\progetto\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(4): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
   Mesh.cpp
-c:\users\meyer\source\repos\progetto\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(4): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
   Node.cpp
-c:\users\meyer\source\repos\progetto\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(4): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
   Object.cpp
-c:\users\meyer\source\repos\progetto\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(4): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
+  OvoReader.cpp
   Texture.cpp
-c:\users\meyer\source\repos\progetto\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(4): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
+     Creazione della libreria C:\Users\cem\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Release\GraphicEngine.lib e dell'oggetto C:\Users\cem\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Release\GraphicEngine.exp
+  Generazione codice in corso...
+  Generazione codice terminata
+  All 764 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  GraphicEngine.vcxproj -> C:\Users\cem\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Release\GraphicEngine.dll

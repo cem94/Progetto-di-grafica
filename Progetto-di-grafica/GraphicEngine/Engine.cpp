@@ -785,4 +785,3 @@ void LIB_API Engine::setAlphaToMaterial(Node * root, float alpha, std::string no
 		printf("Setted alpha of %s\n",mesh->getName().c_str());
     }
 }
-
