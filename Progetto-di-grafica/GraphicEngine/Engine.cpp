@@ -617,11 +617,9 @@ void LIB_API Engine::openThumb(Node *root) {
 	Node* phalanx1 = phalanx2->getParent();
 	Node* gemma = phalanx1->getChildren().at(1);
 	std::cout << gemma->getName().c_str() << std::endl;
-	glm::mat4 rotationY = glm::rotate(glm::mat4(1.0f), glm::radians(fingerAngles[0]), glm::vec3(0.0f, 1.0f, 1.0f));
-	//glm::mat4 rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(fingerAngles[0]), glm::vec3(0.0f, 0.0f, 1.0f));
+	glm::mat4 rotationY = glm::rotate(glm::mat4(1.0f), glm::radians(fingerAngles[0]), glm::vec3(-1.0f, 1.0f, 1.0f));
 	phalanx1->setMatrix(phalanx1->getMatrix()*rotationY);
 	phalanx2->setMatrix(phalanx2->getMatrix()*rotationY);
-//	gemma->setMatrix(gemma->getMatrix()*rotationY);
 	fingerAngles[0] = 0;
 }
 
@@ -640,7 +638,7 @@ void LIB_API Engine::closeThumb(Node *root)
 	}
 	
 	fingerAngles[0] += angle;
-	glm::mat4 rotationY = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, -1.0f, -1.0f));
+	glm::mat4 rotationY = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(1.0f, -1.0f, -1.0f));
 	std::string name = fingerNames[0];
 	name.append("2");
 	Node* phalanx2 = getNodeByName(root, name);
