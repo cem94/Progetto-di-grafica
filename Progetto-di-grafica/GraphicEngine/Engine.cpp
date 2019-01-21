@@ -87,7 +87,12 @@ void LIB_API Engine::init()
     glEnable(GL_LIGHT0);
     enableZbuffer();
 }
-
+void printList(std::vector<Node*> list) {
+	for (auto n : list) {
+		std::cout << n->getName().c_str() << std::endl;
+	}
+	std::cout << "-----------------------------------------------------" << std::endl;
+}
 /**
  * Start the main loop
  */
@@ -416,7 +421,6 @@ Node*  Engine::getScene(const char* name)
     printTree(root, "");
     return root;
 }
-//
 /**
 * Comment
 * @param  name1
@@ -464,8 +468,15 @@ Node*  Engine::getNodeByName(Node* root, std::string name)
   */
 void  LIB_API Engine::createRenderList(Node * root)
 {
-	setAlphaToMaterial(root, 0.9f, "plane");
+	setAlphaToMaterial(root, 0.5f, "plane");
 	toRender = new List(root);
+	//std::cout << "Before: " << std::endl;
+	//printList(toRender->getList());
+	//SERVE lo dice il sore nelle slide
+	toRender->sort();
+	//std::cout << "After: " << std::endl;
+	//printList(toRender->getList());
+
 }
 
 Camera * Engine::getCurrentCamera()
@@ -473,12 +484,19 @@ Camera * Engine::getCurrentCamera()
 	return currentCamera;
 }
 
+
+
 void LIB_API Engine::render()
 {
-	glm::mat4 mat = glm::scale(glm::mat4(1), glm::vec3(1.0f, -1.0f, 1.0f));
+	glm::mat4 mat = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, -1.0f, 1.0f));
+	//clockwise
 	glFrontFace(GL_CW);
 	toRender->render(mat);
+	//counter clockwise
 	glFrontFace(GL_CCW);
+	//std::vector<Node*> v = toRender->getList();
+	//sortTrasparentMeshesList(v);
+	//toRender->setList(v);
 	toRender->render(mat);
 }
 
@@ -526,13 +544,6 @@ void LIB_API Engine::moveCameraRight(float direction)
     glm::mat4 matrix = currentCamera->getMatrix();
     glm::vec3 mov = direction * 5.0f * matrix[0];
     currentCamera->setMatrix(glm::translate(matrix, mov));
-
-    /*	old version
-    	glm::vec3 mov = direction * currentCamera->getMatrix()[0];
-    	glm::vec3 eye = currentCamera->getEye() + mov;
-    	glm::vec3 center = currentCamera->getCenter() + mov;
-    	currentCamera->setVec(eye, center, currentCamera->getUp());
-    */
 }
 
 void LIB_API Engine::moveCameraUp(float direction)
@@ -542,13 +553,6 @@ void LIB_API Engine::moveCameraUp(float direction)
     glm::mat4 matrix = currentCamera->getMatrix();
     glm::vec3 mov = direction * 5.0f * matrix[1];
     currentCamera->setMatrix(glm::translate(matrix, mov));
-
-    /*  old verion
-    	glm::vec3 mov = direction * currentCamera->getMatrix()[1];
-    	glm::vec3 eye = currentCamera->getEye() + mov;
-    	glm::vec3 center = currentCamera->getCenter() + mov;
-    	currentCamera->setVec(eye, center, currentCamera->getUp());
-    */
 }
 
 void LIB_API Engine::moveCameraForward(float direction)
@@ -558,14 +562,6 @@ void LIB_API Engine::moveCameraForward(float direction)
     glm::mat4 matrix = currentCamera->getMatrix();
     glm::vec3 mov = direction * 5.0f * matrix[2];
     currentCamera->setMatrix(glm::translate(matrix, mov));
-
-    /*	old version
-    	glm::vec3 mov = direction * currentCamera->getMatrix()[2];
-    	glm::vec3 eye = currentCamera->getEye() + mov;
-    	glm::vec3 center = currentCamera->getCenter() + mov;
-    	currentCamera->setVec(eye, center, currentCamera->getUp());
-    */
-
 }
 
 
@@ -602,10 +598,9 @@ void LIB_API Engine::changeCamera(Node * root)
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Rotate model
+ * @param  root our scene graph
+ * @param angle rotational increment
  */
 void LIB_API Engine::rotateModel(Node * root, float angle)
 {
@@ -616,6 +611,7 @@ void LIB_API Engine::rotateModel(Node * root, float angle)
         guardia->setMatrix(guardia->getMatrix()*rotation);
     }
 }
+
 
 void LIB_API Engine::openThumb(Node *root) {
 
@@ -759,20 +755,28 @@ void LIB_API Engine::free()
 
 bool listNodeCompare(Node*a, Node *b)
 {
-    glm::mat4 first = currentCamera->getMatrix() * a->getMatrix();
-    glm::mat4 second = currentCamera->getMatrix() * b->getMatrix();
+    glm::mat4 first = currentCamera->getMatrix()* a->getMatrix() ;
+    glm::mat4 second = currentCamera->getMatrix()*b->getMatrix();
     return (float)first[3].z > (float)second[3].z;
 }
 
+//TODO attenzione questo metodo ribalta la scena e non sembra cambiare la lista forse inutile per noi
 /**
 * sorts the trasparent meshes list
 * @param list of transparent meshes
 */
-void LIB_API Engine::sortTrasparentMeshesList(std::vector<Node*> transparentMeshes)
+void LIB_API Engine::sortTrasparentMeshesList(std::vector<Node*>& transparentMeshes)
 {
+	//Specifies whether the depth buffer is enabled for writing.If flag is GL_FALSE, depth buffer writing is disabled.
+	/*There are certain scenarios imaginable where you want to perform the depth test on all fragments and discard them accordingly,
+	but not update the depth buffer. Basically, you're using a read-only depth buffer. OpenGL allows us to disable writing to the depth buffer by setting its depth mask to GL_FALSE: */
     glDepthMask(GL_FALSE);
     //gli passo un comparator
+	printList(transparentMeshes);
+
     std::sort(transparentMeshes.begin(), transparentMeshes.end(), listNodeCompare);
+	printList(transparentMeshes);
+	//Otherwise, it is enabled.Initially, depth buffer writing is enabled.
     glDepthMask(GL_TRUE);
 }
 //setta valore alpha ad un nodo specifico

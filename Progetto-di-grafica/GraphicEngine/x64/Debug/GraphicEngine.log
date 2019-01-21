@@ -1,18 +1,19 @@
 ﻿  Camera.cpp
   Engine.cpp
-c:\users\meyer\source\repos\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(361): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+c:\users\meyer\source\repos\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(366): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: see declaration of 'strcpy'
-c:\users\meyer\source\repos\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(366): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+c:\users\meyer\source\repos\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(371): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
-c:\users\meyer\source\repos\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(371): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+c:\users\meyer\source\repos\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(376): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(132): note: see declaration of 'strcpy'
-c:\users\meyer\source\repos\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(376): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+c:\users\meyer\source\repos\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.cpp(381): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
   Light.cpp
   List.cpp
   Material.cpp
   Mesh.cpp
   Node.cpp
+  Object.cpp
   OvoReader.cpp
 c:\users\meyer\source\repos\progetto-di-grafica\progetto-di-grafica\graphicengine\ovoreader.cpp(13): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: see declaration of 'fopen'

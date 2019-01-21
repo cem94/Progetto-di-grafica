@@ -120,10 +120,11 @@ float Material::getAlpha() const
  */
 void Material::setAlpha(float alpha)
 {
-    //TODO cambiare
-    if (isTrasparent())
-        activeTransparencies();
-    this->alpha = alpha;
+	this->alpha = alpha;
+	if (isTrasparent()) {
+		activeTransparencies();
+		printf("TRASPARENT\n");
+	}
 }
 /**
  * Getter for emissive
@@ -167,7 +168,6 @@ void Material::render(glm::mat4 renderMatrix)
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, glm::value_ptr(glm::vec3(emissive[0], emissive[1], emissive[2])));
 	if(hasTexture())
 	texture->render();
-
 }
 /**
 * Method that verifies if the material is transparent (alpha = 1 not transparent transparent otherwise)

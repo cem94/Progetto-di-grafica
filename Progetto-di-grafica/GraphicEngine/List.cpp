@@ -92,9 +92,9 @@ void List::insert(std::vector<Node*> elements)
  * Give the size of the list
  * @return size of the list
  */
-unsigned int List::size()
+ int List::size()
 {
-    return (unsigned int)this->list.size();
+    return (int)this->list.size();
 }
 
 void List::getTreeAsList(Node *root, std::vector<Node*>& nodes) {
@@ -105,11 +105,10 @@ void List::getTreeAsList(Node *root, std::vector<Node*>& nodes) {
 	}
 }
 
- /*void List::sort(Node * root)
+ void List::sort()
  {
-
 	 //I create a vector of pure nodes
-	 /*std::vector<Node*> pureNodes;
+	 std::vector<Node*> pureNodes;
 
 	 //I create a vector of lights
 	 std::vector<Light*> lights;
@@ -143,24 +142,24 @@ void List::getTreeAsList(Node *root, std::vector<Node*>& nodes) {
 	 for (int i = 0; i < meshes.size(); i++) {
 		 list.push_back(meshes.at(i));
 	 }
- }*/
+ }
 
 /**
 * support method for transparent render
 * @param material and render matrix
 */
-void List::transparentPreRender(Material *material, glm::mat4 renderMatrix)
+void List::transparentPreRender(Material *material)
 {
-	//TODO:: GREG DEVI SPIEGARMI PERCHÈ SI FA IN QUESTO ORDINE.
-	//RISPONDIMI SU WHATSAPP E RIMUOVI QUESTO COMMENTO
+	//abilito cull facing (risparmio facce non renderizzando quelle interne)
 	glEnable(GL_CULL_FACE);
+	//disabilito z buffer write
 	glDepthMask(GL_FALSE);
 	// At first render back faces
 	glCullFace(GL_FRONT);
-	material->render(renderMatrix);
+	material->render();
 	// Then render front faces
 	glCullFace(GL_BACK);
-	material->render(renderMatrix);
+	material->render();
 	// Enabled z-buffer write
 	glDepthMask(GL_TRUE);
 	glDisable(GL_CULL_FACE);
@@ -186,10 +185,9 @@ void List::render(glm::mat4 scaling)
 			{
 				if (m->getMaterial()->isTrasparent())
 				{
-					transparentPreRender(m->getMaterial(), renderMatrix);
+					transparentPreRender(m->getMaterial());
 				}
 			}
-		
 		}
 		n->render(renderMatrix);
 	}

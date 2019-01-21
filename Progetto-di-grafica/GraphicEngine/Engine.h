@@ -100,7 +100,7 @@ public:
     void closeHand(Node* root);
 	void openHand(Node * root);
     void free();
-    void sortTrasparentMeshesList(std::vector<Node*> transparentMeshes);
+    void sortTrasparentMeshesList(std::vector<Node*>& transparentMeshes);
     void setAlphaToMaterial(Node* root, float alpha, std::string nodeName);
     void createRenderList(Node* root);
 	Camera * getCurrentCamera();
