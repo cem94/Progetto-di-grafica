@@ -156,7 +156,16 @@ void List::getTreeAsList(Node *root, std::vector<Node*>& nodes) {
 	 //}
 
  }
-/**
+ void List::setIsRefletcion(bool isReflection) 
+ {
+   this->isReflection = isReflection;
+ }
+ bool List::getIsReflection() 
+ { 
+	 return isReflection; 
+ }
+
+ /**
 * support method for transparent render
 * @param material and render matrix
 */
@@ -234,10 +243,15 @@ void List::render(glm::mat4 scaling)
 {
 	Node * root = list.at(0);
 	root->setMatrix(root->getMatrix() * scaling);
+    const bool reflection = getIsReflection();
 
 	for (Node* n : list)
 	{
 		glm::mat4 renderMatrix = n->getFinalMatrix();
+
+		if (reflection && n->getName() == "plane") {
+             continue;
+		}
 
 		if (n->getType() == Object::Type::MESH)
 		{

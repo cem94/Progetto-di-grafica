@@ -35,7 +35,7 @@ c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphice
   c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
 c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
   c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(26): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
           with
           [
               _Ty=Node *
@@ -92,7 +92,7 @@ c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphice
   c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
 c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
   c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(26): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
           with
           [
               _Ty=Node *
@@ -157,7 +157,7 @@ c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphice
   c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
 c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
   c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(26): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
           with
           [
               _Ty=Node *
@@ -214,7 +214,7 @@ c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphice
   c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
 c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
   c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(26): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
           with
           [
               _Ty=Node *
@@ -271,7 +271,7 @@ c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphice
   c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
 c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
   c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(26): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
           with
           [
               _Ty=Node *
@@ -328,7 +328,7 @@ c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphice
   c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
 c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
   c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(26): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
           with
           [
               _Ty=Node *
@@ -385,7 +385,7 @@ c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphice
   c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
 c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
   c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(26): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
           with
           [
               _Ty=Node *
@@ -443,7 +443,7 @@ c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphice
   c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
 c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
   c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(26): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
           with
           [
               _Ty=Node *
@@ -550,7 +550,7 @@ c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphice
   c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(243): note: vedere la dichiarazione di 'glm::tvec3<float,0>'
 c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\material.h(35): warning C4251: 'Material::emissive': struct 'glm::tvec4<float,0>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'Material'
   c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\dependencies\glm\include\glm\detail\type_vec.hpp(349): note: vedere la dichiarazione di 'glm::tvec4<float,0>'
-c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(24): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
+c:\users\cem\source\repos\cem94\progetto-di-grafica\progetto-di-grafica\graphicengine\list.h(26): warning C4251: 'List::list': class 'std::vector<Node *,std::allocator<_Ty>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'List'
           with
           [
               _Ty=Node *

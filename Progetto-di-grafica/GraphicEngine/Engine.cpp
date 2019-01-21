@@ -564,9 +564,11 @@ Camera * Engine::getCurrentCamera()
 void LIB_API Engine::render()
 {
 	glm::mat4 mat = glm::scale(glm::mat4(1), glm::vec3(1.0f, -1.0f, 1.0f));
+	toRender->setIsRefletcion(true);
 	glFrontFace(GL_CW);
 	toRender->render(mat);
 	glFrontFace(GL_CCW);
+    toRender->setIsRefletcion(false);
 	toRender->render(mat);
 }
 
