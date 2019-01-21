@@ -1,3 +1,5 @@
+/*
+//TODO:: da eliminare! IL SORE HA DETTO CHE DEVE ESSERE UNA CLASSE ASTRATTA! -> si può fare basta che non la puoi costruire gli altri hanno fatto il cpp
 #include "Engine.h"
 
 int Object::getId() const
@@ -28,4 +30,8 @@ void Object::setType(Type type)
 Object::Type Object::getType() const
 {
 		return type;
+<<<<<<< HEAD
 }
+=======
+}
+*/

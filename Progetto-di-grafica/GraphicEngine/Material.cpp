@@ -174,7 +174,7 @@ void Material::render(glm::mat4 renderMatrix)
 */
 bool Material::isTrasparent()
 {
-    return this->alpha != 1;
+    return this->alpha != 1.0f;
 }
 /**
 * Method that enables transparencies

@@ -77,17 +77,17 @@ Node* List::at(int position)
     }
     return nullptr;
 }
+
 /**
  * insert a list of elements at the end of our list
  * @param  list of elements to add
  */
 void List::insert(std::vector<Node*> elements)
 {
-    if (elements.size() == 0)
-        printf("Nothing to insert\n");//TODO remove
-    else
+  
         list.insert(list.end(), elements.begin(), elements.end());
 }
+
 /**
  * Give the size of the list
  * @return size of the list
@@ -105,12 +105,11 @@ void List::getTreeAsList(Node *root, std::vector<Node*>& nodes) {
 	}
 }
 
- void List::sort(Node * root)
+ /*void List::sort(Node * root)
  {
-	/*  std::vector<Node*> allNodes;
-	 getTreeAsList(root,allNodes);*/
+
 	 //I create a vector of pure nodes
-	 std::vector<Node*> pureNodes;
+	 /*std::vector<Node*> pureNodes;
 
 	 //I create a vector of lights
 	 std::vector<Light*> lights;
@@ -144,13 +143,16 @@ void List::getTreeAsList(Node *root, std::vector<Node*>& nodes) {
 	 for (int i = 0; i < meshes.size(); i++) {
 		 list.push_back(meshes.at(i));
 	 }
- }
+ }*/
+
 /**
 * support method for transparent render
 * @param material and render matrix
 */
 void List::transparentPreRender(Material *material, glm::mat4 renderMatrix)
 {
+	//TODO:: GREG DEVI SPIEGARMI PERCHÈ SI FA IN QUESTO ORDINE.
+	//RISPONDIMI SU WHATSAPP E RIMUOVI QUESTO COMMENTO
 	glEnable(GL_CULL_FACE);
 	glDepthMask(GL_FALSE);
 	// At first render back faces
@@ -163,13 +165,16 @@ void List::transparentPreRender(Material *material, glm::mat4 renderMatrix)
 	glDepthMask(GL_TRUE);
 	glDisable(GL_CULL_FACE);
 }
+
 /**
- * Render for list 
+ * Render for list
  * @param  matrix render matrix (not used)
  */
-void List::render(glm::mat4 matrix)
+
+void List::render(glm::mat4 scaling)
 {
-	glm::mat4 camera = Engine::getInstance().getCurrentCamera()->getMatrix();
+	Node * root = list.at(0);
+	root->setMatrix(root->getMatrix() * scaling);
 	for (Node* n : list)
 	{
 		glm::mat4 renderMatrix = n->getFinalMatrix();
@@ -184,9 +189,8 @@ void List::render(glm::mat4 matrix)
 					transparentPreRender(m->getMaterial(), renderMatrix);
 				}
 			}
+		
 		}
-		n->render(camera * renderMatrix);
-
-		//n->render(renderMatrix);
+		n->render(renderMatrix);
 	}
 }

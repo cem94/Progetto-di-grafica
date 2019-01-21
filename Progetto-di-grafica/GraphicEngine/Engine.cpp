@@ -32,13 +32,12 @@ std::string fingerNames[5] = {"pollice", "indice", "medio", "anulare", "mignolo"
 bool translateUp = false;
 int translateCnt = 0;
 
-//lists
-//List* toRender = new List();
+List* toRender = new List();
 //List *reflectedList = new List();
-
 Engine* Engine::instance = nullptr;
 //complete set of lists
-std::vector<List*> Engine::lists = {};
+//std::vector<List*> Engine::lists = {};
+
 /**
  * Getter for engine instance
  * @return a instance of engine. A new instance is created if engine is still nullptr
@@ -55,7 +54,7 @@ Engine LIB_API & Engine::getInstance()
  * @param  argc number of command-line arguments passed
  * @param argv  containing up to argc passed arguments
  */
-void LIB_API Engine::init(int argc, char* argv[])
+void LIB_API Engine::init()
 {
     freeImageInitialize();
     std::cout << "The engine starts" << std::endl;
@@ -63,8 +62,8 @@ void LIB_API Engine::init(int argc, char* argv[])
     glutInitWindowSize(1920, 1080);
     glutInitWindowPosition(0, 0);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-
-    glutInit(&argc, argv);
+	int argc = 1;
+    glutInit(&argc, nullptr);
 
     glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 
@@ -73,7 +72,7 @@ void LIB_API Engine::init(int argc, char* argv[])
 
     //aablita glew (un gestore di estensioni che usiamo per includere i metodi per vao usati per renderizzare le mesh)
     glewExperimental = GL_TRUE;  // Optional, but recommended
-//normalizza i vettori per il modello di illuminazione
+	//normalizza i vettori per il modello di illuminazione
     glEnable(GL_NORMALIZE);
 
     // Init di glew
@@ -89,6 +88,7 @@ void LIB_API Engine::init(int argc, char* argv[])
         printf("Required OpenGL version not supported\n");
     }
 
+	// attiva la luce sopra il guanto
     enableLighting(true);
     glEnable(GL_LIGHT0);
     enableZbuffer();
@@ -432,8 +432,8 @@ void LIB_API findChildren(Node* currentNode, std::vector<Node*>& nodes)
     {
         Node* next = nodes.at(0);
         nodes.erase(nodes.begin());
-        findChildren(next, nodes);
         currentNode->insert(next);
+		findChildren(next, nodes);
     }
 }
 
@@ -501,29 +501,15 @@ Node*  Engine::getNodeByName(Node* root, std::string name)
   */
 void  LIB_API Engine::setLists(Node * root)
 {
-	//CEM se commento questo lo gira se no no non capisco perché -> mi serve una copia di root per fare le trasparenze
-	//List *reflections = new List{ root };
-	Node* node = new Node{ *root };
-	List *normal = new List{ node };
-	setAlphaToMaterial(node, 0.9f, "plane");
-	printTree(node,"");
-	//riempie e ordina lista
-	normal->sort(node);
-	lists.push_back(normal);
-	printf("We have %d elements to render\n", normal->size());
-	glm::mat4 reflection = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, -1.0f, 1.0));
-	//Node *r = reflections->at(0);
-	//r->setMatrix(r->getMatrix()*reflection);
-	//std::vector<Node*> nodes;
-	//reflections->getTreeAsList(node,nodes);
-	List *reflections = new List{ root };
-	Node *r = reflections->at(0);
-	r->setMatrix(r->getMatrix()*reflection);
-	sortTrasparentMeshesList(reflections->getList());
-
-	lists.push_back(normal);
-
-	//printf("size %d\n",reflections.size());
+	setAlphaToMaterial(root, 0.9f, "plane");
+	toRender = new List(root);
+	
+	//for (Node * n : root->getChildren()) {
+	//	if (n->getName() == "plane") {
+	//	}
+	//	setLists(n);
+	//}
+	//printf("Render list: %d",toRender->size());
 }
 
 Camera * Engine::getCurrentCamera()
@@ -531,9 +517,13 @@ Camera * Engine::getCurrentCamera()
 	return currentCamera;
 }
 
-std::vector<List*> Engine::getLists()
+void LIB_API Engine::render()
 {
-	return lists;
+	glm::mat4 mat = glm::scale(glm::mat4(1), glm::vec3(1.0f, -1.0f, 1.0f));
+	glFrontFace(GL_CW);
+	toRender->render(mat);
+	glFrontFace(GL_CCW);
+	toRender->render(mat);
 }
 
 /**
@@ -655,7 +645,6 @@ void LIB_API Engine::changeCamera(Node * root)
     setCameraToPalm(root);
 }
 
-
 /**
  * Comment
  * @param  name1
@@ -684,7 +673,7 @@ void LIB_API Engine::openThumb(Node *root) {
 
 	phalanx1->setMatrix(phalanx1->getMatrix()*rotationY);
 	phalanx2->setMatrix(phalanx2->getMatrix()*rotationY*rotationZ);
-	fingerAngles[0] = 0;//l'angolo in y
+	fingerAngles[0] = 0;
 }
 
 /**

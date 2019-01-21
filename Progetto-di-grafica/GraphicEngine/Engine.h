@@ -25,6 +25,7 @@
 #include <iomanip>
 #include <iostream>
 #include <vector>
+#include <cstring>
 
 // GLM
 #define GLM_FORCE_CTOR_INIT  // Force constructors to initialize to identity
@@ -50,7 +51,7 @@ class LIB_API Engine
 {
 public:
     static Engine& getInstance();
-    void init(int argc, char* argv[]);
+    void init();
     void loadMatrix(glm::mat4 matrix);
     void startLoop();
     void clearColor(float r, float g, float b);
@@ -102,16 +103,17 @@ public:
     void closeHand(Node* root);
 	void openHand(Node * root);
     void free();
-   // void transparentPreRender(Material* material, glm::mat4 renderMatrix);
     void sortTrasparentMeshesList(std::vector<Node*> transparentMeshes);
     void setAlphaToMaterial(Node* root, float alpha, std::string nodeName);
     void setLists(Node* root);
 	Camera * getCurrentCamera();
+
+	void render();
 	std::vector<List*> static getLists();
 private:
     // Singleton
     Engine() {};                       // Private so that it can  not be called
-    ~Engine();                         // private destructor
+	~Engine() {};                         // private destructor
     Engine(Engine const&) {};          // copy constructor is private
     Engine& operator=(Engine const&);  // assignment operator is private
     static Engine* instance;

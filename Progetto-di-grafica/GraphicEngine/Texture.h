@@ -9,5 +9,4 @@ public:
     void render(glm::mat4 rendermatrix = glm::mat4(1.0f)) override;
 private:
     unsigned int textureId;
-	static unsigned int id;
 };

@@ -27,10 +27,20 @@ void displayCallback()
     // setto la matrice di proiezione prospettica per il rendering 3d
     engine->setProjectionMatrix(perspective);
     // 3d rendering//
-	std::vector<List*> lists = Engine::getLists();
+
+	engine->render();
+	/*std::vector<List*> lists = Engine::getLists();
 	for (int i = 0; i < lists.size(); i++) {
+<<<<<<< HEAD
 		lists.at(i)->render();
 	}
+=======
+		lists.at(i)->render(glm::mat4(1.0f));
+		//printf("Rendering %d\n",i);
+	}*/
+
+	// printf("Rendering %d\n",i);
+//>>>>>>> 8f2bd5dd8490ca662d342c5c230112b91e41c0c6
     if (rotating)
         engine->autoRotateModel(scene, -1.0f);
     // 2D rendering//
@@ -241,7 +251,6 @@ void mouseWheel(int wheel, int direction, int x, int y)
  * @param2 name2
  * @return what it returns
  */
-// TODO:: Cem completares
 void mouseMoved(int x, int y)
 {
     //TODO:: chiedere a Marco
@@ -341,7 +350,7 @@ int main(int argc, char* argv[])
 {
     std::cout << "Client application starts" << std::endl;
     // init engine settings
-    engine->init(argc, argv);
+    engine->init();
     // init call back functions
     setCallBacks();
     // set background color
@@ -352,8 +361,8 @@ int main(int argc, char* argv[])
     const char* fileName = "../ovo_files/full_scene.ovo";
     scene = engine->getScene(fileName);
 
-   // engine->setAlphaToMaterial(scene, 0.9f, "plane");
-   engine->setLists(scene);
+	//engine->setAlphaToMaterial(scene, 0.95f, "plane");
+	engine->setLists(scene);
    
 	//TODO Cem basta farlo in reshape callback lo chiama una volta anche all'inizio
    // sizeX = engine->getWindowSizeX();
