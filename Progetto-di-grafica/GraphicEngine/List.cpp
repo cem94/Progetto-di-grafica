@@ -185,6 +185,7 @@ void List::render(glm::mat4 scaling)
 			{
 				if (m->getMaterial()->isTrasparent())
 				{
+					//non so se serve o no
 					transparentPreRender(m->getMaterial());
 				}
 			}

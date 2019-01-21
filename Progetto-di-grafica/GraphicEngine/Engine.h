@@ -17,9 +17,12 @@
 #else
 #define LIB_API
 #endif
+//So it doesn't give us deprecation warnings for fopen etc
+#define _CRT_SECURE_NO_WARNINGS
 
 // C/C++
 #include <limits.h>
+//per sort
 #include <algorithm>
 #include <fstream>
 #include <iomanip>
@@ -29,7 +32,6 @@
 
 // GLM
 #define GLM_FORCE_CTOR_INIT  // Force constructors to initialize to identity
-// (from v0.9.9)
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/packing.hpp>
@@ -56,8 +58,8 @@ public:
     void startLoop();
     void clearColor(float r, float g, float b);
     void mouseWheel(void (*mouseWheelFunc)(int, int, int, int));
-    int getWindowSizeX();
-    int getWindowSizeY();
+    int getWindowWidth();
+    int getWindowHeight();
     void mouseMoved(void (*mouseFunc)(int, int));
     void redisplay();
     void reshape(void (*reshapeCallback)(int, int));

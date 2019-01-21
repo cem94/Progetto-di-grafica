@@ -123,7 +123,6 @@ void Material::setAlpha(float alpha)
 	this->alpha = alpha;
 	if (isTrasparent()) {
 		activeTransparencies();
-		printf("TRASPARENT\n");
 	}
 }
 /**

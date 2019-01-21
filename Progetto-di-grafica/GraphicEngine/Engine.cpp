@@ -6,7 +6,6 @@
 #include <GL/freeglut.h>
 // FreeImage
 #include <FreeImage.h>
-
 /////////////
 // GLOBALS //
 ////////////
@@ -32,6 +31,27 @@ int translateCnt = 0;
 List* toRender = new List();
 Engine* Engine::instance = nullptr;
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void printList(std::vector<Node*> list) {
+	for (auto n : list) {
+		std::cout << n->getName().c_str() << std::endl;
+	}
+	std::cout << "-----------------------------------------------------" << std::endl;
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+}
+/**
+ * Function that prints the scene graph
+ * @param  scene the scene graph to print
+ * @param indentation text intentation
+ */
+ //TODO::  renderlo privato! -> non è neanche un metodo della classe per ora
+void printTree(Node* scene, std::string indentation)
+{
+	glm::mat4 mat = scene->getMatrix();
+	std::cout << indentation.c_str() << scene->getName().c_str() << std::endl;
+	for (int i = 0; i < scene->getChildrenSize(); i++)
+		printTree(scene->getChildren().at(i), "\t - " + indentation);
+}
 /**
  * Getter for engine instance
  * @return a instance of engine. A new instance is created if engine is still nullptr
@@ -81,18 +101,12 @@ void LIB_API Engine::init()
         // Required OpenGL version not supported
         printf("Required OpenGL version not supported\n");
     }
-
 	// attiva la luce sopra il guanto
     enableLighting(true);
     glEnable(GL_LIGHT0);
     enableZbuffer();
 }
-void printList(std::vector<Node*> list) {
-	for (auto n : list) {
-		std::cout << n->getName().c_str() << std::endl;
-	}
-	std::cout << "-----------------------------------------------------" << std::endl;
-}
+
 /**
  * Start the main loop
  */
@@ -131,32 +145,26 @@ void LIB_API Engine::mouseWheel(void(*mouseWheelFunc)(int, int, int, int))
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Get windows width
+ * @return current window width
  */
-int LIB_API Engine::getWindowSizeX()
+int LIB_API Engine::getWindowWidth()
 {
     return glutGet(GLUT_WINDOW_WIDTH);
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Get windows height
+ * @return current widows height
  */
-int LIB_API Engine::getWindowSizeY()
+int LIB_API Engine::getWindowHeight()
 {
     return glutGet(GLUT_WINDOW_HEIGHT);
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Callback for mouse passive motion function
+ * @param  mouveMoved passive motion function callback
  */
 void LIB_API Engine::mouseMoved(void (*mouseMoved)(int, int))
 {
@@ -164,10 +172,7 @@ void LIB_API Engine::mouseMoved(void (*mouseMoved)(int, int))
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Wrapper function for glutPostWindowRedisplay
  */
 void LIB_API Engine::redisplay()
 {
@@ -193,7 +198,7 @@ void LIB_API Engine::display(void(*displayCallback)())
 }
 
 /**
- * Setter for timer callback
+ * Setter for timer callback here we calculate fps
  * @param  timerCallback
  */
 void LIB_API Engine::timer(void timerCallback(int))
@@ -203,6 +208,7 @@ void LIB_API Engine::timer(void timerCallback(int))
     // Register the next update:
     glutTimerFunc(1000, timerCallback, 0);
 }
+
 /**
  * Setter for keyboard callback
  * @param  keyboardCallBack keyboard callback to set
@@ -211,6 +217,7 @@ void LIB_API Engine::keyboard(void(*keyboardCallBack)(unsigned char, int, int))
 {
     glutKeyboardFunc(keyboardCallBack);
 }
+
 /**
  * Setter for keyboard up callback
  * @param  keyboardUpCallBack keyboard up callback to set
@@ -263,20 +270,6 @@ void LIB_API Engine::swapBuffers()
 void LIB_API Engine::loadIdentity()
 {
     loadMatrix(glm::mat4(1.0f));
-}
-
-/**
- * Function that prints the scene graph
- * @param  scene the scene graph to print
- * @param indentation text intentation
- */
-//TODO::  renderlo privato! -> non è neanche un metodo della classe per ora
-void printTree(Node* scene, std::string indentation)
-{
-    glm::mat4 mat = scene->getMatrix();
-    std::cout << indentation.c_str() << scene->getName().c_str() << std::endl;
-    for (int i = 0; i < scene->getChildrenSize(); i++)
-        printTree(scene->getChildren().at(i), "\t - " + indentation);
 }
 
 /**

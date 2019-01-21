@@ -9,7 +9,7 @@ Engine* engine = &Engine::getInstance();
 // matrici di proiezione
 glm::mat4 perspective;
 glm::mat4 ortho;
-Node* scene = NULL;
+Node* scene = nullptr;
 bool rotating = false;
 int sizeX = 0;
 int sizeY = 0;
@@ -37,6 +37,7 @@ void displayCallback()
     engine->swapBuffers();
     engine->redisplay();
 }
+
 /**
  * Reshape callback
  * @param width screen width
@@ -50,6 +51,7 @@ void reshapeCallback(int width, int height)
     perspective = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 1.0f, 4000.0f);
     ortho = glm::ortho(0.f, (float)width, 0.f, (float)height, -1.f, 1.f);
 }
+
 /**
  * Keyboard callback
  * @param  key the button that was pressed
@@ -112,7 +114,7 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 }
 
 /**
- * Keyboard up callback
+ * Keyboard up callback it detects when a key is released its main function is opening the fingers of our gauntlet
  * @param  key the button that was released
  * @param x x coordinate
  * @param x y coordinate
@@ -132,8 +134,7 @@ void keyboardUpCallback(unsigned char key, int x, int y)
     case ' ':
         if (keyState[(unsigned char)' '] == false)
         {
-			//NON FUNZIONA IL POLLICE SI DEFORMA
-           // engine->openThumb(scene);
+            engine->openThumb(scene);
         }
         break;
     case 'f':
@@ -164,14 +165,13 @@ void keyboardUpCallback(unsigned char key, int x, int y)
 }
 
 /**
- * Special callback
+ * Special callback this callback is used to move the camera (if movable). FreeGlut special key redefinition is necessary (e.g #define GLUT_KEY_LEFT 0x0064)
  * @param  key an integer representing a special key
  * @param x x coordinate
  * @param y y coordinate
  */
 void specialCallback(int key, int x, int y)
 {
-    // muove camere
     switch (key)
     {
     case GLUT_KEY_DOWN:
@@ -191,6 +191,7 @@ void specialCallback(int key, int x, int y)
     }
     engine->redisplay();
 }
+
 /**
  * Timer callback
  * @param  value
@@ -220,43 +221,36 @@ void mouseWheel(int wheel, int direction, int x, int y)
 
 /**
  * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * @param  x
+ * @param y
  */
 void mouseMoved(int x, int y)
 {
-    //TODO:: chiedere a Marco
-    // UP
     const float sizeYMin = sizeY * 0.20;
     const float sizeXMin = sizeX * 0.20;
     const float sizeYMax = sizeY * 0.80;
     const float sizeXMax = sizeX * 0.80;
-
+	// UP
     if (x > sizeXMin && x < sizeXMax && y < sizeYMin)
     {
-       // std::cout << "UP" << std::endl;
         const float angle = (10.0f / sizeYMin) * (sizeYMin - y);
         engine->rotateCameraUp(-angle);
-        // DOWN
-    }
-    else if (x > sizeXMin && x < sizeXMax && y > sizeYMax)
+      }
+	// DOWN
+	else if (x > sizeXMin && x < sizeXMax && y > sizeYMax)
     {
-      //  std::cout << "DOWN" << std::endl;
         const float angle = (10.0f / (sizeY - sizeYMax)) * (y - sizeYMax);
         engine->rotateCameraUp(angle);
-        // LEFT
-    }
+         }
+	// LEFT
     else if (y > sizeYMin && y < sizeYMax && x < sizeXMin)
     {
-      //  std::cout << "LEFT" << std::endl;
         const float angle = (10.0f / sizeXMin) * (sizeXMin - x);
         engine->rotateCameraRight(-angle);
-        // RIGHT
     }
+	// RIGHT
     else if (y > sizeYMin && y < sizeYMax && x > sizeXMax)
     {
-     //   std::cout << "RIGHT" << std::endl;
         const float angle = (10.0f / (sizeX - sizeXMax)) * (x - sizeXMax);
         engine->rotateCameraRight(angle);
     }
@@ -270,30 +264,24 @@ void setCallBacks()
     engine->display(displayCallback);
     engine->reshape(reshapeCallback);
     engine->keyboard(keyboardCallback);
-    // necessario
     engine->keyboardUp(keyboardUpCallback);
     engine->specialKeyboard(specialCallback);
     engine->mouseWheel(mouseWheel);
     engine->mouseMoved(mouseMoved);
     engine->timer(timerCallback);
 }
+
 /**
  * Camera setter
  */
 void setCameras()
 {
-    // dove si trova la camera
     glm::vec3 eye = glm::vec3(0.f, 50.f, 400.f);
-    // verso dove guarda
     glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
-    // dove è il sopra
     glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
     engine->addCamera("Camera3", false, eye, center, up);
     eye = glm::vec3(400.f, 400.f, 400.f);
     engine->addCamera("Camera2", false, eye, center, up);
-    // si direbbe che renderizza prima l'ultima che gli passi quindi questa è la
-    // camera 1
-    // lascialo così se no non vedo la scena
     eye = glm::vec3(0.0f, 50.0f, 400.f);
     center = glm::vec3(0.0f, 50.0f, 200.0f);
     engine->addCamera("Camera1", true, eye, center, up);
@@ -316,8 +304,8 @@ int main(int argc, char* argv[])
     engine->clearColor(1.f, 1.f, 1.f);
     // set cameras
     setCameras();
-    // read ovo file, load scene and start main loop
     const char* fileName = "../ovo_files/full_scene.ovo";
+	// read ovo file, load scene and start main loop
     scene = engine->getScene(fileName);
 	engine->createRenderList(scene);
 	//start main loop
