@@ -27,11 +27,13 @@ void displayCallback()
     // setto la matrice di proiezione prospettica per il rendering 3d
     engine->setProjectionMatrix(perspective);
     // 3d rendering//
-	std::vector<List*> lists = Engine::getLists();
+
+	engine->render();
+	/*std::vector<List*> lists = Engine::getLists();
 	for (int i = 0; i < lists.size(); i++) {
 		lists.at(i)->render(glm::mat4(1.0f));
 		//printf("Rendering %d\n",i);
-	}
+	}*/
 
 	// printf("Rendering %d\n",i);
     if (rotating)
@@ -67,67 +69,83 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 {
     // pressed
     keyState[key] = true;
-    switch (key)
-    {
-    case '1':
-        engine->enableLight(scene, "fix_light");
-        break;
-    case '2':
-        engine->enableLight(scene, "Omni1");
-        break;
-    case '3':
-        engine->enableLight(scene, "Omni2");
-        break;
-    case '4':
-        engine->enableLight(scene, "Omni3");
-        break;
-    case 'r':
-        engine->rotateModel(scene, 1);
-        break;
-    case 'R':
-        rotating = !rotating;
-        break;
-    case 'c':
-        engine->changeCamera(scene);
-        break;
-    case 'h':
-        if (keyState[(unsigned char)'h'] == true)
-        {
-            engine->closeHand(scene);
-        }
-        break;
-    case ' ':
-        if (keyState[(unsigned char)' '] == true)
-        {
-            engine->closeThumb(scene);
-        }
-        break;
-    case 'f':
-        if (keyState[(unsigned char)'f'] == true)
-        {
-            engine->closeFinger(scene, 1);
-        }
-        break;
-    case 'e':
-        if (keyState[(unsigned char)'e'] == true)
-        {
-            engine->closeFinger(scene, 2);
-        }
-        break;
+	switch (key)
+	{
+	case '1':
+		engine->enableLight(scene, "fix_light");
+		break;
+	case '2':
+		engine->enableLight(scene, "Omni1");
+		break;
+	case '3':
+		engine->enableLight(scene, "Omni2");
+		break;
+	case '4':
+		engine->enableLight(scene, "Omni3");
+		break;
+	case '5':
+		engine->enableLight(scene, "moving_light");
+		engine->enableLight(scene, "specular_light");
+		break;
+	case 'r':
+		engine->rotateModel(scene, 1);
+		break;
+	case 'R':
+		rotating = !rotating;
+		break;
+	case 'c':
+		engine->changeCamera(scene);
+		break;
+	case 'h':
+		if (keyState[(unsigned char)'h'] == true)
+		{
+			engine->closeHand(scene);
+		}
+		break;
+	case ' ':
+		if (keyState[(unsigned char)' '] == true)
+		{
+			engine->closeThumb(scene);
+		}
+		break;
+	case 'f':
+		if (keyState[(unsigned char)'f'] == true)
+		{
+			engine->closeFinger(scene, 1);
+		}
+		break;
+	case 'e':
+		if (keyState[(unsigned char)'e'] == true)
+		{
+			engine->closeFinger(scene, 2);
+		}
+		break;
 
-    case 'w':
-        if (keyState[(unsigned char)'w'] == true)
-        {
-            engine->closeFinger(scene, 3);
-        }
-        break;
-    case 'a':
-        if (keyState[(unsigned char)'a'] == true)
-        {
-            engine->closeFinger(scene, 4);
-        }
-        break;
-    }
+	case 'w':
+		if (keyState[(unsigned char)'w'] == true)
+		{
+			engine->closeFinger(scene, 3);
+		}
+		break;
+	case 'a':
+		if (keyState[(unsigned char)'a'] == true)
+		{
+			engine->closeFinger(scene, 4);
+		}
+		break;
+	case 'i':
+		engine->moveLightForward(3.0f);
+		break;
+	case 'j':
+		engine->moveLightRight(-3.0f);
+		break;
+	case 'k':
+		engine->moveLightForward(-3.0f);
+		break;
+	case 'l':
+		engine->moveLightRight(3.0f);
+		break;
+	}
     engine->redisplay();
 }
 

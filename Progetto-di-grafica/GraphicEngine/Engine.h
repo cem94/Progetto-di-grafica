@@ -25,7 +25,7 @@
 #include <iomanip>
 #include <iostream>
 #include <vector>
-
+#include <cstring>
 // GLM
 #define GLM_FORCE_CTOR_INIT  // Force constructors to initialize to identity
 // (from v0.9.9)
@@ -101,12 +101,16 @@ public:
     void openFinger(Node* root, int finger);
     void closeHand(Node* root);
 	void openHand(Node * root);
+	void moveLightForward(float direction);
+	void moveLightRight(float direction);
     void free();
    // void transparentPreRender(Material* material, glm::mat4 renderMatrix);
     void sortTrasparentMeshesList(std::vector<Node*> transparentMeshes);
     void setAlphaToMaterial(Node* root, float alpha, std::string nodeName);
     void setLists(Node* root);
 	Camera * getCurrentCamera();
+
+	void render();
 	std::vector<List*> static getLists();
 private:
     // Singleton

@@ -21,6 +21,10 @@ Camera* currentCamera = nullptr;
 std::vector<Camera*> cameras;
 int activeCamera = 0;
 
+// Light
+Light* movableLight = nullptr;
+Light* specularLight = nullptr;
+
 float angle = 5.f;
 
 float fingerAngles[5];
@@ -33,7 +37,7 @@ bool translateUp = false;
 int translateCnt = 0;
 
 //lists
-//List* toRender = new List();
+List* toRender = new List();
 List *reflectedList = new List();
 
 Engine* Engine::instance = nullptr;
@@ -90,7 +94,10 @@ void LIB_API Engine::init(int argc, char* argv[])
     }
 
     enableLighting(true);
-    glEnable(GL_LIGHT0);
+	//
+	//TODO commentato per test luci
+	//
+    //glEnable(GL_LIGHT0);
     enableZbuffer();
 }
 
@@ -432,8 +439,8 @@ void LIB_API findChildren(Node* currentNode, std::vector<Node*>& nodes)
     {
         Node* next = nodes.at(0);
         nodes.erase(nodes.begin());
-        findChildren(next, nodes);
         currentNode->insert(next);
+		findChildren(next, nodes);
     }
 }
 
@@ -448,7 +455,8 @@ Node*  Engine::getScene(const char* name)
     Node* root = nodes.at(0);
     nodes.erase(nodes.begin());
     findChildren(root, nodes);
-
+	movableLight = (Light*)getNodeByName(root, "moving_light");
+	specularLight = (Light*)getNodeByName(root, "specular_light");
     setCameraToPalm(root);
     printTree(root, "");
     return root;
@@ -529,6 +537,14 @@ Node*  Engine::getNodeByName(Node* root, std::string name)
   */
 void  LIB_API Engine::setLists(Node * root)
 {
+	toRender->add(root);
+	for (Node * n : root->getChildren()) {
+		if (n->getName() == "plane") {
+			setAlphaToMaterial(root, 0.9f, "plane");
+		}
+		setLists(n);
+	}
+	/*
 	//CEM se commento questo lo gira se no no non capisco perché -> mi una copia di root per fare le trasparenze
 	Node* node = new Node{*root};
 	printTree(node,"");
@@ -544,11 +560,21 @@ void  LIB_API Engine::setLists(Node * root)
 	//std::vector<Node*> nodes;
 	//reflectedList->getTreeAsList(node,nodes);
 	//printf("size %d\n",nodes.size());
+	*/
 }
 
 Camera * Engine::getCurrentCamera()
 {
 	return currentCamera;
+}
+
+void LIB_API Engine::render()
+{
+	glm::mat4 mat = glm::scale(glm::mat4(1), glm::vec3(1.0f, -1.0f, 1.0f));
+	glFrontFace(GL_CW);
+	toRender->render(mat);
+	glFrontFace(GL_CCW);
+	toRender->render(glm::mat4(1.0f));
 }
 
 std::vector<List*> Engine::getLists()
@@ -598,8 +624,12 @@ void LIB_API Engine::moveCameraRight(float direction)
     if (!isMovableCamera())
         return;
     glm::mat4 matrix = currentCamera->getMatrix();
-    glm::vec3 mov = direction * 5.0f * matrix[0];
-    currentCamera->setMatrix(glm::translate(matrix, mov));
+	glm::vec3 mov = direction * 5.0f * matrix[0];
+	glm::mat4 trans = glm::translate(matrix, mov);
+	// TODO da rimettere appena finito la trasparenza
+	/*if (trans[3].x >= 615.0f || trans[3].x <= -615.0f )
+		return;*/
+    currentCamera->setMatrix(trans);
 
     /*	old version
     	glm::vec3 mov = direction * currentCamera->getMatrix()[0];
@@ -615,7 +645,11 @@ void LIB_API Engine::moveCameraUp(float direction)
         return;
     glm::mat4 matrix = currentCamera->getMatrix();
     glm::vec3 mov = direction * 5.0f * matrix[1];
-    currentCamera->setMatrix(glm::translate(matrix, mov));
+	glm::mat4 trans = glm::translate(matrix, mov);
+	// TODO da rimettere appena finito la trasparenza
+	/*if (trans[3].y >= -5.0f || trans[3].y <= -320.0f)
+		return;*/
+	currentCamera->setMatrix(trans);
 
     /*  old verion
     	glm::vec3 mov = direction * currentCamera->getMatrix()[1];
@@ -631,7 +665,11 @@ void LIB_API Engine::moveCameraForward(float direction)
         return;
     glm::mat4 matrix = currentCamera->getMatrix();
     glm::vec3 mov = direction * 5.0f * matrix[2];
-    currentCamera->setMatrix(glm::translate(matrix, mov));
+	glm::mat4 trans = glm::translate(matrix, mov);
+	// TODO da rimettere appena finito la trasparenza
+	/*if (trans[3].z >= 410.0f || trans[3].z <= -430.0f)
+		return;*/
+	currentCamera->setMatrix(trans);
 
     /*	old version
     	glm::vec3 mov = direction * currentCamera->getMatrix()[2];
@@ -821,6 +859,30 @@ void LIB_API Engine::openHand(Node * root)
 	openFinger(root, 3);
 	openFinger(root, 4);
 }
+
+void Engine::moveLightForward(float direction)
+{
+	glm::mat4 matrix = movableLight->getMatrix();
+	glm::vec3 mov = direction * 5.0f * matrix[2];
+	glm::mat4 trans = glm::translate(matrix, mov);
+	if (trans[3].z >= 410.0f || trans[3].z <= -430.0f)
+		return;
+	movableLight->setMatrix(trans);
+	specularLight->setMatrix(trans);
+}
+
+
+void Engine::moveLightRight(float direction)
+{
+	glm::mat4 matrix = movableLight->getMatrix();
+	glm::vec3 mov = direction * 5.0f * matrix[0];
+	glm::mat4 trans = glm::translate(matrix, mov);
+	if (trans[3].x >= 615.0f || trans[3].x <= -615.0f)
+		return;
+	movableLight->setMatrix(trans);
+	specularLight->setMatrix(trans);
+}
+
 void LIB_API Engine::free()
 {
     //TODO::aggiungere altre cose da deinizializzare

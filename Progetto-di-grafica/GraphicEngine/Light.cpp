@@ -93,16 +93,24 @@ void Light::changeState()
  * Render render method for light
  * @param  renderMatrix light render matrix
  */
+// TODO
+// attenuation non vista dal programma per le luci
 void Light::render(glm::mat4 renderMatrix)
 {
-    //set renderingMatrix as current OpenGL Matrix
-    glLoadMatrixf(glm::value_ptr(renderMatrix));
+	// DIRECTIONL, OMNI AND SPOTLIGHT
+	glLightfv(getLightNumber(), GL_POSITION, glm::value_ptr(this->position));
     //setto le componenti
+	float val = 10000.0f;
+	GLfloat shiny = 32.0f;
+	glLightfv(getLightNumber(), GL_QUADRATIC_ATTENUATION, &val);
+	glLightfv(getLightNumber(), GL_SHININESS, &shiny);
     glLightfv(getLightNumber(), GL_AMBIENT, glm::value_ptr(this->ambient));
     glLightfv(getLightNumber(), GL_DIFFUSE, glm::value_ptr(this->diffuse));
     glLightfv(getLightNumber(), GL_SPECULAR, glm::value_ptr(this->specular));
-    // DIRECTIONL, OMNI AND SPOTLIGHT
-    glLightfv(getLightNumber(), GL_POSITION, glm::value_ptr(this->position));
+    
+	//set renderingMatrix as current OpenGL Matrix
+	glLoadMatrixf(glm::value_ptr(renderMatrix));
+
     // OMNI OR SPOTLIGHT
     if (this->subtype != DIRECTIONAL)
     {
