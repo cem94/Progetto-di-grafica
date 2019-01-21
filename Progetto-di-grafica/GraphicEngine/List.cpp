@@ -26,7 +26,7 @@ List::~List()
  */
 std::vector<Node*> List::getList() const
 {
-    return this->list;
+	return this->list;
 }
 /**
  * Setter for list
@@ -34,7 +34,7 @@ std::vector<Node*> List::getList() const
  */
 void List::setList(std::vector<Node*> list)
 {
-    this->list = list;
+	this->list = list;
 }
 /**
 * Reserve memory for list
@@ -42,7 +42,7 @@ void List::setList(std::vector<Node*> list)
 */
 void List::reserve(int size)
 {
-    this->list.reserve(size);
+	this->list.reserve(size);
 }
 
 /**
@@ -51,7 +51,7 @@ void List::reserve(int size)
  */
 void List::add(Node* node)
 {
-    this->list.push_back(node);
+	this->list.push_back(node);
 }
 
 /**
@@ -60,7 +60,7 @@ void List::add(Node* node)
  */
 void List::remove(int position)
 {
-    list.erase(list.begin() + position);
+	list.erase(list.begin() + position);
 }
 
 /**
@@ -70,12 +70,12 @@ void List::remove(int position)
  */
 Node* List::at(int position)
 {
-    // non vogliamo che lanci un eccezione.
-    if (position < this->list.size() && position >= 0)
-    {
-        return list.at(position);
-    }
-    return nullptr;
+	// non vogliamo che lanci un eccezione.
+	if (position < this->list.size() && position >= 0)
+	{
+		return list.at(position);
+	}
+	return nullptr;
 }
 
 /**
@@ -84,17 +84,16 @@ Node* List::at(int position)
  */
 void List::insert(std::vector<Node*> elements)
 {
-  
-        list.insert(list.end(), elements.begin(), elements.end());
+	list.insert(list.end(), elements.begin(), elements.end());
 }
 
 /**
  * Give the size of the list
  * @return size of the list
  */
- int List::size()
+int List::size()
 {
-    return (int)this->list.size();
+	return (int)this->list.size();
 }
 
 void List::getTreeAsList(Node *root, std::vector<Node*>& nodes) {
@@ -105,73 +104,73 @@ void List::getTreeAsList(Node *root, std::vector<Node*>& nodes) {
 	}
 }
 
- void List::sort()
- {
-	 //I create a vector of pure nodes
-	 std::vector<Node*> pureNodes;
+void List::sort()
+{
+	//I create a vector of pure nodes
+	std::vector<Node*> pureNodes;
 
-	 //I create a vector of lights
-	 std::vector<Light*> lights;
+	//I create a vector of lights
+	std::vector<Light*> lights;
 
-	 //I create a vector of meshes
-	 std::vector<Mesh*> meshes;
+	//I create a vector of meshes
+	std::vector<Mesh*> meshes;
 
-	 for (int i = 0; i < list.size(); i++) {
-		 if (list.at(i)->getType() == Object::NODE) {
-			 pureNodes.push_back(list.at(i));
-			 continue;
-		 }
-		 if (list.at(i)->getType() == Object::LIGHT) {
-			 lights.push_back(dynamic_cast<Light*>(list.at(i)));
-			 continue;
-		 }
-		 if (list.at(i)->getType() == Object::MESH) {
-			 meshes.push_back(dynamic_cast<Mesh*>(list.at(i)));
-			 continue;
-		 }
-	 }
-	 //Svuoto lista
-	 list.clear();
-	 //TODO inserisco elementi in ordine
-	 for (int i = 0; i < pureNodes.size(); i++) {
-		 list.push_back(pureNodes.at(i));
-	 }
-	 for (int i = 0; i < lights.size(); i++) {
-		 list.push_back(lights.at(i));
-	 }
-	 for (int i = 0; i < meshes.size(); i++) {
-		 list.push_back(meshes.at(i));
-	 }
- }
- void List::setIsRefletcion(bool isReflection) 
- {
-   this->isReflection = isReflection;
- }
- bool List::getIsReflection() 
- { 
-	 return isReflection; 
- }
+	for (int i = 0; i < list.size(); i++) {
+		if (list.at(i)->getType() == Object::NODE) {
+			pureNodes.push_back(list.at(i));
+			continue;
+		}
+		if (list.at(i)->getType() == Object::LIGHT) {
+			lights.push_back(dynamic_cast<Light*>(list.at(i)));
+			continue;
+		}
+		if (list.at(i)->getType() == Object::MESH) {
+			meshes.push_back(dynamic_cast<Mesh*>(list.at(i)));
+			continue;
+		}
+	}
+	//Svuoto lista
+	list.clear();
+	//TODO inserisco elementi in ordine
+	for (int i = 0; i < pureNodes.size(); i++) {
+		list.push_back(pureNodes.at(i));
+	}
+	for (int i = 0; i < lights.size(); i++) {
+		list.push_back(lights.at(i));
+	}
+	for (int i = 0; i < meshes.size(); i++) {
+		list.push_back(meshes.at(i));
+	}
+}
+void List::setIsRefletcion(bool isReflection)
+{
+	this->isReflection = isReflection;
+}
+bool List::getIsReflection()
+{
+	return isReflection;
+}
 
- /**
+/**
 * support method for transparent render
 * @param material and render matrix
 */
-void List::transparentPreRender(Material *material)
-{
-	//abilito cull facing (risparmio facce non renderizzando quelle interne)
-	glEnable(GL_CULL_FACE);
-	//disabilito z buffer write
-	glDepthMask(GL_FALSE);
-	// At first render back faces
-	glCullFace(GL_FRONT);
-	material->render();
-	// Then render front faces
-	glCullFace(GL_BACK);
-	material->render();
-	// Enabled z-buffer write
-	glDepthMask(GL_TRUE);
-	glDisable(GL_CULL_FACE);
-}
+//void List::transparentPreRender(Material *material)
+//{
+//	//abilito cull facing (risparmio facce non renderizzando quelle interne)
+//	glEnable(GL_CULL_FACE);
+//	//disabilito z buffer write
+//	glDepthMask(GL_FALSE);
+//	// At first render back faces
+//	glCullFace(GL_FRONT);
+//	material->render();
+//	// Then render front faces
+//	glCullFace(GL_BACK);
+//	material->render();
+//	// Enabled z-buffer write
+//	glDepthMask(GL_TRUE);
+//	glDisable(GL_CULL_FACE);
+//}
 
 /**
  * Render for list
@@ -182,28 +181,28 @@ void List::render(glm::mat4 scaling)
 {
 	Node * root = list.at(0);
 	root->setMatrix(root->getMatrix() * scaling);
-    const bool reflection = getIsReflection();
+	const bool reflection = getIsReflection();
 
 	for (Node* n : list)
 	{
 		glm::mat4 renderMatrix = n->getFinalMatrix();
 
 		if (reflection && n->getName() == "plane") {
-             continue;
+			continue;
 		}
 
-		if (n->getType() == Object::Type::MESH)
-		{
-			Mesh* m = static_cast<Mesh*>(n);
-			if (m->getMaterial() != nullptr)
-			{
-				if (m->getMaterial()->isTrasparent())
-				{
-					//non so se serve o no
-					transparentPreRender(m->getMaterial());
-				}
-			}
-		}
+		//if (n->getType() == Object::Type::MESH)
+		//{
+		//	Mesh* m = static_cast<Mesh*>(n);
+		//	if (m->getMaterial() != nullptr)
+		//	{
+		//		if (m->getMaterial()->isTrasparent())
+		//		{
+		//			//non so se serve o no
+		//			//transparentPreRender(m->getMaterial());
+		//		}
+		//	}
+		//}
 		n->render(renderMatrix);
 	}
 }
