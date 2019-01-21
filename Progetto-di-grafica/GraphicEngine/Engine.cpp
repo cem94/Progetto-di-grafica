@@ -6,7 +6,6 @@
 #include <GL/freeglut.h>
 // FreeImage
 #include <FreeImage.h>
-
 /////////////
 // GLOBALS //
 ////////////
@@ -20,25 +19,39 @@ bool lighting = true;
 Camera* currentCamera = nullptr;
 std::vector<Camera*> cameras;
 int activeCamera = 0;
-
+//finger sensitivity
 float angle = 5.f;
-
 float fingerAngles[5];
-// per il pollice
-float angleX;
 std::string fingerNames[5] = {"pollice", "indice", "medio", "anulare", "mignolo"};
 
 // Gauntlet translate
 bool translateUp = false;
 int translateCnt = 0;
 
-//lists
 List* toRender = new List();
-List *reflectedList = new List();
-
 Engine* Engine::instance = nullptr;
-//complete set of lists
-std::vector<List*> Engine::lists = {};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void printList(std::vector<Node*> list) {
+	for (auto n : list) {
+		std::cout << n->getName().c_str() << std::endl;
+	}
+	std::cout << "-----------------------------------------------------" << std::endl;
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+}
+/**
+ * Function that prints the scene graph
+ * @param  scene the scene graph to print
+ * @param indentation text intentation
+ */
+ //TODO::  renderlo privato! -> non è neanche un metodo della classe per ora
+void printTree(Node* scene, std::string indentation)
+{
+	glm::mat4 mat = scene->getMatrix();
+	std::cout << indentation.c_str() << scene->getName().c_str() << std::endl;
+	for (int i = 0; i < scene->getChildrenSize(); i++)
+		printTree(scene->getChildren().at(i), "\t - " + indentation);
+}
 /**
  * Getter for engine instance
  * @return a instance of engine. A new instance is created if engine is still nullptr
@@ -55,7 +68,7 @@ Engine LIB_API & Engine::getInstance()
  * @param  argc number of command-line arguments passed
  * @param argv  containing up to argc passed arguments
  */
-void LIB_API Engine::init(int argc, char* argv[])
+void LIB_API Engine::init()
 {
     freeImageInitialize();
     std::cout << "The engine starts" << std::endl;
@@ -63,8 +76,8 @@ void LIB_API Engine::init(int argc, char* argv[])
     glutInitWindowSize(1920, 1080);
     glutInitWindowPosition(0, 0);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-
-    glutInit(&argc, argv);
+	int argc = 1;
+    glutInit(&argc, nullptr);
 
     glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 
@@ -88,7 +101,6 @@ void LIB_API Engine::init(int argc, char* argv[])
         // Required OpenGL version not supported
         printf("Required OpenGL version not supported\n");
     }
-
 	// attiva la luce sopra il guanto
     enableLighting(true);
     glEnable(GL_LIGHT0);
@@ -133,62 +145,26 @@ void LIB_API Engine::mouseWheel(void(*mouseWheelFunc)(int, int, int, int))
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Get windows width
+ * @return current window width
  */
-//TODO:: credo che non lo useremo
-void LIB_API Engine::mousePressed(int button, int state, int x, int y)
-{
-    if (state == GLUT_UP)
-    {
-        // isMousePressed = false;
-    }
-    if (state == GLUT_DOWN)
-    {
-        // isMousePressed = true;
-        // mousePosition.x = x;
-        // mousePosition.y = y;
-    }
-}
-
-/**
- * Setter for mouse pressed callback
- * @param mouseFunc mouse pressed callback function to set
- */
-void LIB_API Engine::mousePressed(void(*mouseFunc)(int, int, int, int))
-{
-    glutMouseFunc(mouseFunc);
-}
-
-/**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
- */
-int LIB_API Engine::getWindowSizeX()
+int LIB_API Engine::getWindowWidth()
 {
     return glutGet(GLUT_WINDOW_WIDTH);
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Get windows height
+ * @return current widows height
  */
-int LIB_API Engine::getWindowSizeY()
+int LIB_API Engine::getWindowHeight()
 {
     return glutGet(GLUT_WINDOW_HEIGHT);
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Callback for mouse passive motion function
+ * @param  mouveMoved passive motion function callback
  */
 void LIB_API Engine::mouseMoved(void (*mouseMoved)(int, int))
 {
@@ -196,10 +172,7 @@ void LIB_API Engine::mouseMoved(void (*mouseMoved)(int, int))
 }
 
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Wrapper function for glutPostWindowRedisplay
  */
 void LIB_API Engine::redisplay()
 {
@@ -225,7 +198,7 @@ void LIB_API Engine::display(void(*displayCallback)())
 }
 
 /**
- * Setter for timer callback
+ * Setter for timer callback here we calculate fps
  * @param  timerCallback
  */
 void LIB_API Engine::timer(void timerCallback(int))
@@ -235,6 +208,7 @@ void LIB_API Engine::timer(void timerCallback(int))
     // Register the next update:
     glutTimerFunc(1000, timerCallback, 0);
 }
+
 /**
  * Setter for keyboard callback
  * @param  keyboardCallBack keyboard callback to set
@@ -243,6 +217,7 @@ void LIB_API Engine::keyboard(void(*keyboardCallBack)(unsigned char, int, int))
 {
     glutKeyboardFunc(keyboardCallBack);
 }
+
 /**
  * Setter for keyboard up callback
  * @param  keyboardUpCallBack keyboard up callback to set
@@ -295,20 +270,6 @@ void LIB_API Engine::swapBuffers()
 void LIB_API Engine::loadIdentity()
 {
     loadMatrix(glm::mat4(1.0f));
-}
-
-/**
- * Function that prints the scene graph
- * @param  scene the scene graph to print
- * @param indentation text intentation
- */
-//TODO::  renderlo privato! -> non è neanche un metodo della classe per ora
-void printTree(Node* scene, std::string indentation)
-{
-    glm::mat4 mat = scene->getMatrix();
-    std::cout << indentation.c_str() << scene->getName().c_str() << std::endl;
-    for (int i = 0; i < scene->getChildrenSize(); i++)
-        printTree(scene->getChildren().at(i), "\t - " + indentation);
 }
 
 /**
@@ -424,7 +385,7 @@ void LIB_API Engine::renderText()
 /**
  * Starting from current node it recursively populate the scene graph
  * @param  currentNode the current node
- * @param2 nodes the list of remaining nodes to insert
+ * @param nodes the list of remaining nodes to insert
  */
 void LIB_API findChildren(Node* currentNode, std::vector<Node*>& nodes)
 {
@@ -449,12 +410,10 @@ Node*  Engine::getScene(const char* name)
     Node* root = nodes.at(0);
     nodes.erase(nodes.begin());
     findChildren(root, nodes);
-
     setCameraToPalm(root);
     printTree(root, "");
     return root;
 }
-//
 /**
 * Comment
 * @param  name1
@@ -497,63 +456,20 @@ Node*  Engine::getNodeByName(Node* root, std::string name)
 }
 
 /**
-* read the scene graph and create various lists for lights, meshes and nodes
-* @param  element root node
-*/
-//void  LIB_API Engine::createLists(Node* root)
-//{
-//    std::vector<Node*> children = root->getChildren();
-//    toRender->add(root);
-//	std::vector<Node*> allNodes;
-//	getTreeAsList(root, allNodes);
-//	if (root->getType() == Node::Type::MESH)
-//    {
-//        Mesh * mesh = (Mesh *)root;
-//        if (mesh->getMaterial() != nullptr && mesh->getMaterial()->isTrasparent())
-//        {
-//            printf("Aggiungo mesh trasparente %s \n", mesh->getName().c_str());
-//            transparentMeshes->add(element);
-//        }
-//    }
-//    if (element->getType() == Node::Type::LIGHT)
-//    {
-//        //lista luci
-//
-//    }
-//    for (Node * n : children)
-//        createLists(n);
-//}
-
-/**
   * Set render and trasparent lists
   * @param  root scene graph
   */
-void  LIB_API Engine::setLists(Node * root)
+void  LIB_API Engine::createRenderList(Node * root)
 {
-	toRender->add(root);
-	for (Node * n : root->getChildren()) {
-		if (n->getName() == "plane") {
-			setAlphaToMaterial(root, 0.95f, "plane");
-		}
-		setLists(n);
-	}
-	/*
-	//CEM se commento questo lo gira se no no non capisco perché -> mi una copia di root per fare le trasparenze
-	Node* node = new Node{*root};
-	printTree(node,"");
-	setAlphaToMaterial(node, 0.9f, "plane");
-	//riempie e ordina lista
-	reflectedList->sort(node);
-	lists.push_back(reflectedList);
-	printf("We have %d elements to render\n", reflectedList->size());
-	glm::mat4 reflection = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, -1.0f, 1.0));
-	sortTrasparentMeshesList(reflectedList->getList());
-	Node *r = reflectedList->at(0);
-	r->setMatrix(r->getMatrix()*reflection);
-	//std::vector<Node*> nodes;
-	//reflectedList->getTreeAsList(node,nodes);
-	//printf("size %d\n",nodes.size());
-	*/
+	setAlphaToMaterial(root, 0.5f, "plane");
+	toRender = new List(root);
+	//std::cout << "Before: " << std::endl;
+	//printList(toRender->getList());
+	//SERVE lo dice il sore nelle slide
+	toRender->sort();
+	//std::cout << "After: " << std::endl;
+	//printList(toRender->getList());
+
 }
 
 Camera * Engine::getCurrentCamera()
@@ -561,20 +477,22 @@ Camera * Engine::getCurrentCamera()
 	return currentCamera;
 }
 
+
+
 void LIB_API Engine::render()
 {
-	glm::mat4 mat = glm::scale(glm::mat4(1), glm::vec3(1.0f, -1.0f, 1.0f));
 	toRender->setIsRefletcion(true);
+	glm::mat4 mat = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, -1.0f, 1.0f));
+	//clockwise
 	glFrontFace(GL_CW);
 	toRender->render(mat);
+	//counter clockwise
 	glFrontFace(GL_CCW);
+	//std::vector<Node*> v = toRender->getList();
+	//sortTrasparentMeshesList(v);
+	//toRender->setList(v);
     toRender->setIsRefletcion(false);
 	toRender->render(mat);
-}
-
-std::vector<List*> Engine::getLists()
-{
-	return lists;
 }
 
 /**
@@ -621,13 +539,6 @@ void LIB_API Engine::moveCameraRight(float direction)
     glm::mat4 matrix = currentCamera->getMatrix();
     glm::vec3 mov = direction * 5.0f * matrix[0];
     currentCamera->setMatrix(glm::translate(matrix, mov));
-
-    /*	old version
-    	glm::vec3 mov = direction * currentCamera->getMatrix()[0];
-    	glm::vec3 eye = currentCamera->getEye() + mov;
-    	glm::vec3 center = currentCamera->getCenter() + mov;
-    	currentCamera->setVec(eye, center, currentCamera->getUp());
-    */
 }
 
 void LIB_API Engine::moveCameraUp(float direction)
@@ -637,13 +548,6 @@ void LIB_API Engine::moveCameraUp(float direction)
     glm::mat4 matrix = currentCamera->getMatrix();
     glm::vec3 mov = direction * 5.0f * matrix[1];
     currentCamera->setMatrix(glm::translate(matrix, mov));
-
-    /*  old verion
-    	glm::vec3 mov = direction * currentCamera->getMatrix()[1];
-    	glm::vec3 eye = currentCamera->getEye() + mov;
-    	glm::vec3 center = currentCamera->getCenter() + mov;
-    	currentCamera->setVec(eye, center, currentCamera->getUp());
-    */
 }
 
 void LIB_API Engine::moveCameraForward(float direction)
@@ -653,14 +557,6 @@ void LIB_API Engine::moveCameraForward(float direction)
     glm::mat4 matrix = currentCamera->getMatrix();
     glm::vec3 mov = direction * 5.0f * matrix[2];
     currentCamera->setMatrix(glm::translate(matrix, mov));
-
-    /*	old version
-    	glm::vec3 mov = direction * currentCamera->getMatrix()[2];
-    	glm::vec3 eye = currentCamera->getEye() + mov;
-    	glm::vec3 center = currentCamera->getCenter() + mov;
-    	currentCamera->setVec(eye, center, currentCamera->getUp());
-    */
-
 }
 
 
@@ -696,12 +592,10 @@ void LIB_API Engine::changeCamera(Node * root)
     setCameraToPalm(root);
 }
 
-
 /**
- * Comment
- * @param  name1
- * @param2 name2
- * @return what it returns
+ * Rotate model
+ * @param  root our scene graph
+ * @param angle rotational increment
  */
 void LIB_API Engine::rotateModel(Node * root, float angle)
 {
@@ -712,6 +606,7 @@ void LIB_API Engine::rotateModel(Node * root, float angle)
         guardia->setMatrix(guardia->getMatrix()*rotation);
     }
 }
+
 
 void LIB_API Engine::openThumb(Node *root) {
 
@@ -725,7 +620,7 @@ void LIB_API Engine::openThumb(Node *root) {
 
 	phalanx1->setMatrix(phalanx1->getMatrix()*rotationY);
 	phalanx2->setMatrix(phalanx2->getMatrix()*rotationY*rotationZ);
-	fingerAngles[0] = 0;//l'angolo in y
+	fingerAngles[0] = 0;
 }
 
 /**
@@ -855,20 +750,28 @@ void LIB_API Engine::free()
 
 bool listNodeCompare(Node*a, Node *b)
 {
-    glm::mat4 first = currentCamera->getMatrix() * a->getMatrix();
-    glm::mat4 second = currentCamera->getMatrix() * b->getMatrix();
+    glm::mat4 first = currentCamera->getMatrix()* a->getMatrix() ;
+    glm::mat4 second = currentCamera->getMatrix()*b->getMatrix();
     return (float)first[3].z > (float)second[3].z;
 }
 
+//TODO attenzione questo metodo ribalta la scena e non sembra cambiare la lista forse inutile per noi
 /**
 * sorts the trasparent meshes list
 * @param list of transparent meshes
 */
-void LIB_API Engine::sortTrasparentMeshesList(std::vector<Node*> transparentMeshes)
+void LIB_API Engine::sortTrasparentMeshesList(std::vector<Node*>& transparentMeshes)
 {
+	//Specifies whether the depth buffer is enabled for writing.If flag is GL_FALSE, depth buffer writing is disabled.
+	/*There are certain scenarios imaginable where you want to perform the depth test on all fragments and discard them accordingly,
+	but not update the depth buffer. Basically, you're using a read-only depth buffer. OpenGL allows us to disable writing to the depth buffer by setting its depth mask to GL_FALSE: */
     glDepthMask(GL_FALSE);
     //gli passo un comparator
+	printList(transparentMeshes);
+
     std::sort(transparentMeshes.begin(), transparentMeshes.end(), listNodeCompare);
+	printList(transparentMeshes);
+	//Otherwise, it is enabled.Initially, depth buffer writing is enabled.
     glDepthMask(GL_TRUE);
 }
 //setta valore alpha ad un nodo specifico
@@ -879,6 +782,7 @@ void LIB_API Engine::setAlphaToMaterial(Node * root, float alpha, std::string no
     {
         Mesh* mesh = (Mesh*)node;
         mesh->getMaterial()->setAlpha(alpha);
+		printf("Setted alpha of %s\n",mesh->getName().c_str());
     }
 }
 

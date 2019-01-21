@@ -17,9 +17,12 @@
 #else
 #define LIB_API
 #endif
+//So it doesn't give us deprecation warnings for fopen etc
+#define _CRT_SECURE_NO_WARNINGS
 
 // C/C++
 #include <limits.h>
+//per sort
 #include <algorithm>
 #include <fstream>
 #include <iomanip>
@@ -29,7 +32,6 @@
 
 // GLM
 #define GLM_FORCE_CTOR_INIT  // Force constructors to initialize to identity
-// (from v0.9.9)
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/packing.hpp>
@@ -51,15 +53,13 @@ class LIB_API Engine
 {
 public:
     static Engine& getInstance();
-    void init(int argc, char* argv[]);
+    void init();
     void loadMatrix(glm::mat4 matrix);
     void startLoop();
     void clearColor(float r, float g, float b);
     void mouseWheel(void (*mouseWheelFunc)(int, int, int, int));
-    void mousePressed(int button, int state, int x, int y);
-    void mousePressed(void (*mouseFunc)(int, int, int, int));
-    int getWindowSizeX();
-    int getWindowSizeY();
+    int getWindowWidth();
+    int getWindowHeight();
     void mouseMoved(void (*mouseFunc)(int, int));
     void redisplay();
     void reshape(void (*reshapeCallback)(int, int));
@@ -92,7 +92,6 @@ public:
     void switchLights();
     Node* getNodeByName(Node* root, std::string name);
     void changeCamera(Node* root);
-    void createLists(Node* element);
     void incrementFrames();
     void rotateModel(Node* root, float angle);
     void closeThumb(Node* root);
@@ -103,20 +102,16 @@ public:
     void closeHand(Node* root);
 	void openHand(Node * root);
     void free();
-   // void transparentPreRender(Material* material, glm::mat4 renderMatrix);
-    void sortTrasparentMeshesList(std::vector<Node*> transparentMeshes);
+    void sortTrasparentMeshesList(std::vector<Node*>& transparentMeshes);
     void setAlphaToMaterial(Node* root, float alpha, std::string nodeName);
-    void setLists(Node* root);
+    void createRenderList(Node* root);
 	Camera * getCurrentCamera();
-
 	void render();
-	std::vector<List*> static getLists();
 private:
     // Singleton
     Engine() {};                       // Private so that it can  not be called
-    ~Engine();                         // private destructor
+	~Engine() {};                         // private destructor
     Engine(Engine const&) {};          // copy constructor is private
     Engine& operator=(Engine const&);  // assignment operator is private
     static Engine* instance;
-	static std::vector<List*> lists;
 };

@@ -8,6 +8,11 @@ List::List()
 {
 }
 
+List::List(Node * root)
+{
+	getTreeAsList(root, list);
+}
+
 /**
 * List Destructor
 */
@@ -72,24 +77,24 @@ Node* List::at(int position)
     }
     return nullptr;
 }
+
 /**
  * insert a list of elements at the end of our list
  * @param  list of elements to add
  */
 void List::insert(std::vector<Node*> elements)
 {
-    if (elements.size() == 0)
-        printf("Nothing to insert\n");//TODO remove
-    else
+  
         list.insert(list.end(), elements.begin(), elements.end());
 }
+
 /**
  * Give the size of the list
  * @return size of the list
  */
-unsigned int List::size()
+ int List::size()
 {
-    return (unsigned int)this->list.size();
+    return (int)this->list.size();
 }
 
 void List::getTreeAsList(Node *root, std::vector<Node*>& nodes) {
@@ -100,12 +105,8 @@ void List::getTreeAsList(Node *root, std::vector<Node*>& nodes) {
 	}
 }
 
- void List::sort(Node * root)
+ void List::sort()
  {
-	 //TODO:: GREG COME MAI ORDIANIAMO COSI?
-	 //RISPONDIMI SU WHATSAPP ED ELIMINA IL COMMENTO
-	 std::vector<Node*> allNodes;
-	 getTreeAsList(root,allNodes);
 	 //I create a vector of pure nodes
 	 std::vector<Node*> pureNodes;
 
@@ -115,22 +116,23 @@ void List::getTreeAsList(Node *root, std::vector<Node*>& nodes) {
 	 //I create a vector of meshes
 	 std::vector<Mesh*> meshes;
 
-	 for (int i = 0; i < allNodes.size(); i++) {
-		 if (allNodes.at(i)->getType() == Object::NODE) {
-			 pureNodes.push_back(allNodes.at(i));
+	 for (int i = 0; i < list.size(); i++) {
+		 if (list.at(i)->getType() == Object::NODE) {
+			 pureNodes.push_back(list.at(i));
 			 continue;
 		 }
-		 if (allNodes.at(i)->getType() == Object::LIGHT) {
-			 lights.push_back(dynamic_cast<Light*>(allNodes.at(i)));
+		 if (list.at(i)->getType() == Object::LIGHT) {
+			 lights.push_back(dynamic_cast<Light*>(list.at(i)));
 			 continue;
 		 }
-		 if (allNodes.at(i)->getType() == Object::MESH) {
-			 meshes.push_back(dynamic_cast<Mesh*>(allNodes.at(i)));
+		 if (list.at(i)->getType() == Object::MESH) {
+			 meshes.push_back(dynamic_cast<Mesh*>(list.at(i)));
 			 continue;
 		 }
 	 }
-
-	 //Now I place the items in the order I want them to be renderized
+	 //Svuoto lista
+	 list.clear();
+	 //TODO inserisco elementi in ordine
 	 for (int i = 0; i < pureNodes.size(); i++) {
 		 list.push_back(pureNodes.at(i));
 	 }
@@ -140,21 +142,6 @@ void List::getTreeAsList(Node *root, std::vector<Node*>& nodes) {
 	 for (int i = 0; i < meshes.size(); i++) {
 		 list.push_back(meshes.at(i));
 	 }
-	 //if (root->getType() == Node::Type::MESH)
-	 //{
-		// Mesh * mesh = (Mesh *)root;
-		// /*if (mesh->getMaterial() != nullptr && mesh->getMaterial()->isTrasparent())
-		// {
-		//	 printf("Aggiungo mesh trasparente %s \n", mesh->getName().c_str());
-		//	// transparentMeshes->add(element);
-		// }*/
-	 //}
-	 //if (root->getType() == Node::Type::LIGHT)
-	 //{
-		// //lista luci
-
-	 //}
-
  }
  void List::setIsRefletcion(bool isReflection) 
  {
@@ -169,75 +156,27 @@ void List::getTreeAsList(Node *root, std::vector<Node*>& nodes) {
 * support method for transparent render
 * @param material and render matrix
 */
-void List::transparentPreRender(Material *material, glm::mat4 renderMatrix)
+void List::transparentPreRender(Material *material)
 {
-	//TODO:: GREG DEVI SPIEGARMI PERCHÈ SI FA IN QUESTO ORDINE.
-	//RISPONDIMI SU WHATSAPP E RIMUOVI QUESTO COMMENTO
+	//abilito cull facing (risparmio facce non renderizzando quelle interne)
 	glEnable(GL_CULL_FACE);
+	//disabilito z buffer write
 	glDepthMask(GL_FALSE);
 	// At first render back faces
 	glCullFace(GL_FRONT);
-	material->render(renderMatrix);
+	material->render();
 	// Then render front faces
 	glCullFace(GL_BACK);
-	material->render(renderMatrix);
+	material->render();
 	// Enabled z-buffer write
 	glDepthMask(GL_TRUE);
 	glDisable(GL_CULL_FACE);
 }
+
 /**
- * Render for list (empty)
- * @param  renderMatrix render matrix
+ * Render for list
+ * @param  matrix render matrix (not used)
  */
-/*
-void List::render(glm::mat4 renderMatrix)
-{
-	for (Node* n : list)
-	{
-		glm::mat4 renderMatrix = n->getFinalMatrix();
-
-		if (n->getType() == Object::Type::MESH)
-		{
-			Mesh* m = static_cast<Mesh*>(n);
-			if (m->getMaterial() != nullptr)
-			{
-				if (m->getMaterial()->isTrasparent())
-				{
-					// TRASPARENZE
-					transparentPreRender(m->getMaterial(), renderMatrix);
-					//printf("Trasparent\n");
-				}
-			}
-		}
-		// n->render(currentCamera->getMatrix() * renderMatrix);
-
-		n->render(renderMatrix);
-	}
-
-	//TODO:: GREG COSI FUNZIONA MA NON COMPLETAMENTE
-     
-	glm::mat4 scaling =  glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, -1.0f, 1.0f));
-	glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -50.0f, 0.0f));
-	for (Node* n : list) {
-		glm::mat4 renderMatrix = n->getFinalMatrix()  * scaling;
-
-		if (n->getType() == Object::Type::MESH) {
-            Mesh* m = static_cast<Mesh*>(n);
-            if (m->getMaterial() != nullptr) {
-              if (m->getMaterial()->isTrasparent()) {
-                // TRASPARENZE
-                transparentPreRender(m->getMaterial(), renderMatrix);
-                // printf("Trasparent\n");
-              }
-            }
-          }
-          // n->render(currentCamera->getMatrix() * renderMatrix);
-
-          n->render(renderMatrix);
-        }
-		
-}
-*/
 
 void List::render(glm::mat4 scaling)
 {
@@ -260,9 +199,8 @@ void List::render(glm::mat4 scaling)
 			{
 				if (m->getMaterial()->isTrasparent())
 				{
-					// TRASPARENZE
-					transparentPreRender(m->getMaterial(), renderMatrix);
-					//printf("Trasparent\n");
+					//non so se serve o no
+					transparentPreRender(m->getMaterial());
 				}
 			}
 		}

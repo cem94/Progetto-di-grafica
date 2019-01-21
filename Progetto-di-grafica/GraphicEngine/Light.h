@@ -1,6 +1,6 @@
 #pragma once
 /*Light class that implements the main types of light introduced in the course. This class includes the necessary methods for applying its settings to OpenGL.*/
-class LIB_API Light : public Node
+class  Light : public Node
 {
 public:
     Light();

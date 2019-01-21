@@ -421,13 +421,6 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
             mesh->setRadius(radius);
             mesh->setNumberOfFaces(faces);
             mesh->setChildrenSize(children);
-            /*
-            	mesh->setMeshVertexes(meshVertices);
-            	mesh->setNormals(meshNormals);
-            	mesh->setTextures(meshTextures);
-            	mesh->setIndices(indices);
-            	mesh->setVertexes(vertices);
-            	*/
             mesh->generateVAO(meshVertices, meshNormals, meshTextures, indices, vertices);
             objects.push_back(mesh);
         }

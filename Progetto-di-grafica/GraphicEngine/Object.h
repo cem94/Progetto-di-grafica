@@ -4,7 +4,7 @@
  * keeping track of the existing objects, forcing some required API (virtual)
  * methods and providing a unique ID to each object.
  */
-class LIB_API Object {
+class  Object {
  public:
   enum Type { OBJECT = 0, CAMERA, LIGHT, MATERIAL, MESH, NODE, TEXTURE };
   int getId() const { return id; };

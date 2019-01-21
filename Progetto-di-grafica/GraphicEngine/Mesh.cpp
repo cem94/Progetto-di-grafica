@@ -92,13 +92,10 @@ void Mesh::setNumberOfFaces(unsigned int numberOfFaces) {
  */
 void Mesh::render(glm::mat4 renderMatrix) {
 	Camera *  camera = Engine::getInstance().getCurrentCamera();
+	//TODO eliminare
 	if (camera == nullptr) return;
-
-	glm::mat4 cameraMat =camera->getMatrix();
-    // glLoadMatrixf(glm::value_ptr(camera * this->getFinalMatrix()));
-	glLoadMatrixf(glm::value_ptr(cameraMat * renderMatrix));
+    glLoadMatrixf(glm::value_ptr(camera->getMatrix() * renderMatrix));
 	material->render(renderMatrix);
-	// glLoadMatrixf(glm::value_ptr(renderMatrix));
 	glBindVertexArray(vao);
 	glDrawElements(GL_TRIANGLES, numberOfFaces * 3, GL_UNSIGNED_INT, nullptr);
 }
