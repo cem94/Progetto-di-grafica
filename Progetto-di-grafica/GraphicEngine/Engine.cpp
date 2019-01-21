@@ -571,9 +571,9 @@ Camera * Engine::getCurrentCamera()
 void LIB_API Engine::render()
 {
 	glm::mat4 mat = glm::scale(glm::mat4(1), glm::vec3(1.0f, -1.0f, 1.0f));
-	glFrontFace(GL_CW);
-	toRender->render(mat);
-	glFrontFace(GL_CCW);
+	//glFrontFace(GL_CW);
+	//toRender->render(mat);
+	//glFrontFace(GL_CCW);
 	toRender->render(glm::mat4(1.0f));
 }
 
@@ -687,9 +687,12 @@ void LIB_API Engine::rotateCameraRight(float angle)
         return;
     std::cout << "angle: " << angle << std::endl;
     glm::mat4 mat = currentCamera->getMatrix();
-    glm::vec3 vec = mat[1];
-    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), vec);
-    currentCamera->setMatrix(rotation * mat);
+    glm::vec3 vec = 100.0f * mat[0];
+    //vec[0] += angle * 10;
+    glm::vec3 pos = mat[3];
+    glm::vec3 look = pos + vec;
+    //glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), vec);
+    currentCamera->setMatrix(glm::lookAt(pos, look ,glm::vec3(0.0f, 1.0f, 0.0f)));
 }
 
 void LIB_API Engine::rotateCameraUp(float angle)
@@ -792,7 +795,7 @@ void Engine::autoRotateModel(Node* root, float angle)
 
         guardia->setMatrix(guardia->getMatrix() * translate * rotation);
 
-        if (translateCnt > 180)
+        if (translateCnt > 120)
         {
             translateCnt = 0;
             translateUp = !translateUp;
@@ -922,4 +925,3 @@ void LIB_API Engine::setAlphaToMaterial(Node * root, float alpha, std::string no
         mesh->getMaterial()->setAlpha(alpha);
     }
 }
-

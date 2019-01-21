@@ -537,6 +537,7 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
             light->setDirection(glm::vec4(direction.r, direction.g, direction.b, 1.0f));
             light->setCutoff(cutoff);
             light->setChildrenSize(children);
+            light->setIntensity(1.0f);
             objects.push_back(light);
         }
         break;

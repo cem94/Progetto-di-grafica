@@ -335,7 +335,7 @@ void setCallBacks()
 void setCameras()
 {
     // dove si trova la camera
-    glm::vec3 eye = glm::vec3(0.f, 50.f, 400.f);
+    glm::vec3 eye = glm::vec3(0.f, 150.f, 400.f);
     // verso dove guarda
     glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
     // dove è il sopra

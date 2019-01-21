@@ -97,6 +97,36 @@ void Light::changeState()
 // attenuation non vista dal programma per le luci
 void Light::render(glm::mat4 renderMatrix)
 {
+	float intensity = 0.8f;
+	GLfloat shiny = 0.6f;
+	glm::vec4 ambientI = glm::vec4(ambient[0] * intensity, ambient[1] * intensity, ambient[2] * intensity, 1.0f);
+	glm::vec4 diffuseI = glm::vec4(diffuse[0] * intensity, diffuse[1] * intensity, diffuse[2] * intensity, 1.0f);
+	glm::vec4 specularI = glm::vec4(specular[0] * intensity, specular[1] * intensity, specular[2] * intensity, 1.0f);
+    glLightfv(getLightNumber(), GL_POSITION, glm::value_ptr(this->position));
+    glLightfv(getLightNumber(), GL_QUADRATIC_ATTENUATION, &intensity);
+    glLightfv(getLightNumber(), GL_SHININESS, &shiny);
+
+	// Load light
+	switch (subtype) {
+	case OMNI:
+      break;
+    case SPOTLIGHT:
+		glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &cutoff);
+      break;
+    case DIRECTIONAL:
+		glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &cutoff);
+		glLightfv(getLightNumber(), GL_SPOT_DIRECTION, glm::value_ptr(direction));
+      break;
+    default:
+      break;
+	}
+
+    glLightfv(getLightNumber(), GL_AMBIENT, glm::value_ptr(ambientI));
+	glLightfv(getLightNumber(), GL_DIFFUSE, glm::value_ptr(diffuseI));
+    glLightfv(getLightNumber(), GL_SPECULAR, glm::value_ptr(specularI));
+
+
+	/*
 	// DIRECTIONL, OMNI AND SPOTLIGHT
 	glLightfv(getLightNumber(), GL_POSITION, glm::value_ptr(this->position));
     //setto le componenti
@@ -119,6 +149,7 @@ void Light::render(glm::mat4 renderMatrix)
         if (this->subtype != OMNI)
             glLightfv(getLightNumber(), GL_SPOT_DIRECTION, glm::value_ptr(direction));
     }
+	*/
 }
 
 /**
