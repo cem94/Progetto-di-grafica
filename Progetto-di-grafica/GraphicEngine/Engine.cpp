@@ -706,46 +706,38 @@ void Engine::autoRotateModel(Node* root, float angle)
 }
 
 /**
- * Close hand
- * @param  root scene graph
- * @param angle rotation angle of fingers
- */
-void LIB_API Engine::openThumb(Node *root)
-{
-    //ottengo falangi
-    std::string name = fingerNames[0];
-    name.append("2");
-    Node* phalanx2 = getNodeByName(root, name);
-    Node* phalanx1 = phalanx2->getParent();
-    glm::mat4 rotationY = glm::rotate(glm::mat4(1.0f), glm::radians(fingerAngles[0]), glm::vec3(-1.0f, 1.0f, 1.0f));
-    phalanx1->setMatrix(phalanx1->getMatrix()*rotationY);
-    phalanx2->setMatrix(phalanx2->getMatrix()*rotationY);
-    fingerAngles[0] = 0;
-}
-
-/**
- * Close the thumb
+ * Move the thumb
  * @param  name1
- * @param2 name2
+ * @param name2
  * @return what it returns
  */
-void LIB_API Engine::closeThumb(Node *root)
+void LIB_API Engine::moveThumb(Node *root, bool open)
 {
-
-    if (fingerAngles[0] > 65.f)
+    glm::mat4 rotation;
+    if(open)
     {
-        return;
-    }
+        if (fingerAngles[0] == 0.f)
+        {
+            return;
+        }
+        fingerAngles[0] -= increment;
+        rotation = glm::rotate(glm::mat4(1.0f), glm::radians(increment), glm::vec3(-1.0f, 1.0f, 1.0f));
 
-    // printf("Before %f\n",fingerAngles[0]);
-    fingerAngles[0] += increment;
-    //printf("After %f\n",fingerAngles[0]);
-    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(increment), glm::vec3(1.0f, -1.0f, -1.0f));
+    }
+    else
+    {
+        if (fingerAngles[0] > 65.f)
+        {
+            return;
+        }
+        fingerAngles[0] += increment;
+        rotation = glm::rotate(glm::mat4(1.0f), glm::radians(increment), glm::vec3(1.0f, -1.0f, -1.0f));
+
+    }
     std::string name = fingerNames[0];
     name.append("2");
     Node* phalanx2 = getNodeByName(root, name);
     Node* phalanx1 = phalanx2->getParent();
-//    Node* gemma = phalanx1->getChildren().at(1);
     phalanx1->setMatrix(phalanx1->getMatrix()*rotation);
     phalanx2->setMatrix(phalanx2->getMatrix()*rotation);
 }
@@ -756,24 +748,40 @@ void LIB_API Engine::closeThumb(Node *root)
  * @param i number of the finger to close (starting from 0)
  * @param angle rotation angle
  */
-void LIB_API Engine::closeFinger(Node * root, int i)
+void LIB_API Engine::moveFinger(Node * root, int f, bool open)
 {
-    if(i == 0)
+    if(f == 0)
     {
-        closeThumb(root);
+        moveThumb(root,open);
         return;
     }
-    if (fingerAngles[i] > 75.f)
+    glm::mat4 rotation;
+    if(open)
     {
-        return;
+        //limit reached
+        if (fingerAngles[f] == 0)
+        {
+
+            return;
+        }
+        rotation = glm::rotate(glm::mat4(1.0f), glm::radians(increment), glm::vec3(0.0f, 0.0f, 1.0f));
+        fingerAngles[f] -= increment;
     }
-    std::string name = fingerNames[i];
+    else
+    {
+        //limit reached
+        if (fingerAngles[f] > 75.f)
+        {
+            return;
+        }
+        fingerAngles[f] += increment;
+        rotation = glm::rotate(glm::mat4(1.0f), glm::radians(increment), glm::vec3(0.0f, 0.0f, -1.0f));
+    }
+    std::string name = fingerNames[f];
     name.append("3");
     Node* phalanx3 = getNodeByName(root, name);
     Node* phalanx2 = phalanx3->getParent();
     Node* phalanx1 = phalanx2->getParent();
-    fingerAngles[i] += increment;
-    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(increment), glm::vec3(0.0f, 0.0f, -1.0f));
     phalanx1->setMatrix(phalanx1->getMatrix()*rotation);
     phalanx2->setMatrix(phalanx2->getMatrix()*rotation);
     phalanx3->setMatrix(phalanx3->getMatrix()*rotation);
@@ -784,52 +792,13 @@ void LIB_API Engine::closeFinger(Node * root, int i)
  * @param  root scene graph
  * @param angle rotation angle of fingers
  */
-void LIB_API Engine::openFinger(Node * root, int i)
+void LIB_API Engine::moveHand(Node * root,bool open)
 {
-    if(i==0)
-    {
-        openThumb(root);
-        return;
-    }
-    std::string name = fingerNames[i];
-    name.append("3");
-    Node* phalanx3 = getNodeByName(root, name);
-    Node* phalanx2 = phalanx3->getParent();
-    Node* phalanx1 = phalanx2->getParent();
-    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(fingerAngles[i]), glm::vec3(0.0f, 0.0f, 1.0f));
-    fingerAngles[i] = 0;
-    phalanx1->setMatrix(phalanx1->getMatrix()*rotation);
-    phalanx2->setMatrix(phalanx2->getMatrix()*rotation);
-    phalanx3->setMatrix(phalanx3->getMatrix()*rotation);
-}
-
-
-/**
- * Close hand
- * @param  root scene graph
- * @param angle rotation angle of fingers
- */
-void LIB_API Engine::closeHand(Node * root)
-{
-    closeThumb(root);
-    closeFinger(root, 1);
-    closeFinger(root, 2);
-    closeFinger(root, 3);
-    closeFinger(root, 4);
-}
-
-/**
- * Close hand
- * @param  root scene graph
- * @param angle rotation angle of fingers
- */
-void LIB_API Engine::openHand(Node * root)
-{
-    openThumb(root);
-    openFinger(root, 1);
-    openFinger(root, 2);
-    openFinger(root, 3);
-    openFinger(root, 4);
+    moveFinger(root, 0, open);
+    moveFinger(root, 1,open);
+    moveFinger(root, 2,open);
+    moveFinger(root, 3,open);
+    moveFinger(root, 4,open);
 }
 
 //TODO::aggiungere altre cose da deinizializzare
@@ -848,21 +817,3 @@ void LIB_API Engine::setAlphaToMaterial(Node * root, float alpha, std::string no
         printf("Setted alpha of %s\n", mesh->getName().c_str());
     }
 }
-
-/**
-* depth-sorting (back to front) method for transparent meshes
-* @param two list element to compare
-*/
-//bool listNodeCompare(Node*a, Node *b)
-//{
-//	glm::mat4 first = currentCamera->getMatrix()* a->getMatrix();
-//	glm::mat4 second = currentCamera->getMatrix()*b->getMatrix();
-//	return (float)first[3].z > (float)second[3].z;
-//}
-
-//void LIB_API Engine::sortTrasparentMeshesList(std::vector<Node*>& transparentMeshes)
-//{
-//	glDepthMask(GL_FALSE);
-//	std::sort(transparentMeshes.begin(), transparentMeshes.end(), listNodeCompare);
-//	glDepthMask(GL_TRUE);
-//}

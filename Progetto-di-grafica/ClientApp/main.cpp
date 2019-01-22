@@ -107,40 +107,40 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
         engine->moveLightUp(10.0f);
         break;
     case 'H':
-        engine->openHand(scene);
+        engine->moveHand(scene,true);
         break;
     case 'h':
-        engine->closeHand(scene);
+        engine->moveHand(scene,false);
         break;
     case 'A':
-        engine->openFinger(scene,4);
+        engine->moveFinger(scene,4,true);
         break;
     case 'a':
-        engine->closeFinger(scene,4);
+        engine->moveFinger(scene,4,false);
         break;
     case 'S':
-        engine->openFinger(scene,3);
+        engine->moveFinger(scene,3,true);
         break;
     case 's':
-        engine->closeFinger(scene,3);
+        engine->moveFinger(scene,3,false);
         break;
     case 'D':
-        engine->openFinger(scene,2);
+        engine->moveFinger(scene,2,true);
         break;
     case 'd':
-        engine->closeFinger(scene,2);
+        engine->moveFinger(scene,2,false);
         break;
     case 'F':
-        engine->openFinger(scene,1);
+        engine->moveFinger(scene,1,true);
         break;
     case 'f':
-        engine->closeFinger(scene,1);
+        engine->moveFinger(scene,1,false);
         break;
     case 'G':
-        engine->openFinger(scene,0);
+        engine->moveFinger(scene,0,true);
         break;
     case 'g':
-        engine->closeFinger(scene,0);
+        engine->moveFinger(scene,0,false);
         break;
     default:
         break;
@@ -148,58 +148,6 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
     engine->redisplay();
 }
 
-/**
- * Keyboard up callback it detects when a key is released its main function is opening the fingers of our gauntlet
- * @param  key the button that was released
- * @param x x coordinate
- * @param x y coordinate
- */
-void keyboardUpCallback(unsigned char key, int x, int y)
-{
-    // not pressed
-    keyState[key] = false;
-    switch (key)
-    {
-    case 'h':
-        if (keyState[(unsigned char)'h'] == false)
-        {
-            engine->openHand(scene);
-        }
-        break;
-    case ' ':
-        if (keyState[(unsigned char)' '] == false)
-        {
-            engine->openThumb(scene);
-        }
-        break;
-    case 'f':
-        if (keyState[(unsigned char)'f'] == false)
-        {
-            engine->openFinger(scene, 1);
-        }
-        break;
-    case 'e':
-        if (keyState[(unsigned char)'e'] == false)
-        {
-            engine->openFinger(scene, 2);
-        }
-        break;
-    case 'w':
-        if (keyState[(unsigned char)'w'] == false)
-        {
-            engine->openFinger(scene, 3);
-        }
-        break;
-    case 'a':
-        if (keyState[(unsigned char)'a'] == false)
-        {
-            engine->openFinger(scene, 4);
-        }
-        break;
-
-    }
-    engine->redisplay();
-}
 
 /**
  * Special callback this callback is used to move the camera (if movable). FreeGlut special key redefinition is necessary (e.g #define GLUT_KEY_LEFT 0x0064)
@@ -301,7 +249,6 @@ void setCallBacks()
     engine->display(displayCallback);
     engine->reshape(reshapeCallback);
     engine->keyboard(keyboardCallback);
-    //  engine->keyboardUp(keyboardUpCallback);
     engine->specialKeyboard(specialCallback);
     engine->mouseWheel(mouseWheel);
     engine->mouseMoved(mouseMoved);

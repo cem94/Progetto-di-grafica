@@ -95,18 +95,15 @@ public:
     void changeCamera(Node* root);
     void incrementFrames();
     void rotateModel(Node* root, float angle);
-    void closeThumb(Node* root);
-    void openThumb(Node *root);
     void autoRotateModel(Node* root, float angle);
-    void closeFinger(Node* root, int f);
-    void openFinger(Node* root, int f);
-    void closeHand(Node* root);
-    void openHand(Node * root);
-    void free();
+    void moveFinger(Node* root, int f, bool open);
+    void moveHand(Node* root,bool open);
+    void moveThumb(Node* root,bool open);
     void setAlphaToMaterial(Node* root, float alpha, std::string nodeName);
     void createRenderList(Node* root);
     Camera * getCurrentCamera();
     void render();
+    void free();
 private:
     Engine() {};
     ~Engine() {};
