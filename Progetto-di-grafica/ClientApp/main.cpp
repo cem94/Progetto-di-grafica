@@ -13,6 +13,7 @@ Node* scene = nullptr;
 bool rotating = false;
 int sizeX = 0;
 int sizeY = 0;
+int i = 0;
 // button state machine
 bool keyState[255];
 
@@ -99,6 +100,7 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
     //guardo se sono tenuti premuti uno o più bottoni
     if (keyState[(unsigned char)'h'] == true)
     {
+            printf("DOWN\n");
         engine->closeHand(scene);
     }
     if (keyState[(unsigned char)' '] == true)
@@ -139,6 +141,7 @@ void keyboardUpCallback(unsigned char key, int x, int y)
     case 'h':
         if (keyState[(unsigned char)'h'] == false)
         {
+        printf("UP\n");
             engine->openHand(scene);
         }
         break;
@@ -172,7 +175,9 @@ void keyboardUpCallback(unsigned char key, int x, int y)
             engine->openFinger(scene, 4);
         }
         break;
+
     }
+    engine->redisplay();
 }
 
 /**
@@ -275,8 +280,9 @@ void setCallBacks()
     engine->display(displayCallback);
     engine->reshape(reshapeCallback);
     engine->keyboard(keyboardCallback);
-    engine->keyboardUp(keyboardUpCallback);
+  //  engine->keyboardUp(keyboardUpCallback);
     engine->specialKeyboard(specialCallback);
+  //  engine->setKeyRepeat(false);
     engine->mouseWheel(mouseWheel);
     engine->mouseMoved(mouseMoved);
     engine->timer(timerCallback);

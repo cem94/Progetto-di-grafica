@@ -15,7 +15,7 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
     // Configure stream:
     std::cout.precision(2);  // 2 decimals are enough
     std::cout << std::fixed;      // Avoid scientific notation
-    Node *root = nullptr;
+//    Node *root = nullptr;
     // Parse chunks:
     unsigned int chunkId, chunkSize;
     while (true)

@@ -1836,3 +1836,82 @@
 1548159899 source:/home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/OvoReader.cpp
 	"Engine.h"
 
+1548167685 source:/home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Camera.cpp
+	"Engine.h"
+	<GL/freeglut.h>
+
+1548187640 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Engine.h
+	<limits.h>
+	<algorithm>
+	<fstream>
+	<iomanip>
+	<iostream>
+	<vector>
+	<cstring>
+	<glm/glm.hpp>
+	<glm/gtc/matrix_transform.hpp>
+	<glm/gtc/packing.hpp>
+	<glm/gtc/type_ptr.hpp>
+	"Object.h"
+	"Node.h"
+	"Camera.h"
+	"Light.h"
+	"Texture.h"
+	"Material.h"
+	"Mesh.h"
+	"List.h"
+	"OvoReader.h"
+
+1548167685 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Object.h
+
+1548167685 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Node.h
+
+1548167685 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Camera.h
+
+1548187457 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Light.h
+
+1548167685 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Texture.h
+
+1548167685 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Material.h
+
+1548167685 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Mesh.h
+
+1548167685 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/List.h
+
+1548167685 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/OvoReader.h
+	"Engine.h"
+
+1548167685 source:/home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Light.cpp
+	"Engine.h"
+	<GL/freeglut.h>
+
+1548167685 source:/home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/List.cpp
+	"Engine.h"
+	<GL/freeglut.h>
+
+1548167685 source:/home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Material.cpp
+	"Engine.h"
+	<GL/freeglut.h>
+
+1548167685 source:/home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Mesh.cpp
+	<GL/glew.h>
+	"Engine.h"
+	<GL/freeglut.h>
+
+1548167685 source:/home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Node.cpp
+	"Engine.h"
+
+1548167685 source:/home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Texture.cpp
+	"Engine.h"
+	<GL/freeglut.h>
+	<FreeImage.h>
+
+1548168674 source:/home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/OvoReader.cpp
+	"Engine.h"
+
+1548188232 source:/home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Engine.cpp
+	"Engine.h"
+	<GL/glew.h>
+	<GL/freeglut.h>
+	<FreeImage.h>
+
