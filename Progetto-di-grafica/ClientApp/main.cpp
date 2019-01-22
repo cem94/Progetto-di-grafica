@@ -72,19 +72,11 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
         break;
     case '3':
         engine->enableLight(scene, "Omni2");
-        break;
-    case '4':
-        engine->enableLight(scene, "Omni3");
-        break;
-    case '5':
-        engine->enableLight(scene, "Omni4");
-        break;
-    case '6':
-        engine->enableLight(scene, "specular_light");
-        break;
-    case '7':
-        engine->enableLight(scene, "moving_light");
-        break;
+		break;
+	case '4':
+		engine->enableLight(scene, "moving_light");
+		engine->enableLight(scene, "specular_light");
+		break;
     case 'r':
         if(!rotating)
             engine->rotateModel(scene, 8);
@@ -95,32 +87,44 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
     case 'c':
         engine->changeCamera(scene);
         break;
-    }
-    //guardo se sono tenuti premuti uno o più bottoni
-    if (keyState[(unsigned char)'h'] == true)
-    {
-        engine->closeHand(scene);
-    }
-    if (keyState[(unsigned char)' '] == true)
-    {
-        engine->closeThumb(scene);
-    }
-    if (keyState[(unsigned char)'f'] == true)
-    {
-        engine->closeFinger(scene, 1);
-    }
-    if (keyState[(unsigned char)'e'] == true)
-    {
-        engine->closeFinger(scene, 2);
-    }
-    if (keyState[(unsigned char)'w'] == true)
-    {
-        engine->closeFinger(scene, 3);
-    }
-    if (keyState[(unsigned char)'a'] == true)
-    {
-        engine->closeFinger(scene, 4);
-    }
+	case 'k':
+		engine->moveLightForward(10.0f);
+		break;
+	case 'l':
+		engine->moveLightRight(-10.0f);
+		break;
+	case 'i':
+		engine->moveLightForward(-10.0f);
+		break;
+	case 'j':
+		engine->moveLightRight(10.0f);
+		break;
+	}
+
+	//guardo se sono tenuti premuti uno o più bottoni
+	if (keyState[(unsigned char)'h'] == true)
+	{
+		engine->closeHand(scene);
+	}
+	 if (keyState[(unsigned char)' '] == true)
+	{
+		engine->closeThumb(scene);
+	} 
+	if (keyState[(unsigned char)'f'] == true)
+	{
+		engine->closeFinger(scene, 1);
+	} if (keyState[(unsigned char)'e'] == true)
+	{
+		engine->closeFinger(scene, 2);
+	}
+	if (keyState[(unsigned char)'w'] == true)
+	{
+		engine->closeFinger(scene, 3);
+	}
+	if (keyState[(unsigned char)'a'] == true)
+	{
+		engine->closeFinger(scene, 4);
+	}
     engine->redisplay();
 }
 
@@ -315,9 +319,9 @@ int main(int argc, char* argv[])
     engine->clearColor(1.f,1.f,1.f);
     // set cameras
     setCameras();
-    // load ovo file
-    const char* fileName = "../ovo_files/full_scene.ovo";
-    // read ovo file, load scene and start main loop
+	// load ovo file
+    const char* fileName = "../ovo_files/complete_scene.ovo";
+	// read ovo file, load scene and start main loop
     scene = engine->getScene(fileName);
     engine->createRenderList(scene);
     //start main loop
