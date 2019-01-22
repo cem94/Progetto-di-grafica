@@ -66,7 +66,6 @@ public:
     void keyboard(void(*keyboardCallBack)(unsigned char, int, int));
     void keyboardUp(void(*keyboardUpCallBack)(unsigned char, int, int));
     void specialKeyboard(void(*specialFunc)(int, int, int));
-    void setKeyRepeat(bool repeat);
     void setViewport(int x, int y, int width, int height);
     void clearBuffers();
     void swapBuffers();
@@ -89,6 +88,9 @@ public:
     void rotateCameraRight(float angle);
     void rotateCameraUp(float angle);
     void switchLights();
+    void moveLightForward(float direction);
+    void moveLightRight(float direction);
+    void moveLightUp(float direction);
     Node* getNodeByName(Node* root, std::string name);
     void changeCamera(Node* root);
     void incrementFrames();
@@ -101,7 +103,6 @@ public:
     void closeHand(Node* root);
     void openHand(Node * root);
     void free();
-    //void sortTrasparentMeshesList(std::vector<Node*>& transparentMeshes);
     void setAlphaToMaterial(Node* root, float alpha, std::string nodeName);
     void createRenderList(Node* root);
     Camera * getCurrentCamera();

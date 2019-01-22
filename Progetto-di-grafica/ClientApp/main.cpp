@@ -75,16 +75,8 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
         engine->enableLight(scene, "Omni2");
         break;
     case '4':
-        engine->enableLight(scene, "Omni3");
-        break;
-    case '5':
-        engine->enableLight(scene, "Omni4");
-        break;
-    case '6':
-        engine->enableLight(scene, "specular_light");
-        break;
-    case '7':
         engine->enableLight(scene, "moving_light");
+        engine->enableLight(scene, "specular_light");
         break;
     case 'r':
         if(!rotating)
@@ -96,32 +88,62 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
     case 'c':
         engine->changeCamera(scene);
         break;
-    }
-    //guardo se sono tenuti premuti uno o più bottoni
-    if (keyState[(unsigned char)'h'] == true)
-    {
-            printf("DOWN\n");
+    case 'k':
+        engine->moveLightForward(10.0f);
+        break;
+    case 'l':
+        engine->moveLightRight(-10.0f);
+        break;
+    case 'i':
+        engine->moveLightForward(-10.0f);
+        break;
+    case 'j':
+        engine->moveLightRight(10.0f);
+        break;
+    case 'u':
+        engine->moveLightUp(-10.0f);
+        break;
+    case 'o':
+        engine->moveLightUp(10.0f);
+        break;
+    case 'H':
+        engine->openHand(scene);
+        break;
+    case 'h':
         engine->closeHand(scene);
-    }
-    if (keyState[(unsigned char)' '] == true)
-    {
-        engine->closeThumb(scene);
-    }
-    if (keyState[(unsigned char)'f'] == true)
-    {
-        engine->closeFinger(scene, 1);
-    }
-    if (keyState[(unsigned char)'e'] == true)
-    {
-        engine->closeFinger(scene, 2);
-    }
-    if (keyState[(unsigned char)'w'] == true)
-    {
-        engine->closeFinger(scene, 3);
-    }
-    if (keyState[(unsigned char)'a'] == true)
-    {
-        engine->closeFinger(scene, 4);
+        break;
+    case 'A':
+        engine->openFinger(scene,4);
+        break;
+    case 'a':
+        engine->closeFinger(scene,4);
+        break;
+    case 'S':
+        engine->openFinger(scene,3);
+        break;
+    case 's':
+        engine->closeFinger(scene,3);
+        break;
+    case 'D':
+        engine->openFinger(scene,2);
+        break;
+    case 'd':
+        engine->closeFinger(scene,2);
+        break;
+    case 'F':
+        engine->openFinger(scene,1);
+        break;
+    case 'f':
+        engine->closeFinger(scene,1);
+        break;
+    case 'G':
+        engine->openFinger(scene,0);
+        break;
+    case 'g':
+        engine->closeFinger(scene,0);
+        break;
+    default:
+        break;
     }
     engine->redisplay();
 }
@@ -141,7 +163,6 @@ void keyboardUpCallback(unsigned char key, int x, int y)
     case 'h':
         if (keyState[(unsigned char)'h'] == false)
         {
-        printf("UP\n");
             engine->openHand(scene);
         }
         break;
@@ -280,9 +301,8 @@ void setCallBacks()
     engine->display(displayCallback);
     engine->reshape(reshapeCallback);
     engine->keyboard(keyboardCallback);
-  //  engine->keyboardUp(keyboardUpCallback);
+    //  engine->keyboardUp(keyboardUpCallback);
     engine->specialKeyboard(specialCallback);
-  //  engine->setKeyRepeat(false);
     engine->mouseWheel(mouseWheel);
     engine->mouseMoved(mouseMoved);
     engine->timer(timerCallback);
@@ -318,11 +338,11 @@ int main(int argc, char* argv[])
     // init call back functions
     setCallBacks();
     // set background color
-    engine->clearColor(1.f,1.f,1.f);
+    engine->clearColor(0.529f, 0.808f, 0.922f);
     // set cameras
     setCameras();
     // load ovo file
-    const char* fileName = "../ovo_files/full_scene.ovo";
+    const char* fileName = "../ovo_files/complete_scene.ovo";
     // read ovo file, load scene and start main loop
     scene = engine->getScene(fileName);
     engine->createRenderList(scene);

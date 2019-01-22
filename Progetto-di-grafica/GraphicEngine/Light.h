@@ -11,8 +11,6 @@ public:
     Light(std::string name);
     virtual ~Light();
     enum Subtype { OMNI, SPOTLIGHT, DIRECTIONAL };
-    /*short getIntensity() const;
-    void setIntensity(short intensity);*/
     void setAmbient(glm::vec4 ambient);
     void setDiffuse(glm::vec4 diffuse);
     void setSpecular(glm::vec4 specular);
@@ -40,7 +38,6 @@ private:
     glm::vec4 position;
     const float intensity = 0.8f;
     const float attenuation = 0.002f;
-
     const float shiny = 128.0f;
     glm::vec4 ambient;
     glm::vec4 diffuse;

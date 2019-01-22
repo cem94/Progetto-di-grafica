@@ -98,16 +98,17 @@ void Light::render(glm::mat4 renderMatrix)
     glLightfv(getLightNumber(), GL_POSITION, glm::value_ptr(glm::vec3(0.0f,0.0f, 0.0f)));
     glLightfv(getLightNumber(), GL_SHININESS, &shiny);
 
+    float cut = 180.0f;
     // Load light
     switch (subtype)
     {
     case OMNI:
         break;
     case SPOTLIGHT:
-        glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &cutoff);
+        glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &cut);
         break;
     case DIRECTIONAL:
-        glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &cutoff);
+        glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &cut);
         glLightfv(getLightNumber(), GL_SPOT_DIRECTION, glm::value_ptr(direction));
         break;
     default:

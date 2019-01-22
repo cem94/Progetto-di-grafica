@@ -15,7 +15,7 @@
     <ProjectGuid>{FB1AA9F8-06C2-4798-B011-C43D256B61A0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>GraphicEngine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">

@@ -19,6 +19,12 @@ bool lighting = true;
 Camera* currentCamera = nullptr;
 std::vector<Camera*> cameras;
 int activeCamera = 0;
+
+// Light
+Light* movableLight = nullptr;
+Light* specularLight = nullptr;
+Mesh* globeLight = nullptr;
+
 //finger sensitivity
 const float increment = 5.f;
 float fingerAngles[5];
@@ -83,8 +89,8 @@ void LIB_API Engine::init()
     windowId = glutCreateWindow("Engine");
     glewExperimental = GL_TRUE;  // Optional, but recommended
     glEnable(GL_NORMALIZE);
-   // glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
-   // glutIgnoreKeyRepeat(1);
+    // glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
+    // glutIgnoreKeyRepeat(1);
     // Init di glew
     GLenum err = glewInit();
     if (err != GLEW_OK)
@@ -316,6 +322,49 @@ void LIB_API Engine::switchLights()
     enableLighting(lighting);
 }
 
+void LIB_API Engine::moveLightForward(float direction)
+{
+    glm::mat4 matrix = movableLight->getMatrix();
+    glm::vec3 mov = direction * 5.0f * matrix[0];
+    glm::mat4 trans = glm::translate(matrix, mov);
+    if (trans[3].x > 90.0f || trans[3].x < -89.0f)
+        return;
+
+    movableLight->setMatrix(trans);
+    specularLight->setMatrix(trans);
+    glm::mat4 matrixObj = globeLight->getMatrix();
+    matrixObj[3] = (movableLight->getMatrix())[3];
+    globeLight->setMatrix(matrixObj);
+}
+
+void LIB_API Engine::moveLightRight(float direction)
+{
+    glm::mat4 matrix = movableLight->getMatrix();
+    glm::vec3 mov = direction * 5.0f * matrix[2];
+    glm::mat4 trans = glm::translate(matrix, mov);
+    if (trans[3].z > 94.0f || trans[3].z < -94.0f)
+        return;
+    movableLight->setMatrix(trans);
+    specularLight->setMatrix(trans);
+    glm::mat4 matrixObj = globeLight->getMatrix();
+    matrixObj[3] = (movableLight->getMatrix())[3];
+    globeLight->setMatrix(matrixObj);
+}
+
+void LIB_API Engine::moveLightUp(float direction)
+{
+    glm::mat4 matrix = movableLight->getMatrix();
+    glm::vec3 mov = direction * 5.0f * matrix[1];
+    glm::mat4 trans = glm::translate(matrix, mov);
+    if (trans[3].y > 83.0f || trans[3].y < 3.0f)
+        return;
+    movableLight->setMatrix(trans);
+    specularLight->setMatrix(trans);
+    glm::mat4 matrixObj = globeLight->getMatrix();
+    matrixObj[3] = (movableLight->getMatrix())[3];
+    globeLight->setMatrix(matrixObj);
+}
+
 /**
  * Enable or disable illumination according to the boolean value passed as argument
  * @param  value true = enable lights false = disable lights
@@ -404,6 +453,9 @@ Node*  Engine::getScene(const char* name)
     Node* root = nodes.at(0);
     nodes.erase(nodes.begin());
     findChildren(root, nodes);
+    movableLight = (Light*)getNodeByName(root, "moving_light");
+    specularLight = (Light*)getNodeByName(root, "specular_light");
+    globeLight = (Mesh*)getNodeByName(root, "sphere_light");
     setCameraToPalm(root);
     printTree(root, "");
     return root;
@@ -428,6 +480,7 @@ void LIB_API Engine::setCameraToPalm(Node* root)
     }
     palmo->insert(currentCamera);
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //TODO questo potrebbe anche stare in node
 /**
@@ -625,6 +678,34 @@ void LIB_API Engine::rotateModel(Node * root, float angle)
 }
 
 /**
+ * Automatic rotation of the model with some additional effects
+ * @param  root scene graph
+ * @param angle rotation angle
+ */
+void Engine::autoRotateModel(Node* root, float angle)
+{
+    Node* guardia = getNodeByName(root, "guardia");
+    if (guardia != nullptr)
+    {
+        glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
+        glm::mat4 translate;
+        translateCnt++;
+        if (translateUp)
+            translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.1f, 0.0f));
+        else
+            translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -0.1f, 0.0f));
+
+        guardia->setMatrix(guardia->getMatrix() * translate * rotation);
+
+        if (translateCnt > 180)
+        {
+            translateCnt = 0;
+            translateUp = !translateUp;
+        }
+    }
+}
+
+/**
  * Close hand
  * @param  root scene graph
  * @param angle rotation angle of fingers
@@ -656,7 +737,7 @@ void LIB_API Engine::closeThumb(Node *root)
         return;
     }
 
-   // printf("Before %f\n",fingerAngles[0]);
+    // printf("Before %f\n",fingerAngles[0]);
     fingerAngles[0] += increment;
     //printf("After %f\n",fingerAngles[0]);
     glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(increment), glm::vec3(1.0f, -1.0f, -1.0f));
@@ -670,34 +751,6 @@ void LIB_API Engine::closeThumb(Node *root)
 }
 
 /**
- * Automatic rotation of the model with some additional effects
- * @param  root scene graph
- * @param angle rotation angle
- */
-void Engine::autoRotateModel(Node* root, float angle)
-{
-    Node* guardia = getNodeByName(root, "guardia");
-    if (guardia != nullptr)
-    {
-        glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
-        glm::mat4 translate;
-        translateCnt++;
-        if (translateUp)
-            translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.1f, 0.0f));
-        else
-            translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -0.1f, 0.0f));
-
-        guardia->setMatrix(guardia->getMatrix() * translate * rotation);
-
-        if (translateCnt > 180)
-        {
-            translateCnt = 0;
-            translateUp = !translateUp;
-        }
-    }
-}
-
-/**
  * Close a finger of the hand
  * @param  scene scene graph
  * @param i number of the finger to close (starting from 0)
@@ -705,6 +758,11 @@ void Engine::autoRotateModel(Node* root, float angle)
  */
 void LIB_API Engine::closeFinger(Node * root, int i)
 {
+    if(i == 0)
+    {
+        closeThumb(root);
+        return;
+    }
     if (fingerAngles[i] > 75.f)
     {
         return;
@@ -728,6 +786,11 @@ void LIB_API Engine::closeFinger(Node * root, int i)
  */
 void LIB_API Engine::openFinger(Node * root, int i)
 {
+    if(i==0)
+    {
+        openThumb(root);
+        return;
+    }
     std::string name = fingerNames[i];
     name.append("3");
     Node* phalanx3 = getNodeByName(root, name);
