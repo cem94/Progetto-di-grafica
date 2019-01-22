@@ -3,13 +3,14 @@
 	<iostream>
 	"Engine.h"
 
-1547944344 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Engine.h
+1548159899 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Engine.h
 	<limits.h>
 	<algorithm>
 	<fstream>
 	<iomanip>
 	<iostream>
 	<vector>
+	<cstring>
 	<glm/glm.hpp>
 	<glm/gtc/matrix_transform.hpp>
 	<glm/gtc/packing.hpp>
@@ -902,26 +903,24 @@
 1533818822 /home/greg/Documents/glm/glm/gtc/type_ptr.inl
 	<cstring>
 
-1547948237 source:/home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/ClientApp/main.cpp
-	"Engine.h"
-	<FreeImage.h>
-
-1547944344 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Object.h
-
-1547944344 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Node.h
-
-1547944344 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Camera.h
-
-1547944345 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Light.h
-
-1547944344 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Texture.h
-
-1547944344 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Material.h
-
-1547944345 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Mesh.h
+1548159899 source:/home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/ClientApp/main.cpp
 	"Engine.h"
 
-1547944345 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/List.h
+1548159899 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Object.h
+
+1548159899 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Node.h
+
+1548159899 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Camera.h
+
+1548159899 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Light.h
+
+1548159899 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Texture.h
+
+1548159899 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Material.h
+
+1548159899 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Mesh.h
+
+1548159899 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/List.h
 
 1547947544 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/OvoReader.h
 	"Engine.h"
