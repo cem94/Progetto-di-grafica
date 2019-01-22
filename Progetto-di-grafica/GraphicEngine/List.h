@@ -17,14 +17,14 @@ public:
     void remove(int position);
     Node* at(int position);
     void insert(std::vector<Node*> elements);
-	void transparentPreRender(Material *material);
-    void render(glm::mat4 renderMatrix) override;
+	//void transparentPreRender(Material *material);
      int size();
 	void getTreeAsList(Node *root, std::vector<Node*>& nodes);
 	void sort();
-	void setIsRefletcion(bool isReflection);
-    bool getIsReflection();
+	void isReflection(bool reflection);
+    bool isReflection() const;
+	void render(glm::mat4 renderMatrix) override;
 private:
     std::vector<Node*> list;
-	bool isReflection = false;
+	bool reflection = false;
 };

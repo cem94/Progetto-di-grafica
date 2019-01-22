@@ -11,21 +11,15 @@ int Light::numberOfLights = 0;
 Light::Light()
 {
 }
-
-//TODO Cem magari spostare la parte che assegna id luci
-//TODO:: GREG perchè vuoi spostarlo?
 /**
  * Light constructor it also set the light number
  * @param  name a string containing the name of the light
- * @param2 name2
- * @return what it returns
  */
 Light::Light(std::string name)
 {
-	numberOfLights++;
-	lightNumber = numberOfLights;
 	this->setName(name);
-	this->setId(lightNumber);
+	//TODO potrebbe essere un problema -> id non univoci cambiato in setLightNumber (era setId)
+	this->setLightNumber(++numberOfLights);
 }
 /**
  * Light destructor
@@ -34,24 +28,24 @@ Light::~Light()
 {
 }
 
-//TODO:: GREG NON LO USIAMO! POSSIAMO RIMUOVERLO
-/**
- * Getter for intensity
- * @return intensity light intensity
- */
-short Light::getIntensity() const
-{
-	return this->intensity;
-}
-
-/**
- * Setter for intensity
- * @param  intensity light intensity
- */
-void Light::setIntensity(short intensity)
-{
-	this->intensity = intensity;
-}
+////TODO:: GREG NON LO USIAMO! POSSIAMO RIMUOVERLO
+///**
+// * Getter for intensity
+// * @return intensity light intensity
+// */
+//short Light::getIntensity() const
+//{
+//	return this->intensity;
+//}
+//
+///**
+// * Setter for intensity
+// * @param  intensity light intensity
+// */
+//void Light::setIntensity(short intensity)
+//{
+//	this->intensity = intensity;
+//}
 
 /**
  * Setter for ambient
@@ -136,9 +130,9 @@ void Light::setSubtype(Light::Subtype subtype)
  * Getter for light number
  * @return an OpenGL enum representing a light
  */
-int Light::getLightNumber()
+int Light::getLightNumber() const
 {
-	switch (this->getId())
+	switch (lightNumber)
 	{
 	case 0:
 		return GL_LIGHT0;
@@ -174,6 +168,11 @@ int Light::getLightNumber()
 		return GL_LIGHT0 + n_light;
 	else
 		return GL_LIGHT0;*/
+}
+
+void Light::setLightNumber(int lightNumber)
+{
+	this->lightNumber = lightNumber;
 }
 
 /**

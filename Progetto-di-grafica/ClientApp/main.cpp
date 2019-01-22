@@ -76,8 +76,18 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
     case '4':
         engine->enableLight(scene, "Omni3");
         break;
+	case '5':
+		engine->enableLight(scene, "Omni4");
+		break;
+	case '6':
+		engine->enableLight(scene, "specular_light");
+		break;
+	case '7':
+		engine->enableLight(scene, "moving_light");
+		break;
     case 'r':
-        engine->rotateModel(scene, 1);
+		if(!rotating)
+        engine->rotateModel(scene, 8);
         break;
     case 'R':
         rotating = !rotating;
@@ -277,8 +287,8 @@ void setCallBacks()
 void setCameras()
 {
     glm::vec3 eye = glm::vec3(0.f, 50.f, 400.f);
-    glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
-    glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+    glm::vec3 center = glm::vec3(0.f, 0.f, 0.f);
+    glm::vec3 up = glm::vec3(0.f, 1.f, 0.f);
     engine->addCamera("Camera3", false, eye, center, up);
     eye = glm::vec3(400.f, 400.f, 400.f);
     engine->addCamera("Camera2", false, eye, center, up);
@@ -301,7 +311,7 @@ int main(int argc, char* argv[])
     // init call back functions
     setCallBacks();
     // set background color
-    engine->clearColor(1.f, 1.f, 1.f);
+    engine->clearColor(1.f,1.f,1.f);
     // set cameras
     setCameras();
     const char* fileName = "../ovo_files/full_scene.ovo";

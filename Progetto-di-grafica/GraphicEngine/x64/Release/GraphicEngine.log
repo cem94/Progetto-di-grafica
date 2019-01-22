@@ -1,18 +1,8 @@
-﻿  Camera.cpp
-c:\users\meyer\source\repos\progetto\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(4): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
-  Engine.cpp
-c:\users\meyer\source\repos\progetto\progetto-di-grafica\progetto-di-grafica\graphicengine\engine.h(13): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
-  Light.cpp
-c:\users\meyer\source\repos\progetto\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(4): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
-  List.cpp
-c:\users\meyer\source\repos\progetto\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(4): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
-  Material.cpp
-c:\users\meyer\source\repos\progetto\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(4): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
-  Mesh.cpp
-c:\users\meyer\source\repos\progetto\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(4): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
-  Node.cpp
-c:\users\meyer\source\repos\progetto\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(4): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
-  Object.cpp
-c:\users\meyer\source\repos\progetto\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(4): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
-  Texture.cpp
-c:\users\meyer\source\repos\progetto\progetto-di-grafica\progetto-di-grafica\graphicengine\object.h(4): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
+﻿  Engine.cpp
+     Creating library C:\Users\meyer\source\repos\Progetto-di-grafica\Progetto-di-grafica\Progetto-di-grafica\x64\Release\GraphicEngine.lib and object C:\Users\meyer\source\repos\Progetto-di-grafica\Progetto-di-grafica\Progetto-di-grafica\x64\Release\GraphicEngine.exp
+  Generating code
+  1 of 796 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    14 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  GraphicEngine.vcxproj -> C:\Users\meyer\source\repos\Progetto-di-grafica\Progetto-di-grafica\Progetto-di-grafica\x64\Release\GraphicEngine.dll

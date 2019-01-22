@@ -7,7 +7,9 @@
 List::List()
 {
 }
-
+/**
+ * List constructor it populates the list from a tree through the getTreeAsList method.
+ */
 List::List(Node * root)
 {
 	getTreeAsList(root, list);
@@ -36,6 +38,22 @@ void List::setList(std::vector<Node*> list)
 {
 	this->list = list;
 }
+
+/**
+ * Getter for reflection
+ * @return reflection
+ */
+bool List::isReflection() const
+{
+	return this->reflection;
+}
+/**
+ * Setter for reflection
+ */
+void List::isReflection(bool reflection)
+{
+	this->reflection = reflection;
+}
 /**
 * Reserve memory for list
 * @param  size how much we want to reserve
@@ -56,7 +74,7 @@ void List::add(Node* node)
 
 /**
  * Removes a node from the list given its position
- * @param  position
+ * @param  position index of the desired node
  */
 void List::remove(int position)
 {
@@ -70,7 +88,6 @@ void List::remove(int position)
  */
 Node* List::at(int position)
 {
-	// non vogliamo che lanci un eccezione.
 	if (position < this->list.size() && position >= 0)
 	{
 		return list.at(position);
@@ -96,6 +113,10 @@ int List::size()
 	return (int)this->list.size();
 }
 
+/**
+ * Get tree as list populates the vector of nodes passed as an argument with the content of the given scene graph
+ *
+ */
 void List::getTreeAsList(Node *root, std::vector<Node*>& nodes) {
 	const int size = root->getChildrenSize();
 	nodes.push_back(root);
@@ -104,105 +125,49 @@ void List::getTreeAsList(Node *root, std::vector<Node*>& nodes) {
 	}
 }
 
+/**
+ * Create a series of lists containing nodes, lights and meshes then put them in the correct order in the list
+ */
 void List::sort()
 {
-	//I create a vector of pure nodes
-	std::vector<Node*> pureNodes;
-
-	//I create a vector of lights
+	std::vector<Node*> nodes;
 	std::vector<Light*> lights;
-
-	//I create a vector of meshes
 	std::vector<Mesh*> meshes;
-
-	for (int i = 0; i < list.size(); i++) {
-		if (list.at(i)->getType() == Object::NODE) {
-			pureNodes.push_back(list.at(i));
+	for (std::vector<Node*>::iterator n = list.begin(), end = list.end(); n != end; ++n) {
+		if ((*n)->getType() == Object::NODE) {
+			nodes.push_back((*n));
 			continue;
 		}
-		if (list.at(i)->getType() == Object::LIGHT) {
-			lights.push_back(dynamic_cast<Light*>(list.at(i)));
+		if ((*n)->getType() == Object::LIGHT) {
+			lights.push_back(dynamic_cast<Light*>((*n)));
 			continue;
 		}
-		if (list.at(i)->getType() == Object::MESH) {
-			meshes.push_back(dynamic_cast<Mesh*>(list.at(i)));
+		if ((*n)->getType() == Object::MESH) {
+			meshes.push_back(dynamic_cast<Mesh*>((*n)));
 			continue;
 		}
 	}
-	//Svuoto lista
 	list.clear();
-	//TODO inserisco elementi in ordine
-	for (int i = 0; i < pureNodes.size(); i++) {
-		list.push_back(pureNodes.at(i));
-	}
-	for (int i = 0; i < lights.size(); i++) {
-		list.push_back(lights.at(i));
-	}
-	for (int i = 0; i < meshes.size(); i++) {
-		list.push_back(meshes.at(i));
-	}
-}
-void List::setIsRefletcion(bool isReflection)
-{
-	this->isReflection = isReflection;
-}
-bool List::getIsReflection()
-{
-	return isReflection;
+	list.insert(list.end(), nodes.begin(), nodes.end());
+	list.insert(list.end(), lights.begin(), lights.end());
+	list.insert(list.end(), meshes.begin(), meshes.end());
 }
 
-/**
-* support method for transparent render
-* @param material and render matrix
-*/
-//void List::transparentPreRender(Material *material)
-//{
-//	//abilito cull facing (risparmio facce non renderizzando quelle interne)
-//	glEnable(GL_CULL_FACE);
-//	//disabilito z buffer write
-//	glDepthMask(GL_FALSE);
-//	// At first render back faces
-//	glCullFace(GL_FRONT);
-//	material->render();
-//	// Then render front faces
-//	glCullFace(GL_BACK);
-//	material->render();
-//	// Enabled z-buffer write
-//	glDepthMask(GL_TRUE);
-//	glDisable(GL_CULL_FACE);
-//}
 
 /**
  * Render for list
  * @param  matrix render matrix (not used)
  */
-
 void List::render(glm::mat4 scaling)
 {
 	Node * root = list.at(0);
 	root->setMatrix(root->getMatrix() * scaling);
-	const bool reflection = getIsReflection();
-
-	for (Node* n : list)
-	{
-		glm::mat4 renderMatrix = n->getFinalMatrix();
-
-		if (reflection && n->getName() == "plane") {
+	const bool reflection = isReflection();
+	for (std::vector<Node*>::iterator n = list.begin(), end = list.end(); n != end; ++n) {
+		glm::mat4 renderMatrix = (*n)->getFinalMatrix();
+		if (reflection && (*n)->getName() == "plane") {
 			continue;
 		}
-
-		//if (n->getType() == Object::Type::MESH)
-		//{
-		//	Mesh* m = static_cast<Mesh*>(n);
-		//	if (m->getMaterial() != nullptr)
-		//	{
-		//		if (m->getMaterial()->isTrasparent())
-		//		{
-		//			//non so se serve o no
-		//			//transparentPreRender(m->getMaterial());
-		//		}
-		//	}
-		//}
-		n->render(renderMatrix);
+		(*n)->render(renderMatrix);
 	}
 }
