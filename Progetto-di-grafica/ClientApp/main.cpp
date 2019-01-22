@@ -324,7 +324,7 @@ int main(int argc, char* argv[])
     // init call back functions
     setCallBacks();
     // set background color
-    engine->clearColor(1.f,1.f,1.f);
+	engine->clearColor(0.529f, 0.808f, 0.922f);
     // set cameras
     setCameras();
 	// load ovo file
