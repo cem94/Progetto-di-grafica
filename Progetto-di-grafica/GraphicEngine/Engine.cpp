@@ -28,7 +28,8 @@ Mesh* globeLight = nullptr;
 //finger sensitivity
 const float increment = 5.f;
 float fingerAngles[5];
-float x[0];
+//TODO:: GREG cosa stai fancedo che non mi permetteva di compilare ?
+//float x[0];
 std::string fingerNames[5] = { "pollice", "indice", "medio", "anulare", "mignolo" };
 
 // Gauntlet translate
