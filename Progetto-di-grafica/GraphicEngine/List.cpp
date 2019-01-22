@@ -1,5 +1,4 @@
 #include "Engine.h"
-#include <GL/freeglut.h>
 
 /**
  * List constructor
@@ -135,6 +134,7 @@ void List::sort()
     std::vector<Node*> nodes;
     std::vector<Light*> lights;
     std::vector<Mesh*> meshes;
+	//TODO:: provare a spostare il root come primo elementoe controllare
     for (std::vector<Node*>::iterator n = list.begin(), end = list.end(); n != end; ++n)
     {
         if ((*n)->getType() == Object::NODE)

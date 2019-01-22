@@ -25,7 +25,9 @@ Mesh::~Mesh()
  * @param indices indices array
  * @param numberOfVertexes number of vertexes
  */
-void Mesh::generateVAO(float* vertexes, float* normals, float* uvArray,
+
+// (meshVertices, meshNormals, meshTextures, indices, vertices)
+void Mesh::generateVAO(float* vertexes, float* normals, float* textures,
                        unsigned int* indices, unsigned int numberOfVertexes)
 {
     glGenVertexArrays(1, &vao);
@@ -45,7 +47,7 @@ void Mesh::generateVAO(float* vertexes, float* normals, float* uvArray,
     // array uv
     glGenBuffers(1, &uvVBO);
     glBindBuffer(GL_ARRAY_BUFFER, uvVBO);
-    glBufferData(GL_ARRAY_BUFFER, numberOfVertexes * 2 * sizeof(float), uvArray,
+    glBufferData(GL_ARRAY_BUFFER, numberOfVertexes * 2 * sizeof(float), textures,
                  GL_STATIC_DRAW);
     glTexCoordPointer(2, GL_FLOAT, 0, nullptr);
     // indices vbo
@@ -109,13 +111,12 @@ void Mesh::setNumberOfFaces(unsigned int numberOfFaces)
  * @param  mesh render matrix
  */
 void Mesh::render(glm::mat4 renderMatrix)
-{
+{	
+	//TODO:: cancellare e controllare il funzioamento, perchè lo facciamo gia prima di chiamre render
     Camera *  camera = Engine::getInstance().getCurrentCamera();
-    //TODO eliminare
-    if (camera == nullptr)
-        return;
+
     glLoadMatrixf(glm::value_ptr(camera->getMatrix() * renderMatrix));
-    material->render(renderMatrix);
+    material->render();
     glBindVertexArray(vao);
     glDrawElements(GL_TRIANGLES, numberOfFaces * 3, GL_UNSIGNED_INT, nullptr);
 }

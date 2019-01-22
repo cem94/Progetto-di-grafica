@@ -18,32 +18,12 @@ Light::Light()
 Light::Light(std::string name)
 {
     this->setName(name);
-    //TODO potrebbe essere un problema -> id non univoci cambiato in setLightNumber (era setId)
     this->setLightNumber(numberOfLights++);
 }
 /**
  * Light destructor
  */
 Light::~Light() {}
-
-////TODO:: GREG NON LO USIAMO! POSSIAMO RIMUOVERLO
-///**
-// * Getter for intensity
-// * @return intensity light intensity
-// */
-//short Light::getIntensity() const
-//{
-//	return this->intensity;
-//}
-//
-///**
-// * Setter for intensity
-// * @param  intensity light intensity
-// */
-//void Light::setIntensity(short intensity)
-//{
-//	this->intensity = intensity;
-//}
 
 /**
  * Setter for ambient
@@ -93,11 +73,12 @@ void Light::render(glm::mat4 renderMatrix)
 
     glLightfv(getLightNumber(), GL_POSITION, glm::value_ptr(glm::vec3(0.0f,0.0f, 0.0f)));
     glLightfv(getLightNumber(), GL_SHININESS, &shiny);
-
+	//TODO:: JULIAN SISTEMARE
   float cut = 100.0f;
   // Load light
   switch (subtype) {
     case OMNI:
+		// for future impl.
         break;
     case SPOTLIGHT:
       glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &cut);

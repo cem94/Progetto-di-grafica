@@ -25,9 +25,9 @@ Texture::Texture(std::string textureName)
     {
         return;
     }
-    //else
-    //{
     this->setName(textureName);
+	//TODO:: potrebbe causare problemi.
+    textureId = getId();
     glGenTextures(1, &textureId);
     std::string texturePath = "../resources/";
     const char* fileName = texturePath.append(textureName).c_str();
@@ -65,7 +65,6 @@ Texture::Texture(std::string textureName)
     glTexEnvf(GL_TEXTURE_2D, GL_TEXTURE_ENV_MODE, GL_DECAL);
     gluBuild2DMipmaps(GL_TEXTURE_2D, format, FreeImage_GetWidth(bitmap), FreeImage_GetHeight(bitmap), extFormat, GL_UNSIGNED_BYTE, (void *)FreeImage_GetBits(bitmap));
     FreeImage_Unload(bitmap);
-    //}
 }
 
 /**

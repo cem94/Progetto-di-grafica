@@ -15,7 +15,6 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
     // Configure stream:
     std::cout.precision(2);  // 2 decimals are enough
     std::cout << std::fixed;      // Avoid scientific notation
-    Node *root = nullptr;
     // Parse chunks:
     unsigned int chunkId, chunkSize;
     while (true)
@@ -76,6 +75,8 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
             Node* node = new Node();
             node->setName(nodeName);
             node->setType(Object::Type::NODE);
+			//TODO:: cambiare in setCapacity
+
             node->setChildrenSize(children);
             node->setMatrix(matrix);
             //root->insert(node);
@@ -147,7 +148,8 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
             material->setShininess((1 - (float)sqrt((int)roughness)) * 128);
             material->setName(materialName);
             material->setTexture(textureName);
-            material->setAlpha(alpha);
+			//TODO:: cancella set aplha
+            //material->setAlpha(alpha);
             material->setAmbient(albedo*0.2f);
             material->setSpecular(albedo*0.4f);
             material->setDiffuse(albedo*0.6f);
@@ -345,11 +347,10 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
                     position += sizeof(unsigned short) * 4;
                 }
             }
-            //TODO	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            
             float* meshVertices = new float[vertices * 3];
             float* meshTextures = new float[vertices * 2];
             float* meshNormals = new float[vertices * 3];
-            //SETTO VERTICI TEXTURE E NORMALI
             // Interleaved and compressed vertex/normal/UV/tangent data:
             for (unsigned int c = 0; c < vertices; c++)
             {
@@ -397,7 +398,6 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
                 if (verbose)
                 {
                     f << "   Face data . . :  f" << c << " (" << face[0] << ", " << face[1] << ", " << face[2] << ")" << std::endl;
-                    //capire se posso spostarli fuori dal for
                     memcpy(face, data + position, sizeof(unsigned int) * 3);
                     position += sizeof(unsigned int) * 3;
                     indices[c * 3] = face[0];
@@ -406,7 +406,6 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
                 }
             }
             //////////////////////////////////////////////////////////////
-            //Creo la mesh
             Mesh *mesh = new Mesh();
             mesh->setType(Object::Type::MESH);
             mesh->setName(meshName);
@@ -418,9 +417,13 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
                     material = *it;
             }
             mesh->setMaterial(material);
+			//TODO:: cancellare Radius
             mesh->setRadius(radius);
+
             mesh->setNumberOfFaces(faces);
             mesh->setChildrenSize(children);
+
+			//TODO:: rinominare in modo coerente (meshVertices, meshNormals, meshTextures, indices, vertices)
             mesh->generateVAO(meshVertices, meshNormals, meshTextures, indices, vertices);
             objects.push_back(mesh);
         }
@@ -502,7 +505,7 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
             memcpy(&isVolumetric, data + position, sizeof(unsigned char));
             f << "   Volumetric  . :  " << (int)isVolumetric << std::endl;
             position += sizeof(unsigned char);
-            //////////////////////////////////////////////////////////////////////////////////////////7
+            //////////////////////////////////////////////////////////////////////////////////////////
             Light *light = new Light(lightName);
             light->setType(Object::Type::LIGHT);
             switch ((OvLight::Subtype) subtype)
@@ -532,7 +535,7 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
             objects.push_back(light);
         }
         break;
-        //TODO credo si possa rimuovere
+
         /////////////////////////////
         case OvObject::Type::BONE: //
         {

@@ -99,13 +99,19 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 	case 'j':
 		engine->moveLightRight(10.0f);
 		break;
+    case 'h':
+          engine->closeHand(scene);
+          break;
+    case 'n':
+			engine->openHand(scene);
+			break;
 	}
 
 	//guardo se sono tenuti premuti uno o più bottoni
-	if (keyState[(unsigned char)'h'] == true)
+	/*if (keyState[(unsigned char)'h'] == true)
 	{
 		engine->closeHand(scene);
-	}
+	}*/
 	 if (keyState[(unsigned char)' '] == true)
 	{
 		engine->closeThumb(scene);
@@ -141,10 +147,10 @@ void keyboardUpCallback(unsigned char key, int x, int y)
     switch (key)
     {
     case 'h':
-        if (keyState[(unsigned char)'h'] == false)
+        /*if (keyState[(unsigned char)'h'] == false)
         {
             engine->openHand(scene);
-        }
+        }*/
         break;
     case ' ':
         if (keyState[(unsigned char)' '] == false)
@@ -241,6 +247,7 @@ void mouseWheel(int wheel, int direction, int x, int y)
  */
 void mouseMoved(int x, int y)
 {
+	//TODO:: provare a spostare 
     const float sizeYMin = sizeY * 0.20;
     const float sizeXMin = sizeX * 0.20;
     const float sizeYMax = sizeY * 0.80;
@@ -291,14 +298,15 @@ void setCallBacks()
  */
 void setCameras()
 {
-    glm::vec3 eye = glm::vec3(0.f, 50.f, 400.f);
-    glm::vec3 center = glm::vec3(0.f, 0.f, 0.f);
+	//TODO:: fissare le camere
+    glm::vec3 eye = glm::vec3(200.f, 50.f, 220.f);
+    glm::vec3 center = glm::vec3(0.f, 50.f, -150.f);
     glm::vec3 up = glm::vec3(0.f, 1.f, 0.f);
     engine->addCamera("Camera3", false, eye, center, up);
-    eye = glm::vec3(400.f, 400.f, 400.f);
+    eye = glm::vec3(200.f, 200.f, 220.f);
     engine->addCamera("Camera2", false, eye, center, up);
-    eye = glm::vec3(0.0f, 50.0f, 400.f);
-    center = glm::vec3(0.0f, 50.0f, 200.0f);
+    eye = glm::vec3(0.0f, 50.0f, 200.f);
+    center = glm::vec3(0.0f, 50.0f, -150.0f);
     engine->addCamera("Camera1", true, eye, center, up);
 }
 

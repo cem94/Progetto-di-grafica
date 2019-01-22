@@ -46,8 +46,8 @@ void printList(std::vector<Node*> list)
         std::cout << n->getId() << std::endl;
     }
     std::cout << "-----------------------------------------------------" << std::endl;
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
  * Function that prints the scene graph
@@ -430,9 +430,11 @@ Node*  Engine::getScene(const char* name)
 	Node* root = nodes.at(0);
 	nodes.erase(nodes.begin());
 	findChildren(root, nodes);
+	//TODO:: provare a spostare 
 	movableLight = (Light*)getNodeByName(root, "moving_light");
 	specularLight = (Light*)getNodeByName(root, "specular_light");
 	globeLight = (Mesh*)getNodeByName(root, "sphere_light");
+	///////////////
 	printTree(root, "");
 	return root;
 }
@@ -458,6 +460,7 @@ Node*  Engine::getNodeByName(Node* root, std::string name)
         return nullptr;
     }
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
   * Set render and trasparent lists
@@ -530,6 +533,7 @@ void LIB_API Engine::addCamera(std::string name, bool movable, glm::vec3 eye, gl
 * Getter for current camera movable
 * @return true if current camera is movable false otherwise
 */
+//TODO::: ELIMINARE
 bool LIB_API Engine::isMovableCamera()
 {
     return currentCamera->getMovable();
@@ -602,6 +606,16 @@ void LIB_API Engine::rotateCameraUp(float angle)
     if (isMovableCamera())
         return;
     std::cout << "angle: " << angle << std::endl;
+    /*
+    glm::mat4 mat = currentCamera->getMatrix();
+    glm::vec3 eye = mat[3];
+    glm::vec3 forward = 10.0f * mat[2];
+    glm::vec3 rotation = sin(angle)*mat[1];
+    glm::vec3 center = forward + rotation;
+
+	currentCamera->setMatrix(glm::lookAt(eye, center, glm::vec3(0.0f, 1.0f, 0.0f)));
+	*/
+   
     glm::mat4 mat = currentCamera->getMatrix();
     glm::vec3 vec = mat[0];
     glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), vec);
@@ -787,24 +801,5 @@ void LIB_API Engine::setAlphaToMaterial(Node * root, float alpha, std::string no
     {
         Mesh* mesh = (Mesh*)node;
         mesh->getMaterial()->setAlpha(alpha);
-        printf("Setted alpha of %s\n", mesh->getName().c_str());
     }
 }
-
-/**
-* depth-sorting (back to front) method for transparent meshes
-* @param two list element to compare
-*/
-//bool listNodeCompare(Node*a, Node *b)
-//{
-//	glm::mat4 first = currentCamera->getMatrix()* a->getMatrix();
-//	glm::mat4 second = currentCamera->getMatrix()*b->getMatrix();
-//	return (float)first[3].z > (float)second[3].z;
-//}
-
-//void LIB_API Engine::sortTrasparentMeshesList(std::vector<Node*>& transparentMeshes)
-//{
-//	glDepthMask(GL_FALSE);
-//	std::sort(transparentMeshes.begin(), transparentMeshes.end(), listNodeCompare);
-//	glDepthMask(GL_TRUE);
-//}
