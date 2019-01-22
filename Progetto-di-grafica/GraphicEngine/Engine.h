@@ -90,6 +90,7 @@ public:
 	void switchLights();
 	void moveLightForward(float direction);
 	void moveLightRight(float direction);
+	void moveLightUp(float direction);
 	Node* getNodeByName(Node* root, std::string name);
 	void changeCamera(Node* root);
 	void incrementFrames();

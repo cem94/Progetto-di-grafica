@@ -342,6 +342,20 @@ void LIB_API Engine::moveLightRight(float direction)
 	globeLight->setMatrix(matrixObj);
 }
 
+void LIB_API Engine::moveLightUp(float direction)
+{
+	glm::mat4 matrix = movableLight->getMatrix();
+	glm::vec3 mov = direction * 5.0f * matrix[1];
+	glm::mat4 trans = glm::translate(matrix, mov);
+	if (trans[3].y > 83.0f || trans[3].y < 3.0f)
+		return;
+	movableLight->setMatrix(trans);
+	specularLight->setMatrix(trans);
+	glm::mat4 matrixObj = globeLight->getMatrix();
+	matrixObj[3] = (movableLight->getMatrix())[3];
+	globeLight->setMatrix(matrixObj);
+}
+
 /**
  * Enable or disable illumination according to the boolean value passed as argument
  * @param  value true = enable lights false = disable lights

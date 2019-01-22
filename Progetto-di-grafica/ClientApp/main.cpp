@@ -99,6 +99,12 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 	case 'j':
 		engine->moveLightRight(10.0f);
 		break;
+	case 'u':
+		engine->moveLightUp(-10.0f);
+		break;
+	case 'o':
+		engine->moveLightUp(10.0f);
+		break;
 	}
 
 	//guardo se sono tenuti premuti uno o più bottoni
