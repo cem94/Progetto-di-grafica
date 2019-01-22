@@ -1,5 +1,4 @@
 #include "Engine.h"
-
 //FreeGlut
 #include <GL/freeglut.h>
 
@@ -41,7 +40,7 @@ void Camera::render(glm::mat4 renderMatrix)
 /**
  * Setter for movable
  * @param  movable boolean value (true if movable false otherwise)
-*/
+ */
 void Camera::setMovable(bool movable)
 {
 	this->movable = movable;

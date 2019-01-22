@@ -29,7 +29,8 @@
 #include <cstring>
 
 // GLM
-#define GLM_FORCE_CTOR_INIT  // Force constructors to initialize to identity
+// Force constructors to initialize to identity
+#define GLM_FORCE_CTOR_INIT  
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/packing.hpp>
@@ -94,12 +95,12 @@ public:
 	void closeThumb(Node* root);
 	void openThumb(Node *root);
 	void autoRotateModel(Node* root, float angle);
-	void closeFinger(Node* root, int finger);
-	void openFinger(Node* root, int finger);
+	void closeFinger(Node* root, int f);
+	void openFinger(Node* root, int f);
 	void closeHand(Node* root);
 	void openHand(Node * root);
 	void free();
-	void sortTrasparentMeshesList(std::vector<Node*>& transparentMeshes);
+	//void sortTrasparentMeshesList(std::vector<Node*>& transparentMeshes);
 	void setAlphaToMaterial(Node* root, float alpha, std::string nodeName);
 	void createRenderList(Node* root);
 	Camera * getCurrentCamera();
