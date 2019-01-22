@@ -84,9 +84,9 @@ void Light::render(glm::mat4 renderMatrix)
 		glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &cut);
 		break;
     case DIRECTIONAL:
-      glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &cut);
-      glLightfv(getLightNumber(), GL_SPOT_DIRECTION, glm::value_ptr(direction));
-      break;
+        glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &cut);
+        glLightfv(getLightNumber(), GL_SPOT_DIRECTION, glm::value_ptr(direction));
+        break;
     default:
         break;
     }

@@ -26,8 +26,9 @@ Light* specularLight = nullptr;
 Mesh* globeLight = nullptr;
 
 //finger sensitivity
-float angle = 5.f;
+const float increment = 5.f;
 float fingerAngles[5];
+float x[0];
 std::string fingerNames[5] = { "pollice", "indice", "medio", "anulare", "mignolo" };
 
 // Gauntlet translate
@@ -57,7 +58,6 @@ void printList(std::vector<Node*> list)
 //TODO::  renderlo privato! -> non è neanche un metodo della classe per ora
 void printTree(Node* scene, std::string indentation)
 {
-    glm::mat4 mat = scene->getMatrix();
     std::cout << indentation.c_str() << scene->getName().c_str() << std::endl;
     for (int i = 0; i < scene->getChildrenSize(); i++)
         printTree(scene->getChildren().at(i), "\t - " + indentation);
@@ -89,6 +89,8 @@ void LIB_API Engine::init()
     windowId = glutCreateWindow("Engine");
     glewExperimental = GL_TRUE;  // Optional, but recommended
     glEnable(GL_NORMALIZE);
+    // glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
+    // glutIgnoreKeyRepeat(1);
     // Init di glew
     GLenum err = glewInit();
     if (err != GLEW_OK)
@@ -194,6 +196,7 @@ void LIB_API Engine::reshape(void(*reshapeCallback)(int, int))
 void LIB_API Engine::display(void(*displayCallback)())
 {
     glutDisplayFunc(displayCallback);
+    frames++;
 }
 
 /**
@@ -215,6 +218,8 @@ void LIB_API Engine::timer(void timerCallback(int))
 void LIB_API Engine::keyboard(void(*keyboardCallBack)(unsigned char, int, int))
 {
     glutKeyboardFunc(keyboardCallBack);
+    glutPostWindowRedisplay(windowId);
+
 }
 
 /**
@@ -224,6 +229,8 @@ void LIB_API Engine::keyboard(void(*keyboardCallBack)(unsigned char, int, int))
 void LIB_API Engine::keyboardUp(void(*keyboardUpCallBack)(unsigned char, int, int))
 {
     glutKeyboardUpFunc(keyboardUpCallBack);
+    glutPostWindowRedisplay(windowId);
+
 }
 
 /**
@@ -233,6 +240,8 @@ void LIB_API Engine::keyboardUp(void(*keyboardUpCallBack)(unsigned char, int, in
 void LIB_API Engine::specialKeyboard(void(*specialFunc)(int, int, int))
 {
     glutSpecialFunc(specialFunc);
+    glutPostWindowRedisplay(windowId);
+
 }
 
 /**
@@ -315,45 +324,45 @@ void LIB_API Engine::switchLights()
 
 void LIB_API Engine::moveLightForward(float direction)
 {
-	glm::mat4 matrix = movableLight->getMatrix();
-	glm::vec3 mov = direction * 5.0f * matrix[0];
-	glm::mat4 trans = glm::translate(matrix, mov);
-	if (trans[3].x > 90.0f || trans[3].x < -89.0f)
-		return;
+    glm::mat4 matrix = movableLight->getMatrix();
+    glm::vec3 mov = direction * 5.0f * matrix[0];
+    glm::mat4 trans = glm::translate(matrix, mov);
+    if (trans[3].x > 90.0f || trans[3].x < -89.0f)
+        return;
 
-	movableLight->setMatrix(trans);
-	specularLight->setMatrix(trans);
-	glm::mat4 matrixObj = globeLight->getMatrix();
-	matrixObj[3] = (movableLight->getMatrix())[3];
-	globeLight->setMatrix(matrixObj);
+    movableLight->setMatrix(trans);
+    specularLight->setMatrix(trans);
+    glm::mat4 matrixObj = globeLight->getMatrix();
+    matrixObj[3] = (movableLight->getMatrix())[3];
+    globeLight->setMatrix(matrixObj);
 }
 
 void LIB_API Engine::moveLightRight(float direction)
 {
-	glm::mat4 matrix = movableLight->getMatrix();
-	glm::vec3 mov = direction * 5.0f * matrix[2];
-	glm::mat4 trans = glm::translate(matrix, mov);
-	if (trans[3].z > 94.0f || trans[3].z < -94.0f)
-		return;
-	movableLight->setMatrix(trans);
-	specularLight->setMatrix(trans);
-	glm::mat4 matrixObj = globeLight->getMatrix();
-	matrixObj[3] = (movableLight->getMatrix())[3];
-	globeLight->setMatrix(matrixObj);
+    glm::mat4 matrix = movableLight->getMatrix();
+    glm::vec3 mov = direction * 5.0f * matrix[2];
+    glm::mat4 trans = glm::translate(matrix, mov);
+    if (trans[3].z > 94.0f || trans[3].z < -94.0f)
+        return;
+    movableLight->setMatrix(trans);
+    specularLight->setMatrix(trans);
+    glm::mat4 matrixObj = globeLight->getMatrix();
+    matrixObj[3] = (movableLight->getMatrix())[3];
+    globeLight->setMatrix(matrixObj);
 }
 
 void LIB_API Engine::moveLightUp(float direction)
 {
-	glm::mat4 matrix = movableLight->getMatrix();
-	glm::vec3 mov = direction * 5.0f * matrix[1];
-	glm::mat4 trans = glm::translate(matrix, mov);
-	if (trans[3].y > 83.0f || trans[3].y < 3.0f)
-		return;
-	movableLight->setMatrix(trans);
-	specularLight->setMatrix(trans);
-	glm::mat4 matrixObj = globeLight->getMatrix();
-	matrixObj[3] = (movableLight->getMatrix())[3];
-	globeLight->setMatrix(matrixObj);
+    glm::mat4 matrix = movableLight->getMatrix();
+    glm::vec3 mov = direction * 5.0f * matrix[1];
+    glm::mat4 trans = glm::translate(matrix, mov);
+    if (trans[3].y > 83.0f || trans[3].y < 3.0f)
+        return;
+    movableLight->setMatrix(trans);
+    specularLight->setMatrix(trans);
+    glm::mat4 matrixObj = globeLight->getMatrix();
+    matrixObj[3] = (movableLight->getMatrix())[3];
+    globeLight->setMatrix(matrixObj);
 }
 
 /**
@@ -641,48 +650,6 @@ void LIB_API Engine::rotateModel(Node * root, float angle)
 }
 
 /**
- * Close hand
- * @param  root scene graph
- * @param angle rotation angle of fingers
- */
-void LIB_API Engine::openThumb(Node *root)
-{
-
-    //ottengo falangi
-    std::string name = fingerNames[0];
-    name.append("2");
-    Node* phalanx2 = getNodeByName(root, name);
-    Node* phalanx1 = phalanx2->getParent();
-    glm::mat4 rotationY = glm::rotate(glm::mat4(1.0f), glm::radians(fingerAngles[0]), glm::vec3(-1.0f, 1.0f, 1.0f));
-    phalanx1->setMatrix(phalanx1->getMatrix()*rotationY);
-    phalanx2->setMatrix(phalanx2->getMatrix()*rotationY);
-    fingerAngles[0] = 0;
-}
-
-/**
- * Close the thumb
- * @param  name1
- * @param2 name2
- * @return what it returns
- */
-void LIB_API Engine::closeThumb(Node *root)
-{
-    if (fingerAngles[0] > 65.f)
-    {
-        return;
-    }
-    fingerAngles[0] += angle;
-    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(1.0f, -1.0f, -1.0f));
-    std::string name = fingerNames[0];
-    name.append("2");
-    Node* phalanx2 = getNodeByName(root, name);
-    Node* phalanx1 = phalanx2->getParent();
-    Node* gemma = phalanx1->getChildren().at(1);
-    phalanx1->setMatrix(phalanx1->getMatrix()*rotation);
-    phalanx2->setMatrix(phalanx2->getMatrix()*rotation);
-}
-
-/**
  * Automatic rotation of the model with some additional effects
  * @param  root scene graph
  * @param angle rotation angle
@@ -711,6 +678,51 @@ void Engine::autoRotateModel(Node* root, float angle)
 }
 
 /**
+ * Close hand
+ * @param  root scene graph
+ * @param angle rotation angle of fingers
+ */
+void LIB_API Engine::openThumb(Node *root)
+{
+    //ottengo falangi
+    std::string name = fingerNames[0];
+    name.append("2");
+    Node* phalanx2 = getNodeByName(root, name);
+    Node* phalanx1 = phalanx2->getParent();
+    glm::mat4 rotationY = glm::rotate(glm::mat4(1.0f), glm::radians(fingerAngles[0]), glm::vec3(-1.0f, 1.0f, 1.0f));
+    phalanx1->setMatrix(phalanx1->getMatrix()*rotationY);
+    phalanx2->setMatrix(phalanx2->getMatrix()*rotationY);
+    fingerAngles[0] = 0;
+}
+
+/**
+ * Close the thumb
+ * @param  name1
+ * @param2 name2
+ * @return what it returns
+ */
+void LIB_API Engine::closeThumb(Node *root)
+{
+
+    if (fingerAngles[0] > 65.f)
+    {
+        return;
+    }
+
+    // printf("Before %f\n",fingerAngles[0]);
+    fingerAngles[0] += increment;
+    //printf("After %f\n",fingerAngles[0]);
+    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(increment), glm::vec3(1.0f, -1.0f, -1.0f));
+    std::string name = fingerNames[0];
+    name.append("2");
+    Node* phalanx2 = getNodeByName(root, name);
+    Node* phalanx1 = phalanx2->getParent();
+//    Node* gemma = phalanx1->getChildren().at(1);
+    phalanx1->setMatrix(phalanx1->getMatrix()*rotation);
+    phalanx2->setMatrix(phalanx2->getMatrix()*rotation);
+}
+
+/**
  * Close a finger of the hand
  * @param  scene scene graph
  * @param i number of the finger to close (starting from 0)
@@ -718,6 +730,11 @@ void Engine::autoRotateModel(Node* root, float angle)
  */
 void LIB_API Engine::closeFinger(Node * root, int i)
 {
+    if(i == 0)
+    {
+        closeThumb(root);
+        return;
+    }
     if (fingerAngles[i] > 75.f)
     {
         return;
@@ -727,8 +744,8 @@ void LIB_API Engine::closeFinger(Node * root, int i)
     Node* phalanx3 = getNodeByName(root, name);
     Node* phalanx2 = phalanx3->getParent();
     Node* phalanx1 = phalanx2->getParent();
-    fingerAngles[i] += angle;
-    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 0.0f, -1.0f));
+    fingerAngles[i] += increment;
+    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(increment), glm::vec3(0.0f, 0.0f, -1.0f));
     phalanx1->setMatrix(phalanx1->getMatrix()*rotation);
     phalanx2->setMatrix(phalanx2->getMatrix()*rotation);
     phalanx3->setMatrix(phalanx3->getMatrix()*rotation);
@@ -741,6 +758,11 @@ void LIB_API Engine::closeFinger(Node * root, int i)
  */
 void LIB_API Engine::openFinger(Node * root, int i)
 {
+    if(i==0)
+    {
+        openThumb(root);
+        return;
+    }
     std::string name = fingerNames[i];
     name.append("3");
     Node* phalanx3 = getNodeByName(root, name);
@@ -752,6 +774,7 @@ void LIB_API Engine::openFinger(Node * root, int i)
     phalanx2->setMatrix(phalanx2->getMatrix()*rotation);
     phalanx3->setMatrix(phalanx3->getMatrix()*rotation);
 }
+
 
 /**
  * Close hand
