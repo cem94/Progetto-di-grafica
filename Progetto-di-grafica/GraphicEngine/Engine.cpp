@@ -395,30 +395,10 @@ Node*  Engine::getScene(const char* name)
     Node* root = nodes.at(0);
     nodes.erase(nodes.begin());
     findChildren(root, nodes);
-    setCameraToPalm(root);
     printTree(root, "");
     return root;
 }
-/**
-* Comment
-* @param  name1
-* @param2 name2
-* @return what it returns
-*/
-//CHIEDERE A CEM A COSA SERVE
-void LIB_API Engine::setCameraToPalm(Node* root)
-{
-    Node* palmo = getNodeByName(root, "guardia");
-    for (Node* n : palmo->getChildren())
-    {
-        if (n->getType() == Object::Type::CAMERA)
-        {
-            n = currentCamera;
-            return;
-        }
-    }
-    palmo->insert(currentCamera);
-}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //TODO questo potrebbe anche stare in node
 /**
@@ -597,7 +577,7 @@ void LIB_API Engine::changeCamera(Node * root)
 {
     activeCamera = (activeCamera + 1) % cameras.size();
     currentCamera = cameras.at(activeCamera);
-    setCameraToPalm(root);
+    loadMatrix(currentCamera->getMatrix());
 }
 
 /**

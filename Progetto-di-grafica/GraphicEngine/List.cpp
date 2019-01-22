@@ -168,10 +168,11 @@ void List::render(glm::mat4 scaling)
 {
     Node * root = list.at(0);
     root->setMatrix(root->getMatrix() * scaling);
+    const glm::mat4 cameraMat = Engine::getInstance().getCurrentCamera()->getMatrix();
     const bool reflection = isReflection();
     for (std::vector<Node*>::iterator n = list.begin(), end = list.end(); n != end; ++n)
     {
-        glm::mat4 renderMatrix = (*n)->getFinalMatrix();
+        glm::mat4 renderMatrix = cameraMat * (*n)->getFinalMatrix();
         if (reflection && (*n)->getName() == "plane")
         {
             continue;

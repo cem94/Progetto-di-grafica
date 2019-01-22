@@ -523,8 +523,7 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
                 strcpy(subtypeName, "UNDEFINED");
                 break;
             }
-            //TODO dovrebbero essere 0,1,2,3, credo resettare id
-            //	light->setID(light->getID());
+
             light->setMatrix(matrix);
             light->setColor(glm::vec4(color.r, color.g, color.b, 1.0f));
             light->setDirection(glm::vec4(direction.r, direction.g, direction.b, 1.0f));

@@ -91,10 +91,6 @@ void Light::render(glm::mat4 renderMatrix)
     glm::vec4 diffuseI = diffuse * intensity;
     glm::vec4 specularI = specular * intensity;
 
-    Camera* camera = Engine::getInstance().getCurrentCamera();
-    glLoadMatrixf(glm::value_ptr(camera->getMatrix() * renderMatrix));
-
-    //glLightfv(getLightNumber(), GL_POSITION, glm::value_ptr(this->position));
     glLightfv(getLightNumber(), GL_POSITION, glm::value_ptr(glm::vec3(0.0f,0.0f, 0.0f)));
     glLightfv(getLightNumber(), GL_SHININESS, &shiny);
 
