@@ -7,16 +7,16 @@
 #define GLM_FORCE_RADIANS
 #ifdef _WINDOWS
 #ifdef GAUNTLET_EXPORTS
- // Windows needs this macro for exporting the library as dll
+// Windows needs this macro for exporting the library as dll
 #define LIB_API __declspec(dllexport)
 #else
 #define LIB_API __declspec(dllimport)
 #endif
- // linux
+// linux
 #else
 #define LIB_API
 #endif
- //So it doesn't give us deprecation warnings for fopen etc
+//So it doesn't give us deprecation warnings for fopen etc
 #define _CRT_SECURE_NO_WARNINGS
 
 // C/C++
@@ -30,7 +30,7 @@
 
 // GLM
 // Force constructors to initialize to identity
-#define GLM_FORCE_CTOR_INIT  
+#define GLM_FORCE_CTOR_INIT
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/packing.hpp>
@@ -108,9 +108,9 @@ public:
 	Camera * getCurrentCamera();
 	void render();
 private:
-	Engine() {};
-	~Engine() {};
-	Engine(Engine const&) {};
-	Engine& operator=(Engine const&);
-	static Engine* instance;
+    Engine() {};
+    ~Engine() {};
+    Engine(Engine const&) {};
+    Engine& operator=(Engine const&);
+    static Engine* instance;
 };
