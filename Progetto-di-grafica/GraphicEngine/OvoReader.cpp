@@ -15,7 +15,6 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
     // Configure stream:
     std::cout.precision(2);  // 2 decimals are enough
     std::cout << std::fixed;      // Avoid scientific notation
-//    Node *root = nullptr;
     // Parse chunks:
     unsigned int chunkId, chunkSize;
     while (true)
@@ -76,9 +75,8 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
             Node* node = new Node();
             node->setName(nodeName);
             node->setType(Object::Type::NODE);
-            node->setChildrenSize(children);
+            node->setCapacity(children);
             node->setMatrix(matrix);
-            //root->insert(node);
             objects.push_back(node);
         }
         break;
@@ -147,7 +145,6 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
             material->setShininess((1 - (float)sqrt((int)roughness)) * 128);
             material->setName(materialName);
             material->setTexture(textureName);
-            material->setAlpha(alpha);
             material->setAmbient(albedo*0.2f);
             material->setSpecular(albedo*0.4f);
             material->setDiffuse(albedo*0.6f);
@@ -345,11 +342,10 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
                     position += sizeof(unsigned short) * 4;
                 }
             }
-            //TODO	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
             float* meshVertices = new float[vertices * 3];
             float* meshTextures = new float[vertices * 2];
             float* meshNormals = new float[vertices * 3];
-            //SETTO VERTICI TEXTURE E NORMALI
             // Interleaved and compressed vertex/normal/UV/tangent data:
             for (unsigned int c = 0; c < vertices; c++)
             {
@@ -397,7 +393,6 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
                 if (verbose)
                 {
                     f << "   Face data . . :  f" << c << " (" << face[0] << ", " << face[1] << ", " << face[2] << ")" << std::endl;
-                    //capire se posso spostarli fuori dal for
                     memcpy(face, data + position, sizeof(unsigned int) * 3);
                     position += sizeof(unsigned int) * 3;
                     indices[c * 3] = face[0];
@@ -406,7 +401,6 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
                 }
             }
             //////////////////////////////////////////////////////////////
-            //Creo la mesh
             Mesh *mesh = new Mesh();
             mesh->setType(Object::Type::MESH);
             mesh->setName(meshName);
@@ -418,9 +412,11 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
                     material = *it;
             }
             mesh->setMaterial(material);
-            mesh->setRadius(radius);
+
             mesh->setNumberOfFaces(faces);
-            mesh->setChildrenSize(children);
+            mesh->setCapacity(children);
+
+            //TODO:: rinominare in modo coerente (meshVertices, meshNormals, meshTextures, indices, vertices)
             mesh->generateVAO(meshVertices, meshNormals, meshTextures, indices, vertices);
             objects.push_back(mesh);
         }
@@ -502,7 +498,7 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
             memcpy(&isVolumetric, data + position, sizeof(unsigned char));
             f << "   Volumetric  . :  " << (int)isVolumetric << std::endl;
             position += sizeof(unsigned char);
-            //////////////////////////////////////////////////////////////////////////////////////////7
+            //////////////////////////////////////////////////////////////////////////////////////////
             Light *light = new Light(lightName);
             light->setType(Object::Type::LIGHT);
             switch ((OvLight::Subtype) subtype)
@@ -523,17 +519,16 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
                 strcpy(subtypeName, "UNDEFINED");
                 break;
             }
-            //TODO dovrebbero essere 0,1,2,3, credo resettare id
-            //	light->setID(light->getID());
+
             light->setMatrix(matrix);
             light->setColor(glm::vec4(color.r, color.g, color.b, 1.0f));
             light->setDirection(glm::vec4(direction.r, direction.g, direction.b, 1.0f));
             light->setCutoff(cutoff);
-            light->setChildrenSize(children);
+            light->setCapacity(children);
             objects.push_back(light);
         }
         break;
-        //TODO credo si possa rimuovere
+
         /////////////////////////////
         case OvObject::Type::BONE: //
         {

@@ -28,7 +28,8 @@ Mesh* globeLight = nullptr;
 //finger sensitivity
 const float increment = 5.f;
 float fingerAngles[5];
-float x[0];
+//TODO:: GREG cosa stai fancedo che non mi permetteva di compilare ?
+//float x[0];
 std::string fingerNames[5] = { "pollice", "indice", "medio", "anulare", "mignolo" };
 
 // Gauntlet translate
@@ -47,8 +48,8 @@ void printList(std::vector<Node*> list)
         std::cout << n->getId() << std::endl;
     }
     std::cout << "-----------------------------------------------------" << std::endl;
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
  * Function that prints the scene graph
@@ -453,32 +454,13 @@ Node*  Engine::getScene(const char* name)
     Node* root = nodes.at(0);
     nodes.erase(nodes.begin());
     findChildren(root, nodes);
+    //TODO:: provare a spostare
     movableLight = (Light*)getNodeByName(root, "moving_light");
     specularLight = (Light*)getNodeByName(root, "specular_light");
     globeLight = (Mesh*)getNodeByName(root, "sphere_light");
-    setCameraToPalm(root);
+    ///////////////
     printTree(root, "");
     return root;
-}
-/**
-* Comment
-* @param  name1
-* @param2 name2
-* @return what it returns
-*/
-//CHIEDERE A CEM A COSA SERVE
-void LIB_API Engine::setCameraToPalm(Node* root)
-{
-    Node* palmo = getNodeByName(root, "guardia");
-    for (Node* n : palmo->getChildren())
-    {
-        if (n->getType() == Object::Type::CAMERA)
-        {
-            n = currentCamera;
-            return;
-        }
-    }
-    palmo->insert(currentCamera);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -502,6 +484,7 @@ Node*  Engine::getNodeByName(Node* root, std::string name)
         return nullptr;
     }
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
   * Set render and trasparent lists
@@ -571,22 +554,13 @@ void LIB_API Engine::addCamera(std::string name, bool movable, glm::vec3 eye, gl
 }
 
 /**
-* Getter for current camera movable
-* @return true if current camera is movable false otherwise
-*/
-bool LIB_API Engine::isMovableCamera()
-{
-    return currentCamera->getMovable();
-}
-
-/**
  * Close hand
  * @param  root scene graph
  * @param angle rotation angle of fingers
  */
 void LIB_API Engine::moveCameraRight(float direction)
 {
-    if (!isMovableCamera())
+    if (!currentCamera->getMovable())
         return;
     glm::mat4 matrix = currentCamera->getMatrix();
     glm::vec3 mov = direction * 5.0f * matrix[0];
@@ -600,7 +574,7 @@ void LIB_API Engine::moveCameraRight(float direction)
  */
 void LIB_API Engine::moveCameraUp(float direction)
 {
-    if (!isMovableCamera())
+    if (!currentCamera->getMovable())
         return;
     glm::mat4 matrix = currentCamera->getMatrix();
     glm::vec3 mov = direction * 5.0f * matrix[1];
@@ -614,7 +588,7 @@ void LIB_API Engine::moveCameraUp(float direction)
  */
 void LIB_API Engine::moveCameraForward(float direction)
 {
-    if (!isMovableCamera())
+    if (!currentCamera->getMovable())
         return;
     glm::mat4 matrix = currentCamera->getMatrix();
     glm::vec3 mov = direction * 5.0f * matrix[2];
@@ -628,9 +602,8 @@ void LIB_API Engine::moveCameraForward(float direction)
  */
 void LIB_API Engine::rotateCameraRight(float angle)
 {
-    if (isMovableCamera())
+    if (currentCamera->getMovable())
         return;
-    std::cout << "angle: " << angle << std::endl;
     glm::mat4 mat = currentCamera->getMatrix();
     glm::vec3 vec = mat[1];
     glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), vec);
@@ -643,9 +616,8 @@ void LIB_API Engine::rotateCameraRight(float angle)
  */
 void LIB_API Engine::rotateCameraUp(float angle)
 {
-    if (isMovableCamera())
+    if (!currentCamera->getMovable())
         return;
-    std::cout << "angle: " << angle << std::endl;
     glm::mat4 mat = currentCamera->getMatrix();
     glm::vec3 vec = mat[0];
     glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), vec);
@@ -659,7 +631,8 @@ void LIB_API Engine::changeCamera(Node * root)
 {
     activeCamera = (activeCamera + 1) % cameras.size();
     currentCamera = cameras.at(activeCamera);
-    setCameraToPalm(root);
+    //TODO:: GREG questo non c'è bisogno perche lo facciamo nel render della mesh
+    //loadMatrix(currentCamera->getMatrix());
 }
 
 /**
@@ -814,6 +787,5 @@ void LIB_API Engine::setAlphaToMaterial(Node * root, float alpha, std::string no
     {
         Mesh* mesh = (Mesh*)node;
         mesh->getMaterial()->setAlpha(alpha);
-        printf("Setted alpha of %s\n", mesh->getName().c_str());
     }
 }

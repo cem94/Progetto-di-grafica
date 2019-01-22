@@ -78,7 +78,6 @@ public:
     void freeImageInitialize();
     void freeImageDeInitialize();
     Node* getScene(const char* name);
-    void setCameraToPalm(Node* root);
     void addCamera(std::string name, bool movable, glm::vec3 eye,
                    glm::vec3 center, glm::vec3 up);
     bool isMovableCamera();

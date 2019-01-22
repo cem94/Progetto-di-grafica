@@ -18,32 +18,12 @@ Light::Light()
 Light::Light(std::string name)
 {
     this->setName(name);
-    //TODO potrebbe essere un problema -> id non univoci cambiato in setLightNumber (era setId)
     this->setLightNumber(numberOfLights++);
 }
 /**
  * Light destructor
  */
 Light::~Light() {}
-
-////TODO:: GREG NON LO USIAMO! POSSIAMO RIMUOVERLO
-///**
-// * Getter for intensity
-// * @return intensity light intensity
-// */
-//short Light::getIntensity() const
-//{
-//	return this->intensity;
-//}
-//
-///**
-// * Setter for intensity
-// * @param  intensity light intensity
-// */
-//void Light::setIntensity(short intensity)
-//{
-//	this->intensity = intensity;
-//}
 
 /**
  * Setter for ambient
@@ -91,10 +71,6 @@ void Light::render(glm::mat4 renderMatrix)
     glm::vec4 diffuseI = diffuse * intensity;
     glm::vec4 specularI = specular * intensity;
 
-    Camera* camera = Engine::getInstance().getCurrentCamera();
-    glLoadMatrixf(glm::value_ptr(camera->getMatrix() * renderMatrix));
-
-    //glLightfv(getLightNumber(), GL_POSITION, glm::value_ptr(this->position));
     glLightfv(getLightNumber(), GL_POSITION, glm::value_ptr(glm::vec3(0.0f,0.0f, 0.0f)));
     glLightfv(getLightNumber(), GL_SHININESS, &shiny);
 
@@ -103,6 +79,7 @@ void Light::render(glm::mat4 renderMatrix)
     switch (subtype)
     {
     case OMNI:
+        // for future impl.
         break;
     case SPOTLIGHT:
         glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &cut);
@@ -139,49 +116,18 @@ void Light::setSubtype(Light::Subtype subtype)
     this->subtype = subtype;
 }
 
-// TODO riprovare metodo Cem
 /*
  * Getter for light number
  * @return an OpenGL enum representing a light
  */
 int Light::getLightNumber() const
 {
-    switch (lightNumber)
-    {
-    case 0:
-        return GL_LIGHT0;
-        break;
-    case 1:
-        return GL_LIGHT1;
-        break;
-    case 2:
-        return GL_LIGHT2;
-        break;
-    case 3:
-        return GL_LIGHT3;
-        break;
-    case 4:
-        return GL_LIGHT4;
-        break;
-    case 5:
-        return GL_LIGHT5;
-        break;
-    case 6:
-        return GL_LIGHT6;
-        break;
-    case 7:
-        return GL_LIGHT7;
-        break;
-    default:
-        return GL_LIGHT0;
-        break;
-    }
-    /*const int n_light = this->getId();
+    const int n_light = lightNumber;
     // we have 7 light, 0 = 0x4000 and 7 = 0x4007
     if (0 <= n_light && n_light <= 7)
-    	return GL_LIGHT0 + n_light;
+        return GL_LIGHT0 + n_light;
     else
-    	return GL_LIGHT0;*/
+        return GL_LIGHT0;
 }
 
 void Light::setLightNumber(int lightNumber)

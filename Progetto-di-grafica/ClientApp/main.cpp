@@ -196,9 +196,7 @@ void timerCallback(int value)
 void mouseWheel(int wheel, int direction, int x, int y)
 {
     wheel = 0;
-    if (!engine->isMovableCamera())
-        return;
-    else if (direction == -1)
+    if (direction == -1)
         engine->moveCameraUp(1.0f);
     else if (direction == +1)
         engine->moveCameraUp(-1.0f);
@@ -260,14 +258,14 @@ void setCallBacks()
  */
 void setCameras()
 {
-    glm::vec3 eye = glm::vec3(0.f, 50.f, 400.f);
-    glm::vec3 center = glm::vec3(0.f, 0.f, 0.f);
+    glm::vec3 eye = glm::vec3(400.f, 150.f, 300.f);
+    glm::vec3 center = glm::vec3(0.f, 50.f, -50.f);
     glm::vec3 up = glm::vec3(0.f, 1.f, 0.f);
     engine->addCamera("Camera3", false, eye, center, up);
-    eye = glm::vec3(400.f, 400.f, 400.f);
+    eye = glm::vec3(-450.f, 330.f, 350.f);
     engine->addCamera("Camera2", false, eye, center, up);
-    eye = glm::vec3(0.0f, 50.0f, 400.f);
-    center = glm::vec3(0.0f, 50.0f, 200.0f);
+    eye = glm::vec3(0.0f, 50.0f, 220.f);
+    center = glm::vec3(0.0f, 50.0f, -150.0f);
     engine->addCamera("Camera1", true, eye, center, up);
 }
 

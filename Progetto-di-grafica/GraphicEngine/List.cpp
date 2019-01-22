@@ -1,5 +1,4 @@
 #include "Engine.h"
-#include <GL/freeglut.h>
 
 /**
  * List constructor
@@ -137,20 +136,18 @@ void List::sort()
     std::vector<Mesh*> meshes;
     for (std::vector<Node*>::iterator n = list.begin(), end = list.end(); n != end; ++n)
     {
-        if ((*n)->getType() == Object::NODE)
+        const Object::Type type = (*n)->getType();
+        if (type == Object::NODE)
         {
             nodes.push_back((*n));
-            continue;
         }
-        if ((*n)->getType() == Object::LIGHT)
+        else if (type == Object::LIGHT)
         {
             lights.push_back(dynamic_cast<Light*>((*n)));
-            continue;
         }
-        if ((*n)->getType() == Object::MESH)
+        else if (type == Object::MESH)
         {
             meshes.push_back(dynamic_cast<Mesh*>((*n)));
-            continue;
         }
     }
     list.clear();
@@ -168,14 +165,16 @@ void List::render(glm::mat4 scaling)
 {
     Node * root = list.at(0);
     root->setMatrix(root->getMatrix() * scaling);
+    const glm::mat4 cameraMat = Engine::getInstance().getCurrentCamera()->getMatrix();
     const bool reflection = isReflection();
     for (std::vector<Node*>::iterator n = list.begin(), end = list.end(); n != end; ++n)
     {
-        glm::mat4 renderMatrix = (*n)->getFinalMatrix();
-        if (reflection && (*n)->getName() == "plane")
+        Node* node = (*n);
+        const glm::mat4 renderMatrix = cameraMat * node->getFinalMatrix();
+        if (reflection && node->getName() == "plane")
         {
             continue;
         }
-        (*n)->render(renderMatrix);
+        node->render(renderMatrix);
     }
 }
