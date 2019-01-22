@@ -62,43 +62,6 @@ void Light::changeState()
 }
 
 /**
- * Render render method for light
- * @param  renderMatrix light render matrix
- */
-void Light::render(glm::mat4 renderMatrix)
-{
-    glm::vec4 ambientI = ambient * intensity;
-    glm::vec4 diffuseI = diffuse * intensity;
-    glm::vec4 specularI = specular * intensity;
-
-    glLightfv(getLightNumber(), GL_POSITION, glm::value_ptr(glm::vec3(0.0f,0.0f, 0.0f)));
-    glLightfv(getLightNumber(), GL_SHININESS, &shiny);
-
-    float cut = 180.0f;
-    // Load light
-    switch (subtype)
-    {
-    case OMNI:
-        // for future impl.
-        break;
-    case SPOTLIGHT:
-        glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &cut);
-        break;
-    case DIRECTIONAL:
-        glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &cut);
-        glLightfv(getLightNumber(), GL_SPOT_DIRECTION, glm::value_ptr(direction));
-        break;
-    default:
-        break;
-    }
-
-    glLightfv(getLightNumber(), GL_AMBIENT, glm::value_ptr(ambientI));
-    glLightfv(getLightNumber(), GL_DIFFUSE, glm::value_ptr(diffuseI));
-    glLightfv(getLightNumber(), GL_SPECULAR, glm::value_ptr(specularI));
-    glLightfv(getLightNumber(), GL_LINEAR_ATTENUATION, &attenuation);
-}
-
-/**
  * Getter for light subtype
  * @return subtype value
  */
@@ -240,4 +203,41 @@ void Light::disableLight()
 {
     glDisable(getLightNumber());
     this->isActive = false;
+}
+
+/**
+ * Render render method for light
+ * @param  renderMatrix light render matrix
+ */
+void Light::render(glm::mat4 renderMatrix)
+{
+    glm::vec4 ambientI = ambient * intensity;
+    glm::vec4 diffuseI = diffuse * intensity;
+    glm::vec4 specularI = specular * intensity;
+
+    glLightfv(getLightNumber(), GL_POSITION, glm::value_ptr(glm::vec3(0.0f,0.0f, 0.0f)));
+    glLightfv(getLightNumber(), GL_SHININESS, &shiny);
+
+    float cut = 180.0f;
+    // Load light
+    switch (subtype)
+    {
+    case OMNI:
+        // for future impl.
+        break;
+    case SPOTLIGHT:
+        glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &cut);
+        break;
+    case DIRECTIONAL:
+        glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &cut);
+        glLightfv(getLightNumber(), GL_SPOT_DIRECTION, glm::value_ptr(direction));
+        break;
+    default:
+        break;
+    }
+
+    glLightfv(getLightNumber(), GL_AMBIENT, glm::value_ptr(ambientI));
+    glLightfv(getLightNumber(), GL_DIFFUSE, glm::value_ptr(diffuseI));
+    glLightfv(getLightNumber(), GL_SPECULAR, glm::value_ptr(specularI));
+    glLightfv(getLightNumber(), GL_LINEAR_ATTENUATION, &attenuation);
 }

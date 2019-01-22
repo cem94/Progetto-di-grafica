@@ -1868,7 +1868,7 @@
 
 1548167685 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Camera.h
 
-1548195169 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Light.h
+1548197672 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Light.h
 
 1548167685 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Texture.h
 
@@ -1881,7 +1881,7 @@
 1548167685 /home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/OvoReader.h
 	"Engine.h"
 
-1548195196 source:/home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Light.cpp
+1548197672 source:/home/greg/CodeBlocksProjects/Progetto-di-grafica/Progetto-di-grafica/Progetto-di-grafica/GraphicEngine/Light.cpp
 	"Engine.h"
 	<GL/freeglut.h>
 
