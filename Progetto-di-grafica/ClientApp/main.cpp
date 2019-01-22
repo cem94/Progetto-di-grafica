@@ -21,21 +21,21 @@ bool keyState[255];
  */
 void displayCallback()
 {
-    // clear dei bit DEPTH etc
-    engine->clearBuffers();
-    // setto la matrice di proiezione prospettica per il rendering 3d
-    engine->setProjectionMatrix(perspective);
-    // 3d rendering//
+	// clear dei bit DEPTH etc
+	engine->clearBuffers();
+	// setto la matrice di proiezione prospettica per il rendering 3d
+	engine->setProjectionMatrix(perspective);
+	// 3d rendering//
 	engine->render();
-    if (rotating)
-        engine->autoRotateModel(scene, -1.0f);
-    // 2D rendering//
-    engine->setProjectionMatrix(ortho);
-    engine->loadIdentity();
-    engine->renderText();
-    engine->incrementFrames();
-    engine->swapBuffers();
-    engine->redisplay();
+	if (rotating)
+		engine->autoRotateModel(scene, -1.0f);
+	// 2D rendering//
+	engine->setProjectionMatrix(ortho);
+	engine->loadIdentity();
+	engine->renderText();
+	engine->incrementFrames();
+	engine->swapBuffers();
+	engine->redisplay();
 }
 
 /**
@@ -45,11 +45,11 @@ void displayCallback()
  */
 void reshapeCallback(int width, int height)
 {
-    engine->setViewport(0, 0, width, height);
-    sizeX = width;
-    sizeY = height;
-    perspective = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 1.0f, 4000.0f);
-    ortho = glm::ortho(0.f, (float)width, 0.f, (float)height, -1.f, 1.f);
+	engine->setViewport(0, 0, width, height);
+	sizeX = width;
+	sizeY = height;
+	perspective = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 1.0f, 4000.0f);
+	ortho = glm::ortho(0.f, (float)width, 0.f, (float)height, -1.f, 1.f);
 }
 
 /**
@@ -60,22 +60,22 @@ void reshapeCallback(int width, int height)
  */
 void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 {
-    // pressed
-    keyState[key] = true;
-    switch (key)
-    {
-    case '1':
-        engine->enableLight(scene, "fix_light");
-        break;
-    case '2':
-        engine->enableLight(scene, "Omni1");
-        break;
-    case '3':
-        engine->enableLight(scene, "Omni2");
-        break;
-    case '4':
-        engine->enableLight(scene, "Omni3");
-        break;
+	// pressed
+	keyState[key] = true;
+	switch (key)
+	{
+	case '1':
+		engine->enableLight(scene, "fix_light");
+		break;
+	case '2':
+		engine->enableLight(scene, "Omni1");
+		break;
+	case '3':
+		engine->enableLight(scene, "Omni2");
+		break;
+	case '4':
+		engine->enableLight(scene, "Omni3");
+		break;
 	case '5':
 		engine->enableLight(scene, "Omni4");
 		break;
@@ -85,26 +85,26 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 	case '7':
 		engine->enableLight(scene, "moving_light");
 		break;
-    case 'r':
-		if(!rotating)
-        engine->rotateModel(scene, 8);
-        break;
-    case 'R':
-        rotating = !rotating;
-        break;
-    case 'c':
-        engine->changeCamera(scene);
-        break;
-    }
+	case 'r':
+		if (!rotating)
+			engine->rotateModel(scene, 8);
+		break;
+	case 'R':
+		rotating = !rotating;
+		break;
+	case 'c':
+		engine->changeCamera(scene);
+		break;
+	}
 	//guardo se sono tenuti premuti uno o più bottoni
 	if (keyState[(unsigned char)'h'] == true)
 	{
 		engine->closeHand(scene);
 	}
-	 if (keyState[(unsigned char)' '] == true)
+	if (keyState[(unsigned char)' '] == true)
 	{
 		engine->closeThumb(scene);
-	} 
+	}
 	if (keyState[(unsigned char)'f'] == true)
 	{
 		engine->closeFinger(scene, 1);
@@ -120,7 +120,7 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 	{
 		engine->closeFinger(scene, 4);
 	}
-    engine->redisplay();
+	engine->redisplay();
 }
 
 /**
@@ -131,47 +131,47 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
  */
 void keyboardUpCallback(unsigned char key, int x, int y)
 {
-    // not pressed
-    keyState[key] = false;
-    switch (key)
-    {
-    case 'h':
-        if (keyState[(unsigned char)'h'] == false)
-        {
-            engine->openHand(scene);
-        }
-        break;
-    case ' ':
-        if (keyState[(unsigned char)' '] == false)
-        {
-            engine->openThumb(scene);
-        }
-        break;
-    case 'f':
-        if (keyState[(unsigned char)'f'] == false)
-        {
-            engine->openFinger(scene, 1);
-        }
-        break;
-    case 'e':
-        if (keyState[(unsigned char)'e'] == false)
-        {
-            engine->openFinger(scene, 2);
-        }
-        break;
-    case 'w':
-        if (keyState[(unsigned char)'w'] == false)
-        {
-            engine->openFinger(scene, 3);
-        }
-        break;
-    case 'a':
-        if (keyState[(unsigned char)'a'] == false)
-        {
-            engine->openFinger(scene, 4);
-        }
-        break;
-    }
+	// not pressed
+	keyState[key] = false;
+	switch (key)
+	{
+	case 'h':
+		if (keyState[(unsigned char)'h'] == false)
+		{
+			engine->openHand(scene);
+		}
+		break;
+	case ' ':
+		if (keyState[(unsigned char)' '] == false)
+		{
+			engine->openThumb(scene);
+		}
+		break;
+	case 'f':
+		if (keyState[(unsigned char)'f'] == false)
+		{
+			engine->openFinger(scene, 1);
+		}
+		break;
+	case 'e':
+		if (keyState[(unsigned char)'e'] == false)
+		{
+			engine->openFinger(scene, 2);
+		}
+		break;
+	case 'w':
+		if (keyState[(unsigned char)'w'] == false)
+		{
+			engine->openFinger(scene, 3);
+		}
+		break;
+	case 'a':
+		if (keyState[(unsigned char)'a'] == false)
+		{
+			engine->openFinger(scene, 4);
+		}
+		break;
+	}
 }
 
 /**
@@ -182,24 +182,24 @@ void keyboardUpCallback(unsigned char key, int x, int y)
  */
 void specialCallback(int key, int x, int y)
 {
-    switch (key)
-    {
-    case GLUT_KEY_DOWN:
-        engine->moveCameraForward(-3.0f);
-        break;
-    case GLUT_KEY_UP:
-        engine->moveCameraForward(3.0f);
-        break;
-    case GLUT_KEY_LEFT:
-        engine->moveCameraRight(3.0f);
-        break;
-    case GLUT_KEY_RIGHT:
-        engine->moveCameraRight(-3.0f);
-        break;
-    default:
-        break;
-    }
-    engine->redisplay();
+	switch (key)
+	{
+	case GLUT_KEY_DOWN:
+		engine->moveCameraForward(-3.0f);
+		break;
+	case GLUT_KEY_UP:
+		engine->moveCameraForward(3.0f);
+		break;
+	case GLUT_KEY_LEFT:
+		engine->moveCameraRight(3.0f);
+		break;
+	case GLUT_KEY_RIGHT:
+		engine->moveCameraRight(-3.0f);
+		break;
+	default:
+		break;
+	}
+	engine->redisplay();
 }
 
 /**
@@ -208,7 +208,7 @@ void specialCallback(int key, int x, int y)
  */
 void timerCallback(int value)
 {
-    engine->timer(timerCallback);
+	engine->timer(timerCallback);
 }
 
 /**
@@ -220,50 +220,50 @@ void timerCallback(int value)
  */
 void mouseWheel(int wheel, int direction, int x, int y)
 {
-    wheel = 0;
-    if (!engine->isMovableCamera())
-        return;
-    else if (direction == -1)
-        engine->moveCameraUp(1.0f);
-    else if (direction == +1)
-        engine->moveCameraUp(-1.0f);
+	wheel = 0;
+	if (!engine->isMovableCamera())
+		return;
+	else if (direction == -1)
+		engine->moveCameraUp(1.0f);
+	else if (direction == +1)
+		engine->moveCameraUp(-1.0f);
 }
 
 /**
- * Comment
+ * Mouse motion callback
  * @param  x
  * @param y
  */
 void mouseMoved(int x, int y)
 {
-    const float sizeYMin = sizeY * 0.20;
-    const float sizeXMin = sizeX * 0.20;
-    const float sizeYMax = sizeY * 0.80;
-    const float sizeXMax = sizeX * 0.80;
+	const float sizeYMin = sizeY * 0.20;
+	const float sizeXMin = sizeX * 0.20;
+	const float sizeYMax = sizeY * 0.80;
+	const float sizeXMax = sizeX * 0.80;
 	// UP
-    if (x > sizeXMin && x < sizeXMax && y < sizeYMin)
-    {
-        const float angle = (10.0f / sizeYMin) * (sizeYMin - y);
-        engine->rotateCameraUp(-angle);
-      }
+	if (x > sizeXMin && x < sizeXMax && y < sizeYMin)
+	{
+		const float angle = (10.0f / sizeYMin) * (sizeYMin - y);
+		engine->rotateCameraUp(-angle);
+	}
 	// DOWN
 	else if (x > sizeXMin && x < sizeXMax && y > sizeYMax)
-    {
-        const float angle = (10.0f / (sizeY - sizeYMax)) * (y - sizeYMax);
-        engine->rotateCameraUp(angle);
-         }
+	{
+		const float angle = (10.0f / (sizeY - sizeYMax)) * (y - sizeYMax);
+		engine->rotateCameraUp(angle);
+	}
 	// LEFT
-    else if (y > sizeYMin && y < sizeYMax && x < sizeXMin)
-    {
-        const float angle = (10.0f / sizeXMin) * (sizeXMin - x);
-        engine->rotateCameraRight(-angle);
-    }
+	else if (y > sizeYMin && y < sizeYMax && x < sizeXMin)
+	{
+		const float angle = (10.0f / sizeXMin) * (sizeXMin - x);
+		engine->rotateCameraRight(-angle);
+	}
 	// RIGHT
-    else if (y > sizeYMin && y < sizeYMax && x > sizeXMax)
-    {
-        const float angle = (10.0f / (sizeX - sizeXMax)) * (x - sizeXMax);
-        engine->rotateCameraRight(angle);
-    }
+	else if (y > sizeYMin && y < sizeYMax && x > sizeXMax)
+	{
+		const float angle = (10.0f / (sizeX - sizeXMax)) * (x - sizeXMax);
+		engine->rotateCameraRight(angle);
+	}
 }
 
 /**
@@ -271,14 +271,14 @@ void mouseMoved(int x, int y)
  */
 void setCallBacks()
 {
-    engine->display(displayCallback);
-    engine->reshape(reshapeCallback);
-    engine->keyboard(keyboardCallback);
-    engine->keyboardUp(keyboardUpCallback);
-    engine->specialKeyboard(specialCallback);
-    engine->mouseWheel(mouseWheel);
-    engine->mouseMoved(mouseMoved);
-    engine->timer(timerCallback);
+	engine->display(displayCallback);
+	engine->reshape(reshapeCallback);
+	engine->keyboard(keyboardCallback);
+	engine->keyboardUp(keyboardUpCallback);
+	engine->specialKeyboard(specialCallback);
+	engine->mouseWheel(mouseWheel);
+	engine->mouseMoved(mouseMoved);
+	engine->timer(timerCallback);
 }
 
 /**
@@ -286,15 +286,15 @@ void setCallBacks()
  */
 void setCameras()
 {
-    glm::vec3 eye = glm::vec3(0.f, 50.f, 400.f);
-    glm::vec3 center = glm::vec3(0.f, 0.f, 0.f);
-    glm::vec3 up = glm::vec3(0.f, 1.f, 0.f);
-    engine->addCamera("Camera3", false, eye, center, up);
-    eye = glm::vec3(400.f, 400.f, 400.f);
-    engine->addCamera("Camera2", false, eye, center, up);
-    eye = glm::vec3(0.0f, 50.0f, 400.f);
-    center = glm::vec3(0.0f, 50.0f, 200.0f);
-    engine->addCamera("Camera1", true, eye, center, up);
+	glm::vec3 eye = glm::vec3(0.f, 50.f, 400.f);
+	glm::vec3 center = glm::vec3(0.f, 0.f, 0.f);
+	glm::vec3 up = glm::vec3(0.f, 1.f, 0.f);
+	engine->addCamera("Camera3", false, eye, center, up);
+	eye = glm::vec3(400.f, 400.f, 400.f);
+	engine->addCamera("Camera2", false, eye, center, up);
+	eye = glm::vec3(0.0f, 50.0f, 400.f);
+	center = glm::vec3(0.0f, 50.0f, 200.0f);
+	engine->addCamera("Camera1", true, eye, center, up);
 }
 
 /**
@@ -305,22 +305,22 @@ void setCameras()
  */
 int main(int argc, char* argv[])
 {
-    std::cout << "Client application starts" << std::endl;
-    // init engine settings
-    engine->init();
-    // init call back functions
-    setCallBacks();
-    // set background color
-    engine->clearColor(1.f,1.f,1.f);
-    // set cameras
-    setCameras();
-    const char* fileName = "../ovo_files/full_scene.ovo";
+	std::cout << "Client application starts" << std::endl;
+	// init engine settings
+	engine->init();
+	// init call back functions
+	setCallBacks();
+	// set background color
+	engine->clearColor(1.f, 1.f, 1.f);
+	// set cameras
+	setCameras();
+	const char* fileName = "../ovo_files/full_scene.ovo";
 	// read ovo file, load scene and start main loop
-    scene = engine->getScene(fileName);
+	scene = engine->getScene(fileName);
 	engine->createRenderList(scene);
 	//start main loop
-    engine->startLoop();
-    //free resources
+	engine->startLoop();
+	//free resources
 	engine->free();
-    std::cout << "Application terminated" << std::endl;
+	std::cout << "Application terminated" << std::endl;
 }
