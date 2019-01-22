@@ -98,7 +98,7 @@ void Light::render(glm::mat4 renderMatrix)
     glLightfv(getLightNumber(), GL_POSITION, glm::value_ptr(glm::vec3(0.0f,0.0f, 0.0f)));
     glLightfv(getLightNumber(), GL_SHININESS, &shiny);
 
-  float cut = 100.0f;
+  float cut = 180.0f;
   // Load light
   switch (subtype) {
     case OMNI:
