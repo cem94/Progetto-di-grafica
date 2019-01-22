@@ -75,11 +75,8 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
             Node* node = new Node();
             node->setName(nodeName);
             node->setType(Object::Type::NODE);
-			//TODO:: cambiare in setCapacity
-
-            node->setChildrenSize(children);
+            node->setCapacity(children);
             node->setMatrix(matrix);
-            //root->insert(node);
             objects.push_back(node);
         }
         break;
@@ -148,8 +145,6 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
             material->setShininess((1 - (float)sqrt((int)roughness)) * 128);
             material->setName(materialName);
             material->setTexture(textureName);
-			//TODO:: cancella set aplha
-            //material->setAlpha(alpha);
             material->setAmbient(albedo*0.2f);
             material->setSpecular(albedo*0.4f);
             material->setDiffuse(albedo*0.6f);
@@ -417,11 +412,9 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
                     material = *it;
             }
             mesh->setMaterial(material);
-			//TODO:: cancellare Radius
-            mesh->setRadius(radius);
 
             mesh->setNumberOfFaces(faces);
-            mesh->setChildrenSize(children);
+            mesh->setCapacity(children);
 
 			//TODO:: rinominare in modo coerente (meshVertices, meshNormals, meshTextures, indices, vertices)
             mesh->generateVAO(meshVertices, meshNormals, meshTextures, indices, vertices);
@@ -531,7 +524,7 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
             light->setColor(glm::vec4(color.r, color.g, color.b, 1.0f));
             light->setDirection(glm::vec4(direction.r, direction.g, direction.b, 1.0f));
             light->setCutoff(cutoff);
-            light->setChildrenSize(children);
+            light->setCapacity(children);
             objects.push_back(light);
         }
         break;

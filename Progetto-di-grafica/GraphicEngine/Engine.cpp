@@ -544,23 +544,13 @@ void LIB_API Engine::addCamera(std::string name, bool movable, glm::vec3 eye, gl
 }
 
 /**
-* Getter for current camera movable
-* @return true if current camera is movable false otherwise
-*/
-//TODO::: ELIMINARE
-bool LIB_API Engine::isMovableCamera()
-{
-    return currentCamera->getMovable();
-}
-
-/**
  * Close hand
  * @param  root scene graph
  * @param angle rotation angle of fingers
  */
 void LIB_API Engine::moveCameraRight(float direction)
 {
-    if (!isMovableCamera())
+    if (!currentCamera->getMovable())
         return;
     glm::mat4 matrix = currentCamera->getMatrix();
     glm::vec3 mov = direction * 5.0f * matrix[0];
@@ -574,7 +564,7 @@ void LIB_API Engine::moveCameraRight(float direction)
  */
 void LIB_API Engine::moveCameraUp(float direction)
 {
-    if (!isMovableCamera())
+    if (!currentCamera->getMovable())
         return;
     glm::mat4 matrix = currentCamera->getMatrix();
     glm::vec3 mov = direction * 5.0f * matrix[1];
@@ -588,7 +578,7 @@ void LIB_API Engine::moveCameraUp(float direction)
  */
 void LIB_API Engine::moveCameraForward(float direction)
 {
-    if (!isMovableCamera())
+    if (!currentCamera->getMovable())
         return;
     glm::mat4 matrix = currentCamera->getMatrix();
     glm::vec3 mov = direction * 5.0f * matrix[2];
@@ -602,9 +592,8 @@ void LIB_API Engine::moveCameraForward(float direction)
  */
 void LIB_API Engine::rotateCameraRight(float angle)
 {
-    if (isMovableCamera())
+    if (currentCamera->getMovable())
         return;
-    std::cout << "angle: " << angle << std::endl;
     glm::mat4 mat = currentCamera->getMatrix();
     glm::vec3 vec = mat[1];
     glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), vec);
@@ -617,19 +606,8 @@ void LIB_API Engine::rotateCameraRight(float angle)
  */
 void LIB_API Engine::rotateCameraUp(float angle)
 {
-    if (isMovableCamera())
-        return;
-    std::cout << "angle: " << angle << std::endl;
-    /*
-    glm::mat4 mat = currentCamera->getMatrix();
-    glm::vec3 eye = mat[3];
-    glm::vec3 forward = 10.0f * mat[2];
-    glm::vec3 rotation = sin(angle)*mat[1];
-    glm::vec3 center = forward + rotation;
-
-	currentCamera->setMatrix(glm::lookAt(eye, center, glm::vec3(0.0f, 1.0f, 0.0f)));
-	*/
-   
+    if (!currentCamera->getMovable())
+        return;   
     glm::mat4 mat = currentCamera->getMatrix();
     glm::vec3 vec = mat[0];
     glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), vec);
@@ -643,7 +621,8 @@ void LIB_API Engine::changeCamera(Node * root)
 {
     activeCamera = (activeCamera + 1) % cameras.size();
     currentCamera = cameras.at(activeCamera);
-    loadMatrix(currentCamera->getMatrix());
+	//TODO:: GREG questo non c'è bisogno perche lo facciamo nel render della mesh
+    //loadMatrix(currentCamera->getMatrix());
 }
 
 /**

@@ -74,15 +74,15 @@ void Light::render(glm::mat4 renderMatrix)
     glLightfv(getLightNumber(), GL_POSITION, glm::value_ptr(glm::vec3(0.0f,0.0f, 0.0f)));
     glLightfv(getLightNumber(), GL_SHININESS, &shiny);
 
-  float cut = 180.0f;
-  // Load light
-  switch (subtype) {
-    case OMNI:
+	float cut = 180.0f;
+	// Load light
+	switch (subtype) {
+	case OMNI:
 		// for future impl.
         break;
     case SPOTLIGHT:
-      glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &cut);
-      break;
+		glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &cut);
+		break;
     case DIRECTIONAL:
       glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &cut);
       glLightfv(getLightNumber(), GL_SPOT_DIRECTION, glm::value_ptr(direction));
@@ -115,49 +115,18 @@ void Light::setSubtype(Light::Subtype subtype)
     this->subtype = subtype;
 }
 
-// TODO riprovare metodo Cem
 /*
  * Getter for light number
  * @return an OpenGL enum representing a light
  */
 int Light::getLightNumber() const
 {
-    switch (lightNumber)
-    {
-    case 0:
-        return GL_LIGHT0;
-        break;
-    case 1:
-        return GL_LIGHT1;
-        break;
-    case 2:
-        return GL_LIGHT2;
-        break;
-    case 3:
-        return GL_LIGHT3;
-        break;
-    case 4:
-        return GL_LIGHT4;
-        break;
-    case 5:
-        return GL_LIGHT5;
-        break;
-    case 6:
-        return GL_LIGHT6;
-        break;
-    case 7:
-        return GL_LIGHT7;
-        break;
-    default:
-        return GL_LIGHT0;
-        break;
-    }
-    /*const int n_light = this->getId();
+	const int n_light = lightNumber;
     // we have 7 light, 0 = 0x4000 and 7 = 0x4007
     if (0 <= n_light && n_light <= 7)
     	return GL_LIGHT0 + n_light;
     else
-    	return GL_LIGHT0;*/
+    	return GL_LIGHT0;
 }
 
 void Light::setLightNumber(int lightNumber)

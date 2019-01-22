@@ -18,9 +18,9 @@ public:
     void remove(int position);
     void remove(Node* node);
     int getChildrenSize() const;
-    void setChildrenSize(unsigned int size);
     glm::mat4 getFinalMatrix();
     int getCapacity() const;
+    void setCapacity(unsigned int size);
     virtual void render(glm::mat4 rendermatrix) override;
 private:
     Node* parent{ nullptr };

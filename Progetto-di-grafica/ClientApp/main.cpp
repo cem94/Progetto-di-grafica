@@ -238,9 +238,7 @@ void timerCallback(int value)
 void mouseWheel(int wheel, int direction, int x, int y)
 {
     wheel = 0;
-    if (!engine->isMovableCamera())
-        return;
-    else if (direction == -1)
+	if (direction == -1)
         engine->moveCameraUp(1.0f);
     else if (direction == +1)
         engine->moveCameraUp(-1.0f);
@@ -253,7 +251,6 @@ void mouseWheel(int wheel, int direction, int x, int y)
  */
 void mouseMoved(int x, int y)
 {
-	//TODO:: provare a spostare 
     const float sizeYMin = sizeY * 0.20;
     const float sizeXMin = sizeX * 0.20;
     const float sizeYMax = sizeY * 0.80;
@@ -304,14 +301,13 @@ void setCallBacks()
  */
 void setCameras()
 {
-	//TODO:: fissare le camere
-    glm::vec3 eye = glm::vec3(200.f, 50.f, 220.f);
-    glm::vec3 center = glm::vec3(0.f, 50.f, -150.f);
+    glm::vec3 eye = glm::vec3(400.f, 150.f, 300.f);
+    glm::vec3 center = glm::vec3(0.f, 50.f, -50.f);
     glm::vec3 up = glm::vec3(0.f, 1.f, 0.f);
     engine->addCamera("Camera3", false, eye, center, up);
-    eye = glm::vec3(200.f, 200.f, 220.f);
+    eye = glm::vec3(-450.f, 330.f, 350.f);
     engine->addCamera("Camera2", false, eye, center, up);
-    eye = glm::vec3(0.0f, 50.0f, 200.f);
+    eye = glm::vec3(0.0f, 50.0f, 220.f);
     center = glm::vec3(0.0f, 50.0f, -150.0f);
     engine->addCamera("Camera1", true, eye, center, up);
 }

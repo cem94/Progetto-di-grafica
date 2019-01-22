@@ -135,15 +135,6 @@ int Node::getChildrenSize() const
 }
 
 /**
- * Method that reserves memory for this node's childrens
- * @param  size children size
- */
-void Node::setChildrenSize(unsigned int size)
-{
-    children.reserve(size);
-}
-
-/**
  * Getter for node final matrix
  * @return this node final matrix
  */
@@ -160,7 +151,16 @@ glm::mat4 Node::getFinalMatrix()
  */
 int Node::getCapacity() const
 {
-    return (int)this->children.capacity();
+    return (int)this->children.capacity(); 
+}
+
+/**
+ * Method that reserves memory for this node's childrens
+ * @param  size children size
+ */
+void Node::setCapacity(unsigned int size) 
+{ 
+	this->children.reserve(size);
 }
 
 /**

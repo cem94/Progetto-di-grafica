@@ -78,10 +78,8 @@ public:
 	void freeImageInitialize();
 	void freeImageDeInitialize();
 	Node* getScene(const char* name);
-	void setCameraToPalm(Node* root);
 	void addCamera(std::string name, bool movable, glm::vec3 eye,
 		glm::vec3 center, glm::vec3 up);
-	bool isMovableCamera();
 	void moveCameraRight(float direction);
 	void moveCameraUp(float direction);
 	void moveCameraForward(float direction);
@@ -103,7 +101,6 @@ public:
 	void closeHand(Node* root);
 	void openHand(Node * root);
 	void free();
-	//void sortTrasparentMeshesList(std::vector<Node*>& transparentMeshes);
 	void setAlphaToMaterial(Node* root, float alpha, std::string nodeName);
 	void createRenderList(Node* root);
 	Camera * getCurrentCamera();

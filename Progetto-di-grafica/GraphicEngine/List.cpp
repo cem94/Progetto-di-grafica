@@ -134,23 +134,20 @@ void List::sort()
     std::vector<Node*> nodes;
     std::vector<Light*> lights;
     std::vector<Mesh*> meshes;
-	//TODO:: provare a spostare il root come primo elementoe controllare
     for (std::vector<Node*>::iterator n = list.begin(), end = list.end(); n != end; ++n)
     {
-        if ((*n)->getType() == Object::NODE)
+		const Object::Type type = (*n)->getType();
+        if (type == Object::NODE)
         {
             nodes.push_back((*n));
-            continue;
         }
-        if ((*n)->getType() == Object::LIGHT)
+        else if (type == Object::LIGHT)
         {
             lights.push_back(dynamic_cast<Light*>((*n)));
-            continue;
         }
-        if ((*n)->getType() == Object::MESH)
+        else if (type == Object::MESH)
         {
             meshes.push_back(dynamic_cast<Mesh*>((*n)));
-            continue;
         }
     }
     list.clear();
@@ -172,11 +169,12 @@ void List::render(glm::mat4 scaling)
     const bool reflection = isReflection();
     for (std::vector<Node*>::iterator n = list.begin(), end = list.end(); n != end; ++n)
     {
-        glm::mat4 renderMatrix = cameraMat * (*n)->getFinalMatrix();
-        if (reflection && (*n)->getName() == "plane")
+		Node* node = (*n);
+        const glm::mat4 renderMatrix = cameraMat * node->getFinalMatrix();
+        if (reflection && node->getName() == "plane")
         {
             continue;
         }
-        (*n)->render(renderMatrix);
+        node->render(renderMatrix);
     }
 }
