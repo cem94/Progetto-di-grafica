@@ -60,23 +60,23 @@ void reshapeCallback(int width, int height)
  */
 void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 {
-	// pressed
-	keyState[key] = true;
-	switch (key)
-	{
-	case '1':
-		engine->enableLight(scene, "fix_light");
+    // pressed
+    keyState[key] = true;
+    switch (key)
+    {
+    case '1':
+        engine->enableLight(scene, "fix_light");
+        break;
+    case '2':
+        engine->enableLight(scene, "Omni1");
+        break;
+    case '3':
+        engine->enableLight(scene, "Omni2");
+        break;
+    case '4':
+        engine->enableLight(scene, "Omni3");
 		break;
-	case '2':
-		engine->enableLight(scene, "Omni1");
-		break;
-	case '3':
-		engine->enableLight(scene, "Omni2");
-		break;
-	case '4':
-		engine->enableLight(scene, "Omni3");
-		break;
-	case '5':
+    case '5':
 		engine->enableLight(scene, "Omni4");
 		break;
 	case '6':
@@ -305,16 +305,17 @@ void setCameras()
  */
 int main(int argc, char* argv[])
 {
-	std::cout << "Client application starts" << std::endl;
-	// init engine settings
-	engine->init();
-	// init call back functions
-	setCallBacks();
-	// set background color
-	engine->clearColor(1.f, 1.f, 1.f);
-	// set cameras
-	setCameras();
-	const char* fileName = "../ovo_files/full_scene.ovo";
+    std::cout << "Client application starts" << std::endl;
+    // init engine settings
+    engine->init();
+    // init call back functions
+    setCallBacks();
+    // set background color
+    engine->clearColor(1.f,1.f,1.f);
+    // set cameras
+    setCameras();
+	// load ovo file
+    const char* fileName = "../ovo_files/full_scene.ovo";
 	// read ovo file, load scene and start main loop
 	scene = engine->getScene(fileName);
 	engine->createRenderList(scene);
@@ -322,5 +323,5 @@ int main(int argc, char* argv[])
 	engine->startLoop();
 	//free resources
 	engine->free();
-	std::cout << "Application terminated" << std::endl;
+    std::cout << "Application terminated" << std::endl;
 }
