@@ -11,8 +11,6 @@ public:
     Light(std::string name);
     virtual ~Light();
     enum Subtype { OMNI, SPOTLIGHT, DIRECTIONAL };
-    /*short getIntensity() const;
-    void setIntensity(short intensity);*/
     void setAmbient(glm::vec4 ambient);
     void setDiffuse(glm::vec4 diffuse);
     void setSpecular(glm::vec4 specular);
