@@ -26,37 +26,38 @@ Mesh::~Mesh()
  * @param numberOfVertexes number of vertexes
  */
 void Mesh::generateVAO(float* vertexes, float* normals, float* uvArray,
-	unsigned int* indices, unsigned int numberOfVertexes) {
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-	// vertex vbo
-	glGenBuffers(1, &vertexVBO);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexVBO);
-	glBufferData(GL_ARRAY_BUFFER, numberOfVertexes * 3 * sizeof(float), vertexes,
-		GL_STATIC_DRAW);
-	glVertexPointer(3, GL_FLOAT, 0, nullptr);
-	// normals
-	glGenBuffers(1, &normalVBO);
-	glBindBuffer(GL_ARRAY_BUFFER, normalVBO);
-	glBufferData(GL_ARRAY_BUFFER, numberOfVertexes * 3 * sizeof(float), normals,
-		GL_STATIC_DRAW);
-	glNormalPointer(GL_FLOAT, 0, nullptr);
-	// array uv
-	glGenBuffers(1, &uvVBO);
-	glBindBuffer(GL_ARRAY_BUFFER, uvVBO);
-	glBufferData(GL_ARRAY_BUFFER, numberOfVertexes * 2 * sizeof(float), uvArray,
-		GL_STATIC_DRAW);
-	glTexCoordPointer(2, GL_FLOAT, 0, nullptr);
-	// indices vbo
-	glGenBuffers(1, &indicesVBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indicesVBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER,
-		numberOfFaces * 3 * sizeof(unsigned int), indices,
-		GL_STATIC_DRAW);
-	glEnableClientState(GL_NORMAL_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glBindVertexArray(0);
+                       unsigned int* indices, unsigned int numberOfVertexes)
+{
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+    // vertex vbo
+    glGenBuffers(1, &vertexVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, vertexVBO);
+    glBufferData(GL_ARRAY_BUFFER, numberOfVertexes * 3 * sizeof(float), vertexes,
+                 GL_STATIC_DRAW);
+    glVertexPointer(3, GL_FLOAT, 0, nullptr);
+    // normals
+    glGenBuffers(1, &normalVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, normalVBO);
+    glBufferData(GL_ARRAY_BUFFER, numberOfVertexes * 3 * sizeof(float), normals,
+                 GL_STATIC_DRAW);
+    glNormalPointer(GL_FLOAT, 0, nullptr);
+    // array uv
+    glGenBuffers(1, &uvVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, uvVBO);
+    glBufferData(GL_ARRAY_BUFFER, numberOfVertexes * 2 * sizeof(float), uvArray,
+                 GL_STATIC_DRAW);
+    glTexCoordPointer(2, GL_FLOAT, 0, nullptr);
+    // indices vbo
+    glGenBuffers(1, &indicesVBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indicesVBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER,
+                 numberOfFaces * 3 * sizeof(unsigned int), indices,
+                 GL_STATIC_DRAW);
+    glEnableClientState(GL_NORMAL_ARRAY);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glBindVertexArray(0);
 }
 
 /**
@@ -65,7 +66,7 @@ void Mesh::generateVAO(float* vertexes, float* normals, float* uvArray,
  */
 Material* Mesh::getMaterial() const
 {
-	return material;
+    return material;
 }
 
 /**
@@ -74,7 +75,7 @@ Material* Mesh::getMaterial() const
  */
 void Mesh::setMaterial(Material* material)
 {
-	this->material = material;
+    this->material = material;
 }
 
 /**
@@ -83,7 +84,7 @@ void Mesh::setMaterial(Material* material)
  */
 float Mesh::getRadius()
 {
-	return this->radius;
+    return this->radius;
 }
 
 /**
@@ -92,7 +93,7 @@ float Mesh::getRadius()
  */
 void Mesh::setRadius(float radius)
 {
-	this->radius = radius;
+    this->radius = radius;
 }
 
 /**
@@ -101,7 +102,7 @@ void Mesh::setRadius(float radius)
  */
 void Mesh::setNumberOfFaces(unsigned int numberOfFaces)
 {
-	this->numberOfFaces = numberOfFaces;
+    this->numberOfFaces = numberOfFaces;
 }
 /**
  * Render for mesh
@@ -109,11 +110,12 @@ void Mesh::setNumberOfFaces(unsigned int numberOfFaces)
  */
 void Mesh::render(glm::mat4 renderMatrix)
 {
-	Camera *  camera = Engine::getInstance().getCurrentCamera();
-	//TODO eliminare
-	if (camera == nullptr) return;
-	glLoadMatrixf(glm::value_ptr(camera->getMatrix() * renderMatrix));
-	material->render(renderMatrix);
-	glBindVertexArray(vao);
-	glDrawElements(GL_TRIANGLES, numberOfFaces * 3, GL_UNSIGNED_INT, nullptr);
+    Camera *  camera = Engine::getInstance().getCurrentCamera();
+    //TODO eliminare
+    if (camera == nullptr)
+        return;
+    glLoadMatrixf(glm::value_ptr(camera->getMatrix() * renderMatrix));
+    material->render(renderMatrix);
+    glBindVertexArray(vao);
+    glDrawElements(GL_TRIANGLES, numberOfFaces * 3, GL_UNSIGNED_INT, nullptr);
 }

@@ -26,7 +26,7 @@ void displayCallback()
     // setto la matrice di proiezione prospettica per il rendering 3d
     engine->setProjectionMatrix(perspective);
     // 3d rendering//
-	engine->render();
+    engine->render();
     if (rotating)
         engine->autoRotateModel(scene, -1.0f);
     // 2D rendering//
@@ -75,19 +75,19 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
         break;
     case '4':
         engine->enableLight(scene, "Omni3");
-		break;
+        break;
     case '5':
-		engine->enableLight(scene, "Omni4");
-		break;
-	case '6':
-		engine->enableLight(scene, "specular_light");
-		break;
-	case '7':
-		engine->enableLight(scene, "moving_light");
-		break;
+        engine->enableLight(scene, "Omni4");
+        break;
+    case '6':
+        engine->enableLight(scene, "specular_light");
+        break;
+    case '7':
+        engine->enableLight(scene, "moving_light");
+        break;
     case 'r':
-		if(!rotating)
-        engine->rotateModel(scene, 8);
+        if(!rotating)
+            engine->rotateModel(scene, 8);
         break;
     case 'R':
         rotating = !rotating;
@@ -96,30 +96,31 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
         engine->changeCamera(scene);
         break;
     }
-	//guardo se sono tenuti premuti uno o più bottoni
-	if (keyState[(unsigned char)'h'] == true)
-	{
-		engine->closeHand(scene);
-	}
-	 if (keyState[(unsigned char)' '] == true)
-	{
-		engine->closeThumb(scene);
-	} 
-	if (keyState[(unsigned char)'f'] == true)
-	{
-		engine->closeFinger(scene, 1);
-	} if (keyState[(unsigned char)'e'] == true)
-	{
-		engine->closeFinger(scene, 2);
-	}
-	if (keyState[(unsigned char)'w'] == true)
-	{
-		engine->closeFinger(scene, 3);
-	}
-	if (keyState[(unsigned char)'a'] == true)
-	{
-		engine->closeFinger(scene, 4);
-	}
+    //guardo se sono tenuti premuti uno o più bottoni
+    if (keyState[(unsigned char)'h'] == true)
+    {
+        engine->closeHand(scene);
+    }
+    if (keyState[(unsigned char)' '] == true)
+    {
+        engine->closeThumb(scene);
+    }
+    if (keyState[(unsigned char)'f'] == true)
+    {
+        engine->closeFinger(scene, 1);
+    }
+    if (keyState[(unsigned char)'e'] == true)
+    {
+        engine->closeFinger(scene, 2);
+    }
+    if (keyState[(unsigned char)'w'] == true)
+    {
+        engine->closeFinger(scene, 3);
+    }
+    if (keyState[(unsigned char)'a'] == true)
+    {
+        engine->closeFinger(scene, 4);
+    }
     engine->redisplay();
 }
 
@@ -240,25 +241,25 @@ void mouseMoved(int x, int y)
     const float sizeXMin = sizeX * 0.20;
     const float sizeYMax = sizeY * 0.80;
     const float sizeXMax = sizeX * 0.80;
-	// UP
+    // UP
     if (x > sizeXMin && x < sizeXMax && y < sizeYMin)
     {
         const float angle = (10.0f / sizeYMin) * (sizeYMin - y);
         engine->rotateCameraUp(-angle);
-      }
-	// DOWN
-	else if (x > sizeXMin && x < sizeXMax && y > sizeYMax)
+    }
+    // DOWN
+    else if (x > sizeXMin && x < sizeXMax && y > sizeYMax)
     {
         const float angle = (10.0f / (sizeY - sizeYMax)) * (y - sizeYMax);
         engine->rotateCameraUp(angle);
-         }
-	// LEFT
+    }
+    // LEFT
     else if (y > sizeYMin && y < sizeYMax && x < sizeXMin)
     {
         const float angle = (10.0f / sizeXMin) * (sizeXMin - x);
         engine->rotateCameraRight(-angle);
     }
-	// RIGHT
+    // RIGHT
     else if (y > sizeYMin && y < sizeYMax && x > sizeXMax)
     {
         const float angle = (10.0f / (sizeX - sizeXMax)) * (x - sizeXMax);
@@ -314,14 +315,14 @@ int main(int argc, char* argv[])
     engine->clearColor(1.f,1.f,1.f);
     // set cameras
     setCameras();
-	// load ovo file
+    // load ovo file
     const char* fileName = "../ovo_files/full_scene.ovo";
-	// read ovo file, load scene and start main loop
+    // read ovo file, load scene and start main loop
     scene = engine->getScene(fileName);
-	engine->createRenderList(scene);
-	//start main loop
+    engine->createRenderList(scene);
+    //start main loop
     engine->startLoop();
     //free resources
-	engine->free();
+    engine->free();
     std::cout << "Application terminated" << std::endl;
 }

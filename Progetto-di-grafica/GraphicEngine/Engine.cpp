@@ -32,13 +32,15 @@ List* toRender = new List();
 Engine* Engine::instance = nullptr;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void printList(std::vector<Node*> list) {
-	for (auto n : list) {
-		std::cout << n->getName().c_str() << std::endl;
-		std::cout << n->getId() << std::endl;
-	}
-	std::cout << "-----------------------------------------------------" << std::endl;
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void printList(std::vector<Node*> list)
+{
+    for (auto n : list)
+    {
+        std::cout << n->getName().c_str() << std::endl;
+        std::cout << n->getId() << std::endl;
+    }
+    std::cout << "-----------------------------------------------------" << std::endl;
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 
 /**
@@ -46,13 +48,13 @@ void printList(std::vector<Node*> list) {
  * @param  scene the scene graph to print
  * @param indentation text intentation
  */
- //TODO::  renderlo privato! -> non è neanche un metodo della classe per ora
+//TODO::  renderlo privato! -> non è neanche un metodo della classe per ora
 void printTree(Node* scene, std::string indentation)
 {
-	glm::mat4 mat = scene->getMatrix();
-	std::cout << indentation.c_str() << scene->getName().c_str() << std::endl;
-	for (int i = 0; i < scene->getChildrenSize(); i++)
-		printTree(scene->getChildren().at(i), "\t - " + indentation);
+    glm::mat4 mat = scene->getMatrix();
+    std::cout << indentation.c_str() << scene->getName().c_str() << std::endl;
+    for (int i = 0; i < scene->getChildrenSize(); i++)
+        printTree(scene->getChildren().at(i), "\t - " + indentation);
 }
 
 /**
@@ -61,9 +63,9 @@ void printTree(Node* scene, std::string indentation)
  */
 Engine LIB_API & Engine::getInstance()
 {
-	if (instance == nullptr)
-		instance = new Engine{};
-	return *instance;
+    if (instance == nullptr)
+        instance = new Engine{};
+    return *instance;
 }
 
 /**
@@ -71,31 +73,31 @@ Engine LIB_API & Engine::getInstance()
  */
 void LIB_API Engine::init()
 {
-	freeImageInitialize();
-	glutInitWindowSize(1920, 1080);
-	glutInitWindowPosition(0, 0);
-	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-	int argc = 1;
-	glutInit(&argc, nullptr);
-	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
-	windowId = glutCreateWindow("Engine");
-	glewExperimental = GL_TRUE;  // Optional, but recommended
-	glEnable(GL_NORMALIZE);
-	// Init di glew
-	GLenum err = glewInit();
-	if (err != GLEW_OK)
-	{
-		// Error loading GLEW
-		printf("Error loading GLEW\n");
-	}
-	else if (!glewIsSupported("GL_VERSION_2_1"))
-	{
-		// Required OpenGL version not supported
-		printf("Required OpenGL version not supported\n");
-	}
-	enableLighting(true);
-	glEnable(GL_LIGHT0);
-	enableZbuffer();
+    freeImageInitialize();
+    glutInitWindowSize(1920, 1080);
+    glutInitWindowPosition(0, 0);
+    glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
+    int argc = 1;
+    glutInit(&argc, nullptr);
+    glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
+    windowId = glutCreateWindow("Engine");
+    glewExperimental = GL_TRUE;  // Optional, but recommended
+    glEnable(GL_NORMALIZE);
+    // Init di glew
+    GLenum err = glewInit();
+    if (err != GLEW_OK)
+    {
+        // Error loading GLEW
+        printf("Error loading GLEW\n");
+    }
+    else if (!glewIsSupported("GL_VERSION_2_1"))
+    {
+        // Required OpenGL version not supported
+        printf("Required OpenGL version not supported\n");
+    }
+    enableLighting(true);
+    glEnable(GL_LIGHT0);
+    enableZbuffer();
 }
 
 /**
@@ -103,7 +105,7 @@ void LIB_API Engine::init()
  */
 void LIB_API Engine::startLoop()
 {
-	glutMainLoop();
+    glutMainLoop();
 }
 
 /**
@@ -112,7 +114,7 @@ void LIB_API Engine::startLoop()
  */
 void LIB_API Engine::loadMatrix(glm::mat4 matrix)
 {
-	glLoadMatrixf(glm::value_ptr(matrix));
+    glLoadMatrixf(glm::value_ptr(matrix));
 }
 
 /**
@@ -123,7 +125,7 @@ void LIB_API Engine::loadMatrix(glm::mat4 matrix)
  */
 void LIB_API Engine::clearColor(float r, float g, float b)
 {
-	glClearColor(r, g, b, 1.0f);
+    glClearColor(r, g, b, 1.0f);
 }
 
 /**
@@ -132,7 +134,7 @@ void LIB_API Engine::clearColor(float r, float g, float b)
  */
 void LIB_API Engine::mouseWheel(void(*mouseWheelFunc)(int, int, int, int))
 {
-	glutMouseWheelFunc(mouseWheelFunc);
+    glutMouseWheelFunc(mouseWheelFunc);
 }
 
 /**
@@ -141,7 +143,7 @@ void LIB_API Engine::mouseWheel(void(*mouseWheelFunc)(int, int, int, int))
  */
 int LIB_API Engine::getWindowWidth()
 {
-	return glutGet(GLUT_WINDOW_WIDTH);
+    return glutGet(GLUT_WINDOW_WIDTH);
 }
 
 /**
@@ -150,7 +152,7 @@ int LIB_API Engine::getWindowWidth()
  */
 int LIB_API Engine::getWindowHeight()
 {
-	return glutGet(GLUT_WINDOW_HEIGHT);
+    return glutGet(GLUT_WINDOW_HEIGHT);
 }
 
 /**
@@ -159,7 +161,7 @@ int LIB_API Engine::getWindowHeight()
  */
 void LIB_API Engine::mouseMoved(void(*mouseMoved)(int, int))
 {
-	glutPassiveMotionFunc(mouseMoved);
+    glutPassiveMotionFunc(mouseMoved);
 }
 
 /**
@@ -167,7 +169,7 @@ void LIB_API Engine::mouseMoved(void(*mouseMoved)(int, int))
  */
 void LIB_API Engine::redisplay()
 {
-	glutPostWindowRedisplay(windowId);
+    glutPostWindowRedisplay(windowId);
 }
 
 /**
@@ -176,7 +178,7 @@ void LIB_API Engine::redisplay()
  */
 void LIB_API Engine::reshape(void(*reshapeCallback)(int, int))
 {
-	glutReshapeFunc(reshapeCallback);
+    glutReshapeFunc(reshapeCallback);
 }
 
 /**
@@ -185,7 +187,7 @@ void LIB_API Engine::reshape(void(*reshapeCallback)(int, int))
  */
 void LIB_API Engine::display(void(*displayCallback)())
 {
-	glutDisplayFunc(displayCallback);
+    glutDisplayFunc(displayCallback);
 }
 
 /**
@@ -194,10 +196,10 @@ void LIB_API Engine::display(void(*displayCallback)())
  */
 void LIB_API Engine::timer(void timerCallback(int))
 {
-	fps = frames / 1.0f;
-	frames = 0;
-	// Register the next update:
-	glutTimerFunc(1000, timerCallback, 0);
+    fps = frames / 1.0f;
+    frames = 0;
+    // Register the next update:
+    glutTimerFunc(1000, timerCallback, 0);
 }
 
 /**
@@ -206,7 +208,7 @@ void LIB_API Engine::timer(void timerCallback(int))
  */
 void LIB_API Engine::keyboard(void(*keyboardCallBack)(unsigned char, int, int))
 {
-	glutKeyboardFunc(keyboardCallBack);
+    glutKeyboardFunc(keyboardCallBack);
 }
 
 /**
@@ -215,7 +217,7 @@ void LIB_API Engine::keyboard(void(*keyboardCallBack)(unsigned char, int, int))
  */
 void LIB_API Engine::keyboardUp(void(*keyboardUpCallBack)(unsigned char, int, int))
 {
-	glutKeyboardUpFunc(keyboardUpCallBack);
+    glutKeyboardUpFunc(keyboardUpCallBack);
 }
 
 /**
@@ -224,7 +226,7 @@ void LIB_API Engine::keyboardUp(void(*keyboardUpCallBack)(unsigned char, int, in
  */
 void LIB_API Engine::specialKeyboard(void(*specialFunc)(int, int, int))
 {
-	glutSpecialFunc(specialFunc);
+    glutSpecialFunc(specialFunc);
 }
 
 /**
@@ -236,7 +238,7 @@ void LIB_API Engine::specialKeyboard(void(*specialFunc)(int, int, int))
  */
 void LIB_API Engine::setViewport(int x, int y, int width, int height)
 {
-	glViewport(x, y, width, height);
+    glViewport(x, y, width, height);
 }
 
 /**
@@ -244,7 +246,7 @@ void LIB_API Engine::setViewport(int x, int y, int width, int height)
  */
 void LIB_API Engine::clearBuffers()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 /**
@@ -252,7 +254,7 @@ void LIB_API Engine::clearBuffers()
  */
 void LIB_API Engine::swapBuffers()
 {
-	glutSwapBuffers();
+    glutSwapBuffers();
 }
 
 /**
@@ -260,7 +262,7 @@ void LIB_API Engine::swapBuffers()
  */
 void LIB_API Engine::loadIdentity()
 {
-	loadMatrix(glm::mat4(1.0f));
+    loadMatrix(glm::mat4(1.0f));
 }
 
 /**
@@ -268,7 +270,7 @@ void LIB_API Engine::loadIdentity()
  */
 void Engine::freeImageInitialize()
 {
-	FreeImage_Initialise();
+    FreeImage_Initialise();
 }
 
 /**
@@ -276,7 +278,7 @@ void Engine::freeImageInitialize()
 */
 void Engine::freeImageDeInitialize()
 {
-	FreeImage_DeInitialise();
+    FreeImage_DeInitialise();
 }
 
 /**
@@ -285,7 +287,7 @@ void Engine::freeImageDeInitialize()
  */
 void LIB_API Engine::setProjectionMatrix(glm::mat4 projection)
 {
-	currentCamera->setProjectionMatrix(projection);
+    currentCamera->setProjectionMatrix(projection);
 }
 
 /**
@@ -293,7 +295,7 @@ void LIB_API Engine::setProjectionMatrix(glm::mat4 projection)
  */
 void LIB_API Engine::enableZbuffer()
 {
-	glEnable(GL_DEPTH_TEST);
+    glEnable(GL_DEPTH_TEST);
 }
 
 /**
@@ -301,8 +303,8 @@ void LIB_API Engine::enableZbuffer()
  */
 void LIB_API Engine::switchLights()
 {
-	lighting = !lighting;
-	enableLighting(lighting);
+    lighting = !lighting;
+    enableLighting(lighting);
 }
 
 /**
@@ -311,14 +313,14 @@ void LIB_API Engine::switchLights()
  */
 void LIB_API Engine::enableLighting(bool value)
 {
-	if (value)
-	{
-		glEnable(GL_LIGHTING);
-	}
-	else
-	{
-		glDisable(GL_LIGHTING);
-	}
+    if (value)
+    {
+        glEnable(GL_LIGHTING);
+    }
+    else
+    {
+        glDisable(GL_LIGHTING);
+    }
 }
 
 /**
@@ -328,9 +330,9 @@ void LIB_API Engine::enableLighting(bool value)
  */
 void LIB_API Engine::enableLight(Node *scene, std::string lightName)
 {
-	Light* light = static_cast<Light *>(getNodeByName(scene, lightName));
-	if (light != nullptr)
-		light->changeState();
+    Light* light = static_cast<Light *>(getNodeByName(scene, lightName));
+    if (light != nullptr)
+        light->changeState();
 }
 
 /**
@@ -338,31 +340,31 @@ void LIB_API Engine::enableLight(Node *scene, std::string lightName)
  */
 void LIB_API Engine::renderText()
 {
-	enableLighting(false);
-	//TODO:: wrappare
-	glDisable(GL_TEXTURE_2D);
-	char text[64];
-	strcpy(text, "[1] [2] [3] [4] turn on/off lights");
-	glColor3f(1.0f, 1.0f, 1.0f);
-	glRasterPos2f(10.0f, 40.0f);
-	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
-	/*-----------------------------------------------------------*/
-	sprintf(text, "FPS: %.1f", fps);
-	glColor3f(1.0f, 1.0f, 1.0f);
-	glRasterPos2f(10.0f, 60.0f);
-	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
-	/*-----------------------------------------------------------*/
-	strcpy(text, "[c] change camera");
-	glColor3f(1.0f, 1.0f, 1.0f);
-	glRasterPos2f(10.0f, 80.0f);
-	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
-	/*-----------------------------------------------------------*/
-	sprintf(text, "[r] rotate model");
-	glColor3f(1.0f, 1.0f, 1.0f);
-	glRasterPos2f(10.0f, 100.0f);
-	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
-	glEnable(GL_TEXTURE_2D);
-	enableLighting(true);
+    enableLighting(false);
+    //TODO:: wrappare
+    glDisable(GL_TEXTURE_2D);
+    char text[64];
+    strcpy(text, "[1] [2] [3] [4] turn on/off lights");
+    glColor3f(1.0f, 1.0f, 1.0f);
+    glRasterPos2f(10.0f, 40.0f);
+    glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
+    /*-----------------------------------------------------------*/
+    sprintf(text, "FPS: %.1f", fps);
+    glColor3f(1.0f, 1.0f, 1.0f);
+    glRasterPos2f(10.0f, 60.0f);
+    glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
+    /*-----------------------------------------------------------*/
+    strcpy(text, "[c] change camera");
+    glColor3f(1.0f, 1.0f, 1.0f);
+    glRasterPos2f(10.0f, 80.0f);
+    glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
+    /*-----------------------------------------------------------*/
+    sprintf(text, "[r] rotate model");
+    glColor3f(1.0f, 1.0f, 1.0f);
+    glRasterPos2f(10.0f, 100.0f);
+    glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
+    glEnable(GL_TEXTURE_2D);
+    enableLighting(true);
 }
 
 /**
@@ -372,14 +374,14 @@ void LIB_API Engine::renderText()
  */
 void LIB_API findChildren(Node* currentNode, std::vector<Node*>& nodes)
 {
-	const int capacity = currentNode->getCapacity();
-	for (int i = 0; i < capacity; i++)
-	{
-		Node* next = nodes.at(0);
-		nodes.erase(nodes.begin());
-		currentNode->insert(next);
-		findChildren(next, nodes);
-	}
+    const int capacity = currentNode->getCapacity();
+    for (int i = 0; i < capacity; i++)
+    {
+        Node* next = nodes.at(0);
+        nodes.erase(nodes.begin());
+        currentNode->insert(next);
+        findChildren(next, nodes);
+    }
 }
 
 /**
@@ -389,13 +391,13 @@ void LIB_API findChildren(Node* currentNode, std::vector<Node*>& nodes)
 */
 Node*  Engine::getScene(const char* name)
 {
-	std::vector<Node*> nodes = OvoReader::readOVOfile(name);
-	Node* root = nodes.at(0);
-	nodes.erase(nodes.begin());
-	findChildren(root, nodes);
-	setCameraToPalm(root);
-	printTree(root, "");
-	return root;
+    std::vector<Node*> nodes = OvoReader::readOVOfile(name);
+    Node* root = nodes.at(0);
+    nodes.erase(nodes.begin());
+    findChildren(root, nodes);
+    setCameraToPalm(root);
+    printTree(root, "");
+    return root;
 }
 /**
 * Comment
@@ -406,16 +408,16 @@ Node*  Engine::getScene(const char* name)
 //CHIEDERE A CEM A COSA SERVE
 void LIB_API Engine::setCameraToPalm(Node* root)
 {
-	Node* palmo = getNodeByName(root, "guardia");
-	for (Node* n : palmo->getChildren())
-	{
-		if (n->getType() == Object::Type::CAMERA)
-		{
-			n = currentCamera;
-			return;
-		}
-	}
-	palmo->insert(currentCamera);
+    Node* palmo = getNodeByName(root, "guardia");
+    for (Node* n : palmo->getChildren())
+    {
+        if (n->getType() == Object::Type::CAMERA)
+        {
+            n = currentCamera;
+            return;
+        }
+    }
+    palmo->insert(currentCamera);
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //TODO questo potrebbe anche stare in node
@@ -425,18 +427,18 @@ void LIB_API Engine::setCameraToPalm(Node* root)
  */
 Node*  Engine::getNodeByName(Node* root, std::string name)
 {
-	if (root->getName().compare(name) == 0)
-		return root;
-	else
-	{
-		for (Node* n : root->getChildren())
-		{
-			Node* founded = getNodeByName(n, name);
-			if (founded != nullptr)
-				return founded;
-		}
-		return nullptr;
-	}
+    if (root->getName().compare(name) == 0)
+        return root;
+    else
+    {
+        for (Node* n : root->getChildren())
+        {
+            Node* founded = getNodeByName(n, name);
+            if (founded != nullptr)
+                return founded;
+        }
+        return nullptr;
+    }
 }
 
 /**
@@ -445,9 +447,9 @@ Node*  Engine::getNodeByName(Node* root, std::string name)
   */
 void  LIB_API Engine::createRenderList(Node * root)
 {
-	setAlphaToMaterial(root, 0.5f, "plane");
-	toRender = new List(root);
-	toRender->sort();
+    setAlphaToMaterial(root, 0.5f, "plane");
+    toRender = new List(root);
+    toRender->sort();
 }
 
 /**
@@ -457,7 +459,7 @@ void  LIB_API Engine::createRenderList(Node * root)
  */
 Camera * Engine::getCurrentCamera()
 {
-	return currentCamera;
+    return currentCamera;
 }
 
 /**
@@ -467,15 +469,15 @@ Camera * Engine::getCurrentCamera()
  */
 void LIB_API Engine::render()
 {
-	toRender->isReflection(true);
-	glm::mat4 mat = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, -1.0f, 1.0f));
-	//clockwise
-	glFrontFace(GL_CW);
-	toRender->render(mat);
-	//counter clockwise
-	glFrontFace(GL_CCW);
-	toRender->isReflection(false);
-	toRender->render(mat);
+    toRender->isReflection(true);
+    glm::mat4 mat = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, -1.0f, 1.0f));
+    //clockwise
+    glFrontFace(GL_CW);
+    toRender->render(mat);
+    //counter clockwise
+    glFrontFace(GL_CCW);
+    toRender->isReflection(false);
+    toRender->render(mat);
 }
 
 /**
@@ -483,7 +485,7 @@ void LIB_API Engine::render()
  */
 void LIB_API Engine::incrementFrames()
 {
-	frames++;
+    frames++;
 }
 /**
  * Add a camera to cameras list
@@ -495,15 +497,15 @@ void LIB_API Engine::incrementFrames()
  */
 void LIB_API Engine::addCamera(std::string name, bool movable, glm::vec3 eye, glm::vec3 center, glm::vec3 up)
 {
-	Camera* camera = new Camera();
-	camera->setName(name);
-	camera->setMovable(movable);
-	camera->setType(Object::Type::CAMERA);
-	camera->setMatrix(glm::lookAt(eye, center, up));
-	cameras.push_back(camera);
-	// update
-	currentCamera = camera;
-	activeCamera = static_cast<int>(cameras.size() - 1);
+    Camera* camera = new Camera();
+    camera->setName(name);
+    camera->setMovable(movable);
+    camera->setType(Object::Type::CAMERA);
+    camera->setMatrix(glm::lookAt(eye, center, up));
+    cameras.push_back(camera);
+    // update
+    currentCamera = camera;
+    activeCamera = static_cast<int>(cameras.size() - 1);
 }
 
 /**
@@ -512,7 +514,7 @@ void LIB_API Engine::addCamera(std::string name, bool movable, glm::vec3 eye, gl
 */
 bool LIB_API Engine::isMovableCamera()
 {
-	return currentCamera->getMovable();
+    return currentCamera->getMovable();
 }
 
 /**
@@ -522,11 +524,11 @@ bool LIB_API Engine::isMovableCamera()
  */
 void LIB_API Engine::moveCameraRight(float direction)
 {
-	if (!isMovableCamera())
-		return;
-	glm::mat4 matrix = currentCamera->getMatrix();
-	glm::vec3 mov = direction * 5.0f * matrix[0];
-	currentCamera->setMatrix(glm::translate(matrix, mov));
+    if (!isMovableCamera())
+        return;
+    glm::mat4 matrix = currentCamera->getMatrix();
+    glm::vec3 mov = direction * 5.0f * matrix[0];
+    currentCamera->setMatrix(glm::translate(matrix, mov));
 }
 
 /**
@@ -536,11 +538,11 @@ void LIB_API Engine::moveCameraRight(float direction)
  */
 void LIB_API Engine::moveCameraUp(float direction)
 {
-	if (!isMovableCamera())
-		return;
-	glm::mat4 matrix = currentCamera->getMatrix();
-	glm::vec3 mov = direction * 5.0f * matrix[1];
-	currentCamera->setMatrix(glm::translate(matrix, mov));
+    if (!isMovableCamera())
+        return;
+    glm::mat4 matrix = currentCamera->getMatrix();
+    glm::vec3 mov = direction * 5.0f * matrix[1];
+    currentCamera->setMatrix(glm::translate(matrix, mov));
 }
 
 /**
@@ -550,11 +552,11 @@ void LIB_API Engine::moveCameraUp(float direction)
  */
 void LIB_API Engine::moveCameraForward(float direction)
 {
-	if (!isMovableCamera())
-		return;
-	glm::mat4 matrix = currentCamera->getMatrix();
-	glm::vec3 mov = direction * 5.0f * matrix[2];
-	currentCamera->setMatrix(glm::translate(matrix, mov));
+    if (!isMovableCamera())
+        return;
+    glm::mat4 matrix = currentCamera->getMatrix();
+    glm::vec3 mov = direction * 5.0f * matrix[2];
+    currentCamera->setMatrix(glm::translate(matrix, mov));
 }
 
 /**
@@ -564,13 +566,13 @@ void LIB_API Engine::moveCameraForward(float direction)
  */
 void LIB_API Engine::rotateCameraRight(float angle)
 {
-	if (isMovableCamera())
-		return;
-	std::cout << "angle: " << angle << std::endl;
-	glm::mat4 mat = currentCamera->getMatrix();
-	glm::vec3 vec = mat[1];
-	glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), vec);
-	currentCamera->setMatrix(rotation * mat);
+    if (isMovableCamera())
+        return;
+    std::cout << "angle: " << angle << std::endl;
+    glm::mat4 mat = currentCamera->getMatrix();
+    glm::vec3 vec = mat[1];
+    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), vec);
+    currentCamera->setMatrix(rotation * mat);
 }
 /**
  * Close hand
@@ -579,13 +581,13 @@ void LIB_API Engine::rotateCameraRight(float angle)
  */
 void LIB_API Engine::rotateCameraUp(float angle)
 {
-	if (isMovableCamera())
-		return;
-	std::cout << "angle: " << angle << std::endl;
-	glm::mat4 mat = currentCamera->getMatrix();
-	glm::vec3 vec = mat[0];
-	glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), vec);
-	currentCamera->setMatrix(rotation * mat);
+    if (isMovableCamera())
+        return;
+    std::cout << "angle: " << angle << std::endl;
+    glm::mat4 mat = currentCamera->getMatrix();
+    glm::vec3 vec = mat[0];
+    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), vec);
+    currentCamera->setMatrix(rotation * mat);
 }
 
 /**
@@ -593,9 +595,9 @@ void LIB_API Engine::rotateCameraUp(float angle)
 */
 void LIB_API Engine::changeCamera(Node * root)
 {
-	activeCamera = (activeCamera + 1) % cameras.size();
-	currentCamera = cameras.at(activeCamera);
-	setCameraToPalm(root);
+    activeCamera = (activeCamera + 1) % cameras.size();
+    currentCamera = cameras.at(activeCamera);
+    setCameraToPalm(root);
 }
 
 /**
@@ -605,12 +607,12 @@ void LIB_API Engine::changeCamera(Node * root)
  */
 void LIB_API Engine::rotateModel(Node * root, float angle)
 {
-	Node* guardia = getNodeByName(root, "guardia");
-	if (guardia != nullptr)
-	{
-		glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
-		guardia->setMatrix(guardia->getMatrix()*rotation);
-	}
+    Node* guardia = getNodeByName(root, "guardia");
+    if (guardia != nullptr)
+    {
+        glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
+        guardia->setMatrix(guardia->getMatrix()*rotation);
+    }
 }
 
 /**
@@ -618,17 +620,18 @@ void LIB_API Engine::rotateModel(Node * root, float angle)
  * @param  root scene graph
  * @param angle rotation angle of fingers
  */
-void LIB_API Engine::openThumb(Node *root) {
+void LIB_API Engine::openThumb(Node *root)
+{
 
-	//ottengo falangi
-	std::string name = fingerNames[0];
-	name.append("2");
-	Node* phalanx2 = getNodeByName(root, name);
-	Node* phalanx1 = phalanx2->getParent();
-	glm::mat4 rotationY = glm::rotate(glm::mat4(1.0f), glm::radians(fingerAngles[0]), glm::vec3(-1.0f, 1.0f, 1.0f));
-	phalanx1->setMatrix(phalanx1->getMatrix()*rotationY);
-	phalanx2->setMatrix(phalanx2->getMatrix()*rotationY);
-	fingerAngles[0] = 0;
+    //ottengo falangi
+    std::string name = fingerNames[0];
+    name.append("2");
+    Node* phalanx2 = getNodeByName(root, name);
+    Node* phalanx1 = phalanx2->getParent();
+    glm::mat4 rotationY = glm::rotate(glm::mat4(1.0f), glm::radians(fingerAngles[0]), glm::vec3(-1.0f, 1.0f, 1.0f));
+    phalanx1->setMatrix(phalanx1->getMatrix()*rotationY);
+    phalanx2->setMatrix(phalanx2->getMatrix()*rotationY);
+    fingerAngles[0] = 0;
 }
 
 /**
@@ -639,18 +642,19 @@ void LIB_API Engine::openThumb(Node *root) {
  */
 void LIB_API Engine::closeThumb(Node *root)
 {
-	if (fingerAngles[0] > 65.f) {
-		return;
-	}
-	fingerAngles[0] += angle;
-	glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(1.0f, -1.0f, -1.0f));
-	std::string name = fingerNames[0];
-	name.append("2");
-	Node* phalanx2 = getNodeByName(root, name);
-	Node* phalanx1 = phalanx2->getParent();
-	Node* gemma = phalanx1->getChildren().at(1);
-	phalanx1->setMatrix(phalanx1->getMatrix()*rotation);
-	phalanx2->setMatrix(phalanx2->getMatrix()*rotation);
+    if (fingerAngles[0] > 65.f)
+    {
+        return;
+    }
+    fingerAngles[0] += angle;
+    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(1.0f, -1.0f, -1.0f));
+    std::string name = fingerNames[0];
+    name.append("2");
+    Node* phalanx2 = getNodeByName(root, name);
+    Node* phalanx1 = phalanx2->getParent();
+    Node* gemma = phalanx1->getChildren().at(1);
+    phalanx1->setMatrix(phalanx1->getMatrix()*rotation);
+    phalanx2->setMatrix(phalanx2->getMatrix()*rotation);
 }
 
 /**
@@ -660,25 +664,25 @@ void LIB_API Engine::closeThumb(Node *root)
  */
 void Engine::autoRotateModel(Node* root, float angle)
 {
-	Node* guardia = getNodeByName(root, "guardia");
-	if (guardia != nullptr)
-	{
-		glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
-		glm::mat4 translate;
-		translateCnt++;
-		if (translateUp)
-			translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.1f, 0.0f));
-		else
-			translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -0.1f, 0.0f));
+    Node* guardia = getNodeByName(root, "guardia");
+    if (guardia != nullptr)
+    {
+        glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
+        glm::mat4 translate;
+        translateCnt++;
+        if (translateUp)
+            translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.1f, 0.0f));
+        else
+            translate = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -0.1f, 0.0f));
 
-		guardia->setMatrix(guardia->getMatrix() * translate * rotation);
+        guardia->setMatrix(guardia->getMatrix() * translate * rotation);
 
-		if (translateCnt > 180)
-		{
-			translateCnt = 0;
-			translateUp = !translateUp;
-		}
-	}
+        if (translateCnt > 180)
+        {
+            translateCnt = 0;
+            translateUp = !translateUp;
+        }
+    }
 }
 
 /**
@@ -689,20 +693,20 @@ void Engine::autoRotateModel(Node* root, float angle)
  */
 void LIB_API Engine::closeFinger(Node * root, int i)
 {
-	if (fingerAngles[i] > 75.f)
-	{
-		return;
-	}
-	std::string name = fingerNames[i];
-	name.append("3");
-	Node* phalanx3 = getNodeByName(root, name);
-	Node* phalanx2 = phalanx3->getParent();
-	Node* phalanx1 = phalanx2->getParent();
-	fingerAngles[i] += angle;
-	glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 0.0f, -1.0f));
-	phalanx1->setMatrix(phalanx1->getMatrix()*rotation);
-	phalanx2->setMatrix(phalanx2->getMatrix()*rotation);
-	phalanx3->setMatrix(phalanx3->getMatrix()*rotation);
+    if (fingerAngles[i] > 75.f)
+    {
+        return;
+    }
+    std::string name = fingerNames[i];
+    name.append("3");
+    Node* phalanx3 = getNodeByName(root, name);
+    Node* phalanx2 = phalanx3->getParent();
+    Node* phalanx1 = phalanx2->getParent();
+    fingerAngles[i] += angle;
+    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 0.0f, -1.0f));
+    phalanx1->setMatrix(phalanx1->getMatrix()*rotation);
+    phalanx2->setMatrix(phalanx2->getMatrix()*rotation);
+    phalanx3->setMatrix(phalanx3->getMatrix()*rotation);
 }
 
 /**
@@ -712,16 +716,16 @@ void LIB_API Engine::closeFinger(Node * root, int i)
  */
 void LIB_API Engine::openFinger(Node * root, int i)
 {
-	std::string name = fingerNames[i];
-	name.append("3");
-	Node* phalanx3 = getNodeByName(root, name);
-	Node* phalanx2 = phalanx3->getParent();
-	Node* phalanx1 = phalanx2->getParent();
-	glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(fingerAngles[i]), glm::vec3(0.0f, 0.0f, 1.0f));
-	fingerAngles[i] = 0;
-	phalanx1->setMatrix(phalanx1->getMatrix()*rotation);
-	phalanx2->setMatrix(phalanx2->getMatrix()*rotation);
-	phalanx3->setMatrix(phalanx3->getMatrix()*rotation);
+    std::string name = fingerNames[i];
+    name.append("3");
+    Node* phalanx3 = getNodeByName(root, name);
+    Node* phalanx2 = phalanx3->getParent();
+    Node* phalanx1 = phalanx2->getParent();
+    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(fingerAngles[i]), glm::vec3(0.0f, 0.0f, 1.0f));
+    fingerAngles[i] = 0;
+    phalanx1->setMatrix(phalanx1->getMatrix()*rotation);
+    phalanx2->setMatrix(phalanx2->getMatrix()*rotation);
+    phalanx3->setMatrix(phalanx3->getMatrix()*rotation);
 }
 
 /**
@@ -731,11 +735,11 @@ void LIB_API Engine::openFinger(Node * root, int i)
  */
 void LIB_API Engine::closeHand(Node * root)
 {
-	closeThumb(root);
-	closeFinger(root, 1);
-	closeFinger(root, 2);
-	closeFinger(root, 3);
-	closeFinger(root, 4);
+    closeThumb(root);
+    closeFinger(root, 1);
+    closeFinger(root, 2);
+    closeFinger(root, 3);
+    closeFinger(root, 4);
 }
 
 /**
@@ -745,28 +749,28 @@ void LIB_API Engine::closeHand(Node * root)
  */
 void LIB_API Engine::openHand(Node * root)
 {
-	openThumb(root);
-	openFinger(root, 1);
-	openFinger(root, 2);
-	openFinger(root, 3);
-	openFinger(root, 4);
+    openThumb(root);
+    openFinger(root, 1);
+    openFinger(root, 2);
+    openFinger(root, 3);
+    openFinger(root, 4);
 }
 
 //TODO::aggiungere altre cose da deinizializzare
 void LIB_API Engine::free()
 {
-	freeImageDeInitialize();
+    freeImageDeInitialize();
 }
 
 void LIB_API Engine::setAlphaToMaterial(Node * root, float alpha, std::string nodeName)
 {
-	Node* node = getNodeByName(root, nodeName);
-	if (node != nullptr)
-	{
-		Mesh* mesh = (Mesh*)node;
-		mesh->getMaterial()->setAlpha(alpha);
-		printf("Setted alpha of %s\n", mesh->getName().c_str());
-	}
+    Node* node = getNodeByName(root, nodeName);
+    if (node != nullptr)
+    {
+        Mesh* mesh = (Mesh*)node;
+        mesh->getMaterial()->setAlpha(alpha);
+        printf("Setted alpha of %s\n", mesh->getName().c_str());
+    }
 }
 
 /**
