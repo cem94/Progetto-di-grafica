@@ -88,6 +88,8 @@ public:
 	void rotateCameraRight(float angle);
 	void rotateCameraUp(float angle);
 	void switchLights();
+	void moveLightForward(float direction);
+	void moveLightRight(float direction);
 	Node* getNodeByName(Node* root, std::string name);
 	void changeCamera(Node* root);
 	void incrementFrames();

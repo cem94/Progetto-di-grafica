@@ -19,6 +19,12 @@ bool lighting = true;
 Camera* currentCamera = nullptr;
 std::vector<Camera*> cameras;
 int activeCamera = 0;
+
+// Light
+Light* movableLight = nullptr;
+Light* specularLight = nullptr;
+Mesh* globeLight = nullptr;
+
 //finger sensitivity
 float angle = 5.f;
 float fingerAngles[5];
@@ -305,6 +311,35 @@ void LIB_API Engine::switchLights()
 	enableLighting(lighting);
 }
 
+void LIB_API Engine::moveLightForward(float direction)
+{
+	glm::mat4 matrix = movableLight->getMatrix();
+	glm::vec3 mov = direction * 5.0f * matrix[0];
+	glm::mat4 trans = glm::translate(matrix, mov);
+	if (trans[3].x > 90.0f || trans[3].x < -89.0f)
+		return;
+
+	movableLight->setMatrix(trans);
+	specularLight->setMatrix(trans);
+	glm::mat4 matrixObj = globeLight->getMatrix();
+	matrixObj[3] = (movableLight->getMatrix())[3];
+	globeLight->setMatrix(matrixObj);
+}
+
+void LIB_API Engine::moveLightRight(float direction)
+{
+	glm::mat4 matrix = movableLight->getMatrix();
+	glm::vec3 mov = direction * 5.0f * matrix[2];
+	glm::mat4 trans = glm::translate(matrix, mov);
+	if (trans[3].z > 94.0f || trans[3].z < -94.0f)
+		return;
+	movableLight->setMatrix(trans);
+	specularLight->setMatrix(trans);
+	glm::mat4 matrixObj = globeLight->getMatrix();
+	matrixObj[3] = (movableLight->getMatrix())[3];
+	globeLight->setMatrix(matrixObj);
+}
+
 /**
  * Enable or disable illumination according to the boolean value passed as argument
  * @param  value true = enable lights false = disable lights
@@ -393,6 +428,9 @@ Node*  Engine::getScene(const char* name)
 	Node* root = nodes.at(0);
 	nodes.erase(nodes.begin());
 	findChildren(root, nodes);
+	movableLight = (Light*)getNodeByName(root, "moving_light");
+	specularLight = (Light*)getNodeByName(root, "specular_light");
+	globeLight = (Mesh*)getNodeByName(root, "sphere_light");
 	setCameraToPalm(root);
 	printTree(root, "");
 	return root;
@@ -417,6 +455,7 @@ void LIB_API Engine::setCameraToPalm(Node* root)
 	}
 	palmo->insert(currentCamera);
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //TODO questo potrebbe anche stare in node
 /**

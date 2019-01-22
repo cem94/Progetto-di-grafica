@@ -72,18 +72,10 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
         break;
     case '3':
         engine->enableLight(scene, "Omni2");
-        break;
-    case '4':
-        engine->enableLight(scene, "Omni3");
 		break;
-    case '5':
-		engine->enableLight(scene, "Omni4");
-		break;
-	case '6':
-		engine->enableLight(scene, "specular_light");
-		break;
-	case '7':
+	case '4':
 		engine->enableLight(scene, "moving_light");
+		engine->enableLight(scene, "specular_light");
 		break;
     case 'r':
 		if(!rotating)
@@ -95,7 +87,20 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
     case 'c':
         engine->changeCamera(scene);
         break;
-    }
+	case 'k':
+		engine->moveLightForward(10.0f);
+		break;
+	case 'l':
+		engine->moveLightRight(-10.0f);
+		break;
+	case 'i':
+		engine->moveLightForward(-10.0f);
+		break;
+	case 'j':
+		engine->moveLightRight(10.0f);
+		break;
+	}
+
 	//guardo se sono tenuti premuti uno o più bottoni
 	if (keyState[(unsigned char)'h'] == true)
 	{
@@ -315,7 +320,7 @@ int main(int argc, char* argv[])
     // set cameras
     setCameras();
 	// load ovo file
-    const char* fileName = "../ovo_files/full_scene.ovo";
+    const char* fileName = "../ovo_files/complete_scene.ovo";
 	// read ovo file, load scene and start main loop
     scene = engine->getScene(fileName);
 	engine->createRenderList(scene);
