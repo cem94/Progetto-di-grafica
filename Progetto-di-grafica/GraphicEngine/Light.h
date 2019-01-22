@@ -38,7 +38,9 @@ private:
 	glm::vec4 color;
 	glm::vec4 direction;
 	glm::vec4 position;
-	short intensity;
+	const float intensity = 0.8f;
+    const float attenuation = 0.002f;
+    const float shiny = 128.0f;
 	glm::vec4 ambient;
 	glm::vec4 diffuse;
 	glm::vec4 specular;

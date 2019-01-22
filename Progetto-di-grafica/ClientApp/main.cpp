@@ -78,9 +78,6 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 		break;
     case '5':
 		engine->enableLight(scene, "Omni4");
-        break;
-	case '5':
-		engine->enableLight(scene, "Omni4");
 		break;
 	case '6':
 		engine->enableLight(scene, "specular_light");

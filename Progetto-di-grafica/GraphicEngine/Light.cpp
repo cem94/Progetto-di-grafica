@@ -19,7 +19,7 @@ Light::Light(std::string name)
 {
 	this->setName(name);
 	//TODO potrebbe essere un problema -> id non univoci cambiato in setLightNumber (era setId)
-	this->setLightNumber(++numberOfLights);
+	this->setLightNumber(numberOfLights++);
 }
 /**
  * Light destructor
@@ -76,15 +76,11 @@ void Light::changeState() {
  * @param  renderMatrix light render matrix
  */
 void Light::render(glm::mat4 renderMatrix) {
-  float intensity = 1.0f;
-  float attenuation = 0.001f;
-  GLfloat shiny = 128.0f;
   glm::vec4 ambientI = ambient * intensity;
   glm::vec4 diffuseI = diffuse * intensity;
   glm::vec4 specularI = specular * intensity;
  
   Camera* camera = Engine::getInstance().getCurrentCamera();
-  // TODO eliminare
   glLoadMatrixf(glm::value_ptr(camera->getMatrix() * renderMatrix));
 
   //glLightfv(getLightNumber(), GL_POSITION, glm::value_ptr(this->position));
