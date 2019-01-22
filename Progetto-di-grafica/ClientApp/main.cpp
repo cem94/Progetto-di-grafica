@@ -75,6 +75,9 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
         break;
     case '4':
         engine->enableLight(scene, "Omni3");
+		break;
+    case '5':
+		engine->enableLight(scene, "Omni4");
         break;
     case 'r':
         engine->rotateModel(scene, 1);
@@ -304,6 +307,7 @@ int main(int argc, char* argv[])
     engine->clearColor(1.f, 1.f, 1.f);
     // set cameras
     setCameras();
+	// load ovo file
     const char* fileName = "../ovo_files/full_scene.ovo";
 	// read ovo file, load scene and start main loop
     scene = engine->getScene(fileName);

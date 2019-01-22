@@ -5,11 +5,10 @@
   Material.cpp
   Mesh.cpp
   Node.cpp
-  Object.cpp
   OvoReader.cpp
   Texture.cpp
      Creazione della libreria C:\Users\cem\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Release\GraphicEngine.lib e dell'oggetto C:\Users\cem\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Release\GraphicEngine.exp
   Generazione codice in corso...
+  All 734 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Generazione codice terminata
-  All 764 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   GraphicEngine.vcxproj -> C:\Users\cem\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Release\GraphicEngine.dll

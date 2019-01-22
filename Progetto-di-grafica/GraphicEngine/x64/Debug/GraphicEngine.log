@@ -1,13 +1,2 @@
-﻿  Camera.cpp
-  Engine.cpp
-  Light.cpp
-  List.cpp
-  Material.cpp
-  Mesh.cpp
-  Node.cpp
-  Object.cpp
-  OvoReader.cpp
-  Texture.cpp
-  Generazione del codice in corso...
-     Creazione della libreria C:\Users\cem\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.lib e dell'oggetto C:\Users\cem\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.exp
+﻿  Light.cpp
   GraphicEngine.vcxproj -> C:\Users\cem\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Debug\GraphicEngine.dll
