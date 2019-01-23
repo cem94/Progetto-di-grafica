@@ -13,8 +13,6 @@ Node* scene = nullptr;
 bool rotating = false;
 int sizeX = 0;
 int sizeY = 0;
-// button state machine
-bool keyState[255];
 
 /**
  * Display callback
@@ -60,30 +58,20 @@ void reshapeCallback(int width, int height)
  */
 void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 {
-    // pressed
-    keyState[key] = true;
-    switch (key)
-    {
-    case '1':
-        engine->enableLight(scene, "fix_light");
-        break;
-    case '2':
-        engine->enableLight(scene, "Omni1");
-        break;
-    case '3':
-        engine->enableLight(scene, "Omni2");
-        break;
-    case '4':
-        engine->enableLight(scene, "Omni3");
+	switch (key)
+	{
+	case '1':
+		engine->enableLight(scene, "fix_light");
 		break;
-    case '5':
-		engine->enableLight(scene, "Omni4");
+	case '2':
+		engine->enableLight(scene, "Omni1");
 		break;
-	case '6':
-		engine->enableLight(scene, "specular_light");
+	case '3':
+		engine->enableLight(scene, "Omni2");
 		break;
-	case '7':
+	case '4':
 		engine->enableLight(scene, "moving_light");
+		engine->enableLight(scene, "specular_light");
 		break;
 	case 'r':
 		if (!rotating)
@@ -95,84 +83,66 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 	case 'c':
 		engine->changeCamera(scene);
 		break;
-	}
-	//guardo se sono tenuti premuti uno o più bottoni
-	if (keyState[(unsigned char)'h'] == true)
-	{
-		engine->closeHand(scene);
-	}
-	if (keyState[(unsigned char)' '] == true)
-	{
-		engine->closeThumb(scene);
-	}
-	if (keyState[(unsigned char)'f'] == true)
-	{
-		engine->closeFinger(scene, 1);
-	} if (keyState[(unsigned char)'e'] == true)
-	{
-		engine->closeFinger(scene, 2);
-	}
-	if (keyState[(unsigned char)'w'] == true)
-	{
-		engine->closeFinger(scene, 3);
-	}
-	if (keyState[(unsigned char)'a'] == true)
-	{
-		engine->closeFinger(scene, 4);
+	case 'k':
+		engine->moveLightForward(10.0f);
+		break;
+	case 'l':
+		engine->moveLightRight(-10.0f);
+		break;
+	case 'i':
+		engine->moveLightForward(-10.0f);
+		break;
+	case 'j':
+		engine->moveLightRight(10.0f);
+		break;
+	case 'u':
+		engine->moveLightUp(-10.0f);
+		break;
+	case 'o':
+		engine->moveLightUp(10.0f);
+		break;
+	case 'H':
+		engine->moveHand(scene, true);
+		break;
+	case 'h':
+		engine->moveHand(scene, false);
+		break;
+	case 'A':
+		engine->moveFinger(scene, 4, true);
+		break;
+	case 'a':
+		engine->moveFinger(scene, 4, false);
+		break;
+	case 'S':
+		engine->moveFinger(scene, 3, true);
+		break;
+	case 's':
+		engine->moveFinger(scene, 3, false);
+		break;
+	case 'D':
+		engine->moveFinger(scene, 2, true);
+		break;
+	case 'd':
+		engine->moveFinger(scene, 2, false);
+		break;
+	case 'F':
+		engine->moveFinger(scene, 1, true);
+		break;
+	case 'f':
+		engine->moveFinger(scene, 1, false);
+		break;
+	case 'G':
+		engine->moveFinger(scene, 0, true);
+		break;
+	case 'g':
+		engine->moveFinger(scene, 0, false);
+		break;
+	default:
+		break;
 	}
 	engine->redisplay();
 }
 
-/**
- * Keyboard up callback it detects when a key is released its main function is opening the fingers of our gauntlet
- * @param  key the button that was released
- * @param x x coordinate
- * @param x y coordinate
- */
-void keyboardUpCallback(unsigned char key, int x, int y)
-{
-	// not pressed
-	keyState[key] = false;
-	switch (key)
-	{
-	case 'h':
-		if (keyState[(unsigned char)'h'] == false)
-		{
-			engine->openHand(scene);
-		}
-		break;
-	case ' ':
-		if (keyState[(unsigned char)' '] == false)
-		{
-			engine->openThumb(scene);
-		}
-		break;
-	case 'f':
-		if (keyState[(unsigned char)'f'] == false)
-		{
-			engine->openFinger(scene, 1);
-		}
-		break;
-	case 'e':
-		if (keyState[(unsigned char)'e'] == false)
-		{
-			engine->openFinger(scene, 2);
-		}
-		break;
-	case 'w':
-		if (keyState[(unsigned char)'w'] == false)
-		{
-			engine->openFinger(scene, 3);
-		}
-		break;
-	case 'a':
-		if (keyState[(unsigned char)'a'] == false)
-		{
-			engine->openFinger(scene, 4);
-		}
-		break;
-	}
-}
 
 /**
  * Special callback this callback is used to move the camera (if movable). FreeGlut special key redefinition is necessary (e.g #define GLUT_KEY_LEFT 0x0064)
@@ -221,9 +191,7 @@ void timerCallback(int value)
 void mouseWheel(int wheel, int direction, int x, int y)
 {
 	wheel = 0;
-	if (!engine->isMovableCamera())
-		return;
-	else if (direction == -1)
+	if (direction == -1)
 		engine->moveCameraUp(1.0f);
 	else if (direction == +1)
 		engine->moveCameraUp(-1.0f);
@@ -274,7 +242,6 @@ void setCallBacks()
 	engine->display(displayCallback);
 	engine->reshape(reshapeCallback);
 	engine->keyboard(keyboardCallback);
-	engine->keyboardUp(keyboardUpCallback);
 	engine->specialKeyboard(specialCallback);
 	engine->mouseWheel(mouseWheel);
 	engine->mouseMoved(mouseMoved);
@@ -286,14 +253,14 @@ void setCallBacks()
  */
 void setCameras()
 {
-	glm::vec3 eye = glm::vec3(0.f, 50.f, 400.f);
-	glm::vec3 center = glm::vec3(0.f, 0.f, 0.f);
+	glm::vec3 eye = glm::vec3(400.f, 150.f, 300.f);
+	glm::vec3 center = glm::vec3(0.f, 50.f, -50.f);
 	glm::vec3 up = glm::vec3(0.f, 1.f, 0.f);
 	engine->addCamera("Camera3", false, eye, center, up);
-	eye = glm::vec3(400.f, 400.f, 400.f);
+	eye = glm::vec3(-450.f, 330.f, 350.f);
 	engine->addCamera("Camera2", false, eye, center, up);
-	eye = glm::vec3(0.0f, 50.0f, 400.f);
-	center = glm::vec3(0.0f, 50.0f, 200.0f);
+	eye = glm::vec3(0.0f, 50.0f, 220.f);
+	center = glm::vec3(0.0f, 50.0f, -150.0f);
 	engine->addCamera("Camera1", true, eye, center, up);
 }
 
@@ -305,17 +272,17 @@ void setCameras()
  */
 int main(int argc, char* argv[])
 {
-    std::cout << "Client application starts" << std::endl;
-    // init engine settings
-    engine->init();
-    // init call back functions
-    setCallBacks();
-    // set background color
-    engine->clearColor(1.f,1.f,1.f);
-    // set cameras
-    setCameras();
+	std::cout << "Client application starts" << std::endl;
+	// init engine settings
+	engine->init();
+	// init call back functions
+	setCallBacks();
+	// set background color
+	engine->clearColor(0.529f, 0.808f, 0.922f);
+	// set cameras
+	setCameras();
 	// load ovo file
-    const char* fileName = "../ovo_files/full_scene.ovo";
+	const char* fileName = "../ovo_files/complete_scene.ovo";
 	// read ovo file, load scene and start main loop
 	scene = engine->getScene(fileName);
 	engine->createRenderList(scene);
@@ -323,5 +290,5 @@ int main(int argc, char* argv[])
 	engine->startLoop();
 	//free resources
 	engine->free();
-    std::cout << "Application terminated" << std::endl;
+	std::cout << "Application terminated" << std::endl;
 }

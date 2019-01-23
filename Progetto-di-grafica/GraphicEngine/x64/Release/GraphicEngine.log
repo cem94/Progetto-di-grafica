@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  Texture.cpp
      Creating library C:\Users\meyer\source\repos\Progetto-di-grafica\Progetto-di-grafica\Progetto-di-grafica\x64\Release\GraphicEngine.lib and object C:\Users\meyer\source\repos\Progetto-di-grafica\Progetto-di-grafica\Progetto-di-grafica\x64\Release\GraphicEngine.exp
   Generating code
@@ -6,3 +7,13 @@
     2 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   GraphicEngine.vcxproj -> C:\Users\meyer\source\repos\Progetto-di-grafica\Progetto-di-grafica\Progetto-di-grafica\x64\Release\GraphicEngine.dll
+=======
+﻿  Engine.cpp
+     Creazione della libreria C:\Users\Julian\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Release\GraphicEngine.lib e dell'oggetto C:\Users\Julian\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Release\GraphicEngine.exp
+  Generazione codice in corso...
+  1 of 799 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  Generazione codice terminata
+  GraphicEngine.vcxproj -> C:\Users\Julian\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Release\GraphicEngine.dll
+>>>>>>> c7c94d107dc252a135389f5f41ee23a790a2650d

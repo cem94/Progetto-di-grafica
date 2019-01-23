@@ -30,7 +30,7 @@
 
 // GLM
 // Force constructors to initialize to identity
-#define GLM_FORCE_CTOR_INIT  
+#define GLM_FORCE_CTOR_INIT
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/packing.hpp>
@@ -78,33 +78,30 @@ public:
 	void freeImageInitialize();
 	void freeImageDeInitialize();
 	Node* getScene(const char* name);
-	void setCameraToPalm(Node* root);
 	void addCamera(std::string name, bool movable, glm::vec3 eye,
 		glm::vec3 center, glm::vec3 up);
-	bool isMovableCamera();
 	void moveCameraRight(float direction);
 	void moveCameraUp(float direction);
 	void moveCameraForward(float direction);
 	void rotateCameraRight(float angle);
 	void rotateCameraUp(float angle);
 	void switchLights();
+	void moveLightForward(float direction);
+	void moveLightRight(float direction);
+	void moveLightUp(float direction);
 	Node* getNodeByName(Node* root, std::string name);
 	void changeCamera(Node* root);
 	void incrementFrames();
 	void rotateModel(Node* root, float angle);
-	void closeThumb(Node* root);
-	void openThumb(Node *root);
 	void autoRotateModel(Node* root, float angle);
-	void closeFinger(Node* root, int f);
-	void openFinger(Node* root, int f);
-	void closeHand(Node* root);
-	void openHand(Node * root);
-	void free();
-	//void sortTrasparentMeshesList(std::vector<Node*>& transparentMeshes);
+	void moveFinger(Node* root, int f, bool open);
+	void moveHand(Node* root, bool open);
+	void moveThumb(Node* root, bool open);
 	void setAlphaToMaterial(Node* root, float alpha, std::string nodeName);
 	void createRenderList(Node* root);
 	Camera * getCurrentCamera();
 	void render();
+	void free();
 private:
 	Engine() {};
 	~Engine() {};

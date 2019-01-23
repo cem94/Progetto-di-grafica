@@ -1,7 +1,7 @@
 #pragma once
 
 /**
-* Contains all the parameters necessary to define a material. It enables to change material properties and it 
+* Contains all the parameters necessary to define a material. It enables to change material properties and it
 * is responsible for transferring its settings to OpenGL through the necessary methods.
 */
 class  Material : public Object
@@ -24,10 +24,10 @@ public:
     glm::vec4 getEmissive() const;
     void setEmissive(glm::vec4 emissive);
     void setTexture(std::string textureName);
-	bool hasTexture() const;
+    bool hasTexture() const;
     bool isTrasparent() const;
     void activeTransparencies();
-	void render(glm::mat4 renderMatrix = glm::mat4(1.0f)) override;
+    void render(glm::mat4 renderMatrix = glm::mat4(1.0f)) override;
 private:
     Texture* texture;
     glm::vec3 ambient;
