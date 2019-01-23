@@ -504,7 +504,16 @@ void  LIB_API Engine::createRenderList(Node * root)
  */
 Camera * Engine::getCurrentCamera()
 {
-    return currentCamera;
+    return currentCamera; }
+
+glm::mat4 Engine::getCurrentCameraMatrix() 
+{ 
+	return currentCamera->getMatrix(); 
+}
+
+bool LIB_API Engine::isMovableCamera() 
+{ 
+	return currentCamera->getMovable(); 
 }
 
 /**
@@ -513,9 +522,9 @@ Camera * Engine::getCurrentCamera()
  * @param angle rotation angle of fingers
  */
 void LIB_API Engine::render()
-{
+{    glm::mat4 mat = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, -1.0f, 1.0f));
+
     toRender->isReflection(true);
-    glm::mat4 mat = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, -1.0f, 1.0f));
     //clockwise
     glFrontFace(GL_CW);
     toRender->render(mat);
@@ -553,75 +562,22 @@ void LIB_API Engine::addCamera(std::string name, bool movable, glm::vec3 eye, gl
     activeCamera = static_cast<int>(cameras.size() - 1);
 }
 
-/**
- * Close hand
- * @param  root scene graph
- * @param angle rotation angle of fingers
- */
-void LIB_API Engine::moveCameraRight(float direction)
+void LIB_API Engine::moveCamera(glm::mat4 move) 
 {
-    if (!currentCamera->getMovable())
-        return;
-    glm::mat4 matrix = currentCamera->getMatrix();
-    glm::vec3 mov = direction * 5.0f * matrix[0];
-    currentCamera->setMatrix(glm::translate(matrix, mov));
+  if (!currentCamera->getMovable())
+	  return;
+  if (move[3][1] > 0.0f) 
+	  return;
+  if (move[3][2] > 400.0f || move[3][2] < -400.0f) 
+	  return;
+  if (move[3][0] > 630.0f || move[3][0] < -630.0f) 
+	  return;
+  currentCamera->setMatrix(move);
 }
 
-/**
- * Close hand
- * @param  root scene graph
- * @param angle rotation angle of fingers
- */
-void LIB_API Engine::moveCameraUp(float direction)
+void Engine::rotateCamera(glm::mat4 rotate) 
 {
-    if (!currentCamera->getMovable())
-        return;
-    glm::mat4 matrix = currentCamera->getMatrix();
-    glm::vec3 mov = direction * 5.0f * matrix[1];
-    currentCamera->setMatrix(glm::translate(matrix, mov));
-}
-
-/**
- * Close hand
- * @param  root scene graph
- * @param angle rotation angle of fingers
- */
-void LIB_API Engine::moveCameraForward(float direction)
-{
-    if (!currentCamera->getMovable())
-        return;
-    glm::mat4 matrix = currentCamera->getMatrix();
-    glm::vec3 mov = direction * 5.0f * matrix[2];
-    currentCamera->setMatrix(glm::translate(matrix, mov));
-}
-
-/**
- * Close hand
- * @param  root scene graph
- * @param angle rotation angle of fingers
- */
-void LIB_API Engine::rotateCameraRight(float angle)
-{
-    if (currentCamera->getMovable())
-        return;
-    glm::mat4 mat = currentCamera->getMatrix();
-    glm::vec3 vec = mat[1];
-    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), vec);
-    currentCamera->setMatrix(rotation * mat);
-}
-/**
- * Close hand
- * @param  root scene graph
- * @param angle rotation angle of fingers
- */
-void LIB_API Engine::rotateCameraUp(float angle)
-{
-    if (!currentCamera->getMovable())
-        return;   
-    glm::mat4 mat = currentCamera->getMatrix();
-    glm::vec3 vec = mat[0];
-    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), vec);
-    currentCamera->setMatrix(rotation * mat);
+  currentCamera->setMatrix(rotate);
 }
 
 /**

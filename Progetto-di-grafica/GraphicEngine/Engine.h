@@ -80,12 +80,8 @@ public:
     Node* getScene(const char* name);
     void addCamera(std::string name, bool movable, glm::vec3 eye,
                    glm::vec3 center, glm::vec3 up);
-    bool isMovableCamera();
-    void moveCameraRight(float direction);
-    void moveCameraUp(float direction);
-    void moveCameraForward(float direction);
-    void rotateCameraRight(float angle);
-    void rotateCameraUp(float angle);
+    void moveCamera(glm::mat4 move);
+    void rotateCamera(glm::mat4 rotate);
     void switchLights();
     void moveLightForward(float direction);
     void moveLightRight(float direction);
@@ -105,6 +101,8 @@ public:
     void setAlphaToMaterial(Node* root, float alpha, std::string nodeName);
     void createRenderList(Node* root);
     Camera * getCurrentCamera();
+    glm::mat4 getCurrentCameraMatrix();
+    bool isMovableCamera();
     void render();
 private:
     Engine() {};
