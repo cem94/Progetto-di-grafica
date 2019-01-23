@@ -1,36 +1,42 @@
 #include "Engine.h"
+
 //Glew//
 #include <GL/glew.h>
 
 // FreeGlut//
 #include <GL/freeglut.h>
+
 // FreeImage
 #include <FreeImage.h>
+
 /////////////
 // GLOBALS //
 ////////////
+
 int windowId;
-// performance properties
+// performance options
 float fps = 0.f;
 int frames = 0;
-// options
+
+//Light options
 bool lighting = true;
-// Cameras
+
+//Cameras
 Camera* currentCamera = nullptr;
 std::vector<Camera*> cameras;
 int activeCamera = 0;
 
-// Light
+//Light
 Light* movableLight = nullptr;
 Light* specularLight = nullptr;
 Mesh* globeLight = nullptr;
 
-//finger options
+//Fingers options
 const float sensitivity = 5.f;
 float fingerAngles[5];
 std::string fingerNames[5] = { "pollice", "indice", "medio", "anulare", "mignolo" };
 
-// Gauntlet rotation options
+//Gauntlet rotation options
 bool translateUp = false;
 int translateCounter;
 //list of istances to render
@@ -42,8 +48,7 @@ Engine* Engine::instance = nullptr;
  * @param  scene the scene graph to print
  * @param indentation text intentation
  */
-//TODO::  renderlo privato! -> non è neanche un metodo della classe per ora
-void printTree(Node* scene, std::string indentation)
+void Engine::printTree(Node* scene, std::string indentation)
 {
     std::cout << indentation.c_str() << scene->getName().c_str() << std::endl;
     for (int i = 0; i < scene->getChildrenSize(); i++)
@@ -439,6 +444,24 @@ void  LIB_API Engine::createRenderList(Node * root)
     toRender->sort();
 }
 
+/**
+ * Close hand
+ * @param  root scene graph
+ * @param angle rotation angle of fingers
+ */
+Camera * Engine::getCurrentCamera()
+{
+    return currentCamera; }
+
+glm::mat4 Engine::getCurrentCameraMatrix() 
+{ 
+	return currentCamera->getMatrix(); 
+}
+
+bool LIB_API Engine::isMovableCamera() 
+{ 
+	return currentCamera->getMovable(); 
+}
 
 /**
  * Close hand
@@ -446,9 +469,9 @@ void  LIB_API Engine::createRenderList(Node * root)
  * @param angle rotation angle of fingers
  */
 void LIB_API Engine::render()
-{
+{    glm::mat4 mat = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, -1.0f, 1.0f));
+
     toRender->isReflection(true);
-    glm::mat4 mat = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, -1.0f, 1.0f));
     //clockwise
     glFrontFace(GL_CW);
     toRender->render(mat);
@@ -499,16 +522,6 @@ void LIB_API Engine::incrementFrames()
 }
 
 /**
- * Close hand
- * @param  root scene graph
- * @param angle rotation angle of fingers
- */
-Camera * Engine::getCurrentCamera()
-{
-	return currentCamera;
-}
-
-/**
  * Add a camera to cameras list
  * @param  name camera name
  * @param movable movable value
@@ -529,75 +542,27 @@ void LIB_API Engine::addCamera(std::string name, bool movable, glm::vec3 eye, gl
     activeCamera = static_cast<int>(cameras.size() - 1);
 }
 
-/**
- * Close hand
- * @param  root scene graph
- * @param angle rotation angle of fingers
- */
-void LIB_API Engine::moveCameraRight(float direction)
+void LIB_API Engine::moveCamera(glm::mat4 move) 
 {
-    if (!currentCamera->getMovable())
-        return;
-    glm::mat4 matrix = currentCamera->getMatrix();
-    glm::vec3 mov = direction * 5.0f * matrix[0];
-    currentCamera->setMatrix(glm::translate(matrix, mov));
+  if (!currentCamera->getMovable())
+	  return;
+  if (move[3][1] > 0.0f) 
+	  return;
+  if (move[3][2] > 400.0f || move[3][2] < -400.0f) 
+	  return;
+  if (move[3][0] > 630.0f || move[3][0] < -630.0f) 
+	  return;
+  currentCamera->setMatrix(move);
 }
 
-/**
- * Close hand
- * @param  root scene graph
- * @param angle rotation angle of fingers
- */
-void LIB_API Engine::moveCameraUp(float direction)
-{
-    if (!currentCamera->getMovable())
-        return;
-    glm::mat4 matrix = currentCamera->getMatrix();
-    glm::vec3 mov = direction * 5.0f * matrix[1];
-    currentCamera->setMatrix(glm::translate(matrix, mov));
-}
-
-/**
- * Close hand
- * @param  root scene graph
- * @param angle rotation angle of fingers
- */
-void LIB_API Engine::moveCameraForward(float direction)
-{
-    if (!currentCamera->getMovable())
-        return;
-    glm::mat4 matrix = currentCamera->getMatrix();
-    glm::vec3 mov = direction * 5.0f * matrix[2];
-    currentCamera->setMatrix(glm::translate(matrix, mov));
-}
-
-/**
- * Close hand
- * @param  root scene graph
- * @param angle rotation angle of fingers
- */
-void LIB_API Engine::rotateCameraRight(float angle)
-{
-    if (currentCamera->getMovable())
-        return;
-    glm::mat4 mat = currentCamera->getMatrix();
-    glm::vec3 vec = mat[1];
-    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), vec);
-    currentCamera->setMatrix(rotation * mat);
-}
-/**
- * Close hand
- * @param  root scene graph
- * @param angle rotation angle of fingers
- */
-void LIB_API Engine::rotateCameraUp(float angle)
+void Engine::rotateCamera(glm::mat4 rotate) 
 {
     if (!currentCamera->getMovable())
         return;
     glm::mat4 mat = currentCamera->getMatrix();
     glm::vec3 vec = mat[0];
-    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), vec);
-    currentCamera->setMatrix(rotation * mat);
+  /*  glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), vec);
+    currentCamera->setMatrix(rotation * mat);*/
 }
 
 /**
@@ -607,8 +572,6 @@ void LIB_API Engine::changeCamera(Node * root)
 {
     activeCamera = (activeCamera + 1) % cameras.size();
     currentCamera = cameras.at(activeCamera);
-    //TODO:: GREG questo non c'è bisogno perche lo facciamo nel render della mesh
-    //loadMatrix(currentCamera->getMatrix());
 }
 
 /**
@@ -760,9 +723,7 @@ void LIB_API Engine::setAlphaToMaterial(Node * root, float alpha, std::string no
 	}
 }
 
-//TODO::aggiungere altre cose da deinizializzare
 void LIB_API Engine::free()
 {
     freeImageDeInitialize();
 }
-

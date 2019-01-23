@@ -1,27 +1,32 @@
 #include "Engine.h"
+//Defines for Freeglut keys
 #define GLUT_KEY_LEFT 0x0064
 #define GLUT_KEY_UP 0x0065
 #define GLUT_KEY_RIGHT 0x0066
 #define GLUT_KEY_DOWN 0x0067
 
+/////////////
 // GLOBALS //
+////////////
+
 Engine* engine = &Engine::getInstance();
-// matrici di proiezione
+// projection matrix
 glm::mat4 perspective;
 glm::mat4 ortho;
+//scene graph
 Node* scene = nullptr;
 bool rotating = false;
 int sizeX = 0;
 int sizeY = 0;
 
 /**
- * Display callback
+ * Display callback  this is the main rendering routine
  */
 void displayCallback()
 {
-	// clear dei bit DEPTH etc
+	// clear of buffer and depth bits
 	engine->clearBuffers();
-	// setto la matrice di proiezione prospettica per il rendering 3d
+	//set perspective matrix for 3d rendering
 	engine->setProjectionMatrix(perspective);
 	// 3d rendering//
 	engine->render();
@@ -30,6 +35,7 @@ void displayCallback()
 	// 2D rendering//
 	engine->setProjectionMatrix(ortho);
 	engine->loadIdentity();
+	//render some text
 	engine->renderText();
 	engine->incrementFrames();
 	engine->swapBuffers();
@@ -37,9 +43,9 @@ void displayCallback()
 }
 
 /**
- * Reshape callback
- * @param width screen width
- * @param height screen height
+ * Reshape callback this callback is invoked each time the window gets resized (and once also when created).
+ * @param width window width
+ * @param height window height
  */
 void reshapeCallback(int width, int height)
 {
@@ -51,7 +57,7 @@ void reshapeCallback(int width, int height)
 }
 
 /**
- * Keyboard callback
+ * Keyboard callback  this callback is invoked each time a standard keyboard key is pressed.
  * @param  key the button that was pressed
  * @param mouseX mouse X coordinate
  * @param mouseY mouse Y coordinate
@@ -145,35 +151,52 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 
 
 /**
- * Special callback this callback is used to move the camera (if movable). FreeGlut special key redefinition is necessary (e.g #define GLUT_KEY_LEFT 0x0064)
+ * Special callback is invoked each time a special keyboard key is pressed. This callback is used to move 
+ * the camera (if movable). FreeGlut special key redefinition is necessary (e.g #define GLUT_KEY_LEFT 0x0064)
  * @param  key an integer representing a special key
  * @param x x coordinate
  * @param y y coordinate
  */
-void specialCallback(int key, int x, int y)
+void specialCallback(int key, int mouseX, int mouseY)
 {
-	switch (key)
+    switch (key)
+    {
+    case GLUT_KEY_DOWN:
 	{
-	case GLUT_KEY_DOWN:
-		engine->moveCameraForward(-3.0f);
-		break;
-	case GLUT_KEY_UP:
-		engine->moveCameraForward(3.0f);
-		break;
-	case GLUT_KEY_LEFT:
-		engine->moveCameraRight(3.0f);
-		break;
-	case GLUT_KEY_RIGHT:
-		engine->moveCameraRight(-3.0f);
-		break;
-	default:
+		glm::mat4 matrix = engine->getCurrentCameraMatrix();
+        glm::vec3 mov = -15.0f * matrix[2];
+		engine->moveCamera(matrix * glm::translate(glm::mat4(1.0f), mov));
+        break;
+	}
+    case GLUT_KEY_UP:
+	{
+		glm::mat4 matrix = engine->getCurrentCameraMatrix();
+		glm::vec3 mov = 15.0f * matrix[2];
+		engine->moveCamera(matrix * glm::translate(glm::mat4(1.0f), mov));
 		break;
 	}
-	engine->redisplay();
+    case GLUT_KEY_LEFT: 
+	{
+		glm::mat4 matrix = engine->getCurrentCameraMatrix();
+		glm::vec3 mov = 15.0f * matrix[0];
+		engine->moveCamera(matrix * glm::translate(glm::mat4(1.0f), mov));
+		break;
+	}
+    case GLUT_KEY_RIGHT: 
+	{
+		glm::mat4 matrix = engine->getCurrentCameraMatrix();
+		glm::vec3 mov = -15.0f * matrix[0];
+		engine->moveCamera(matrix * glm::translate(glm::mat4(1.0f), mov));
+		break;
+	}
+    default:
+        break;
+    }
+    engine->redisplay();
 }
 
 /**
- * Timer callback
+ * Timer callback is used to register fps updates
  * @param  value
  */
 void timerCallback(int value)
@@ -190,11 +213,17 @@ void timerCallback(int value)
  */
 void mouseWheel(int wheel, int direction, int x, int y)
 {
-	wheel = 0;
+    wheel = 0;
 	if (direction == -1)
-		engine->moveCameraUp(1.0f);
-	else if (direction == +1)
-		engine->moveCameraUp(-1.0f);
+	{
+		glm::mat4 matrix = engine->getCurrentCameraMatrix();
+        glm::vec3 mov = 15.0f * matrix[1];
+        engine->moveCamera(glm::translate(matrix *glm::mat4(1.0f), mov));
+	} else if (direction == +1) {
+		glm::mat4 matrix = engine->getCurrentCameraMatrix();
+		glm::vec3 mov = -15.0f * matrix[1];
+		engine->moveCamera(glm::translate(matrix * glm::mat4(1.0f), mov));
+	}
 }
 
 /**
@@ -205,33 +234,46 @@ void mouseWheel(int wheel, int direction, int x, int y)
 void mouseMoved(int x, int y)
 {
 	const float sizeYMin = sizeY * 0.20;
-	const float sizeXMin = sizeX * 0.20;
-	const float sizeYMax = sizeY * 0.80;
-	const float sizeXMax = sizeX * 0.80;
-	// UP
-	if (x > sizeXMin && x < sizeXMax && y < sizeYMin)
-	{
-		const float angle = (10.0f / sizeYMin) * (sizeYMin - y);
-		engine->rotateCameraUp(-angle);
-	}
-	// DOWN
-	else if (x > sizeXMin && x < sizeXMax && y > sizeYMax)
-	{
-		const float angle = (10.0f / (sizeY - sizeYMax)) * (y - sizeYMax);
-		engine->rotateCameraUp(angle);
-	}
-	// LEFT
-	else if (y > sizeYMin && y < sizeYMax && x < sizeXMin)
-	{
-		const float angle = (10.0f / sizeXMin) * (sizeXMin - x);
-		engine->rotateCameraRight(-angle);
-	}
-	// RIGHT
-	else if (y > sizeYMin && y < sizeYMax && x > sizeXMax)
-	{
-		const float angle = (10.0f / (sizeX - sizeXMax)) * (x - sizeXMax);
-		engine->rotateCameraRight(angle);
-	}
+    const float sizeXMin = sizeX * 0.20;
+    const float sizeYMax = sizeY * 0.80;
+    const float sizeXMax = sizeX * 0.80;
+    const bool movable = engine->isMovableCamera();
+    // UP
+    if (x > sizeXMin && x < sizeXMax && y < sizeYMin && movable)
+    {
+		const float angle = (2.0f / sizeYMin) * (sizeYMin - y);
+		glm::mat4 mat = engine->getCurrentCameraMatrix();
+		glm::vec3 vec = mat[0];
+		glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(-angle), vec);
+		engine->rotateCamera(rotation * mat);
+    }
+    // DOWN
+    else if (x > sizeXMin && x < sizeXMax && y > sizeYMax && movable)
+    {
+		const float angle = (2.0f / (sizeY - sizeYMax)) * (y - sizeYMax);
+		glm::mat4 mat = engine->getCurrentCameraMatrix();
+		glm::vec3 vec = mat[0];
+		glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), vec);
+		engine->rotateCamera(rotation * mat);
+    }
+    // LEFT
+    else if (y > sizeYMin && y < sizeYMax && x < sizeXMin && !movable)
+    {
+        const float angle = (5.0f / sizeXMin) * (sizeXMin - x);
+		glm::mat4 mat = engine->getCurrentCameraMatrix();
+		glm::vec3 vec = mat[1];
+		glm::mat4 rotation =glm::rotate(glm::mat4(1.0f), glm::radians(-angle), vec);
+        engine->rotateCamera(rotation * mat);
+    }
+    // RIGHT
+    else if (y > sizeYMin && y < sizeYMax && x > sizeXMax && !movable)
+    {
+        const float angle = (5.0f / (sizeX - sizeXMax)) * (x - sizeXMax);
+		glm::mat4 mat = engine->getCurrentCameraMatrix();
+		glm::vec3 vec = mat[1];
+		glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), vec);
+		engine->rotateCamera(rotation * mat);
+    }
 }
 
 /**
