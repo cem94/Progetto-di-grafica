@@ -72,12 +72,12 @@ void List::reserve(int size)
  */
 void List::add(Node* node)
 {
-   this->list.push_back(node);
+	this->list.push_back(node);
 }
 
 /**
  * Removes a node from the list given its position
- * @param  position index of the desired node
+ * @param position index of the desired node
  */
 void List::remove(int position)
 {
@@ -86,7 +86,7 @@ void List::remove(int position)
 
 /**
  * Return the element at the position passed as an argument or nullptr if out of range
- * @param  position the position of the desired element
+ * @param position the position of the desired element
  * @return if the range is valid it returns the requested node, otherwise it return nullptr
  */
 Node* List::at(int position)
@@ -100,7 +100,7 @@ Node* List::at(int position)
 
 /**
  * insert a list of elements at the end of our list
- * @param  list of elements to add
+ * @param elements list of elements to add
  */
 void List::insert(std::vector<Node*> elements)
 {
@@ -118,6 +118,8 @@ int List::size()
 
 /**
  * Get tree as list populates the vector of nodes passed as an argument with the content of the given scene graph
+ * @param root scene graph
+ * @param nodes the list to populate
  */
 void List::getTreeAsList(Node *root, std::vector<Node*>& nodes)
 {
@@ -159,10 +161,9 @@ void List::sort()
 	list.insert(list.end(), meshes.begin(), meshes.end());
 }
 
-
 /**
- * Render for list
- * @param  matrix scaling matrix
+ * Render for list if the list ot render is trasparent the plane isn't rendered
+ * @param matrix scaling matrix
  */
 void List::render(glm::mat4 scaling)
 {
