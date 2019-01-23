@@ -767,3 +767,12 @@ void LIB_API Engine::free()
 {
 	freeImageDeInitialize();
 }
+
+/**
+* Function for refill the list to render
+*/
+void LIB_API Engine::updateList(Node* root)
+{
+	toRender = new List(root);
+	toRender->sort();
+}

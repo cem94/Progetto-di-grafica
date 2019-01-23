@@ -216,7 +216,7 @@
    BBox minimum  :  -100, 0, -100
    BBox maximum  :  100, 0, 100
    Physics . . . :  0
-   Face data . . :  f0 (0, 0, 12452028)
+   Face data . . :  f0 (1444442, 0, 0)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (3, 2, 1)
    Face data . . :  f3 (2, 3, 4)

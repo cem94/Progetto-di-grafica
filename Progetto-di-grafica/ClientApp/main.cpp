@@ -40,6 +40,7 @@ void displayCallback()
 	engine->incrementFrames();
 	engine->swapBuffers();
 	engine->redisplay();
+	engine->updateList(scene);
 }
 
 /**

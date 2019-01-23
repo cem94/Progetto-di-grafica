@@ -100,6 +100,7 @@ public:
 	bool isMovableCamera();
 	void render();
 	void free();
+	void updateList(Node* root);
 private:
 	Engine() {};
 	~Engine() {};
