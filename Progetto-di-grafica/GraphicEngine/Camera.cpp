@@ -18,6 +18,23 @@ Camera::~Camera()
 }
 
 /**
+ * Getter for movable
+ * @return movable value (true if movable false otherwise)
+ */
+bool Camera::getMovable() const
+{
+	return movable;
+}
+/**
+ * Setter for movable
+ * @param  movable boolean value (true if movable false otherwise)
+ */
+void Camera::setMovable(bool movable)
+{
+	this->movable = movable;
+}
+
+/**
  * Setter for projection matrix
  * @param  projection projection matrix
  */
@@ -29,29 +46,11 @@ void Camera::setProjectionMatrix(glm::mat4 projection)
 	glMatrixMode(GL_MODELVIEW);
 }
 
-///**
-// * Render camera rendering method
-// * @param  render matrix
-// */
-//void Camera::render(glm::mat4 renderMatrix)
-//{
-//	glLoadMatrixf(glm::value_ptr(renderMatrix));
-//}
-
 /**
- * Setter for movable
- * @param  movable boolean value (true if movable false otherwise)
+ * Render camera rendering method
+ * @param renderMatrix render matrix
  */
-void Camera::setMovable(bool movable)
+void Camera::render(glm::mat4 renderMatrix)
 {
-	this->movable = movable;
-}
-
-/**
- * Getter for movable
- * @return movable value (true if movable false otherwise)
- */
-bool Camera::getMovable() const
-{
-	return movable;
+	glLoadMatrixf(glm::value_ptr(renderMatrix));
 }
