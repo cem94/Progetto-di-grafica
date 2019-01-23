@@ -1,0 +1,79 @@
+\hypertarget{classTexture}{}\section{Texture Class Reference}
+\label{classTexture}\index{Texture@{Texture}}
+
+
+{\ttfamily \#include $<$Texture.\+h$>$}
+
+
+
+Inheritance diagram for Texture\+:
+% FIG 0
+
+
+Collaboration diagram for Texture\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classTexture_a6c275e3f186675ff6ed73ccf970e552f}{Texture} ()
+\item 
+\hyperlink{classTexture_ae9b5167a274031b947316833d6fd4886}{Texture} (std\+::string texture\+Name)
+\item 
+virtual \hyperlink{classTexture_a09c4bcb7462f64c1d20fa69dba3cee8a}{$\sim$\+Texture} ()
+\item 
+void \hyperlink{classTexture_a2771beaa1d538acddacc48d53bc75bdf}{render} (glm\+::mat4 rendermatrix=glm\+::mat4(1.\+0f)) override
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+This class represents a texture. It\textquotesingle{}s responsible for loading data from a file into an Open\+GL texture and for passing its settings to the Open\+GL A\+PI. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classTexture_a6c275e3f186675ff6ed73ccf970e552f}\label{classTexture_a6c275e3f186675ff6ed73ccf970e552f}} 
+\index{Texture@{Texture}!Texture@{Texture}}
+\index{Texture@{Texture}!Texture@{Texture}}
+\subsubsection{\texorpdfstring{Texture()}{Texture()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Texture\+::\+Texture (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\hyperlink{classTexture}{Texture} constructor \mbox{\Hypertarget{classTexture_ae9b5167a274031b947316833d6fd4886}\label{classTexture_ae9b5167a274031b947316833d6fd4886}} 
+\index{Texture@{Texture}!Texture@{Texture}}
+\index{Texture@{Texture}!Texture@{Texture}}
+\subsubsection{\texorpdfstring{Texture()}{Texture()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Texture\+::\+Texture (\begin{DoxyParamCaption}\item[{std\+::string}]{texture\+Name }\end{DoxyParamCaption})}
+
+\hyperlink{classTexture}{Texture} constructor if texture\+Name is valid it generates the corresponding texture 
+\begin{DoxyParams}{Parameters}
+{\em texture\+Name} & the name of the texture \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classTexture_a09c4bcb7462f64c1d20fa69dba3cee8a}\label{classTexture_a09c4bcb7462f64c1d20fa69dba3cee8a}} 
+\index{Texture@{Texture}!````~Texture@{$\sim$\+Texture}}
+\index{````~Texture@{$\sim$\+Texture}!Texture@{Texture}}
+\subsubsection{\texorpdfstring{$\sim$\+Texture()}{~Texture()}}
+{\footnotesize\ttfamily Texture\+::$\sim$\+Texture (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+\hyperlink{classTexture}{Texture} destructor frees unused resources 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classTexture_a2771beaa1d538acddacc48d53bc75bdf}\label{classTexture_a2771beaa1d538acddacc48d53bc75bdf}} 
+\index{Texture@{Texture}!render@{render}}
+\index{render@{render}!Texture@{Texture}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Texture\+::render (\begin{DoxyParamCaption}\item[{glm\+::mat4}]{rendermatrix = {\ttfamily glm\+:\+:mat4(1.0f)} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Render for textures 
+\begin{DoxyParams}{Parameters}
+{\em render\+Matrix} & texture render matrix (not used by this method) \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classObject_af7b5e6c789269f331688537c0809fb82}{Object}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Texture_8h}{Texture.\+h}\item 
+\hyperlink{Texture_8cpp}{Texture.\+cpp}\end{DoxyCompactItemize}

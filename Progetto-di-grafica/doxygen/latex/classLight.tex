@@ -1,0 +1,342 @@
+\hypertarget{classLight}{}\section{Light Class Reference}
+\label{classLight}\index{Light@{Light}}
+
+
+{\ttfamily \#include $<$Light.\+h$>$}
+
+
+
+Inheritance diagram for Light\+:
+% FIG 0
+
+
+Collaboration diagram for Light\+:
+% FIG 1
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{classLight_a7b5feeb01dd53961e0e523f3d2f5fa7f}{Subtype} \{ \hyperlink{classLight_a7b5feeb01dd53961e0e523f3d2f5fa7fa82b3eb15e901d2bb0a11c613f2d02b52}{O\+M\+NI}, 
+\hyperlink{classLight_a7b5feeb01dd53961e0e523f3d2f5fa7faeb3694a08c662b54cbe4548af2fc7c4d}{S\+P\+O\+T\+L\+I\+G\+HT}, 
+\hyperlink{classLight_a7b5feeb01dd53961e0e523f3d2f5fa7fa308ea96a5b3e191559504e7ac0141eba}{D\+I\+R\+E\+C\+T\+I\+O\+N\+AL}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLight_aeb5df09a25a32f19fdffa761268ba24f}{Light} ()
+\item 
+\hyperlink{classLight_a91ebda8220b23dd81e03e9a3d74038de}{Light} (std\+::string name)
+\item 
+virtual \hyperlink{classLight_ad0e59fad13bb6cfadc25b2c477e9ddc7}{$\sim$\+Light} ()
+\item 
+void \hyperlink{classLight_a7a9f3b7fa887fc05f09bdbc686582d91}{set\+Ambient} (glm\+::vec4 ambient)
+\item 
+void \hyperlink{classLight_adc52e832ae3c0319a836488b0ef548a4}{set\+Diffuse} (glm\+::vec4 diffuse)
+\item 
+void \hyperlink{classLight_a578d1435c4dd9a940c68ea34b32197e1}{set\+Specular} (glm\+::vec4 specular)
+\item 
+\hyperlink{classLight_a7b5feeb01dd53961e0e523f3d2f5fa7f}{Subtype} \hyperlink{classLight_abe7e9dce915c21865968d0639cde590f}{get\+Subtype} () const
+\item 
+void \hyperlink{classLight_a853de52827212e0a3940b24b3474b397}{set\+Subtype} (\hyperlink{classLight_a7b5feeb01dd53961e0e523f3d2f5fa7f}{Subtype} subtype)
+\item 
+int \hyperlink{classLight_ad718ac25026b144b6cd1366742b18468}{get\+Light\+Number} () const
+\item 
+void \hyperlink{classLight_aa2da7de405831666a6af15c6244beed8}{set\+Light\+Number} (int light\+Number)
+\item 
+void \hyperlink{classLight_aaf638193c905de52570362eccd920714}{set\+Color} (glm\+::vec4 color)
+\item 
+void \hyperlink{classLight_a568e3fd99b6863f462071cf872c3cde0}{set\+Position} (glm\+::vec4 position)
+\item 
+glm\+::vec3 \hyperlink{classLight_ae10c348537ea57b655960f027731fbf3}{get\+Direction} ()
+\item 
+void \hyperlink{classLight_aa32662da42afe808259609126aabe7f1}{set\+Direction} (glm\+::vec4 direction)
+\item 
+void \hyperlink{classLight_a95eee24e173aa9e0432a9c1324f4faec}{set\+Angle} (float angle)
+\item 
+float \hyperlink{classLight_a1a69147d826c7ab474a56d91b5845c47}{get\+Angle} () const
+\item 
+float \hyperlink{classLight_a6bb146ceb8e047d6fa7660e0aa5dca9d}{get\+Radius} () const
+\item 
+void \hyperlink{classLight_a23e09d82da020bc04cd9cecf8ca1461b}{set\+Radius} (float radius)
+\item 
+float \hyperlink{classLight_a73794614318f137338f87bd773739f78}{get\+Cutoff} () const
+\item 
+void \hyperlink{classLight_adb7e95904a97034f319b60236e578ecc}{set\+Cutoff} (float cutoff)
+\item 
+void \hyperlink{classLight_a4a605e1a566089fb330938b0e7820185}{enable\+Light} ()
+\item 
+void \hyperlink{classLight_a3990013078306656215c200537868835}{disable\+Light} ()
+\item 
+void \hyperlink{classLight_a5d257d1ad65b8c8ab986dcbba2e9c5ff}{change\+State} ()
+\item 
+void \hyperlink{classLight_a069c6888b42eca238328d79b03c3a411}{render} (glm\+::mat4 render\+Matrix) override
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classLight}{Light} class that implements the main types of light introduced in the course. This class includes the necessary methods for applying its settings to Open\+GL. 
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classLight_a7b5feeb01dd53961e0e523f3d2f5fa7f}\label{classLight_a7b5feeb01dd53961e0e523f3d2f5fa7f}} 
+\index{Light@{Light}!Subtype@{Subtype}}
+\index{Subtype@{Subtype}!Light@{Light}}
+\subsubsection{\texorpdfstring{Subtype}{Subtype}}
+{\footnotesize\ttfamily enum \hyperlink{classLight_a7b5feeb01dd53961e0e523f3d2f5fa7f}{Light\+::\+Subtype}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{O\+M\+NI@{O\+M\+NI}!Light@{Light}}\index{Light@{Light}!O\+M\+NI@{O\+M\+NI}}}\mbox{\Hypertarget{classLight_a7b5feeb01dd53961e0e523f3d2f5fa7fa82b3eb15e901d2bb0a11c613f2d02b52}\label{classLight_a7b5feeb01dd53961e0e523f3d2f5fa7fa82b3eb15e901d2bb0a11c613f2d02b52}} 
+O\+M\+NI&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+P\+O\+T\+L\+I\+G\+HT@{S\+P\+O\+T\+L\+I\+G\+HT}!Light@{Light}}\index{Light@{Light}!S\+P\+O\+T\+L\+I\+G\+HT@{S\+P\+O\+T\+L\+I\+G\+HT}}}\mbox{\Hypertarget{classLight_a7b5feeb01dd53961e0e523f3d2f5fa7faeb3694a08c662b54cbe4548af2fc7c4d}\label{classLight_a7b5feeb01dd53961e0e523f3d2f5fa7faeb3694a08c662b54cbe4548af2fc7c4d}} 
+S\+P\+O\+T\+L\+I\+G\+HT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+I\+R\+E\+C\+T\+I\+O\+N\+AL@{D\+I\+R\+E\+C\+T\+I\+O\+N\+AL}!Light@{Light}}\index{Light@{Light}!D\+I\+R\+E\+C\+T\+I\+O\+N\+AL@{D\+I\+R\+E\+C\+T\+I\+O\+N\+AL}}}\mbox{\Hypertarget{classLight_a7b5feeb01dd53961e0e523f3d2f5fa7fa308ea96a5b3e191559504e7ac0141eba}\label{classLight_a7b5feeb01dd53961e0e523f3d2f5fa7fa308ea96a5b3e191559504e7ac0141eba}} 
+D\+I\+R\+E\+C\+T\+I\+O\+N\+AL&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classLight_aeb5df09a25a32f19fdffa761268ba24f}\label{classLight_aeb5df09a25a32f19fdffa761268ba24f}} 
+\index{Light@{Light}!Light@{Light}}
+\index{Light@{Light}!Light@{Light}}
+\subsubsection{\texorpdfstring{Light()}{Light()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Light\+::\+Light (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\hyperlink{classLight}{Light} constructor \mbox{\Hypertarget{classLight_a91ebda8220b23dd81e03e9a3d74038de}\label{classLight_a91ebda8220b23dd81e03e9a3d74038de}} 
+\index{Light@{Light}!Light@{Light}}
+\index{Light@{Light}!Light@{Light}}
+\subsubsection{\texorpdfstring{Light()}{Light()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Light\+::\+Light (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption})}
+
+\hyperlink{classLight}{Light} constructor it also set the light number 
+\begin{DoxyParams}{Parameters}
+{\em name} & a string containing the name of the light \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLight_ad0e59fad13bb6cfadc25b2c477e9ddc7}\label{classLight_ad0e59fad13bb6cfadc25b2c477e9ddc7}} 
+\index{Light@{Light}!````~Light@{$\sim$\+Light}}
+\index{````~Light@{$\sim$\+Light}!Light@{Light}}
+\subsubsection{\texorpdfstring{$\sim$\+Light()}{~Light()}}
+{\footnotesize\ttfamily Light\+::$\sim$\+Light (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+\hyperlink{classLight}{Light} destructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classLight_a5d257d1ad65b8c8ab986dcbba2e9c5ff}\label{classLight_a5d257d1ad65b8c8ab986dcbba2e9c5ff}} 
+\index{Light@{Light}!change\+State@{change\+State}}
+\index{change\+State@{change\+State}!Light@{Light}}
+\subsubsection{\texorpdfstring{change\+State()}{changeState()}}
+{\footnotesize\ttfamily void Light\+::change\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Switch that change the state of the light \mbox{\Hypertarget{classLight_a3990013078306656215c200537868835}\label{classLight_a3990013078306656215c200537868835}} 
+\index{Light@{Light}!disable\+Light@{disable\+Light}}
+\index{disable\+Light@{disable\+Light}!Light@{Light}}
+\subsubsection{\texorpdfstring{disable\+Light()}{disableLight()}}
+{\footnotesize\ttfamily void Light\+::disable\+Light (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Disable \hyperlink{classLight}{Light} \mbox{\Hypertarget{classLight_a4a605e1a566089fb330938b0e7820185}\label{classLight_a4a605e1a566089fb330938b0e7820185}} 
+\index{Light@{Light}!enable\+Light@{enable\+Light}}
+\index{enable\+Light@{enable\+Light}!Light@{Light}}
+\subsubsection{\texorpdfstring{enable\+Light()}{enableLight()}}
+{\footnotesize\ttfamily void Light\+::enable\+Light (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Enable light \mbox{\Hypertarget{classLight_a1a69147d826c7ab474a56d91b5845c47}\label{classLight_a1a69147d826c7ab474a56d91b5845c47}} 
+\index{Light@{Light}!get\+Angle@{get\+Angle}}
+\index{get\+Angle@{get\+Angle}!Light@{Light}}
+\subsubsection{\texorpdfstring{get\+Angle()}{getAngle()}}
+{\footnotesize\ttfamily float Light\+::get\+Angle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for light angle \begin{DoxyReturn}{Returns}
+light angle 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLight_a73794614318f137338f87bd773739f78}\label{classLight_a73794614318f137338f87bd773739f78}} 
+\index{Light@{Light}!get\+Cutoff@{get\+Cutoff}}
+\index{get\+Cutoff@{get\+Cutoff}!Light@{Light}}
+\subsubsection{\texorpdfstring{get\+Cutoff()}{getCutoff()}}
+{\footnotesize\ttfamily float Light\+::get\+Cutoff (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for light cutoff \begin{DoxyReturn}{Returns}
+light cutoff 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLight_ae10c348537ea57b655960f027731fbf3}\label{classLight_ae10c348537ea57b655960f027731fbf3}} 
+\index{Light@{Light}!get\+Direction@{get\+Direction}}
+\index{get\+Direction@{get\+Direction}!Light@{Light}}
+\subsubsection{\texorpdfstring{get\+Direction()}{getDirection()}}
+{\footnotesize\ttfamily glm\+::vec3 Light\+::get\+Direction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Getter for light direction \begin{DoxyReturn}{Returns}
+light direction 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLight_ad718ac25026b144b6cd1366742b18468}\label{classLight_ad718ac25026b144b6cd1366742b18468}} 
+\index{Light@{Light}!get\+Light\+Number@{get\+Light\+Number}}
+\index{get\+Light\+Number@{get\+Light\+Number}!Light@{Light}}
+\subsubsection{\texorpdfstring{get\+Light\+Number()}{getLightNumber()}}
+{\footnotesize\ttfamily int Light\+::get\+Light\+Number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for light number we have 7 light, 0 = 0x4000 and 7 = 0x4007 \begin{DoxyReturn}{Returns}
+an Open\+GL enum representing a light 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLight_a6bb146ceb8e047d6fa7660e0aa5dca9d}\label{classLight_a6bb146ceb8e047d6fa7660e0aa5dca9d}} 
+\index{Light@{Light}!get\+Radius@{get\+Radius}}
+\index{get\+Radius@{get\+Radius}!Light@{Light}}
+\subsubsection{\texorpdfstring{get\+Radius()}{getRadius()}}
+{\footnotesize\ttfamily float Light\+::get\+Radius (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for light radius \begin{DoxyReturn}{Returns}
+light radius 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLight_abe7e9dce915c21865968d0639cde590f}\label{classLight_abe7e9dce915c21865968d0639cde590f}} 
+\index{Light@{Light}!get\+Subtype@{get\+Subtype}}
+\index{get\+Subtype@{get\+Subtype}!Light@{Light}}
+\subsubsection{\texorpdfstring{get\+Subtype()}{getSubtype()}}
+{\footnotesize\ttfamily \hyperlink{classLight_a7b5feeb01dd53961e0e523f3d2f5fa7f}{Light\+::\+Subtype} Light\+::get\+Subtype (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for light subtype \begin{DoxyReturn}{Returns}
+subtype value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLight_a069c6888b42eca238328d79b03c3a411}\label{classLight_a069c6888b42eca238328d79b03c3a411}} 
+\index{Light@{Light}!render@{render}}
+\index{render@{render}!Light@{Light}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Light\+::render (\begin{DoxyParamCaption}\item[{glm\+::mat4}]{render\+Matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Render render method for light 
+\begin{DoxyParams}{Parameters}
+{\em render\+Matrix} & light render matrix \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classNode_a7faebb78a04b6421dbf5afe998f7658d}{Node}.
+
+\mbox{\Hypertarget{classLight_a7a9f3b7fa887fc05f09bdbc686582d91}\label{classLight_a7a9f3b7fa887fc05f09bdbc686582d91}} 
+\index{Light@{Light}!set\+Ambient@{set\+Ambient}}
+\index{set\+Ambient@{set\+Ambient}!Light@{Light}}
+\subsubsection{\texorpdfstring{set\+Ambient()}{setAmbient()}}
+{\footnotesize\ttfamily void Light\+::set\+Ambient (\begin{DoxyParamCaption}\item[{glm\+::vec4}]{ambient }\end{DoxyParamCaption})}
+
+Setter for ambient 
+\begin{DoxyParams}{Parameters}
+{\em ambient} & light ambient value \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLight_a95eee24e173aa9e0432a9c1324f4faec}\label{classLight_a95eee24e173aa9e0432a9c1324f4faec}} 
+\index{Light@{Light}!set\+Angle@{set\+Angle}}
+\index{set\+Angle@{set\+Angle}!Light@{Light}}
+\subsubsection{\texorpdfstring{set\+Angle()}{setAngle()}}
+{\footnotesize\ttfamily void Light\+::set\+Angle (\begin{DoxyParamCaption}\item[{float}]{angle }\end{DoxyParamCaption})}
+
+Setter for light angle 
+\begin{DoxyParams}{Parameters}
+{\em angle} & light angle \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLight_aaf638193c905de52570362eccd920714}\label{classLight_aaf638193c905de52570362eccd920714}} 
+\index{Light@{Light}!set\+Color@{set\+Color}}
+\index{set\+Color@{set\+Color}!Light@{Light}}
+\subsubsection{\texorpdfstring{set\+Color()}{setColor()}}
+{\footnotesize\ttfamily void Light\+::set\+Color (\begin{DoxyParamCaption}\item[{glm\+::vec4}]{color }\end{DoxyParamCaption})}
+
+Setter for \hyperlink{classLight}{Light} color 
+\begin{DoxyParams}{Parameters}
+{\em color} & light color \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLight_adb7e95904a97034f319b60236e578ecc}\label{classLight_adb7e95904a97034f319b60236e578ecc}} 
+\index{Light@{Light}!set\+Cutoff@{set\+Cutoff}}
+\index{set\+Cutoff@{set\+Cutoff}!Light@{Light}}
+\subsubsection{\texorpdfstring{set\+Cutoff()}{setCutoff()}}
+{\footnotesize\ttfamily void Light\+::set\+Cutoff (\begin{DoxyParamCaption}\item[{float}]{cutoff }\end{DoxyParamCaption})}
+
+Setter for light cutoff 
+\begin{DoxyParams}{Parameters}
+{\em cutoff} & light cutoff \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLight_adc52e832ae3c0319a836488b0ef548a4}\label{classLight_adc52e832ae3c0319a836488b0ef548a4}} 
+\index{Light@{Light}!set\+Diffuse@{set\+Diffuse}}
+\index{set\+Diffuse@{set\+Diffuse}!Light@{Light}}
+\subsubsection{\texorpdfstring{set\+Diffuse()}{setDiffuse()}}
+{\footnotesize\ttfamily void Light\+::set\+Diffuse (\begin{DoxyParamCaption}\item[{glm\+::vec4}]{diffuse }\end{DoxyParamCaption})}
+
+Setter for diffuse 
+\begin{DoxyParams}{Parameters}
+{\em diffuse} & light diffuse value \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLight_aa32662da42afe808259609126aabe7f1}\label{classLight_aa32662da42afe808259609126aabe7f1}} 
+\index{Light@{Light}!set\+Direction@{set\+Direction}}
+\index{set\+Direction@{set\+Direction}!Light@{Light}}
+\subsubsection{\texorpdfstring{set\+Direction()}{setDirection()}}
+{\footnotesize\ttfamily void Light\+::set\+Direction (\begin{DoxyParamCaption}\item[{glm\+::vec4}]{direction }\end{DoxyParamCaption})}
+
+Setter for light direction 
+\begin{DoxyParams}{Parameters}
+{\em direction} & light direction \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLight_aa2da7de405831666a6af15c6244beed8}\label{classLight_aa2da7de405831666a6af15c6244beed8}} 
+\index{Light@{Light}!set\+Light\+Number@{set\+Light\+Number}}
+\index{set\+Light\+Number@{set\+Light\+Number}!Light@{Light}}
+\subsubsection{\texorpdfstring{set\+Light\+Number()}{setLightNumber()}}
+{\footnotesize\ttfamily void Light\+::set\+Light\+Number (\begin{DoxyParamCaption}\item[{int}]{light\+Number }\end{DoxyParamCaption})}
+
+Setter for light number 
+\begin{DoxyParams}{Parameters}
+{\em light\+Number} & light number \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLight_a568e3fd99b6863f462071cf872c3cde0}\label{classLight_a568e3fd99b6863f462071cf872c3cde0}} 
+\index{Light@{Light}!set\+Position@{set\+Position}}
+\index{set\+Position@{set\+Position}!Light@{Light}}
+\subsubsection{\texorpdfstring{set\+Position()}{setPosition()}}
+{\footnotesize\ttfamily void Light\+::set\+Position (\begin{DoxyParamCaption}\item[{glm\+::vec4}]{position }\end{DoxyParamCaption})}
+
+Setter for light position 
+\begin{DoxyParams}{Parameters}
+{\em position} & light position \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLight_a23e09d82da020bc04cd9cecf8ca1461b}\label{classLight_a23e09d82da020bc04cd9cecf8ca1461b}} 
+\index{Light@{Light}!set\+Radius@{set\+Radius}}
+\index{set\+Radius@{set\+Radius}!Light@{Light}}
+\subsubsection{\texorpdfstring{set\+Radius()}{setRadius()}}
+{\footnotesize\ttfamily void Light\+::set\+Radius (\begin{DoxyParamCaption}\item[{float}]{radius }\end{DoxyParamCaption})}
+
+Setter for light radius 
+\begin{DoxyParams}{Parameters}
+{\em light} & radius \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLight_a578d1435c4dd9a940c68ea34b32197e1}\label{classLight_a578d1435c4dd9a940c68ea34b32197e1}} 
+\index{Light@{Light}!set\+Specular@{set\+Specular}}
+\index{set\+Specular@{set\+Specular}!Light@{Light}}
+\subsubsection{\texorpdfstring{set\+Specular()}{setSpecular()}}
+{\footnotesize\ttfamily void Light\+::set\+Specular (\begin{DoxyParamCaption}\item[{glm\+::vec4}]{specular }\end{DoxyParamCaption})}
+
+Setter for specular 
+\begin{DoxyParams}{Parameters}
+{\em specular} & light specular value \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLight_a853de52827212e0a3940b24b3474b397}\label{classLight_a853de52827212e0a3940b24b3474b397}} 
+\index{Light@{Light}!set\+Subtype@{set\+Subtype}}
+\index{set\+Subtype@{set\+Subtype}!Light@{Light}}
+\subsubsection{\texorpdfstring{set\+Subtype()}{setSubtype()}}
+{\footnotesize\ttfamily void Light\+::set\+Subtype (\begin{DoxyParamCaption}\item[{\hyperlink{classLight_a7b5feeb01dd53961e0e523f3d2f5fa7f}{Light\+::\+Subtype}}]{subtype }\end{DoxyParamCaption})}
+
+Setter for light subtype 
+\begin{DoxyParams}{Parameters}
+{\em An} & enum containing the light subtype \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Light_8h}{Light.\+h}\item 
+\hyperlink{Light_8cpp}{Light.\+cpp}\end{DoxyCompactItemize}

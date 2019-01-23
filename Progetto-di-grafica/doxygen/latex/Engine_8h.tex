@@ -1,0 +1,69 @@
+\hypertarget{Engine_8h}{}\section{Engine.\+h File Reference}
+\label{Engine_8h}\index{Engine.\+h@{Engine.\+h}}
+{\ttfamily \#include $<$limits.\+h$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$iomanip$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+{\ttfamily \#include $<$glm/glm.\+hpp$>$}\newline
+{\ttfamily \#include $<$glm/gtc/matrix\+\_\+transform.\+hpp$>$}\newline
+{\ttfamily \#include $<$glm/gtc/packing.\+hpp$>$}\newline
+{\ttfamily \#include $<$glm/gtc/type\+\_\+ptr.\+hpp$>$}\newline
+{\ttfamily \#include \char`\"{}Object.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Node.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Camera.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Light.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Texture.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Material.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Mesh.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}List.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Ovo\+Reader.\+h\char`\"{}}\newline
+Include dependency graph for Engine.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classEngine}{Engine}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{Engine_8h_a816ab7d5c2ce1f0a01216042837beb93}{G\+L\+M\+\_\+\+F\+O\+R\+C\+E\+\_\+\+R\+A\+D\+I\+A\+NS}
+\item 
+\#define \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI}
+\item 
+\#define \hyperlink{Engine_8h_af08ec37a8c99d747fb60fa15bc28678b}{\+\_\+\+C\+R\+T\+\_\+\+S\+E\+C\+U\+R\+E\+\_\+\+N\+O\+\_\+\+W\+A\+R\+N\+I\+N\+GS}
+\item 
+\#define \hyperlink{Engine_8h_ac627c73454e4c96daef4a3fa6b2408fc}{G\+L\+M\+\_\+\+F\+O\+R\+C\+E\+\_\+\+C\+T\+O\+R\+\_\+\+I\+N\+IT}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{Engine_8h_af08ec37a8c99d747fb60fa15bc28678b}\label{Engine_8h_af08ec37a8c99d747fb60fa15bc28678b}} 
+\index{Engine.\+h@{Engine.\+h}!\+\_\+\+C\+R\+T\+\_\+\+S\+E\+C\+U\+R\+E\+\_\+\+N\+O\+\_\+\+W\+A\+R\+N\+I\+N\+GS@{\+\_\+\+C\+R\+T\+\_\+\+S\+E\+C\+U\+R\+E\+\_\+\+N\+O\+\_\+\+W\+A\+R\+N\+I\+N\+GS}}
+\index{\+\_\+\+C\+R\+T\+\_\+\+S\+E\+C\+U\+R\+E\+\_\+\+N\+O\+\_\+\+W\+A\+R\+N\+I\+N\+GS@{\+\_\+\+C\+R\+T\+\_\+\+S\+E\+C\+U\+R\+E\+\_\+\+N\+O\+\_\+\+W\+A\+R\+N\+I\+N\+GS}!Engine.\+h@{Engine.\+h}}
+\subsubsection{\texorpdfstring{\+\_\+\+C\+R\+T\+\_\+\+S\+E\+C\+U\+R\+E\+\_\+\+N\+O\+\_\+\+W\+A\+R\+N\+I\+N\+GS}{\_CRT\_SECURE\_NO\_WARNINGS}}
+{\footnotesize\ttfamily \#define \+\_\+\+C\+R\+T\+\_\+\+S\+E\+C\+U\+R\+E\+\_\+\+N\+O\+\_\+\+W\+A\+R\+N\+I\+N\+GS}
+
+\mbox{\Hypertarget{Engine_8h_ac627c73454e4c96daef4a3fa6b2408fc}\label{Engine_8h_ac627c73454e4c96daef4a3fa6b2408fc}} 
+\index{Engine.\+h@{Engine.\+h}!G\+L\+M\+\_\+\+F\+O\+R\+C\+E\+\_\+\+C\+T\+O\+R\+\_\+\+I\+N\+IT@{G\+L\+M\+\_\+\+F\+O\+R\+C\+E\+\_\+\+C\+T\+O\+R\+\_\+\+I\+N\+IT}}
+\index{G\+L\+M\+\_\+\+F\+O\+R\+C\+E\+\_\+\+C\+T\+O\+R\+\_\+\+I\+N\+IT@{G\+L\+M\+\_\+\+F\+O\+R\+C\+E\+\_\+\+C\+T\+O\+R\+\_\+\+I\+N\+IT}!Engine.\+h@{Engine.\+h}}
+\subsubsection{\texorpdfstring{G\+L\+M\+\_\+\+F\+O\+R\+C\+E\+\_\+\+C\+T\+O\+R\+\_\+\+I\+N\+IT}{GLM\_FORCE\_CTOR\_INIT}}
+{\footnotesize\ttfamily \#define G\+L\+M\+\_\+\+F\+O\+R\+C\+E\+\_\+\+C\+T\+O\+R\+\_\+\+I\+N\+IT}
+
+\mbox{\Hypertarget{Engine_8h_a816ab7d5c2ce1f0a01216042837beb93}\label{Engine_8h_a816ab7d5c2ce1f0a01216042837beb93}} 
+\index{Engine.\+h@{Engine.\+h}!G\+L\+M\+\_\+\+F\+O\+R\+C\+E\+\_\+\+R\+A\+D\+I\+A\+NS@{G\+L\+M\+\_\+\+F\+O\+R\+C\+E\+\_\+\+R\+A\+D\+I\+A\+NS}}
+\index{G\+L\+M\+\_\+\+F\+O\+R\+C\+E\+\_\+\+R\+A\+D\+I\+A\+NS@{G\+L\+M\+\_\+\+F\+O\+R\+C\+E\+\_\+\+R\+A\+D\+I\+A\+NS}!Engine.\+h@{Engine.\+h}}
+\subsubsection{\texorpdfstring{G\+L\+M\+\_\+\+F\+O\+R\+C\+E\+\_\+\+R\+A\+D\+I\+A\+NS}{GLM\_FORCE\_RADIANS}}
+{\footnotesize\ttfamily \#define G\+L\+M\+\_\+\+F\+O\+R\+C\+E\+\_\+\+R\+A\+D\+I\+A\+NS}
+
+The engine class is the main component of the A\+PI. It is a single class (singleton) responsible for initializing the Open\+GL context and main modules. \mbox{\Hypertarget{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}\label{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}} 
+\index{Engine.\+h@{Engine.\+h}!L\+I\+B\+\_\+\+A\+PI@{L\+I\+B\+\_\+\+A\+PI}}
+\index{L\+I\+B\+\_\+\+A\+PI@{L\+I\+B\+\_\+\+A\+PI}!Engine.\+h@{Engine.\+h}}
+\subsubsection{\texorpdfstring{L\+I\+B\+\_\+\+A\+PI}{LIB\_API}}
+{\footnotesize\ttfamily \#define L\+I\+B\+\_\+\+A\+PI}
+

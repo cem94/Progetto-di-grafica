@@ -1,0 +1,603 @@
+\hypertarget{classEngine}{}\section{Engine Class Reference}
+\label{classEngine}\index{Engine@{Engine}}
+
+
+{\ttfamily \#include $<$Engine.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classEngine_ae675127bbb7671464d1d7ad94818a17a}{init} ()
+\item 
+void \hyperlink{classEngine_a033a7a3b7697c9998270276bf659ac89}{load\+Matrix} (glm\+::mat4 matrix)
+\item 
+void \hyperlink{classEngine_af0255a9a3e166e47a13ecbba393956de}{start\+Loop} ()
+\item 
+void \hyperlink{classEngine_a74984091119dd2be987608dcc4ab46f6}{clear\+Color} (float r, float g, float b)
+\item 
+void \hyperlink{classEngine_a57d57550b28d0c5c3ae92fcbaf5dd82b}{mouse\+Wheel} (void($\ast$mouse\+Wheel\+Func)(int, int, int, int))
+\item 
+int \hyperlink{classEngine_aa9edd591eafe0975a95ab06f74b6ba03}{get\+Window\+Width} ()
+\item 
+int \hyperlink{classEngine_a483d0d99c1f762f0012aa649ec3220cf}{get\+Window\+Height} ()
+\item 
+void \hyperlink{classEngine_a649eaa6139ab7b66d2d5ac541ac2f069}{mouse\+Moved} (void($\ast$mouse\+Func)(int, int))
+\item 
+void \hyperlink{classEngine_ac12f3f0be76b8394772aeac4053ad2f2}{redisplay} ()
+\item 
+void \hyperlink{classEngine_af43e72719048ae70cb4c50c0b76c5ec7}{reshape} (void($\ast$reshape\+Callback)(int, int))
+\item 
+void \hyperlink{classEngine_a56fc665908ac6d6c4340864facc00760}{display} (void($\ast$display\+Callback)())
+\item 
+void \hyperlink{classEngine_a3f92d7e6ea9beeac958fcc243ee7d434}{timer} (void callback(int))
+\item 
+void \hyperlink{classEngine_a5ddd680e42a9c0a655af665611ddd279}{keyboard} (void($\ast$keyboard\+Call\+Back)(unsigned char, int, int))
+\item 
+void \hyperlink{classEngine_a2e7d54bf7a41c23afce2934967cf09de}{keyboard\+Up} (void($\ast$keyboard\+Up\+Call\+Back)(unsigned char, int, int))
+\item 
+void \hyperlink{classEngine_ac5a3f2e2081bec8580ba9606822da90f}{special\+Keyboard} (void($\ast$special\+Func)(int, int, int))
+\item 
+void \hyperlink{classEngine_a978bb7f90f67e2b51b03a8ce2a8d9b2b}{set\+Viewport} (int x, int y, int width, int height)
+\item 
+void \hyperlink{classEngine_acc1431883e68b03c4a873ffb222f55cc}{clear\+Buffers} ()
+\item 
+void \hyperlink{classEngine_a0544e301002dd8af6958796fee18430e}{swap\+Buffers} ()
+\item 
+void \hyperlink{classEngine_a177922eb00045463beb7b5f0e2a59da4}{enable\+Light} (\hyperlink{classNode}{Node} $\ast$root, std\+::string light\+Name)
+\item 
+void \hyperlink{classEngine_a3f48d4bd248688249c8b1ad74d33117e}{enable\+Lighting} (bool value)
+\item 
+void \hyperlink{classEngine_a5b6cc6eb1b71934aadc4402c67f983ed}{render\+Text} ()
+\item 
+void \hyperlink{classEngine_aca42da4f6570409cecaf513efb86ada5}{set\+Projection\+Matrix} (glm\+::mat4 projection)
+\item 
+void \hyperlink{classEngine_a0508a50886cadf9d264e06811fa49e45}{enable\+Zbuffer} ()
+\item 
+void \hyperlink{classEngine_ab0d411e34b7ec898bd5e29f02feb4644}{load\+Identity} ()
+\item 
+void \hyperlink{classEngine_abeafe4eb10b3068b3623b2ca905e1fb5}{free\+Image\+Initialize} ()
+\item 
+void \hyperlink{classEngine_a276a5a08cd53ff62495737ede775c23b}{free\+Image\+De\+Initialize} ()
+\item 
+\hyperlink{classNode}{Node} $\ast$ \hyperlink{classEngine_a0966e5d9a460caedd44b9862aaf6a5f1}{get\+Scene} (const char $\ast$name)
+\item 
+void \hyperlink{classEngine_accc0b5153b3b63bb0de0446842bb61b2}{add\+Camera} (std\+::string name, bool movable, glm\+::vec3 eye, glm\+::vec3 center, glm\+::vec3 up)
+\item 
+void \hyperlink{classEngine_af6210e638d3512ddf222ec53b1c29a57}{move\+Camera} (glm\+::mat4 move)
+\item 
+void \hyperlink{classEngine_aa6e7ac4ee48c5288089d6d717b421168}{rotate\+Camera} (glm\+::mat4 rotate)
+\item 
+void \hyperlink{classEngine_a4c2cc9c594912622eb4c21ccb73a3a6d}{switch\+Lights} ()
+\item 
+void \hyperlink{classEngine_ae001f97b8363dcc657fea6d8fd61bb71}{move\+Light\+Forward} (float direction)
+\item 
+void \hyperlink{classEngine_a39722483f0ab212c1f240607b79984a8}{move\+Light\+Right} (float direction)
+\item 
+void \hyperlink{classEngine_a9af1747c316912a33e2300a6a2dd4904}{move\+Light\+Up} (float direction)
+\item 
+\hyperlink{classNode}{Node} $\ast$ \hyperlink{classEngine_a6897f35a40e6e871ad1badf96f115727}{get\+Node\+By\+Name} (\hyperlink{classNode}{Node} $\ast$root, std\+::string name)
+\item 
+void \hyperlink{classEngine_a9c29390e49cea40900a48490c8659490}{change\+Camera} (\hyperlink{classNode}{Node} $\ast$root)
+\item 
+void \hyperlink{classEngine_a1c8aef3cc4613f7c47698653ef6e3931}{increment\+Frames} ()
+\item 
+void \hyperlink{classEngine_a762a16ea87e60e95bbeff740e29e2ef0}{rotate\+Model} (\hyperlink{classNode}{Node} $\ast$root, float angle)
+\item 
+void \hyperlink{classEngine_adc57a0ae38c6370f704e4a54439a748f}{auto\+Rotate\+Model} (\hyperlink{classNode}{Node} $\ast$root, float angle)
+\item 
+void \hyperlink{classEngine_a7254f9eac21e503248c2b935c0a97686}{move\+Finger} (\hyperlink{classNode}{Node} $\ast$root, int f, bool open)
+\item 
+void \hyperlink{classEngine_a50b326857768af9eb3ba6e806662afed}{move\+Hand} (\hyperlink{classNode}{Node} $\ast$root, bool open)
+\item 
+void \hyperlink{classEngine_a1189f12688d8c4df96e8e2fd4574e3ea}{move\+Thumb} (\hyperlink{classNode}{Node} $\ast$root, bool open)
+\item 
+void \hyperlink{classEngine_afe2e714ea154d95366154ee7e5ad76a2}{set\+Alpha\+To\+Material} (\hyperlink{classNode}{Node} $\ast$root, float alpha, std\+::string node\+Name)
+\item 
+void \hyperlink{classEngine_a148fe7dcd328ef27f766554584bed191}{create\+Render\+List} (\hyperlink{classNode}{Node} $\ast$root)
+\item 
+\hyperlink{classCamera}{Camera} $\ast$ \hyperlink{classEngine_a28b61944fbc25c2a640c400c0827552e}{get\+Current\+Camera} ()
+\item 
+glm\+::mat4 \hyperlink{classEngine_a7f476ef9fb9bf0f578e4d6490fd0553a}{get\+Current\+Camera\+Matrix} ()
+\item 
+bool \hyperlink{classEngine_afcd6a7929f45ee442c5276b6f69d0f75}{is\+Movable\+Camera} ()
+\item 
+void \hyperlink{classEngine_ab48f7c79b39ed583b0568c381d444944}{render} ()
+\item 
+void \hyperlink{classEngine_a2dfa731be604b9bf6d3292c464fb1736}{free} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classEngine}{Engine} \& \hyperlink{classEngine_aa2fe1c0ae8e569098ce93ec4b173fcbe}{get\+Instance} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classEngine_accc0b5153b3b63bb0de0446842bb61b2}\label{classEngine_accc0b5153b3b63bb0de0446842bb61b2}} 
+\index{Engine@{Engine}!add\+Camera@{add\+Camera}}
+\index{add\+Camera@{add\+Camera}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{add\+Camera()}{addCamera()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::add\+Camera (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{bool}]{movable,  }\item[{glm\+::vec3}]{eye,  }\item[{glm\+::vec3}]{center,  }\item[{glm\+::vec3}]{up }\end{DoxyParamCaption})}
+
+Add a camera to cameras list 
+\begin{DoxyParams}{Parameters}
+{\em name} & camera name \\
+\hline
+{\em movable} & movable value \\
+\hline
+{\em eye} & where the eye is \\
+\hline
+{\em center} & center of the scene \\
+\hline
+{\em up} & orientation vector \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_adc57a0ae38c6370f704e4a54439a748f}\label{classEngine_adc57a0ae38c6370f704e4a54439a748f}} 
+\index{Engine@{Engine}!auto\+Rotate\+Model@{auto\+Rotate\+Model}}
+\index{auto\+Rotate\+Model@{auto\+Rotate\+Model}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{auto\+Rotate\+Model()}{autoRotateModel()}}
+{\footnotesize\ttfamily void Engine\+::auto\+Rotate\+Model (\begin{DoxyParamCaption}\item[{\hyperlink{classNode}{Node} $\ast$}]{root,  }\item[{float}]{angle }\end{DoxyParamCaption})}
+
+Automatic rotation of the model with some additional effects 
+\begin{DoxyParams}{Parameters}
+{\em root} & scene graph \\
+\hline
+{\em angle} & rotation angle \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_a9c29390e49cea40900a48490c8659490}\label{classEngine_a9c29390e49cea40900a48490c8659490}} 
+\index{Engine@{Engine}!change\+Camera@{change\+Camera}}
+\index{change\+Camera@{change\+Camera}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{change\+Camera()}{changeCamera()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::change\+Camera (\begin{DoxyParamCaption}\item[{\hyperlink{classNode}{Node} $\ast$}]{root }\end{DoxyParamCaption})}
+
+Change the current camera \mbox{\Hypertarget{classEngine_acc1431883e68b03c4a873ffb222f55cc}\label{classEngine_acc1431883e68b03c4a873ffb222f55cc}} 
+\index{Engine@{Engine}!clear\+Buffers@{clear\+Buffers}}
+\index{clear\+Buffers@{clear\+Buffers}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{clear\+Buffers()}{clearBuffers()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::clear\+Buffers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Clear the color and depth buffer bit \mbox{\Hypertarget{classEngine_a74984091119dd2be987608dcc4ab46f6}\label{classEngine_a74984091119dd2be987608dcc4ab46f6}} 
+\index{Engine@{Engine}!clear\+Color@{clear\+Color}}
+\index{clear\+Color@{clear\+Color}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{clear\+Color()}{clearColor()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::clear\+Color (\begin{DoxyParamCaption}\item[{float}]{r,  }\item[{float}]{g,  }\item[{float}]{b }\end{DoxyParamCaption})}
+
+Setter for clear color 
+\begin{DoxyParams}{Parameters}
+{\em r} & red component of the color \\
+\hline
+{\em g} & green component of the color \\
+\hline
+{\em b} & blue component of the color \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_a148fe7dcd328ef27f766554584bed191}\label{classEngine_a148fe7dcd328ef27f766554584bed191}} 
+\index{Engine@{Engine}!create\+Render\+List@{create\+Render\+List}}
+\index{create\+Render\+List@{create\+Render\+List}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{create\+Render\+List()}{createRenderList()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::create\+Render\+List (\begin{DoxyParamCaption}\item[{\hyperlink{classNode}{Node} $\ast$}]{root }\end{DoxyParamCaption})}
+
+Create render list and sort it 
+\begin{DoxyParams}{Parameters}
+{\em root} & scene graph \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_a56fc665908ac6d6c4340864facc00760}\label{classEngine_a56fc665908ac6d6c4340864facc00760}} 
+\index{Engine@{Engine}!display@{display}}
+\index{display@{display}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{display()}{display()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::display (\begin{DoxyParamCaption}\item[{void($\ast$)()}]{display\+Callback }\end{DoxyParamCaption})}
+
+Setter for display callback 
+\begin{DoxyParams}{Parameters}
+{\em display\+Callback} & display callback to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_a177922eb00045463beb7b5f0e2a59da4}\label{classEngine_a177922eb00045463beb7b5f0e2a59da4}} 
+\index{Engine@{Engine}!enable\+Light@{enable\+Light}}
+\index{enable\+Light@{enable\+Light}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{enable\+Light()}{enableLight()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::enable\+Light (\begin{DoxyParamCaption}\item[{\hyperlink{classNode}{Node} $\ast$}]{scene,  }\item[{std\+::string}]{light\+Name }\end{DoxyParamCaption})}
+
+Change light state given its name 
+\begin{DoxyParams}{Parameters}
+{\em scene} & scene graph \\
+\hline
+{\em light\+Name} & the name of the light to enable \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_a3f48d4bd248688249c8b1ad74d33117e}\label{classEngine_a3f48d4bd248688249c8b1ad74d33117e}} 
+\index{Engine@{Engine}!enable\+Lighting@{enable\+Lighting}}
+\index{enable\+Lighting@{enable\+Lighting}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{enable\+Lighting()}{enableLighting()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::enable\+Lighting (\begin{DoxyParamCaption}\item[{bool}]{value }\end{DoxyParamCaption})}
+
+Enable or disable illumination according to the boolean value passed as argument 
+\begin{DoxyParams}{Parameters}
+{\em value} & true = enable lights false = disable lights \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_a0508a50886cadf9d264e06811fa49e45}\label{classEngine_a0508a50886cadf9d264e06811fa49e45}} 
+\index{Engine@{Engine}!enable\+Zbuffer@{enable\+Zbuffer}}
+\index{enable\+Zbuffer@{enable\+Zbuffer}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{enable\+Zbuffer()}{enableZbuffer()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::enable\+Zbuffer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Enable Z buffer \mbox{\Hypertarget{classEngine_a2dfa731be604b9bf6d3292c464fb1736}\label{classEngine_a2dfa731be604b9bf6d3292c464fb1736}} 
+\index{Engine@{Engine}!free@{free}}
+\index{free@{free}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{free()}{free()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::free (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Function that frees unused resources \mbox{\Hypertarget{classEngine_a276a5a08cd53ff62495737ede775c23b}\label{classEngine_a276a5a08cd53ff62495737ede775c23b}} 
+\index{Engine@{Engine}!free\+Image\+De\+Initialize@{free\+Image\+De\+Initialize}}
+\index{free\+Image\+De\+Initialize@{free\+Image\+De\+Initialize}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{free\+Image\+De\+Initialize()}{freeImageDeInitialize()}}
+{\footnotesize\ttfamily void Engine\+::free\+Image\+De\+Initialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+De\+Initialize Free Image \mbox{\Hypertarget{classEngine_abeafe4eb10b3068b3623b2ca905e1fb5}\label{classEngine_abeafe4eb10b3068b3623b2ca905e1fb5}} 
+\index{Engine@{Engine}!free\+Image\+Initialize@{free\+Image\+Initialize}}
+\index{free\+Image\+Initialize@{free\+Image\+Initialize}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{free\+Image\+Initialize()}{freeImageInitialize()}}
+{\footnotesize\ttfamily void Engine\+::free\+Image\+Initialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Initialize Free Image \mbox{\Hypertarget{classEngine_a28b61944fbc25c2a640c400c0827552e}\label{classEngine_a28b61944fbc25c2a640c400c0827552e}} 
+\index{Engine@{Engine}!get\+Current\+Camera@{get\+Current\+Camera}}
+\index{get\+Current\+Camera@{get\+Current\+Camera}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{get\+Current\+Camera()}{getCurrentCamera()}}
+{\footnotesize\ttfamily \hyperlink{classCamera}{Camera} $\ast$ Engine\+::get\+Current\+Camera (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get current camera \begin{DoxyReturn}{Returns}
+current camera 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classEngine_a7f476ef9fb9bf0f578e4d6490fd0553a}\label{classEngine_a7f476ef9fb9bf0f578e4d6490fd0553a}} 
+\index{Engine@{Engine}!get\+Current\+Camera\+Matrix@{get\+Current\+Camera\+Matrix}}
+\index{get\+Current\+Camera\+Matrix@{get\+Current\+Camera\+Matrix}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{get\+Current\+Camera\+Matrix()}{getCurrentCameraMatrix()}}
+{\footnotesize\ttfamily glm\+::mat4 Engine\+::get\+Current\+Camera\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get current camera matrix \begin{DoxyReturn}{Returns}
+current camera matrix 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classEngine_aa2fe1c0ae8e569098ce93ec4b173fcbe}\label{classEngine_aa2fe1c0ae8e569098ce93ec4b173fcbe}} 
+\index{Engine@{Engine}!get\+Instance@{get\+Instance}}
+\index{get\+Instance@{get\+Instance}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{get\+Instance()}{getInstance()}}
+{\footnotesize\ttfamily \hyperlink{classEngine}{Engine} \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} \& Engine\+::get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Getter for engine instance \begin{DoxyReturn}{Returns}
+a instance of engine. A new instance is created if engine is still nullptr 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classEngine_a6897f35a40e6e871ad1badf96f115727}\label{classEngine_a6897f35a40e6e871ad1badf96f115727}} 
+\index{Engine@{Engine}!get\+Node\+By\+Name@{get\+Node\+By\+Name}}
+\index{get\+Node\+By\+Name@{get\+Node\+By\+Name}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{get\+Node\+By\+Name()}{getNodeByName()}}
+{\footnotesize\ttfamily \hyperlink{classNode}{Node} $\ast$ Engine\+::get\+Node\+By\+Name (\begin{DoxyParamCaption}\item[{\hyperlink{classNode}{Node} $\ast$}]{root,  }\item[{std\+::string}]{name }\end{DoxyParamCaption})}
+
+takes a node from scene graph searching it by his name 
+\begin{DoxyParams}{Parameters}
+{\em root} & node and node name \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_a0966e5d9a460caedd44b9862aaf6a5f1}\label{classEngine_a0966e5d9a460caedd44b9862aaf6a5f1}} 
+\index{Engine@{Engine}!get\+Scene@{get\+Scene}}
+\index{get\+Scene@{get\+Scene}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{get\+Scene()}{getScene()}}
+{\footnotesize\ttfamily \hyperlink{classNode}{Node} $\ast$ Engine\+::get\+Scene (\begin{DoxyParamCaption}\item[{const char $\ast$}]{name }\end{DoxyParamCaption})}
+
+Returns the scene graph given its name 
+\begin{DoxyParams}{Parameters}
+{\em name} & O\+VO file name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+root node of the scene graph 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classEngine_a483d0d99c1f762f0012aa649ec3220cf}\label{classEngine_a483d0d99c1f762f0012aa649ec3220cf}} 
+\index{Engine@{Engine}!get\+Window\+Height@{get\+Window\+Height}}
+\index{get\+Window\+Height@{get\+Window\+Height}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{get\+Window\+Height()}{getWindowHeight()}}
+{\footnotesize\ttfamily int \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::get\+Window\+Height (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get windows height \begin{DoxyReturn}{Returns}
+current widows height 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classEngine_aa9edd591eafe0975a95ab06f74b6ba03}\label{classEngine_aa9edd591eafe0975a95ab06f74b6ba03}} 
+\index{Engine@{Engine}!get\+Window\+Width@{get\+Window\+Width}}
+\index{get\+Window\+Width@{get\+Window\+Width}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{get\+Window\+Width()}{getWindowWidth()}}
+{\footnotesize\ttfamily int \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::get\+Window\+Width (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get windows width \begin{DoxyReturn}{Returns}
+current window width 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classEngine_a1c8aef3cc4613f7c47698653ef6e3931}\label{classEngine_a1c8aef3cc4613f7c47698653ef6e3931}} 
+\index{Engine@{Engine}!increment\+Frames@{increment\+Frames}}
+\index{increment\+Frames@{increment\+Frames}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{increment\+Frames()}{incrementFrames()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::increment\+Frames (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Increment frames \mbox{\Hypertarget{classEngine_ae675127bbb7671464d1d7ad94818a17a}\label{classEngine_ae675127bbb7671464d1d7ad94818a17a}} 
+\index{Engine@{Engine}!init@{init}}
+\index{init@{init}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Init function \mbox{\Hypertarget{classEngine_afcd6a7929f45ee442c5276b6f69d0f75}\label{classEngine_afcd6a7929f45ee442c5276b6f69d0f75}} 
+\index{Engine@{Engine}!is\+Movable\+Camera@{is\+Movable\+Camera}}
+\index{is\+Movable\+Camera@{is\+Movable\+Camera}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{is\+Movable\+Camera()}{isMovableCamera()}}
+{\footnotesize\ttfamily bool \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::is\+Movable\+Camera (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get current camera movable property \begin{DoxyReturn}{Returns}
+current camera movable value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classEngine_a5ddd680e42a9c0a655af665611ddd279}\label{classEngine_a5ddd680e42a9c0a655af665611ddd279}} 
+\index{Engine@{Engine}!keyboard@{keyboard}}
+\index{keyboard@{keyboard}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{keyboard()}{keyboard()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::keyboard (\begin{DoxyParamCaption}\item[{void($\ast$)(unsigned char, int, int)}]{keyboard\+Call\+Back }\end{DoxyParamCaption})}
+
+Setter for keyboard callback 
+\begin{DoxyParams}{Parameters}
+{\em keyboard\+Call\+Back} & keyboard callback to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_a2e7d54bf7a41c23afce2934967cf09de}\label{classEngine_a2e7d54bf7a41c23afce2934967cf09de}} 
+\index{Engine@{Engine}!keyboard\+Up@{keyboard\+Up}}
+\index{keyboard\+Up@{keyboard\+Up}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{keyboard\+Up()}{keyboardUp()}}
+{\footnotesize\ttfamily void Engine\+::keyboard\+Up (\begin{DoxyParamCaption}\item[{void($\ast$)(unsigned char, int, int)}]{keyboard\+Up\+Call\+Back }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classEngine_ab0d411e34b7ec898bd5e29f02feb4644}\label{classEngine_ab0d411e34b7ec898bd5e29f02feb4644}} 
+\index{Engine@{Engine}!load\+Identity@{load\+Identity}}
+\index{load\+Identity@{load\+Identity}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{load\+Identity()}{loadIdentity()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::load\+Identity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Loads the identity matrix \mbox{\Hypertarget{classEngine_a033a7a3b7697c9998270276bf659ac89}\label{classEngine_a033a7a3b7697c9998270276bf659ac89}} 
+\index{Engine@{Engine}!load\+Matrix@{load\+Matrix}}
+\index{load\+Matrix@{load\+Matrix}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{load\+Matrix()}{loadMatrix()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::load\+Matrix (\begin{DoxyParamCaption}\item[{glm\+::mat4}]{matrix }\end{DoxyParamCaption})}
+
+Wrapper function that loads matrix as the current Opengl matrix 
+\begin{DoxyParams}{Parameters}
+{\em matrix} & the matrix to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_a649eaa6139ab7b66d2d5ac541ac2f069}\label{classEngine_a649eaa6139ab7b66d2d5ac541ac2f069}} 
+\index{Engine@{Engine}!mouse\+Moved@{mouse\+Moved}}
+\index{mouse\+Moved@{mouse\+Moved}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{mouse\+Moved()}{mouseMoved()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::mouse\+Moved (\begin{DoxyParamCaption}\item[{void($\ast$)(int, int)}]{mouse\+Moved }\end{DoxyParamCaption})}
+
+Callback for mouse passive motion function 
+\begin{DoxyParams}{Parameters}
+{\em mouve\+Moved} & passive motion function callback \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_a57d57550b28d0c5c3ae92fcbaf5dd82b}\label{classEngine_a57d57550b28d0c5c3ae92fcbaf5dd82b}} 
+\index{Engine@{Engine}!mouse\+Wheel@{mouse\+Wheel}}
+\index{mouse\+Wheel@{mouse\+Wheel}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{mouse\+Wheel()}{mouseWheel()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::mouse\+Wheel (\begin{DoxyParamCaption}\item[{void($\ast$)(int, int, int, int)}]{mouse\+Wheel\+Func }\end{DoxyParamCaption})}
+
+Setter for mouse wheel callback 
+\begin{DoxyParams}{Parameters}
+{\em mouse\+Wheel\+Func} & the mouse callback to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_af6210e638d3512ddf222ec53b1c29a57}\label{classEngine_af6210e638d3512ddf222ec53b1c29a57}} 
+\index{Engine@{Engine}!move\+Camera@{move\+Camera}}
+\index{move\+Camera@{move\+Camera}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{move\+Camera()}{moveCamera()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::move\+Camera (\begin{DoxyParamCaption}\item[{glm\+::mat4}]{move }\end{DoxyParamCaption})}
+
+Limits for camera movement 
+\begin{DoxyParams}{Parameters}
+{\em move} & movement matrix \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_a7254f9eac21e503248c2b935c0a97686}\label{classEngine_a7254f9eac21e503248c2b935c0a97686}} 
+\index{Engine@{Engine}!move\+Finger@{move\+Finger}}
+\index{move\+Finger@{move\+Finger}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{move\+Finger()}{moveFinger()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::move\+Finger (\begin{DoxyParamCaption}\item[{\hyperlink{classNode}{Node} $\ast$}]{root,  }\item[{int}]{f,  }\item[{bool}]{open }\end{DoxyParamCaption})}
+
+Move a finger of the hand 
+\begin{DoxyParams}{Parameters}
+{\em scene} & scene graph \\
+\hline
+{\em f} & number of the finger to close (starting from 0) \\
+\hline
+{\em open} & boolean value that determines the closure or opening of the finger (true open false close) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_a50b326857768af9eb3ba6e806662afed}\label{classEngine_a50b326857768af9eb3ba6e806662afed}} 
+\index{Engine@{Engine}!move\+Hand@{move\+Hand}}
+\index{move\+Hand@{move\+Hand}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{move\+Hand()}{moveHand()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::move\+Hand (\begin{DoxyParamCaption}\item[{\hyperlink{classNode}{Node} $\ast$}]{root,  }\item[{bool}]{open }\end{DoxyParamCaption})}
+
+Move hand 
+\begin{DoxyParams}{Parameters}
+{\em root} & scene graph \\
+\hline
+{\em open} & boolean value that determines the closure or opening of the hand (true open false close) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_ae001f97b8363dcc657fea6d8fd61bb71}\label{classEngine_ae001f97b8363dcc657fea6d8fd61bb71}} 
+\index{Engine@{Engine}!move\+Light\+Forward@{move\+Light\+Forward}}
+\index{move\+Light\+Forward@{move\+Light\+Forward}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{move\+Light\+Forward()}{moveLightForward()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::move\+Light\+Forward (\begin{DoxyParamCaption}\item[{float}]{direction }\end{DoxyParamCaption})}
+
+Move light forward or backwards according to the value of direction direction direction of the light (positive forward negative backwards) \mbox{\Hypertarget{classEngine_a39722483f0ab212c1f240607b79984a8}\label{classEngine_a39722483f0ab212c1f240607b79984a8}} 
+\index{Engine@{Engine}!move\+Light\+Right@{move\+Light\+Right}}
+\index{move\+Light\+Right@{move\+Light\+Right}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{move\+Light\+Right()}{moveLightRight()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::move\+Light\+Right (\begin{DoxyParamCaption}\item[{float}]{direction }\end{DoxyParamCaption})}
+
+Move light right or left according to the value of direction direction direction of the light (positive right negative left) \mbox{\Hypertarget{classEngine_a9af1747c316912a33e2300a6a2dd4904}\label{classEngine_a9af1747c316912a33e2300a6a2dd4904}} 
+\index{Engine@{Engine}!move\+Light\+Up@{move\+Light\+Up}}
+\index{move\+Light\+Up@{move\+Light\+Up}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{move\+Light\+Up()}{moveLightUp()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::move\+Light\+Up (\begin{DoxyParamCaption}\item[{float}]{direction }\end{DoxyParamCaption})}
+
+Move light up or down according to the value of direction direction direction of the light (positive up negative down) \mbox{\Hypertarget{classEngine_a1189f12688d8c4df96e8e2fd4574e3ea}\label{classEngine_a1189f12688d8c4df96e8e2fd4574e3ea}} 
+\index{Engine@{Engine}!move\+Thumb@{move\+Thumb}}
+\index{move\+Thumb@{move\+Thumb}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{move\+Thumb()}{moveThumb()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::move\+Thumb (\begin{DoxyParamCaption}\item[{\hyperlink{classNode}{Node} $\ast$}]{root,  }\item[{bool}]{open }\end{DoxyParamCaption})}
+
+Move the thumb 
+\begin{DoxyParams}{Parameters}
+{\em root} & scene graph \\
+\hline
+{\em open} & boolean value that determines the closure or opening of the thumb (true open false close) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_ac12f3f0be76b8394772aeac4053ad2f2}\label{classEngine_ac12f3f0be76b8394772aeac4053ad2f2}} 
+\index{Engine@{Engine}!redisplay@{redisplay}}
+\index{redisplay@{redisplay}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{redisplay()}{redisplay()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::redisplay (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Wrapper function for glut\+Post\+Window\+Redisplay \mbox{\Hypertarget{classEngine_ab48f7c79b39ed583b0568c381d444944}\label{classEngine_ab48f7c79b39ed583b0568c381d444944}} 
+\index{Engine@{Engine}!render@{render}}
+\index{render@{render}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::render (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Render scene \mbox{\Hypertarget{classEngine_a5b6cc6eb1b71934aadc4402c67f983ed}\label{classEngine_a5b6cc6eb1b71934aadc4402c67f983ed}} 
+\index{Engine@{Engine}!render\+Text@{render\+Text}}
+\index{render\+Text@{render\+Text}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{render\+Text()}{renderText()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::render\+Text (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Render some 2D text with various information \mbox{\Hypertarget{classEngine_af43e72719048ae70cb4c50c0b76c5ec7}\label{classEngine_af43e72719048ae70cb4c50c0b76c5ec7}} 
+\index{Engine@{Engine}!reshape@{reshape}}
+\index{reshape@{reshape}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{reshape()}{reshape()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::reshape (\begin{DoxyParamCaption}\item[{void($\ast$)(int, int)}]{reshape\+Callback }\end{DoxyParamCaption})}
+
+Setter for reshape callback 
+\begin{DoxyParams}{Parameters}
+{\em reshape\+Callback} & reshape callback to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_aa6e7ac4ee48c5288089d6d717b421168}\label{classEngine_aa6e7ac4ee48c5288089d6d717b421168}} 
+\index{Engine@{Engine}!rotate\+Camera@{rotate\+Camera}}
+\index{rotate\+Camera@{rotate\+Camera}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{rotate\+Camera()}{rotateCamera()}}
+{\footnotesize\ttfamily void Engine\+::rotate\+Camera (\begin{DoxyParamCaption}\item[{glm\+::mat4}]{rotate }\end{DoxyParamCaption})}
+
+Rotate the camera 
+\begin{DoxyParams}{Parameters}
+{\em rotate} & rotation to apply \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_a762a16ea87e60e95bbeff740e29e2ef0}\label{classEngine_a762a16ea87e60e95bbeff740e29e2ef0}} 
+\index{Engine@{Engine}!rotate\+Model@{rotate\+Model}}
+\index{rotate\+Model@{rotate\+Model}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{rotate\+Model()}{rotateModel()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::rotate\+Model (\begin{DoxyParamCaption}\item[{\hyperlink{classNode}{Node} $\ast$}]{root,  }\item[{float}]{angle }\end{DoxyParamCaption})}
+
+Rotate model 
+\begin{DoxyParams}{Parameters}
+{\em root} & scene graph \\
+\hline
+{\em angle} & rotational increment \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_afe2e714ea154d95366154ee7e5ad76a2}\label{classEngine_afe2e714ea154d95366154ee7e5ad76a2}} 
+\index{Engine@{Engine}!set\+Alpha\+To\+Material@{set\+Alpha\+To\+Material}}
+\index{set\+Alpha\+To\+Material@{set\+Alpha\+To\+Material}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{set\+Alpha\+To\+Material()}{setAlphaToMaterial()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::set\+Alpha\+To\+Material (\begin{DoxyParamCaption}\item[{\hyperlink{classNode}{Node} $\ast$}]{root,  }\item[{float}]{alpha,  }\item[{std\+::string}]{material\+Name }\end{DoxyParamCaption})}
+
+Function that set alpha to a desired material 
+\begin{DoxyParams}{Parameters}
+{\em scene} & scene graph \\
+\hline
+{\em alpha} & alpha value to set \\
+\hline
+{\em material\+Name} & name of the material \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_aca42da4f6570409cecaf513efb86ada5}\label{classEngine_aca42da4f6570409cecaf513efb86ada5}} 
+\index{Engine@{Engine}!set\+Projection\+Matrix@{set\+Projection\+Matrix}}
+\index{set\+Projection\+Matrix@{set\+Projection\+Matrix}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{set\+Projection\+Matrix()}{setProjectionMatrix()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::set\+Projection\+Matrix (\begin{DoxyParamCaption}\item[{glm\+::mat4}]{projection }\end{DoxyParamCaption})}
+
+Setter for current camera projection matrix 
+\begin{DoxyParams}{Parameters}
+{\em projection} & camera projection matrix \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_a978bb7f90f67e2b51b03a8ce2a8d9b2b}\label{classEngine_a978bb7f90f67e2b51b03a8ce2a8d9b2b}} 
+\index{Engine@{Engine}!set\+Viewport@{set\+Viewport}}
+\index{set\+Viewport@{set\+Viewport}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{set\+Viewport()}{setViewport()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::set\+Viewport (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{int}]{width,  }\item[{int}]{height }\end{DoxyParamCaption})}
+
+Setter for Open\+GL viewport 
+\begin{DoxyParams}{Parameters}
+{\em x} & x coordinate \\
+\hline
+{\em y} & y coordinate \\
+\hline
+{\em width} & viewport width \\
+\hline
+{\em height} & viewport height \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_ac5a3f2e2081bec8580ba9606822da90f}\label{classEngine_ac5a3f2e2081bec8580ba9606822da90f}} 
+\index{Engine@{Engine}!special\+Keyboard@{special\+Keyboard}}
+\index{special\+Keyboard@{special\+Keyboard}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{special\+Keyboard()}{specialKeyboard()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::special\+Keyboard (\begin{DoxyParamCaption}\item[{void($\ast$)(int, int, int)}]{special\+Func }\end{DoxyParamCaption})}
+
+Setter for special keyboard callback 
+\begin{DoxyParams}{Parameters}
+{\em special\+Func} & special keyboard callback to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_af0255a9a3e166e47a13ecbba393956de}\label{classEngine_af0255a9a3e166e47a13ecbba393956de}} 
+\index{Engine@{Engine}!start\+Loop@{start\+Loop}}
+\index{start\+Loop@{start\+Loop}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{start\+Loop()}{startLoop()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::start\+Loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Start the main loop \mbox{\Hypertarget{classEngine_a0544e301002dd8af6958796fee18430e}\label{classEngine_a0544e301002dd8af6958796fee18430e}} 
+\index{Engine@{Engine}!swap\+Buffers@{swap\+Buffers}}
+\index{swap\+Buffers@{swap\+Buffers}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{swap\+Buffers()}{swapBuffers()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::swap\+Buffers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Wrapper for glut\+Swap\+Buffers \mbox{\Hypertarget{classEngine_a4c2cc9c594912622eb4c21ccb73a3a6d}\label{classEngine_a4c2cc9c594912622eb4c21ccb73a3a6d}} 
+\index{Engine@{Engine}!switch\+Lights@{switch\+Lights}}
+\index{switch\+Lights@{switch\+Lights}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{switch\+Lights()}{switchLights()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::switch\+Lights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Changes lighting state \mbox{\Hypertarget{classEngine_a3f92d7e6ea9beeac958fcc243ee7d434}\label{classEngine_a3f92d7e6ea9beeac958fcc243ee7d434}} 
+\index{Engine@{Engine}!timer@{timer}}
+\index{timer@{timer}!Engine@{Engine}}
+\subsubsection{\texorpdfstring{timer()}{timer()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} Engine\+::timer (\begin{DoxyParamCaption}\item[{void }]{timer\+Callbackint }\end{DoxyParamCaption})}
+
+Setter for timer callback here we calculate fps 
+\begin{DoxyParams}{Parameters}
+{\em timer\+Callback} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Engine_8h}{Engine.\+h}\item 
+\hyperlink{Engine_8cpp}{Engine.\+cpp}\end{DoxyCompactItemize}

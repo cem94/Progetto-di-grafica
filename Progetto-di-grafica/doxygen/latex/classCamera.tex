@@ -1,0 +1,103 @@
+\hypertarget{classCamera}{}\section{Camera Class Reference}
+\label{classCamera}\index{Camera@{Camera}}
+
+
+{\ttfamily \#include $<$Camera.\+h$>$}
+
+
+
+Inheritance diagram for Camera\+:
+% FIG 0
+
+
+Collaboration diagram for Camera\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCamera_a01f94c3543f56ede7af49dc778f19331}{Camera} ()
+\item 
+virtual \hyperlink{classCamera_ad1897942d0ccf91052386388a497349f}{$\sim$\+Camera} ()
+\item 
+void \hyperlink{classCamera_a153d920e646e06c882606e38ef23df9a}{set\+Projection\+Matrix} (glm\+::mat4 projection)
+\item 
+void \hyperlink{classCamera_afea7920e4a36865a5062a05eb6a381ed}{set\+Movable} (bool movable)
+\item 
+bool \hyperlink{classCamera_a5140fa7588dab50da4d932ab32baf7f3}{get\+Movable} () const
+\item 
+void \hyperlink{classCamera_adb0f3d1a0119a86ca7d68e54468b8eef}{render} (glm\+::mat4 render\+Matrix) override
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+This class represents a camera. Settings should comprise both orthographic and perspective projections, and the necessary math to retrieve the camera inverse matrix. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCamera_a01f94c3543f56ede7af49dc778f19331}\label{classCamera_a01f94c3543f56ede7af49dc778f19331}} 
+\index{Camera@{Camera}!Camera@{Camera}}
+\index{Camera@{Camera}!Camera@{Camera}}
+\subsubsection{\texorpdfstring{Camera()}{Camera()}}
+{\footnotesize\ttfamily Camera\+::\+Camera (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\hyperlink{classCamera}{Camera} constructor \mbox{\Hypertarget{classCamera_ad1897942d0ccf91052386388a497349f}\label{classCamera_ad1897942d0ccf91052386388a497349f}} 
+\index{Camera@{Camera}!````~Camera@{$\sim$\+Camera}}
+\index{````~Camera@{$\sim$\+Camera}!Camera@{Camera}}
+\subsubsection{\texorpdfstring{$\sim$\+Camera()}{~Camera()}}
+{\footnotesize\ttfamily Camera\+::$\sim$\+Camera (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+\hyperlink{classCamera}{Camera} destructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classCamera_a5140fa7588dab50da4d932ab32baf7f3}\label{classCamera_a5140fa7588dab50da4d932ab32baf7f3}} 
+\index{Camera@{Camera}!get\+Movable@{get\+Movable}}
+\index{get\+Movable@{get\+Movable}!Camera@{Camera}}
+\subsubsection{\texorpdfstring{get\+Movable()}{getMovable()}}
+{\footnotesize\ttfamily bool Camera\+::get\+Movable (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for movable \begin{DoxyReturn}{Returns}
+movable value (true if movable false otherwise) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCamera_adb0f3d1a0119a86ca7d68e54468b8eef}\label{classCamera_adb0f3d1a0119a86ca7d68e54468b8eef}} 
+\index{Camera@{Camera}!render@{render}}
+\index{render@{render}!Camera@{Camera}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Camera\+::render (\begin{DoxyParamCaption}\item[{glm\+::mat4}]{render\+Matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Render camera rendering method 
+\begin{DoxyParams}{Parameters}
+{\em render\+Matrix} & render matrix \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classNode_a7faebb78a04b6421dbf5afe998f7658d}{Node}.
+
+\mbox{\Hypertarget{classCamera_afea7920e4a36865a5062a05eb6a381ed}\label{classCamera_afea7920e4a36865a5062a05eb6a381ed}} 
+\index{Camera@{Camera}!set\+Movable@{set\+Movable}}
+\index{set\+Movable@{set\+Movable}!Camera@{Camera}}
+\subsubsection{\texorpdfstring{set\+Movable()}{setMovable()}}
+{\footnotesize\ttfamily void Camera\+::set\+Movable (\begin{DoxyParamCaption}\item[{bool}]{movable }\end{DoxyParamCaption})}
+
+Setter for movable 
+\begin{DoxyParams}{Parameters}
+{\em movable} & boolean value (true if movable false otherwise) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classCamera_a153d920e646e06c882606e38ef23df9a}\label{classCamera_a153d920e646e06c882606e38ef23df9a}} 
+\index{Camera@{Camera}!set\+Projection\+Matrix@{set\+Projection\+Matrix}}
+\index{set\+Projection\+Matrix@{set\+Projection\+Matrix}!Camera@{Camera}}
+\subsubsection{\texorpdfstring{set\+Projection\+Matrix()}{setProjectionMatrix()}}
+{\footnotesize\ttfamily void Camera\+::set\+Projection\+Matrix (\begin{DoxyParamCaption}\item[{glm\+::mat4}]{projection }\end{DoxyParamCaption})}
+
+Setter for projection matrix 
+\begin{DoxyParams}{Parameters}
+{\em projection} & projection matrix \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Camera_8h}{Camera.\+h}\item 
+\hyperlink{Camera_8cpp}{Camera.\+cpp}\end{DoxyCompactItemize}

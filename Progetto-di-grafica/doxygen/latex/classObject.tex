@@ -1,0 +1,137 @@
+\hypertarget{classObject}{}\section{Object Class Reference}
+\label{classObject}\index{Object@{Object}}
+
+
+{\ttfamily \#include $<$Object.\+h$>$}
+
+
+
+Inheritance diagram for Object\+:
+% FIG 0
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{classObject_ad8dadb365053c182931671a424199e36}{Type} \{ \newline
+\hyperlink{classObject_ad8dadb365053c182931671a424199e36ad7c3b780cc411a9b2bca5c893bf058d9}{O\+B\+J\+E\+CT} = 0, 
+\hyperlink{classObject_ad8dadb365053c182931671a424199e36a9d820291fd75d33b2108aec3577bdeb6}{C\+A\+M\+E\+RA}, 
+\hyperlink{classObject_ad8dadb365053c182931671a424199e36a2c3992641cd104186ff698ed3af9fe77}{L\+I\+G\+HT}, 
+\hyperlink{classObject_ad8dadb365053c182931671a424199e36a33752e3fe4c2b26f5f945568aa8e7f7c}{M\+A\+T\+E\+R\+I\+AL}, 
+\newline
+\hyperlink{classObject_ad8dadb365053c182931671a424199e36a233f5c2a87bcc6d1ab8a6f831578f3a0}{M\+E\+SH}, 
+\hyperlink{classObject_ad8dadb365053c182931671a424199e36a9a306e7d310391d25eb73ad6a1d3c729}{N\+O\+DE}, 
+\hyperlink{classObject_ad8dadb365053c182931671a424199e36a0832fb173ad4ea78e71d34d6e6532d45}{T\+E\+X\+T\+U\+RE}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classObject_af3558f9e2b46d677f0ac4d6d3c97b118}{get\+Id} () const
+\item 
+void \hyperlink{classObject_a7ab65dbfd0a7c93266d3303330718be4}{set\+Id} (int object\+Id)
+\item 
+std\+::string \hyperlink{classObject_acb9b466607cb80beaaa30ece2f7f570a}{get\+Name} () const
+\item 
+void \hyperlink{classObject_a93052cbcc55dd5ca96d87f45a2af893f}{set\+Name} (std\+::string object\+Name)
+\item 
+void \hyperlink{classObject_a1fad7c569e1a3dbd84b97136825bb1dd}{set\+Type} (\hyperlink{classObject_ad8dadb365053c182931671a424199e36}{Type} object\+Type)
+\item 
+\hyperlink{classObject_ad8dadb365053c182931671a424199e36}{Type} \hyperlink{classObject_a9bb97ab8fe1c83ce6dbbb19cba53a578}{get\+Type} () const
+\item 
+virtual void \hyperlink{classObject_af7b5e6c789269f331688537c0809fb82}{render} (glm\+::mat4 rendermatrix)=0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Base class used by all the derived classes.\+This class is responsible for keeping track of the existing objects, forcing some required A\+PI (virtual) methods and providing a unique ID to each object. 
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classObject_ad8dadb365053c182931671a424199e36}\label{classObject_ad8dadb365053c182931671a424199e36}} 
+\index{Object@{Object}!Type@{Type}}
+\index{Type@{Type}!Object@{Object}}
+\subsubsection{\texorpdfstring{Type}{Type}}
+{\footnotesize\ttfamily enum \hyperlink{classObject_ad8dadb365053c182931671a424199e36}{Object\+::\+Type}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{O\+B\+J\+E\+CT@{O\+B\+J\+E\+CT}!Object@{Object}}\index{Object@{Object}!O\+B\+J\+E\+CT@{O\+B\+J\+E\+CT}}}\mbox{\Hypertarget{classObject_ad8dadb365053c182931671a424199e36ad7c3b780cc411a9b2bca5c893bf058d9}\label{classObject_ad8dadb365053c182931671a424199e36ad7c3b780cc411a9b2bca5c893bf058d9}} 
+O\+B\+J\+E\+CT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+A\+M\+E\+RA@{C\+A\+M\+E\+RA}!Object@{Object}}\index{Object@{Object}!C\+A\+M\+E\+RA@{C\+A\+M\+E\+RA}}}\mbox{\Hypertarget{classObject_ad8dadb365053c182931671a424199e36a9d820291fd75d33b2108aec3577bdeb6}\label{classObject_ad8dadb365053c182931671a424199e36a9d820291fd75d33b2108aec3577bdeb6}} 
+C\+A\+M\+E\+RA&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{L\+I\+G\+HT@{L\+I\+G\+HT}!Object@{Object}}\index{Object@{Object}!L\+I\+G\+HT@{L\+I\+G\+HT}}}\mbox{\Hypertarget{classObject_ad8dadb365053c182931671a424199e36a2c3992641cd104186ff698ed3af9fe77}\label{classObject_ad8dadb365053c182931671a424199e36a2c3992641cd104186ff698ed3af9fe77}} 
+L\+I\+G\+HT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{M\+A\+T\+E\+R\+I\+AL@{M\+A\+T\+E\+R\+I\+AL}!Object@{Object}}\index{Object@{Object}!M\+A\+T\+E\+R\+I\+AL@{M\+A\+T\+E\+R\+I\+AL}}}\mbox{\Hypertarget{classObject_ad8dadb365053c182931671a424199e36a33752e3fe4c2b26f5f945568aa8e7f7c}\label{classObject_ad8dadb365053c182931671a424199e36a33752e3fe4c2b26f5f945568aa8e7f7c}} 
+M\+A\+T\+E\+R\+I\+AL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{M\+E\+SH@{M\+E\+SH}!Object@{Object}}\index{Object@{Object}!M\+E\+SH@{M\+E\+SH}}}\mbox{\Hypertarget{classObject_ad8dadb365053c182931671a424199e36a233f5c2a87bcc6d1ab8a6f831578f3a0}\label{classObject_ad8dadb365053c182931671a424199e36a233f5c2a87bcc6d1ab8a6f831578f3a0}} 
+M\+E\+SH&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{N\+O\+DE@{N\+O\+DE}!Object@{Object}}\index{Object@{Object}!N\+O\+DE@{N\+O\+DE}}}\mbox{\Hypertarget{classObject_ad8dadb365053c182931671a424199e36a9a306e7d310391d25eb73ad6a1d3c729}\label{classObject_ad8dadb365053c182931671a424199e36a9a306e7d310391d25eb73ad6a1d3c729}} 
+N\+O\+DE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+E\+X\+T\+U\+RE@{T\+E\+X\+T\+U\+RE}!Object@{Object}}\index{Object@{Object}!T\+E\+X\+T\+U\+RE@{T\+E\+X\+T\+U\+RE}}}\mbox{\Hypertarget{classObject_ad8dadb365053c182931671a424199e36a0832fb173ad4ea78e71d34d6e6532d45}\label{classObject_ad8dadb365053c182931671a424199e36a0832fb173ad4ea78e71d34d6e6532d45}} 
+T\+E\+X\+T\+U\+RE&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classObject_af3558f9e2b46d677f0ac4d6d3c97b118}\label{classObject_af3558f9e2b46d677f0ac4d6d3c97b118}} 
+\index{Object@{Object}!get\+Id@{get\+Id}}
+\index{get\+Id@{get\+Id}!Object@{Object}}
+\subsubsection{\texorpdfstring{get\+Id()}{getId()}}
+{\footnotesize\ttfamily int Object\+::get\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classObject_acb9b466607cb80beaaa30ece2f7f570a}\label{classObject_acb9b466607cb80beaaa30ece2f7f570a}} 
+\index{Object@{Object}!get\+Name@{get\+Name}}
+\index{get\+Name@{get\+Name}!Object@{Object}}
+\subsubsection{\texorpdfstring{get\+Name()}{getName()}}
+{\footnotesize\ttfamily std\+::string Object\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classObject_a9bb97ab8fe1c83ce6dbbb19cba53a578}\label{classObject_a9bb97ab8fe1c83ce6dbbb19cba53a578}} 
+\index{Object@{Object}!get\+Type@{get\+Type}}
+\index{get\+Type@{get\+Type}!Object@{Object}}
+\subsubsection{\texorpdfstring{get\+Type()}{getType()}}
+{\footnotesize\ttfamily \hyperlink{classObject_ad8dadb365053c182931671a424199e36}{Type} Object\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classObject_af7b5e6c789269f331688537c0809fb82}\label{classObject_af7b5e6c789269f331688537c0809fb82}} 
+\index{Object@{Object}!render@{render}}
+\index{render@{render}!Object@{Object}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily virtual void Object\+::render (\begin{DoxyParamCaption}\item[{glm\+::mat4}]{rendermatrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \hyperlink{classLight_a069c6888b42eca238328d79b03c3a411}{Light}, \hyperlink{classMaterial_ada83b9344f974994cd495b8ecda8b049}{Material}, \hyperlink{classList_a98b7c18a8ee26e9e521ab3b8f8bb4334}{List}, \hyperlink{classNode_a7faebb78a04b6421dbf5afe998f7658d}{Node}, \hyperlink{classMesh_a4d69d0cadc7f4c10d7b30b19ee1220cc}{Mesh}, \hyperlink{classCamera_adb0f3d1a0119a86ca7d68e54468b8eef}{Camera}, and \hyperlink{classTexture_a2771beaa1d538acddacc48d53bc75bdf}{Texture}.
+
+\mbox{\Hypertarget{classObject_a7ab65dbfd0a7c93266d3303330718be4}\label{classObject_a7ab65dbfd0a7c93266d3303330718be4}} 
+\index{Object@{Object}!set\+Id@{set\+Id}}
+\index{set\+Id@{set\+Id}!Object@{Object}}
+\subsubsection{\texorpdfstring{set\+Id()}{setId()}}
+{\footnotesize\ttfamily void Object\+::set\+Id (\begin{DoxyParamCaption}\item[{int}]{object\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classObject_a93052cbcc55dd5ca96d87f45a2af893f}\label{classObject_a93052cbcc55dd5ca96d87f45a2af893f}} 
+\index{Object@{Object}!set\+Name@{set\+Name}}
+\index{set\+Name@{set\+Name}!Object@{Object}}
+\subsubsection{\texorpdfstring{set\+Name()}{setName()}}
+{\footnotesize\ttfamily void Object\+::set\+Name (\begin{DoxyParamCaption}\item[{std\+::string}]{object\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classObject_a1fad7c569e1a3dbd84b97136825bb1dd}\label{classObject_a1fad7c569e1a3dbd84b97136825bb1dd}} 
+\index{Object@{Object}!set\+Type@{set\+Type}}
+\index{set\+Type@{set\+Type}!Object@{Object}}
+\subsubsection{\texorpdfstring{set\+Type()}{setType()}}
+{\footnotesize\ttfamily void Object\+::set\+Type (\begin{DoxyParamCaption}\item[{\hyperlink{classObject_ad8dadb365053c182931671a424199e36}{Type}}]{object\+Type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Object_8h}{Object.\+h}\end{DoxyCompactItemize}

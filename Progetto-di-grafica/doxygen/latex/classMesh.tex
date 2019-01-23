@@ -1,0 +1,148 @@
+\hypertarget{classMesh}{}\section{Mesh Class Reference}
+\label{classMesh}\index{Mesh@{Mesh}}
+
+
+{\ttfamily \#include $<$Mesh.\+h$>$}
+
+
+
+Inheritance diagram for Mesh\+:
+% FIG 0
+
+
+Collaboration diagram for Mesh\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMesh_a2af137f1571af89172b9c102302c416b}{Mesh} ()
+\item 
+virtual \hyperlink{classMesh_a5efe4da1a4c0971cfb037bd70304c303}{$\sim$\+Mesh} ()
+\item 
+\hyperlink{classMaterial}{Material} $\ast$ \hyperlink{classMesh_ad0815fc310ab9de09381978871f2bc77}{get\+Material} () const
+\item 
+void \hyperlink{classMesh_acee71afee77988e9233bee788ac501f3}{set\+Material} (\hyperlink{classMaterial}{Material} $\ast$material)
+\item 
+float \hyperlink{classMesh_adad2377f4e9ba111309593ead1242a57}{get\+Radius} ()
+\item 
+void \hyperlink{classMesh_a02add67a4d615f48594c2e70d15da2c8}{set\+Radius} (float radius)
+\item 
+void \hyperlink{classMesh_ad53ff995738c244717611c437db95462}{set\+Number\+Of\+Faces} (unsigned int number\+Of\+Faces)
+\item 
+void \hyperlink{classMesh_a024b57bf1f509baa3d6aef3c530c74ee}{generate\+V\+AO} (float $\ast$vertex\+Array, float $\ast$normal\+Array, float $\ast$uv\+Array, unsigned int $\ast$indices, unsigned int vertices)
+\item 
+void \hyperlink{classMesh_a4d69d0cadc7f4c10d7b30b19ee1220cc}{render} (glm\+::mat4 render\+Matrix) override
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Class responsible for storing a single 3D object (including its vertices, texturing coordinates, and a reference to the used material). The class includes the necessary methods for transferring data to Open\+GL. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classMesh_a2af137f1571af89172b9c102302c416b}\label{classMesh_a2af137f1571af89172b9c102302c416b}} 
+\index{Mesh@{Mesh}!Mesh@{Mesh}}
+\index{Mesh@{Mesh}!Mesh@{Mesh}}
+\subsubsection{\texorpdfstring{Mesh()}{Mesh()}}
+{\footnotesize\ttfamily Mesh\+::\+Mesh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\hyperlink{classMesh}{Mesh} constructor \mbox{\Hypertarget{classMesh_a5efe4da1a4c0971cfb037bd70304c303}\label{classMesh_a5efe4da1a4c0971cfb037bd70304c303}} 
+\index{Mesh@{Mesh}!````~Mesh@{$\sim$\+Mesh}}
+\index{````~Mesh@{$\sim$\+Mesh}!Mesh@{Mesh}}
+\subsubsection{\texorpdfstring{$\sim$\+Mesh()}{~Mesh()}}
+{\footnotesize\ttfamily Mesh\+::$\sim$\+Mesh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+\hyperlink{classMesh}{Mesh} destructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classMesh_a024b57bf1f509baa3d6aef3c530c74ee}\label{classMesh_a024b57bf1f509baa3d6aef3c530c74ee}} 
+\index{Mesh@{Mesh}!generate\+V\+AO@{generate\+V\+AO}}
+\index{generate\+V\+AO@{generate\+V\+AO}!Mesh@{Mesh}}
+\subsubsection{\texorpdfstring{generate\+V\+A\+O()}{generateVAO()}}
+{\footnotesize\ttfamily void Mesh\+::generate\+V\+AO (\begin{DoxyParamCaption}\item[{float $\ast$}]{vertices,  }\item[{float $\ast$}]{normals,  }\item[{float $\ast$}]{textures,  }\item[{unsigned int $\ast$}]{indices,  }\item[{unsigned int}]{number\+Of\+Vertices }\end{DoxyParamCaption})}
+
+Generate vao (vertex array objects) 
+\begin{DoxyParams}{Parameters}
+{\em vertices} & vertices array \\
+\hline
+{\em normals} & normals vertices array \\
+\hline
+{\em textures} & uv vertices array \\
+\hline
+{\em indices} & indices array \\
+\hline
+{\em number\+Of\+Vertexes} & number of vertices \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMesh_ad0815fc310ab9de09381978871f2bc77}\label{classMesh_ad0815fc310ab9de09381978871f2bc77}} 
+\index{Mesh@{Mesh}!get\+Material@{get\+Material}}
+\index{get\+Material@{get\+Material}!Mesh@{Mesh}}
+\subsubsection{\texorpdfstring{get\+Material()}{getMaterial()}}
+{\footnotesize\ttfamily \hyperlink{classMaterial}{Material} $\ast$ Mesh\+::get\+Material (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for material \begin{DoxyReturn}{Returns}
+mesh material 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classMesh_adad2377f4e9ba111309593ead1242a57}\label{classMesh_adad2377f4e9ba111309593ead1242a57}} 
+\index{Mesh@{Mesh}!get\+Radius@{get\+Radius}}
+\index{get\+Radius@{get\+Radius}!Mesh@{Mesh}}
+\subsubsection{\texorpdfstring{get\+Radius()}{getRadius()}}
+{\footnotesize\ttfamily float Mesh\+::get\+Radius (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Getter for radius \begin{DoxyReturn}{Returns}
+mesh radius 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classMesh_a4d69d0cadc7f4c10d7b30b19ee1220cc}\label{classMesh_a4d69d0cadc7f4c10d7b30b19ee1220cc}} 
+\index{Mesh@{Mesh}!render@{render}}
+\index{render@{render}!Mesh@{Mesh}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Mesh\+::render (\begin{DoxyParamCaption}\item[{glm\+::mat4}]{render\+Matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Render for mesh 
+\begin{DoxyParams}{Parameters}
+{\em render\+Matrix} & mesh render matrix \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classNode_a7faebb78a04b6421dbf5afe998f7658d}{Node}.
+
+\mbox{\Hypertarget{classMesh_acee71afee77988e9233bee788ac501f3}\label{classMesh_acee71afee77988e9233bee788ac501f3}} 
+\index{Mesh@{Mesh}!set\+Material@{set\+Material}}
+\index{set\+Material@{set\+Material}!Mesh@{Mesh}}
+\subsubsection{\texorpdfstring{set\+Material()}{setMaterial()}}
+{\footnotesize\ttfamily void Mesh\+::set\+Material (\begin{DoxyParamCaption}\item[{\hyperlink{classMaterial}{Material} $\ast$}]{material }\end{DoxyParamCaption})}
+
+Setter for material 
+\begin{DoxyParams}{Parameters}
+{\em material} & mesh material \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMesh_ad53ff995738c244717611c437db95462}\label{classMesh_ad53ff995738c244717611c437db95462}} 
+\index{Mesh@{Mesh}!set\+Number\+Of\+Faces@{set\+Number\+Of\+Faces}}
+\index{set\+Number\+Of\+Faces@{set\+Number\+Of\+Faces}!Mesh@{Mesh}}
+\subsubsection{\texorpdfstring{set\+Number\+Of\+Faces()}{setNumberOfFaces()}}
+{\footnotesize\ttfamily void Mesh\+::set\+Number\+Of\+Faces (\begin{DoxyParamCaption}\item[{unsigned int}]{number\+Of\+Faces }\end{DoxyParamCaption})}
+
+Setter for number\+Of\+Faces 
+\begin{DoxyParams}{Parameters}
+{\em number\+Of\+Faces} & number of mesh faces \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMesh_a02add67a4d615f48594c2e70d15da2c8}\label{classMesh_a02add67a4d615f48594c2e70d15da2c8}} 
+\index{Mesh@{Mesh}!set\+Radius@{set\+Radius}}
+\index{set\+Radius@{set\+Radius}!Mesh@{Mesh}}
+\subsubsection{\texorpdfstring{set\+Radius()}{setRadius()}}
+{\footnotesize\ttfamily void Mesh\+::set\+Radius (\begin{DoxyParamCaption}\item[{float}]{radius }\end{DoxyParamCaption})}
+
+Setter for radius 
+\begin{DoxyParams}{Parameters}
+{\em radius} & mesh radius \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Mesh_8h}{Mesh.\+h}\item 
+\hyperlink{Mesh_8cpp}{Mesh.\+cpp}\end{DoxyCompactItemize}

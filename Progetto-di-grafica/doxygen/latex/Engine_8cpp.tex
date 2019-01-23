@@ -1,0 +1,163 @@
+\hypertarget{Engine_8cpp}{}\section{Engine.\+cpp File Reference}
+\label{Engine_8cpp}\index{Engine.\+cpp@{Engine.\+cpp}}
+{\ttfamily \#include \char`\"{}Engine.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$G\+L/glew.\+h$>$}\newline
+{\ttfamily \#include $<$G\+L/freeglut.\+h$>$}\newline
+{\ttfamily \#include $<$Free\+Image.\+h$>$}\newline
+Include dependency graph for Engine.\+cpp\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} \hyperlink{Engine_8cpp_a5c492885a58e9528bc355e18a0b9997a}{find\+Children} (\hyperlink{classNode}{Node} $\ast$current\+Node, std\+::vector$<$ \hyperlink{classNode}{Node} $\ast$$>$ \&nodes)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{Engine_8cpp_a4f77f6cde6e60ee7c22594950e788b3b}{window\+Id}
+\item 
+float \hyperlink{Engine_8cpp_a4f50e96f11c68d45dc109185efe011ad}{fps} = 0.f
+\item 
+int \hyperlink{Engine_8cpp_a61217d5bc9d5b446d9c08e7ca401b733}{frames} = 0
+\item 
+bool \hyperlink{Engine_8cpp_a9cafd19157c6e531240d60eea30770a9}{lighting} = true
+\item 
+\hyperlink{classCamera}{Camera} $\ast$ \hyperlink{Engine_8cpp_a15cc23d6523f11b8d22ceaab07b04fe7}{current\+Camera} = nullptr
+\item 
+std\+::vector$<$ \hyperlink{classCamera}{Camera} $\ast$ $>$ \hyperlink{Engine_8cpp_a32e60d0bbf553dd7e630ddee1f50ea57}{cameras}
+\item 
+int \hyperlink{Engine_8cpp_a464d70dd995ed246c21ceeeae7c44f75}{active\+Camera} = 0
+\item 
+\hyperlink{classLight}{Light} $\ast$ \hyperlink{Engine_8cpp_a65bb908a398ec7382c4317c03643de13}{movable\+Light} = nullptr
+\item 
+\hyperlink{classLight}{Light} $\ast$ \hyperlink{Engine_8cpp_a76dd24d39e1048a7b31196e6e4009ffe}{specular\+Light} = nullptr
+\item 
+\hyperlink{classMesh}{Mesh} $\ast$ \hyperlink{Engine_8cpp_a22533a5bea3228f0438948eeda1d84eb}{globe\+Light} = nullptr
+\item 
+const float \hyperlink{Engine_8cpp_af715d185b7ab82db4a55088c69dd6c47}{sensitivity} = 5.f
+\item 
+float \hyperlink{Engine_8cpp_a0f45fb59aec5a4cdde791c65a30d3598}{finger\+Angles} \mbox{[}5\mbox{]}
+\item 
+std\+::string \hyperlink{Engine_8cpp_a70ef2ea10e1f8ad0e510e629ef0109c8}{finger\+Names} \mbox{[}5\mbox{]} = \{ \char`\"{}pollice\char`\"{}, \char`\"{}indice\char`\"{}, \char`\"{}medio\char`\"{}, \char`\"{}anulare\char`\"{}, \char`\"{}mignolo\char`\"{} \}
+\item 
+bool \hyperlink{Engine_8cpp_a26bde04a7163a734769b6b5372312582}{translate\+Up} = false
+\item 
+int \hyperlink{Engine_8cpp_a55ca06944e9f239540cf7749246e2928}{translate\+Counter}
+\item 
+\hyperlink{classList}{List} $\ast$ \hyperlink{Engine_8cpp_a85567a00cbe4672b7f6aade9ffec2b6f}{to\+Render} = new \hyperlink{classList}{List}()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{Engine_8cpp_a5c492885a58e9528bc355e18a0b9997a}\label{Engine_8cpp_a5c492885a58e9528bc355e18a0b9997a}} 
+\index{Engine.\+cpp@{Engine.\+cpp}!find\+Children@{find\+Children}}
+\index{find\+Children@{find\+Children}!Engine.\+cpp@{Engine.\+cpp}}
+\subsubsection{\texorpdfstring{find\+Children()}{findChildren()}}
+{\footnotesize\ttfamily void \hyperlink{Engine_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{L\+I\+B\+\_\+\+A\+PI} find\+Children (\begin{DoxyParamCaption}\item[{\hyperlink{classNode}{Node} $\ast$}]{current\+Node,  }\item[{std\+::vector$<$ \hyperlink{classNode}{Node} $\ast$$>$ \&}]{nodes }\end{DoxyParamCaption})}
+
+Starting from current node it recursively populate the scene graph according to its capacity 
+\begin{DoxyParams}{Parameters}
+{\em current\+Node} & the current node \\
+\hline
+{\em nodes} & the list of remaining nodes to insert \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{Engine_8cpp_a464d70dd995ed246c21ceeeae7c44f75}\label{Engine_8cpp_a464d70dd995ed246c21ceeeae7c44f75}} 
+\index{Engine.\+cpp@{Engine.\+cpp}!active\+Camera@{active\+Camera}}
+\index{active\+Camera@{active\+Camera}!Engine.\+cpp@{Engine.\+cpp}}
+\subsubsection{\texorpdfstring{active\+Camera}{activeCamera}}
+{\footnotesize\ttfamily int active\+Camera = 0}
+
+\mbox{\Hypertarget{Engine_8cpp_a32e60d0bbf553dd7e630ddee1f50ea57}\label{Engine_8cpp_a32e60d0bbf553dd7e630ddee1f50ea57}} 
+\index{Engine.\+cpp@{Engine.\+cpp}!cameras@{cameras}}
+\index{cameras@{cameras}!Engine.\+cpp@{Engine.\+cpp}}
+\subsubsection{\texorpdfstring{cameras}{cameras}}
+{\footnotesize\ttfamily std\+::vector$<$\hyperlink{classCamera}{Camera}$\ast$$>$ cameras}
+
+\mbox{\Hypertarget{Engine_8cpp_a15cc23d6523f11b8d22ceaab07b04fe7}\label{Engine_8cpp_a15cc23d6523f11b8d22ceaab07b04fe7}} 
+\index{Engine.\+cpp@{Engine.\+cpp}!current\+Camera@{current\+Camera}}
+\index{current\+Camera@{current\+Camera}!Engine.\+cpp@{Engine.\+cpp}}
+\subsubsection{\texorpdfstring{current\+Camera}{currentCamera}}
+{\footnotesize\ttfamily \hyperlink{classCamera}{Camera}$\ast$ current\+Camera = nullptr}
+
+\mbox{\Hypertarget{Engine_8cpp_a0f45fb59aec5a4cdde791c65a30d3598}\label{Engine_8cpp_a0f45fb59aec5a4cdde791c65a30d3598}} 
+\index{Engine.\+cpp@{Engine.\+cpp}!finger\+Angles@{finger\+Angles}}
+\index{finger\+Angles@{finger\+Angles}!Engine.\+cpp@{Engine.\+cpp}}
+\subsubsection{\texorpdfstring{finger\+Angles}{fingerAngles}}
+{\footnotesize\ttfamily float finger\+Angles\mbox{[}5\mbox{]}}
+
+\mbox{\Hypertarget{Engine_8cpp_a70ef2ea10e1f8ad0e510e629ef0109c8}\label{Engine_8cpp_a70ef2ea10e1f8ad0e510e629ef0109c8}} 
+\index{Engine.\+cpp@{Engine.\+cpp}!finger\+Names@{finger\+Names}}
+\index{finger\+Names@{finger\+Names}!Engine.\+cpp@{Engine.\+cpp}}
+\subsubsection{\texorpdfstring{finger\+Names}{fingerNames}}
+{\footnotesize\ttfamily std\+::string finger\+Names\mbox{[}5\mbox{]} = \{ \char`\"{}pollice\char`\"{}, \char`\"{}indice\char`\"{}, \char`\"{}medio\char`\"{}, \char`\"{}anulare\char`\"{}, \char`\"{}mignolo\char`\"{} \}}
+
+\mbox{\Hypertarget{Engine_8cpp_a4f50e96f11c68d45dc109185efe011ad}\label{Engine_8cpp_a4f50e96f11c68d45dc109185efe011ad}} 
+\index{Engine.\+cpp@{Engine.\+cpp}!fps@{fps}}
+\index{fps@{fps}!Engine.\+cpp@{Engine.\+cpp}}
+\subsubsection{\texorpdfstring{fps}{fps}}
+{\footnotesize\ttfamily float fps = 0.f}
+
+\mbox{\Hypertarget{Engine_8cpp_a61217d5bc9d5b446d9c08e7ca401b733}\label{Engine_8cpp_a61217d5bc9d5b446d9c08e7ca401b733}} 
+\index{Engine.\+cpp@{Engine.\+cpp}!frames@{frames}}
+\index{frames@{frames}!Engine.\+cpp@{Engine.\+cpp}}
+\subsubsection{\texorpdfstring{frames}{frames}}
+{\footnotesize\ttfamily int frames = 0}
+
+\mbox{\Hypertarget{Engine_8cpp_a22533a5bea3228f0438948eeda1d84eb}\label{Engine_8cpp_a22533a5bea3228f0438948eeda1d84eb}} 
+\index{Engine.\+cpp@{Engine.\+cpp}!globe\+Light@{globe\+Light}}
+\index{globe\+Light@{globe\+Light}!Engine.\+cpp@{Engine.\+cpp}}
+\subsubsection{\texorpdfstring{globe\+Light}{globeLight}}
+{\footnotesize\ttfamily \hyperlink{classMesh}{Mesh}$\ast$ globe\+Light = nullptr}
+
+\mbox{\Hypertarget{Engine_8cpp_a9cafd19157c6e531240d60eea30770a9}\label{Engine_8cpp_a9cafd19157c6e531240d60eea30770a9}} 
+\index{Engine.\+cpp@{Engine.\+cpp}!lighting@{lighting}}
+\index{lighting@{lighting}!Engine.\+cpp@{Engine.\+cpp}}
+\subsubsection{\texorpdfstring{lighting}{lighting}}
+{\footnotesize\ttfamily bool lighting = true}
+
+\mbox{\Hypertarget{Engine_8cpp_a65bb908a398ec7382c4317c03643de13}\label{Engine_8cpp_a65bb908a398ec7382c4317c03643de13}} 
+\index{Engine.\+cpp@{Engine.\+cpp}!movable\+Light@{movable\+Light}}
+\index{movable\+Light@{movable\+Light}!Engine.\+cpp@{Engine.\+cpp}}
+\subsubsection{\texorpdfstring{movable\+Light}{movableLight}}
+{\footnotesize\ttfamily \hyperlink{classLight}{Light}$\ast$ movable\+Light = nullptr}
+
+\mbox{\Hypertarget{Engine_8cpp_af715d185b7ab82db4a55088c69dd6c47}\label{Engine_8cpp_af715d185b7ab82db4a55088c69dd6c47}} 
+\index{Engine.\+cpp@{Engine.\+cpp}!sensitivity@{sensitivity}}
+\index{sensitivity@{sensitivity}!Engine.\+cpp@{Engine.\+cpp}}
+\subsubsection{\texorpdfstring{sensitivity}{sensitivity}}
+{\footnotesize\ttfamily const float sensitivity = 5.f}
+
+\mbox{\Hypertarget{Engine_8cpp_a76dd24d39e1048a7b31196e6e4009ffe}\label{Engine_8cpp_a76dd24d39e1048a7b31196e6e4009ffe}} 
+\index{Engine.\+cpp@{Engine.\+cpp}!specular\+Light@{specular\+Light}}
+\index{specular\+Light@{specular\+Light}!Engine.\+cpp@{Engine.\+cpp}}
+\subsubsection{\texorpdfstring{specular\+Light}{specularLight}}
+{\footnotesize\ttfamily \hyperlink{classLight}{Light}$\ast$ specular\+Light = nullptr}
+
+\mbox{\Hypertarget{Engine_8cpp_a85567a00cbe4672b7f6aade9ffec2b6f}\label{Engine_8cpp_a85567a00cbe4672b7f6aade9ffec2b6f}} 
+\index{Engine.\+cpp@{Engine.\+cpp}!to\+Render@{to\+Render}}
+\index{to\+Render@{to\+Render}!Engine.\+cpp@{Engine.\+cpp}}
+\subsubsection{\texorpdfstring{to\+Render}{toRender}}
+{\footnotesize\ttfamily \hyperlink{classList}{List}$\ast$ to\+Render = new \hyperlink{classList}{List}()}
+
+\mbox{\Hypertarget{Engine_8cpp_a55ca06944e9f239540cf7749246e2928}\label{Engine_8cpp_a55ca06944e9f239540cf7749246e2928}} 
+\index{Engine.\+cpp@{Engine.\+cpp}!translate\+Counter@{translate\+Counter}}
+\index{translate\+Counter@{translate\+Counter}!Engine.\+cpp@{Engine.\+cpp}}
+\subsubsection{\texorpdfstring{translate\+Counter}{translateCounter}}
+{\footnotesize\ttfamily int translate\+Counter}
+
+\mbox{\Hypertarget{Engine_8cpp_a26bde04a7163a734769b6b5372312582}\label{Engine_8cpp_a26bde04a7163a734769b6b5372312582}} 
+\index{Engine.\+cpp@{Engine.\+cpp}!translate\+Up@{translate\+Up}}
+\index{translate\+Up@{translate\+Up}!Engine.\+cpp@{Engine.\+cpp}}
+\subsubsection{\texorpdfstring{translate\+Up}{translateUp}}
+{\footnotesize\ttfamily bool translate\+Up = false}
+
+\mbox{\Hypertarget{Engine_8cpp_a4f77f6cde6e60ee7c22594950e788b3b}\label{Engine_8cpp_a4f77f6cde6e60ee7c22594950e788b3b}} 
+\index{Engine.\+cpp@{Engine.\+cpp}!window\+Id@{window\+Id}}
+\index{window\+Id@{window\+Id}!Engine.\+cpp@{Engine.\+cpp}}
+\subsubsection{\texorpdfstring{window\+Id}{windowId}}
+{\footnotesize\ttfamily int window\+Id}
+

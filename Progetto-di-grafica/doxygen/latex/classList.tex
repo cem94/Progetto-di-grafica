@@ -1,0 +1,219 @@
+\hypertarget{classList}{}\section{List Class Reference}
+\label{classList}\index{List@{List}}
+
+
+{\ttfamily \#include $<$List.\+h$>$}
+
+
+
+Inheritance diagram for List\+:
+% FIG 0
+
+
+Collaboration diagram for List\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classList_a64d878a92d11f7c63c70cbe4e7dd4176}{List} ()
+\item 
+\hyperlink{classList_ac4bdd9fca5382f2b13316f54e56484d7}{List} (\hyperlink{classNode}{Node} $\ast$root)
+\item 
+virtual \hyperlink{classList_a70aecf37bd9d779a394e4d50377fbf5f}{$\sim$\+List} ()
+\item 
+std\+::vector$<$ \hyperlink{classNode}{Node} $\ast$ $>$ \hyperlink{classList_a2daf0ff93100ed732fc655f7e2af1ae9}{get\+List} () const
+\item 
+void \hyperlink{classList_ab0fd82314008a2da13ae096b3794def8}{reserve} (int dimension)
+\item 
+void \hyperlink{classList_ad37b253f0232820b8c13a1523e9f46b6}{set\+List} (std\+::vector$<$ \hyperlink{classNode}{Node} $\ast$$>$ list)
+\item 
+void \hyperlink{classList_ad5dc568900ee2069c7fcbf813aeeeead}{add} (\hyperlink{classNode}{Node} $\ast$node)
+\item 
+void \hyperlink{classList_a29511479f561a5840cdb2b913d9afd00}{remove} (int position)
+\item 
+\hyperlink{classNode}{Node} $\ast$ \hyperlink{classList_a7c79ecd4f068f6cde918941ad276e842}{at} (int position)
+\item 
+void \hyperlink{classList_adde6cc4002cdd88401634f383b4d3411}{insert} (std\+::vector$<$ \hyperlink{classNode}{Node} $\ast$$>$ elements)
+\item 
+int \hyperlink{classList_a86141be078d5fac15c1b7f402173a30f}{size} ()
+\item 
+void \hyperlink{classList_a613a58dfe61bbaebe346ef214c23b5cf}{get\+Tree\+As\+List} (\hyperlink{classNode}{Node} $\ast$root, std\+::vector$<$ \hyperlink{classNode}{Node} $\ast$$>$ \&nodes)
+\item 
+void \hyperlink{classList_a397e04de01f7a13691a7714a29e9b511}{sort} ()
+\item 
+void \hyperlink{classList_af9d3726a97cfa3355117f914db6c5ecc}{is\+Reflection} (bool reflection)
+\item 
+bool \hyperlink{classList_aa5924a5fcbb2907a0eebd04376db84a6}{is\+Reflection} () const
+\item 
+void \hyperlink{classList_a98b7c18a8ee26e9e521ab3b8f8bb4334}{render} (glm\+::mat4 render\+Matrix) override
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Contains a list of instances, each one with its own properties(such as position, material, etc.). Matrices are stored in world coordinates after being evaluated according to their hierarchy. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classList_a64d878a92d11f7c63c70cbe4e7dd4176}\label{classList_a64d878a92d11f7c63c70cbe4e7dd4176}} 
+\index{List@{List}!List@{List}}
+\index{List@{List}!List@{List}}
+\subsubsection{\texorpdfstring{List()}{List()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily List\+::\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\hyperlink{classList}{List} constructor \mbox{\Hypertarget{classList_ac4bdd9fca5382f2b13316f54e56484d7}\label{classList_ac4bdd9fca5382f2b13316f54e56484d7}} 
+\index{List@{List}!List@{List}}
+\index{List@{List}!List@{List}}
+\subsubsection{\texorpdfstring{List()}{List()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily List\+::\+List (\begin{DoxyParamCaption}\item[{\hyperlink{classNode}{Node} $\ast$}]{root }\end{DoxyParamCaption})}
+
+\hyperlink{classList}{List} constructor it populates the list from a tree through the get\+Tree\+As\+List method. \mbox{\Hypertarget{classList_a70aecf37bd9d779a394e4d50377fbf5f}\label{classList_a70aecf37bd9d779a394e4d50377fbf5f}} 
+\index{List@{List}!````~List@{$\sim$\+List}}
+\index{````~List@{$\sim$\+List}!List@{List}}
+\subsubsection{\texorpdfstring{$\sim$\+List()}{~List()}}
+{\footnotesize\ttfamily List\+::$\sim$\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+\hyperlink{classList}{List} Destructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classList_ad5dc568900ee2069c7fcbf813aeeeead}\label{classList_ad5dc568900ee2069c7fcbf813aeeeead}} 
+\index{List@{List}!add@{add}}
+\index{add@{add}!List@{List}}
+\subsubsection{\texorpdfstring{add()}{add()}}
+{\footnotesize\ttfamily void List\+::add (\begin{DoxyParamCaption}\item[{\hyperlink{classNode}{Node} $\ast$}]{node }\end{DoxyParamCaption})}
+
+Add a node to the list 
+\begin{DoxyParams}{Parameters}
+{\em node} & the node we want to add \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classList_a7c79ecd4f068f6cde918941ad276e842}\label{classList_a7c79ecd4f068f6cde918941ad276e842}} 
+\index{List@{List}!at@{at}}
+\index{at@{at}!List@{List}}
+\subsubsection{\texorpdfstring{at()}{at()}}
+{\footnotesize\ttfamily \hyperlink{classNode}{Node} $\ast$ List\+::at (\begin{DoxyParamCaption}\item[{int}]{position }\end{DoxyParamCaption})}
+
+Return the element at the position passed as an argument or nullptr if out of range 
+\begin{DoxyParams}{Parameters}
+{\em position} & the position of the desired element \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+if the range is valid it returns the requested node, otherwise it return nullptr 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classList_a2daf0ff93100ed732fc655f7e2af1ae9}\label{classList_a2daf0ff93100ed732fc655f7e2af1ae9}} 
+\index{List@{List}!get\+List@{get\+List}}
+\index{get\+List@{get\+List}!List@{List}}
+\subsubsection{\texorpdfstring{get\+List()}{getList()}}
+{\footnotesize\ttfamily std\+::vector$<$ \hyperlink{classNode}{Node} $\ast$ $>$ List\+::get\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for list \begin{DoxyReturn}{Returns}
+list 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classList_a613a58dfe61bbaebe346ef214c23b5cf}\label{classList_a613a58dfe61bbaebe346ef214c23b5cf}} 
+\index{List@{List}!get\+Tree\+As\+List@{get\+Tree\+As\+List}}
+\index{get\+Tree\+As\+List@{get\+Tree\+As\+List}!List@{List}}
+\subsubsection{\texorpdfstring{get\+Tree\+As\+List()}{getTreeAsList()}}
+{\footnotesize\ttfamily void List\+::get\+Tree\+As\+List (\begin{DoxyParamCaption}\item[{\hyperlink{classNode}{Node} $\ast$}]{root,  }\item[{std\+::vector$<$ \hyperlink{classNode}{Node} $\ast$$>$ \&}]{nodes }\end{DoxyParamCaption})}
+
+Get tree as list populates the vector of nodes passed as an argument with the content of the given scene graph 
+\begin{DoxyParams}{Parameters}
+{\em root} & scene graph \\
+\hline
+{\em nodes} & the list to populate \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classList_adde6cc4002cdd88401634f383b4d3411}\label{classList_adde6cc4002cdd88401634f383b4d3411}} 
+\index{List@{List}!insert@{insert}}
+\index{insert@{insert}!List@{List}}
+\subsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily void List\+::insert (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \hyperlink{classNode}{Node} $\ast$$>$}]{elements }\end{DoxyParamCaption})}
+
+insert a list of elements at the end of our list 
+\begin{DoxyParams}{Parameters}
+{\em elements} & list of elements to add \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classList_af9d3726a97cfa3355117f914db6c5ecc}\label{classList_af9d3726a97cfa3355117f914db6c5ecc}} 
+\index{List@{List}!is\+Reflection@{is\+Reflection}}
+\index{is\+Reflection@{is\+Reflection}!List@{List}}
+\subsubsection{\texorpdfstring{is\+Reflection()}{isReflection()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void List\+::is\+Reflection (\begin{DoxyParamCaption}\item[{bool}]{reflection }\end{DoxyParamCaption})}
+
+Setter for reflection \mbox{\Hypertarget{classList_aa5924a5fcbb2907a0eebd04376db84a6}\label{classList_aa5924a5fcbb2907a0eebd04376db84a6}} 
+\index{List@{List}!is\+Reflection@{is\+Reflection}}
+\index{is\+Reflection@{is\+Reflection}!List@{List}}
+\subsubsection{\texorpdfstring{is\+Reflection()}{isReflection()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool List\+::is\+Reflection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for reflection \begin{DoxyReturn}{Returns}
+reflection 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classList_a29511479f561a5840cdb2b913d9afd00}\label{classList_a29511479f561a5840cdb2b913d9afd00}} 
+\index{List@{List}!remove@{remove}}
+\index{remove@{remove}!List@{List}}
+\subsubsection{\texorpdfstring{remove()}{remove()}}
+{\footnotesize\ttfamily void List\+::remove (\begin{DoxyParamCaption}\item[{int}]{position }\end{DoxyParamCaption})}
+
+Removes a node from the list given its position 
+\begin{DoxyParams}{Parameters}
+{\em position} & index of the desired node \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classList_a98b7c18a8ee26e9e521ab3b8f8bb4334}\label{classList_a98b7c18a8ee26e9e521ab3b8f8bb4334}} 
+\index{List@{List}!render@{render}}
+\index{render@{render}!List@{List}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void List\+::render (\begin{DoxyParamCaption}\item[{glm\+::mat4}]{scaling }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Render for list if the list ot render is trasparent the plane isn\textquotesingle{}t rendered 
+\begin{DoxyParams}{Parameters}
+{\em matrix} & scaling matrix \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classObject_af7b5e6c789269f331688537c0809fb82}{Object}.
+
+\mbox{\Hypertarget{classList_ab0fd82314008a2da13ae096b3794def8}\label{classList_ab0fd82314008a2da13ae096b3794def8}} 
+\index{List@{List}!reserve@{reserve}}
+\index{reserve@{reserve}!List@{List}}
+\subsubsection{\texorpdfstring{reserve()}{reserve()}}
+{\footnotesize\ttfamily void List\+::reserve (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})}
+
+Reserve memory for list 
+\begin{DoxyParams}{Parameters}
+{\em size} & how much we want to reserve \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classList_ad37b253f0232820b8c13a1523e9f46b6}\label{classList_ad37b253f0232820b8c13a1523e9f46b6}} 
+\index{List@{List}!set\+List@{set\+List}}
+\index{set\+List@{set\+List}!List@{List}}
+\subsubsection{\texorpdfstring{set\+List()}{setList()}}
+{\footnotesize\ttfamily void List\+::set\+List (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \hyperlink{classNode}{Node} $\ast$$>$}]{list }\end{DoxyParamCaption})}
+
+Setter for list 
+\begin{DoxyParams}{Parameters}
+{\em list} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classList_a86141be078d5fac15c1b7f402173a30f}\label{classList_a86141be078d5fac15c1b7f402173a30f}} 
+\index{List@{List}!size@{size}}
+\index{size@{size}!List@{List}}
+\subsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily int List\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Give the size of the list \begin{DoxyReturn}{Returns}
+size of the list 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classList_a397e04de01f7a13691a7714a29e9b511}\label{classList_a397e04de01f7a13691a7714a29e9b511}} 
+\index{List@{List}!sort@{sort}}
+\index{sort@{sort}!List@{List}}
+\subsubsection{\texorpdfstring{sort()}{sort()}}
+{\footnotesize\ttfamily void List\+::sort (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Create a series of lists containing nodes, lights and meshes then put them in the correct order in the list 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{List_8h}{List.\+h}\item 
+\hyperlink{List_8cpp}{List.\+cpp}\end{DoxyCompactItemize}
