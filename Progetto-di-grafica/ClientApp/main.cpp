@@ -149,13 +149,12 @@ void keyboardCallback(unsigned char key, int mouseX, int mouseY)
 	engine->redisplay();
 }
 
-
 /**
  * Special callback is invoked each time a special keyboard key is pressed. This callback is used to move 
  * the camera (if movable). FreeGlut special key redefinition is necessary (e.g #define GLUT_KEY_LEFT 0x0064)
  * @param  key an integer representing a special key
- * @param x x coordinate
- * @param y y coordinate
+ * @param mouseX mouse X coordinate
+ * @param mouseY mouse Y coordinate
  */
 void specialCallback(int key, int mouseX, int mouseY)
 {
@@ -228,8 +227,8 @@ void mouseWheel(int wheel, int direction, int x, int y)
 
 /**
  * Mouse motion callback
- * @param  x
- * @param y
+ * @param x x coordinate
+ * @param y y coordinate
  */
 void mouseMoved(int x, int y)
 {
