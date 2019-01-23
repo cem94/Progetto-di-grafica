@@ -7,8 +7,8 @@ static int counter;
  */
 Node::Node()
 {
-	this->setId(counter);
-	counter++;
+    this->setId(counter);
+    counter++;
 }
 
 /**
@@ -24,7 +24,7 @@ Node::~Node()
  */
 Node * Node::getParent() const
 {
-	return parent;
+    return parent;
 }
 
 /**
@@ -33,7 +33,7 @@ Node * Node::getParent() const
  */
 void Node::setParent(Node * parent)
 {
-	this->parent = parent;
+    this->parent = parent;
 }
 
 /**
@@ -42,7 +42,7 @@ void Node::setParent(Node * parent)
  */
 std::vector<Node*> Node::getChildren() const
 {
-	return children;
+    return children;
 }
 
 /**
@@ -51,7 +51,7 @@ std::vector<Node*> Node::getChildren() const
  */
 glm::mat4 Node::getMatrix()
 {
-	return matrix;
+    return matrix;
 }
 
 /**
@@ -60,7 +60,7 @@ glm::mat4 Node::getMatrix()
  */
 void Node::setMatrix(glm::mat4 matrix)
 {
-	this->matrix = matrix;
+    this->matrix = matrix;
 }
 
 /**
@@ -69,8 +69,8 @@ void Node::setMatrix(glm::mat4 matrix)
  */
 void Node::insert(Node * node)
 {
-	node->setParent(this);
-	children.push_back(node);
+    node->setParent(this);
+    children.push_back(node);
 }
 
 /**
@@ -79,12 +79,12 @@ void Node::insert(Node * node)
  */
 void Node::remove(int position)
 {
-	if (getChildrenSize() > position && position >= 0)
-	{
-		auto to_remove = children.at(position);
-		children.erase(children.begin() + position);
-		free(to_remove);
-	}
+    if (getChildrenSize() > position && position >= 0)
+    {
+        auto to_remove = children.at(position);
+        children.erase(children.begin() + position);
+        free(to_remove);
+    }
 }
 
 /**
@@ -93,14 +93,14 @@ void Node::remove(int position)
  */
 void Node::remove(Node * node)
 {
-	int i = 0;
-	for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
-	{
-		if ((*it) == node)
-			break;
-		i++;
-	}
-	remove(i);
+    int i = 0;
+    for (std::vector<Node*>::iterator it = children.begin(); it != children.end(); ++it)
+    {
+        if ((*it) == node)
+            break;
+        i++;
+    }
+    remove(i);
 }
 
 /**
@@ -109,7 +109,7 @@ void Node::remove(Node * node)
  */
 int Node::getChildrenSize() const
 {
-	return (int)this->children.size();
+    return (int)this->children.size();
 }
 
 /**
@@ -118,9 +118,9 @@ int Node::getChildrenSize() const
  */
 glm::mat4 Node::getFinalMatrix()
 {
-	if (!parent)
-		return matrix;
-	return parent->getFinalMatrix()*matrix;
+    if (!parent)
+        return matrix;
+    return parent->getFinalMatrix()*matrix;
 }
 
 /**
@@ -129,7 +129,7 @@ glm::mat4 Node::getFinalMatrix()
  */
 int Node::getCapacity() const
 {
-	return (int)this->children.capacity();
+    return (int)this->children.capacity();
 }
 
 /**
@@ -138,7 +138,7 @@ int Node::getCapacity() const
  */
 void Node::setCapacity(unsigned int size)
 {
-	this->children.reserve(size);
+    this->children.reserve(size);
 }
 
 /**

@@ -17,8 +17,8 @@ Light::Light()
  */
 Light::Light(std::string name)
 {
-	this->setName(name);
-	this->setLightNumber(numberOfLights++);
+    this->setName(name);
+    this->setLightNumber(numberOfLights++);
 }
 
 /**
@@ -34,7 +34,7 @@ Light::~Light()
  */
 void Light::setAmbient(glm::vec4 ambient)
 {
-	this->ambient = ambient;
+    this->ambient = ambient;
 }
 
 /**
@@ -43,7 +43,7 @@ void Light::setAmbient(glm::vec4 ambient)
  */
 void Light::setDiffuse(glm::vec4 diffuse)
 {
-	this->diffuse = diffuse;
+    this->diffuse = diffuse;
 }
 
 /**
@@ -52,7 +52,7 @@ void Light::setDiffuse(glm::vec4 diffuse)
  */
 void Light::setSpecular(glm::vec4 specular)
 {
-	this->specular = specular;
+    this->specular = specular;
 }
 
 /**
@@ -60,10 +60,10 @@ void Light::setSpecular(glm::vec4 specular)
  */
 void Light::changeState()
 {
-	if (this->isActive)
-		this->disableLight();
-	else
-		this->enableLight();
+    if (this->isActive)
+        this->disableLight();
+    else
+        this->enableLight();
 }
 
 /**
@@ -72,7 +72,7 @@ void Light::changeState()
  */
 Light::Subtype Light::getSubtype() const
 {
-	return this->subtype;
+    return this->subtype;
 }
 
 /**
@@ -81,7 +81,7 @@ Light::Subtype Light::getSubtype() const
  */
 void Light::setSubtype(Light::Subtype subtype)
 {
-	this->subtype = subtype;
+    this->subtype = subtype;
 }
 
 /**
@@ -90,11 +90,11 @@ void Light::setSubtype(Light::Subtype subtype)
  */
 int Light::getLightNumber() const
 {
-	const int n_light = lightNumber;
-	if (0 <= n_light && n_light <= 7)
-		return GL_LIGHT0 + n_light;
-	else
-		return GL_LIGHT0;
+    const int n_light = lightNumber;
+    if (0 <= n_light && n_light <= 7)
+        return GL_LIGHT0 + n_light;
+    else
+        return GL_LIGHT0;
 }
 
 /**
@@ -103,7 +103,7 @@ int Light::getLightNumber() const
  */
 void Light::setLightNumber(int lightNumber)
 {
-	this->lightNumber = lightNumber;
+    this->lightNumber = lightNumber;
 }
 
 /**
@@ -112,10 +112,10 @@ void Light::setLightNumber(int lightNumber)
  */
 void Light::setColor(glm::vec4 color)
 {
-	this->color = color;
-	this->setAmbient(glm::vec4(color));
-	this->setDiffuse(glm::vec4(color));
-	this->setSpecular(glm::vec4(color));
+    this->color = color;
+    this->setAmbient(glm::vec4(color));
+    this->setDiffuse(glm::vec4(color));
+    this->setSpecular(glm::vec4(color));
 }
 
 /**
@@ -124,7 +124,7 @@ void Light::setColor(glm::vec4 color)
  */
 void Light::setPosition(glm::vec4 position)
 {
-	this->position = position;
+    this->position = position;
 }
 
 /**
@@ -133,7 +133,7 @@ void Light::setPosition(glm::vec4 position)
  */
 glm::vec3 Light::getDirection()
 {
-	return this->direction;
+    return this->direction;
 }
 
 /**
@@ -142,7 +142,7 @@ glm::vec3 Light::getDirection()
  */
 void Light::setDirection(glm::vec4 direction)
 {
-	this->direction = direction;
+    this->direction = direction;
 }
 
 /**
@@ -151,7 +151,7 @@ void Light::setDirection(glm::vec4 direction)
  */
 float Light::getAngle() const
 {
-	return this->angle;
+    return this->angle;
 }
 
 /**
@@ -160,7 +160,7 @@ float Light::getAngle() const
  */
 void Light::setAngle(float angle)
 {
-	this->angle = angle;
+    this->angle = angle;
 }
 
 /**
@@ -169,7 +169,7 @@ void Light::setAngle(float angle)
  */
 float Light::getRadius() const
 {
-	return this->radius;
+    return this->radius;
 }
 
 /**
@@ -178,7 +178,7 @@ float Light::getRadius() const
  */
 void Light::setRadius(float radius)
 {
-	this->radius = radius;
+    this->radius = radius;
 }
 
 /**
@@ -187,7 +187,7 @@ void Light::setRadius(float radius)
  */
 float Light::getCutoff() const
 {
-	return this->cutoff;
+    return this->cutoff;
 }
 
 /**
@@ -196,7 +196,7 @@ float Light::getCutoff() const
  */
 void Light::setCutoff(float cutoff)
 {
-	this->cutoff = cutoff;
+    this->cutoff = cutoff;
 }
 
 /**
@@ -204,8 +204,8 @@ void Light::setCutoff(float cutoff)
  */
 void Light::enableLight()
 {
-	glEnable(getLightNumber());
-	this->isActive = true;
+    glEnable(getLightNumber());
+    this->isActive = true;
 }
 
 /**
@@ -213,8 +213,8 @@ void Light::enableLight()
  */
 void Light::disableLight()
 {
-	glDisable(getLightNumber());
-	this->isActive = false;
+    glDisable(getLightNumber());
+    this->isActive = false;
 }
 
 /**
@@ -223,32 +223,32 @@ void Light::disableLight()
  */
 void Light::render(glm::mat4 renderMatrix)
 {
-	glm::vec4 ambientI = ambient * intensity;
-	glm::vec4 diffuseI = diffuse * intensity;
-	glm::vec4 specularI = specular * intensity;
+    glm::vec4 ambientI = ambient * intensity;
+    glm::vec4 diffuseI = diffuse * intensity;
+    glm::vec4 specularI = specular * intensity;
 
-	glLightfv(getLightNumber(), GL_POSITION, glm::value_ptr(glm::vec3(0.0f, 0.0f, 0.0f)));
-	glLightfv(getLightNumber(), GL_SHININESS, &shininess);
+    glLightfv(getLightNumber(), GL_POSITION, glm::value_ptr(glm::vec3(0.0f, 0.0f, 0.0f)));
+    glLightfv(getLightNumber(), GL_SHININESS, &shininess);
 
-	float cut = 180.0f;
-	// Load light
-	switch (subtype)
-	{
-	case OMNI:
-		// for future implementation
-		break;
-	case SPOTLIGHT:
-		glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &cut);
-		break;
-	case DIRECTIONAL:
-		glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &cut);
-		glLightfv(getLightNumber(), GL_SPOT_DIRECTION, glm::value_ptr(direction));
-		break;
-	default:
-		break;
-	}
-	glLightfv(getLightNumber(), GL_AMBIENT, glm::value_ptr(ambientI));
-	glLightfv(getLightNumber(), GL_DIFFUSE, glm::value_ptr(diffuseI));
-	glLightfv(getLightNumber(), GL_SPECULAR, glm::value_ptr(specularI));
-	glLightfv(getLightNumber(), GL_LINEAR_ATTENUATION, &attenuation);
+    float cut = 180.0f;
+    // Load light
+    switch (subtype)
+    {
+    case OMNI:
+        // for future implementation
+        break;
+    case SPOTLIGHT:
+        glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &cut);
+        break;
+    case DIRECTIONAL:
+        glLightfv(getLightNumber(), GL_SPOT_CUTOFF, &cut);
+        glLightfv(getLightNumber(), GL_SPOT_DIRECTION, glm::value_ptr(direction));
+        break;
+    default:
+        break;
+    }
+    glLightfv(getLightNumber(), GL_AMBIENT, glm::value_ptr(ambientI));
+    glLightfv(getLightNumber(), GL_DIFFUSE, glm::value_ptr(diffuseI));
+    glLightfv(getLightNumber(), GL_SPECULAR, glm::value_ptr(specularI));
+    glLightfv(getLightNumber(), GL_LINEAR_ATTENUATION, &attenuation);
 }

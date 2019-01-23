@@ -12,7 +12,7 @@ List::List()
  */
 List::List(Node * root)
 {
-	getTreeAsList(root, list);
+    getTreeAsList(root, list);
 }
 
 /**
@@ -28,7 +28,7 @@ List::~List()
  */
 std::vector<Node*> List::getList() const
 {
-	return this->list;
+    return this->list;
 }
 
 /**
@@ -37,7 +37,7 @@ std::vector<Node*> List::getList() const
  */
 void List::setList(std::vector<Node*> list)
 {
-	this->list = list;
+    this->list = list;
 }
 
 /**
@@ -46,7 +46,7 @@ void List::setList(std::vector<Node*> list)
  */
 bool List::isReflection() const
 {
-	return this->reflection;
+    return this->reflection;
 }
 
 /**
@@ -54,7 +54,7 @@ bool List::isReflection() const
  */
 void List::isReflection(bool reflection)
 {
-	this->reflection = reflection;
+    this->reflection = reflection;
 }
 
 /**
@@ -63,7 +63,7 @@ void List::isReflection(bool reflection)
 */
 void List::reserve(int size)
 {
-	this->list.reserve(size);
+    this->list.reserve(size);
 }
 
 /**
@@ -72,7 +72,7 @@ void List::reserve(int size)
  */
 void List::add(Node* node)
 {
-	this->list.push_back(node);
+    this->list.push_back(node);
 }
 
 /**
@@ -81,7 +81,7 @@ void List::add(Node* node)
  */
 void List::remove(int position)
 {
-	list.erase(list.begin() + position);
+    list.erase(list.begin() + position);
 }
 
 /**
@@ -91,11 +91,11 @@ void List::remove(int position)
  */
 Node* List::at(int position)
 {
-	if (position < this->list.size() && position >= 0)
-	{
-		return list.at(position);
-	}
-	return nullptr;
+    if (position < this->list.size() && position >= 0)
+    {
+        return list.at(position);
+    }
+    return nullptr;
 }
 
 /**
@@ -104,7 +104,7 @@ Node* List::at(int position)
  */
 void List::insert(std::vector<Node*> elements)
 {
-	list.insert(list.end(), elements.begin(), elements.end());
+    list.insert(list.end(), elements.begin(), elements.end());
 }
 
 /**
@@ -113,7 +113,7 @@ void List::insert(std::vector<Node*> elements)
  */
 int List::size()
 {
-	return (int)this->list.size();
+    return (int)this->list.size();
 }
 
 /**
@@ -123,12 +123,12 @@ int List::size()
  */
 void List::getTreeAsList(Node *root, std::vector<Node*>& nodes)
 {
-	const int size = root->getChildrenSize();
-	nodes.push_back(root);
-	for (int i = 0; i < size; i++)
-	{
-		getTreeAsList(root->getChildren().at(i), nodes);
-	}
+    const int size = root->getChildrenSize();
+    nodes.push_back(root);
+    for (int i = 0; i < size; i++)
+    {
+        getTreeAsList(root->getChildren().at(i), nodes);
+    }
 }
 
 /**
@@ -136,29 +136,29 @@ void List::getTreeAsList(Node *root, std::vector<Node*>& nodes)
  */
 void List::sort()
 {
-	std::vector<Node*> nodes;
-	std::vector<Light*> lights;
-	std::vector<Mesh*> meshes;
-	for (std::vector<Node*>::iterator n = list.begin(), end = list.end(); n != end; ++n)
-	{
-		const Object::Type type = (*n)->getType();
-		if (type == Object::NODE)
-		{
-			nodes.push_back((*n));
-		}
-		else if (type == Object::LIGHT)
-		{
-			lights.push_back(dynamic_cast<Light*>((*n)));
-		}
-		else if (type == Object::MESH)
-		{
-			meshes.push_back(dynamic_cast<Mesh*>((*n)));
-		}
-	}
-	list.clear();
-	list.insert(list.end(), nodes.begin(), nodes.end());
-	list.insert(list.end(), lights.begin(), lights.end());
-	list.insert(list.end(), meshes.begin(), meshes.end());
+    std::vector<Node*> nodes;
+    std::vector<Light*> lights;
+    std::vector<Mesh*> meshes;
+    for (std::vector<Node*>::iterator n = list.begin(), end = list.end(); n != end; ++n)
+    {
+        const Object::Type type = (*n)->getType();
+        if (type == Object::NODE)
+        {
+            nodes.push_back((*n));
+        }
+        else if (type == Object::LIGHT)
+        {
+            lights.push_back(dynamic_cast<Light*>((*n)));
+        }
+        else if (type == Object::MESH)
+        {
+            meshes.push_back(dynamic_cast<Mesh*>((*n)));
+        }
+    }
+    list.clear();
+    list.insert(list.end(), nodes.begin(), nodes.end());
+    list.insert(list.end(), lights.begin(), lights.end());
+    list.insert(list.end(), meshes.begin(), meshes.end());
 }
 
 /**
@@ -167,18 +167,18 @@ void List::sort()
  */
 void List::render(glm::mat4 scaling)
 {
-	Node * root = list.at(0);
-	root->setMatrix(root->getMatrix() * scaling);
-	const glm::mat4 cameraMat = Engine::getInstance().getCurrentCamera()->getMatrix();
-	const bool reflection = isReflection();
-	for (std::vector<Node*>::iterator n = list.begin(), end = list.end(); n != end; ++n)
-	{
-		Node* node = (*n);
-		const glm::mat4 renderMatrix = cameraMat * node->getFinalMatrix();
-		if (reflection && node->getName() == "plane")
-		{
-			continue;
-		}
-		node->render(renderMatrix);
-	}
+    Node * root = list.at(0);
+    root->setMatrix(root->getMatrix() * scaling);
+    const glm::mat4 cameraMat = Engine::getInstance().getCurrentCamera()->getMatrix();
+    const bool reflection = isReflection();
+    for (std::vector<Node*>::iterator n = list.begin(), end = list.end(); n != end; ++n)
+    {
+        Node* node = (*n);
+        const glm::mat4 renderMatrix = cameraMat * node->getFinalMatrix();
+        if (reflection && node->getName() == "plane")
+        {
+            continue;
+        }
+        node->render(renderMatrix);
+    }
 }
