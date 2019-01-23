@@ -175,7 +175,6 @@ void LIB_API Engine::reshape(void(*reshapeCallback)(int, int))
 void LIB_API Engine::display(void(*displayCallback)())
 {
 	glutDisplayFunc(displayCallback);
-	//frames++; TODO chiedere
 }
 
 /**
@@ -411,7 +410,6 @@ Node*  Engine::getScene(const char* name)
  */
 Node*  Engine::getNodeByName(Node* root, std::string name)
 {
-	//TODO questo potrebbe anche stare in node
 	if (root->getName().compare(name) == 0)
 		return root;
 	else
@@ -507,6 +505,28 @@ void LIB_API Engine::renderText()
 	glColor3f(1.0f, 1.0f, 1.0f);
 	glRasterPos2f(10.0f, 100.0f);
 	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
+
+	/*-----------------------------------------------------------*/
+	sprintf(text, "[a] [s] [d] [f] [g] close fingers ");
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glRasterPos2f(10.0f, 100.0f);
+	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
+
+	/*-----------------------------------------------------------*/
+	sprintf(text, "[h] close hand ");
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glRasterPos2f(10.0f, 120.0f);
+	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
+	/*-----------------------------------------------------------*/
+	sprintf(text, "[j][k][l][i] move light left forwards up or backwards");
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glRasterPos2f(10.0f, 140.0f);
+	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
+	/*-----------------------------------------------------------*/
+	sprintf(text, "[u][o] move light up and down");
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glRasterPos2f(10.0f, 160.0f);
+	glutBitmapString(GLUT_BITMAP_8_BY_13, (unsigned char *)text);
 	glEnable(GL_TEXTURE_2D);
 	enableLighting(true);
 }
@@ -562,13 +582,7 @@ void LIB_API Engine::moveCamera(glm::mat4 move)
  */
 void Engine::rotateCamera(glm::mat4 rotate)
 {
-	if (!currentCamera->getMovable())
-		return;
-	glm::mat4 mat = currentCamera->getMatrix();
-	glm::vec3 vec = mat[0];
-	//TODO fix
-	/*  glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(angle), vec);
-	  currentCamera->setMatrix(rotation * mat);*/
+	  currentCamera->setMatrix(rotate);
 }
 
 /**

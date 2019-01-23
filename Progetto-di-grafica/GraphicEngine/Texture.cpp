@@ -28,7 +28,7 @@ Texture::Texture(std::string textureName)
 		return;
 	}
 	this->setName(textureName);
-	textureId = getId();
+	textureId;
 	glGenTextures(1, &textureId);
 	std::string texturePath = "../resources/";
 	const char* fileName = texturePath.append(textureName).c_str();
