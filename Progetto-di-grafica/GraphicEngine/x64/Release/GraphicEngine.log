@@ -1,8 +1,16 @@
-﻿  Engine.cpp
+﻿  Camera.cpp
+  Engine.cpp
+  Light.cpp
+  List.cpp
+  Material.cpp
+  Mesh.cpp
+  Node.cpp
+  OvoReader.cpp
+  Texture.cpp
      Creazione della libreria C:\Users\Julian\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Release\GraphicEngine.lib e dell'oggetto C:\Users\Julian\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Release\GraphicEngine.exp
   Generazione codice in corso...
-  6 of 785 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
+  1 of 785 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
     1 functions had inline decision re-evaluated but remain unchanged
   Generazione codice terminata
   GraphicEngine.vcxproj -> C:\Users\Julian\Source\Repos\cem94\Progetto-di-grafica\Progetto-di-grafica\x64\Release\GraphicEngine.dll

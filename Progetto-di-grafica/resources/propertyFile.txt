@@ -216,7 +216,7 @@
    BBox minimum  :  -100, 0, -100
    BBox maximum  :  100, 0, 100
    Physics . . . :  0
-   Face data . . :  f0 (1107313152, 32766, 6)
+   Face data . . :  f0 (1381544, 0, 0)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (3, 2, 1)
    Face data . . :  f3 (2, 3, 4)
@@ -1032,7 +1032,7 @@
    BBox minimum  :  -600, 0, -150
    BBox maximum  :  600, 0, 150
    Physics . . . :  0
-   Face data . . :  f0 (1157645568, 440, 418)
+   Face data . . :  f0 (419, 440, 418)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (3, 2, 1)
    Face data . . :  f3 (2, 3, 4)
@@ -1848,7 +1848,7 @@
    BBox minimum  :  -450, 0, -150
    BBox maximum  :  450, 0, 150
    Physics . . . :  0
-   Face data . . :  f0 (1157645568, 440, 418)
+   Face data . . :  f0 (419, 440, 418)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (3, 2, 1)
    Face data . . :  f3 (2, 3, 4)
@@ -2664,7 +2664,7 @@
    BBox minimum  :  -12.5257, 11.4252, -21.3754
    BBox maximum  :  -11.627, 11.4631, -4.6284
    Physics . . . :  0
-   Face data . . :  f0 (1006644791, 440, 418)
+   Face data . . :  f0 (419, 440, 418)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (2, 3, 0)
    Face data . . :  f3 (4, 5, 1)
@@ -3028,7 +3028,7 @@
    BBox minimum  :  -12.5438, 11.403, -4.8666
    BBox maximum  :  -11.6089, 11.4852, -4.4482
    Physics . . . :  0
-   Face data . . :  f0 (1006516266, 531, 528)
+   Face data . . :  f0 (556, 531, 528)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (2, 3, 0)
    Face data . . :  f3 (4, 5, 6)
@@ -3096,7 +3096,7 @@
    BBox minimum  :  -12.4631, 11.0573, -4.5122
    BBox maximum  :  -11.6895, 11.8309, 0.1579
    Physics . . . :  0
-   Face data . . :  f0 (1006647359, 64, 66)
+   Face data . . :  f0 (65, 64, 66)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (2, 3, 0)
    Face data . . :  f3 (4, 5, 1)
@@ -7176,7 +7176,7 @@
    BBox minimum  :  -14.3501, 11.1052, -4.8019
    BBox maximum  :  -9.7578, 11.7831, -4.4304
    Physics . . . :  0
-   Face data . . :  f0 (1005336776, 2260, 2259)
+   Face data . . :  f0 (2258, 2260, 2259)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (2, 3, 0)
    Face data . . :  f3 (4, 5, 1)
@@ -9044,7 +9044,7 @@
    BBox minimum  :  -450, 0, -150
    BBox maximum  :  450, 0, 150
    Physics . . . :  0
-   Face data . . :  f0 (1157645568, 1187, 1218)
+   Face data . . :  f0 (610, 1187, 1218)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (3, 2, 1)
    Face data . . :  f3 (2, 3, 4)
@@ -9860,7 +9860,7 @@
    BBox minimum  :  -600, 0, -150
    BBox maximum  :  600, 0, 150
    Physics . . . :  0
-   Face data . . :  f0 (1157645568, 440, 418)
+   Face data . . :  f0 (419, 440, 418)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (3, 2, 1)
    Face data . . :  f3 (2, 3, 4)
@@ -10676,7 +10676,7 @@
    BBox minimum  :  -12.5257, 11.4252, -21.3754
    BBox maximum  :  -11.627, 11.4631, -4.6284
    Physics . . . :  0
-   Face data . . :  f0 (1006644791, 440, 418)
+   Face data . . :  f0 (419, 440, 418)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (2, 3, 0)
    Face data . . :  f3 (4, 5, 1)
@@ -11040,7 +11040,7 @@
    BBox minimum  :  -12.5438, 11.403, -4.8666
    BBox maximum  :  -11.6089, 11.4852, -4.4482
    Physics . . . :  0
-   Face data . . :  f0 (1006516266, 531, 528)
+   Face data . . :  f0 (556, 531, 528)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (2, 3, 0)
    Face data . . :  f3 (4, 5, 6)
@@ -11108,7 +11108,7 @@
    BBox minimum  :  -12.4631, 11.0573, -4.5122
    BBox maximum  :  -11.6895, 11.8309, 0.1579
    Physics . . . :  0
-   Face data . . :  f0 (1006647359, 64, 66)
+   Face data . . :  f0 (65, 64, 66)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (2, 3, 0)
    Face data . . :  f3 (4, 5, 1)
@@ -15188,7 +15188,7 @@
    BBox minimum  :  -14.3501, 11.1052, -4.8019
    BBox maximum  :  -9.7578, 11.7831, -4.4304
    Physics . . . :  0
-   Face data . . :  f0 (1005336776, 2260, 2259)
+   Face data . . :  f0 (2258, 2260, 2259)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (2, 3, 0)
    Face data . . :  f3 (4, 5, 1)
@@ -17056,7 +17056,7 @@
    BBox minimum  :  -19.012, 0, -18.7232
    BBox maximum  :  19.012, 167.361, 18.7232
    Physics . . . :  0
-   Face data . . :  f0 (1006647694, 1187, 1218)
+   Face data . . :  f0 (610, 1187, 1218)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (0, 3, 1)
    Face data . . :  f3 (0, 4, 3)
@@ -17288,7 +17288,7 @@
    BBox minimum  :  -29.6722, -30, -29.8357
    BBox maximum  :  29.6722, 30, 29.8357
    Physics . . . :  0
-   Face data . . :  f0 (2147630012, 153, 135)
+   Face data . . :  f0 (134, 153, 135)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (3, 2, 4)
    Face data . . :  f3 (5, 4, 6)
@@ -18144,7 +18144,7 @@
    BBox minimum  :  -19.012, 0, -18.7232
    BBox maximum  :  19.012, 167.361, 18.7232
    Physics . . . :  0
-   Face data . . :  f0 (1006647694, 463, 462)
+   Face data . . :  f0 (493, 463, 462)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (0, 3, 1)
    Face data . . :  f3 (0, 4, 3)
@@ -18376,7 +18376,7 @@
    BBox minimum  :  -29.6722, -30, -29.8357
    BBox maximum  :  29.6722, 30, 29.8357
    Physics . . . :  0
-   Face data . . :  f0 (2147630012, 153, 135)
+   Face data . . :  f0 (134, 153, 135)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (3, 2, 4)
    Face data . . :  f3 (5, 4, 6)
@@ -19232,7 +19232,7 @@
    BBox minimum  :  -19.012, 0, -18.7232
    BBox maximum  :  19.012, 167.361, 18.7232
    Physics . . . :  0
-   Face data . . :  f0 (1006647694, 463, 462)
+   Face data . . :  f0 (493, 463, 462)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (0, 3, 1)
    Face data . . :  f3 (0, 4, 3)
@@ -19464,7 +19464,7 @@
    BBox minimum  :  -29.6722, -30, -29.8357
    BBox maximum  :  29.6722, 30, 29.8357
    Physics . . . :  0
-   Face data . . :  f0 (2147630012, 153, 135)
+   Face data . . :  f0 (134, 153, 135)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (3, 2, 4)
    Face data . . :  f3 (5, 4, 6)
@@ -20320,7 +20320,7 @@
    BBox minimum  :  -19.012, 0, -18.7232
    BBox maximum  :  19.012, 167.361, 18.7232
    Physics . . . :  0
-   Face data . . :  f0 (1006647694, 463, 462)
+   Face data . . :  f0 (493, 463, 462)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (0, 3, 1)
    Face data . . :  f3 (0, 4, 3)
@@ -20552,7 +20552,7 @@
    BBox minimum  :  -29.6722, -30, -29.8357
    BBox maximum  :  29.6722, 30, 29.8357
    Physics . . . :  0
-   Face data . . :  f0 (2147630012, 153, 135)
+   Face data . . :  f0 (134, 153, 135)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (3, 2, 4)
    Face data . . :  f3 (5, 4, 6)
@@ -21408,7 +21408,7 @@
    BBox minimum  :  -23.2719, 0, -30
    BBox maximum  :  23.2719, 45, 30
    Physics . . . :  0
-   Face data . . :  f0 (1006675044, 463, 462)
+   Face data . . :  f0 (493, 463, 462)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (3, 4, 5)
    Face data . . :  f3 (6, 7, 8)
@@ -21432,7 +21432,7 @@
    BBox minimum  :  -41.183, -9.84579, -40.5574
    BBox maximum  :  41.183, 0, 40.5574
    Physics . . . :  0
-   Face data . . :  f0 (893205504, 13, 12)
+   Face data . . :  f0 (16, 13, 12)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (0, 3, 1)
    Face data . . :  f3 (0, 4, 3)
@@ -21664,7 +21664,7 @@
    BBox minimum  :  -29.7553, 0, -26.3081
    BBox maximum  :  29.7553, 31.4593, 26.3081
    Physics . . . :  0
-   Face data . . :  f0 (921057807, 157, 140)
+   Face data . . :  f0 (139, 157, 140)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (0, 3, 1)
    Face data . . :  f3 (0, 4, 3)
@@ -21968,7 +21968,7 @@
    BBox minimum  :  -7.91139, 0, -13.2911
    BBox maximum  :  7.91139, 37.9747, 13.2911
    Physics . . . :  0
-   Face data . . :  f0 (1006648320, 193, 170)
+   Face data . . :  f0 (169, 193, 170)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (2, 3, 0)
    Face data . . :  f3 (3, 2, 4)
@@ -26784,7 +26784,7 @@
    BBox minimum  :  -5.44451, -5.44451, -5.44451
    BBox maximum  :  5.44451, 5.44451, 5.44451
    Physics . . . :  0
-   Face data . . :  f0 (2147630016, 2644, 2623)
+   Face data . . :  f0 (2645, 2644, 2623)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (3, 2, 4)
    Face data . . :  f3 (5, 4, 6)
@@ -27760,7 +27760,7 @@
    BBox minimum  :  -4.47536, -4.47536, -4.47536
    BBox maximum  :  4.47536, 4.47536, 4.47536
    Physics . . . :  0
-   Face data . . :  f0 (2147630016, 526, 525)
+   Face data . . :  f0 (558, 526, 525)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (3, 2, 4)
    Face data . . :  f3 (5, 4, 6)
@@ -28736,7 +28736,7 @@
    BBox minimum  :  -4.47536, -4.47536, -4.47536
    BBox maximum  :  4.47536, 4.47536, 4.47536
    Physics . . . :  0
-   Face data . . :  f0 (2147630016, 526, 525)
+   Face data . . :  f0 (558, 526, 525)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (3, 2, 4)
    Face data . . :  f3 (5, 4, 6)
@@ -29712,7 +29712,7 @@
    BBox minimum  :  -4.47536, -4.47536, -4.47536
    BBox maximum  :  4.47536, 4.47536, 4.47536
    Physics . . . :  0
-   Face data . . :  f0 (2147630016, 526, 525)
+   Face data . . :  f0 (558, 526, 525)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (3, 2, 4)
    Face data . . :  f3 (5, 4, 6)
@@ -30688,7 +30688,7 @@
    BBox minimum  :  -4.47536, -4.47536, -4.47536
    BBox maximum  :  4.47536, 4.47536, 4.47536
    Physics . . . :  0
-   Face data . . :  f0 (2147630016, 526, 525)
+   Face data . . :  f0 (558, 526, 525)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (3, 2, 4)
    Face data . . :  f3 (5, 4, 6)
@@ -31664,7 +31664,7 @@
    BBox minimum  :  -3.52087, 0, -4.46665
    BBox maximum  :  3.52381, 14.1695, 4.38287
    Physics . . . :  0
-   Face data . . :  f0 (939538432, 526, 525)
+   Face data . . :  f0 (558, 526, 525)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (0, 2, 3)
    Face data . . :  f3 (0, 3, 4)
@@ -31968,7 +31968,7 @@
    BBox minimum  :  -2.59508, 0, -2.97065
    BBox maximum  :  2.59508, 10.923, 2.97065
    Physics . . . :  0
-   Face data . . :  f0 (939538432, 171, 159)
+   Face data . . :  f0 (170, 171, 159)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (0, 2, 3)
    Face data . . :  f3 (0, 3, 4)
@@ -32272,7 +32272,7 @@
    BBox minimum  :  -1.63205, 0, -1.86239
    BBox maximum  :  1.63205, 8.33382, 1.86239
    Physics . . . :  0
-   Face data . . :  f0 (939538432, 171, 159)
+   Face data . . :  f0 (170, 171, 159)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (0, 2, 3)
    Face data . . :  f3 (0, 3, 4)
@@ -32576,7 +32576,7 @@
    BBox minimum  :  -3.11762, 0, -3.89394
    BBox maximum  :  3.11762, 12.5451, 3.89394
    Physics . . . :  0
-   Face data . . :  f0 (939538432, 171, 159)
+   Face data . . :  f0 (170, 171, 159)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (0, 2, 3)
    Face data . . :  f3 (0, 3, 4)
@@ -32880,7 +32880,7 @@
    BBox minimum  :  -2.58999, 0, -2.18075
    BBox maximum  :  2.58999, 9.94389, 2.18075
    Physics . . . :  0
-   Face data . . :  f0 (939538432, 171, 159)
+   Face data . . :  f0 (170, 171, 159)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (0, 2, 3)
    Face data . . :  f3 (0, 3, 4)
@@ -33184,7 +33184,7 @@
    BBox minimum  :  -1.84756, 0, -1.69326
    BBox maximum  :  1.84756, 7.49432, 1.69326
    Physics . . . :  0
-   Face data . . :  f0 (939538432, 171, 159)
+   Face data . . :  f0 (170, 171, 159)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (0, 2, 3)
    Face data . . :  f3 (0, 3, 4)
@@ -33488,7 +33488,7 @@
    BBox minimum  :  -3.35892, 0, -4.19534
    BBox maximum  :  3.35892, 13.5161, 4.19534
    Physics . . . :  0
-   Face data . . :  f0 (939538432, 171, 159)
+   Face data . . :  f0 (170, 171, 159)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (0, 2, 3)
    Face data . . :  f3 (0, 3, 4)
@@ -33792,7 +33792,7 @@
    BBox minimum  :  -2.5149, 0, -3.23967
    BBox maximum  :  2.5149, 10.1198, 3.23967
    Physics . . . :  0
-   Face data . . :  f0 (939538432, 171, 159)
+   Face data . . :  f0 (170, 171, 159)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (0, 2, 3)
    Face data . . :  f3 (0, 3, 4)
@@ -34096,7 +34096,7 @@
    BBox minimum  :  -1.96063, 0, -2.28177
    BBox maximum  :  1.96063, 7.88947, 2.28177
    Physics . . . :  0
-   Face data . . :  f0 (939538432, 171, 159)
+   Face data . . :  f0 (170, 171, 159)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (0, 2, 3)
    Face data . . :  f3 (0, 3, 4)
@@ -34400,7 +34400,7 @@
    BBox minimum  :  -2.98577, 0, -4.10466
    BBox maximum  :  2.98558, 13.3209, 4.26945
    Physics . . . :  0
-   Face data . . :  f0 (939538432, 171, 159)
+   Face data . . :  f0 (170, 171, 159)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (0, 2, 3)
    Face data . . :  f3 (0, 3, 4)
@@ -34704,7 +34704,7 @@
    BBox minimum  :  -2.23551, 0, -3.17035
    BBox maximum  :  2.23537, 9.97362, 3.29373
    Physics . . . :  0
-   Face data . . :  f0 (939538432, 171, 159)
+   Face data . . :  f0 (170, 171, 159)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (0, 2, 3)
    Face data . . :  f3 (0, 3, 4)
@@ -35008,7 +35008,7 @@
    BBox minimum  :  -1.74282, 0, -2.5949
    BBox maximum  :  1.74271, 7.77551, 2.6781
    Physics . . . :  0
-   Face data . . :  f0 (939538432, 171, 159)
+   Face data . . :  f0 (170, 171, 159)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (0, 2, 3)
    Face data . . :  f3 (0, 3, 4)
@@ -35312,7 +35312,7 @@
    BBox minimum  :  -4.2999, -1.22133, -14.0844
    BBox maximum  :  3.88139, 12.9602, 1.50108
    Physics . . . :  0
-   Face data . . :  f0 (939538432, 171, 159)
+   Face data . . :  f0 (170, 171, 159)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (0, 2, 3)
    Face data . . :  f3 (0, 3, 4)
@@ -35616,7 +35616,7 @@
    BBox minimum  :  -3.01741, -0.782489, -8.11649
    BBox maximum  :  3.03726, 8.07661, 1.34565
    Physics . . . :  0
-   Face data . . :  f0 (939538432, 171, 159)
+   Face data . . :  f0 (170, 171, 159)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (0, 2, 3)
    Face data . . :  f3 (0, 3, 4)
@@ -35920,7 +35920,7 @@
    BBox minimum  :  -2.5644, -3.27537, -2.88136
    BBox maximum  :  2.5644, 3.27537, 2.88136
    Physics . . . :  0
-   Face data . . :  f0 (2147630016, 171, 159)
+   Face data . . :  f0 (170, 171, 159)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (3, 2, 4)
    Face data . . :  f3 (5, 4, 6)
@@ -36888,7 +36888,7 @@
                     	0	0	-0	1
    Nr. children  :  0
    Target node . :  [none]
-   Subtype . . . :  0 ([none])
+   Subtype . . . :  0 (standard)
    Color . . . . :  1, 1, 1
    Radius  . . . :  200
    Direction . . :  0, 0, 0
@@ -36912,7 +36912,7 @@
                     	0	0	-0	1
    Nr. children  :  0
    Target node . :  fix_light.Target
-   Subtype . . . :  2 ([none])
+   Subtype . . . :  2 (fix_light.Target)
    Color . . . . :  1, 1, 1
    Radius  . . . :  500
    Direction . . :  0, -1, 0
@@ -36952,7 +36952,7 @@
    BBox minimum  :  -165.163, 68.7881, -225.043
    BBox maximum  :  232.163, 471.734, 304.932
    Physics . . . :  0
-   Face data . . :  f0 (955923281, 0, 0)
+   Face data . . :  f0 (558, 526, 525)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (0, 3, 4)
    Face data . . :  f3 (4, 5, 0)
@@ -44090,7 +44090,7 @@
    BBox minimum  :  -119.12, -63.9141, 52.2811
    BBox maximum  :  188.947, 181.449, 264.167
    Physics . . . :  0
-   Face data . . :  f0 (900414441, 108, 284)
+   Face data . . :  f0 (4977, 108, 284)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (3, 4, 5)
    Face data . . :  f3 (0, 6, 7)
@@ -47146,7 +47146,7 @@
    BBox minimum  :  -45.4637, 16.1434, 153.108
    BBox maximum  :  113.79, 63.8638, 277.946
    Physics . . . :  0
-   Face data . . :  f0 (903231649, 1822, 265)
+   Face data . . :  f0 (1821, 1822, 265)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (3, 4, 1)
    Face data . . :  f3 (0, 5, 3)
@@ -55718,7 +55718,7 @@
    BBox minimum  :  -44.059, 42.5123, 156.479
    BBox maximum  :  112.518, 103.884, 291.446
    Physics . . . :  0
-   Face data . . :  f0 (941963314, 6001, 6000)
+   Face data . . :  f0 (6002, 6001, 6000)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (3, 4, 1)
    Face data . . :  f3 (0, 5, 3)
@@ -59326,7 +59326,7 @@
                     	0	0	-0	1
    Nr. children  :  0
    Target node . :  [none]
-   Subtype . . . :  0 (omni)
+   Subtype . . . :  0 (standard)
    Color . . . . :  1, 1, 1
    Radius  . . . :  200
    Direction . . :  0, 0, 0
@@ -59366,7 +59366,7 @@
    BBox minimum  :  -1091.7, -1091.7, -1091.7
    BBox maximum  :  1091.7, 1091.7, 1091.7
    Physics . . . :  0
-   Face data . . :  f0 (2147630016, 0, 0)
+   Face data . . :  f0 (2536, 2539, 2512)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (3, 2, 4)
    Face data . . :  f3 (5, 4, 6)
@@ -60342,7 +60342,7 @@
    BBox minimum  :  -8.55505, -8.55505, -8.55505
    BBox maximum  :  8.55505, 8.55505, 8.55505
    Physics . . . :  0
-   Face data . . :  f0 (2147630016, 526, 525)
+   Face data . . :  f0 (558, 526, 525)
    Face data . . :  f1 (0, 1, 2)
    Face data . . :  f2 (3, 2, 4)
    Face data . . :  f3 (5, 4, 6)
