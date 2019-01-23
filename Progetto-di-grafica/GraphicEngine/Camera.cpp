@@ -1,4 +1,5 @@
 #include "Engine.h"
+
 //FreeGlut
 #include <GL/freeglut.h>
 
@@ -22,20 +23,20 @@ Camera::~Camera()
  */
 void Camera::setProjectionMatrix(glm::mat4 projection)
 {
-    this->projectionMatrix = projection;
-    glMatrixMode(GL_PROJECTION);
-    glLoadMatrixf(glm::value_ptr(projection));
-    glMatrixMode(GL_MODELVIEW);
+	this->projectionMatrix = projection;
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixf(glm::value_ptr(projection));
+	glMatrixMode(GL_MODELVIEW);
 }
 
-/**
- * Render camera rendering method
- * @param  render matrix
- */
-void Camera::render(glm::mat4 renderMatrix)
-{
-    glLoadMatrixf(glm::value_ptr(renderMatrix));
-}
+///**
+// * Render camera rendering method
+// * @param  render matrix
+// */
+//void Camera::render(glm::mat4 renderMatrix)
+//{
+//	glLoadMatrixf(glm::value_ptr(renderMatrix));
+//}
 
 /**
  * Setter for movable
@@ -43,7 +44,7 @@ void Camera::render(glm::mat4 renderMatrix)
  */
 void Camera::setMovable(bool movable)
 {
-    this->movable = movable;
+	this->movable = movable;
 }
 
 /**
@@ -52,5 +53,5 @@ void Camera::setMovable(bool movable)
  */
 bool Camera::getMovable() const
 {
-    return movable;
+	return movable;
 }

@@ -8,13 +8,13 @@
 class  Camera : public Node
 {
 public:
-    Camera();
-    virtual ~Camera();
-    void setProjectionMatrix(glm::mat4 projection);
-    void setMovable(bool movable);
-    bool getMovable() const;
-    void render(glm::mat4 renderMatrix) override;
+	Camera();
+	virtual ~Camera();
+	void setProjectionMatrix(glm::mat4 projection);
+	void setMovable(bool movable);
+	bool getMovable() const;
+	void render(glm::mat4 renderMatrix) override;
 private:
-    glm::mat4 projectionMatrix;
-    bool movable = false;
+	glm::mat4 projectionMatrix;
+	bool movable = false;
 };
