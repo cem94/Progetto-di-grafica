@@ -7,16 +7,16 @@
 #define GLM_FORCE_RADIANS
 #ifdef _WINDOWS
 #ifdef GAUNTLET_EXPORTS
- // Windows needs this macro for exporting the library as dll
+// Windows needs this macro for exporting the library as dll
 #define LIB_API __declspec(dllexport)
 #else
 #define LIB_API __declspec(dllimport)
 #endif
- // linux
+// linux
 #else
 #define LIB_API
 #endif
- //So it doesn't give us deprecation warnings for fopen etc
+//So it doesn't give us deprecation warnings for fopen etc
 #define _CRT_SECURE_NO_WARNINGS
 
 // C/C++
@@ -102,10 +102,10 @@ public:
 	void free();
 	void updateList(Node* root);
 private:
-	Engine() {};
-	~Engine() {};
-	Engine(Engine const&) {};
-	Engine& operator=(Engine const&);
-	void printTree(Node* scene, std::string indentation);
-	static Engine* instance;
+    Engine() {};
+    ~Engine() {};
+    Engine(Engine const&) {};
+    Engine& operator=(Engine const&);
+    void printTree(Node* scene, std::string indentation);
+    static Engine* instance;
 };

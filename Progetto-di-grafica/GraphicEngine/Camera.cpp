@@ -23,7 +23,7 @@ Camera::~Camera()
  */
 bool Camera::getMovable() const
 {
-	return movable;
+    return movable;
 }
 /**
  * Setter for movable
@@ -31,7 +31,7 @@ bool Camera::getMovable() const
  */
 void Camera::setMovable(bool movable)
 {
-	this->movable = movable;
+    this->movable = movable;
 }
 
 /**
@@ -40,10 +40,10 @@ void Camera::setMovable(bool movable)
  */
 void Camera::setProjectionMatrix(glm::mat4 projection)
 {
-	this->projectionMatrix = projection;
-	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixf(glm::value_ptr(projection));
-	glMatrixMode(GL_MODELVIEW);
+    this->projectionMatrix = projection;
+    glMatrixMode(GL_PROJECTION);
+    glLoadMatrixf(glm::value_ptr(projection));
+    glMatrixMode(GL_MODELVIEW);
 }
 
 /**
@@ -52,5 +52,5 @@ void Camera::setProjectionMatrix(glm::mat4 projection)
  */
 void Camera::render(glm::mat4 renderMatrix)
 {
-	glLoadMatrixf(glm::value_ptr(renderMatrix));
+    glLoadMatrixf(glm::value_ptr(renderMatrix));
 }
