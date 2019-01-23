@@ -136,7 +136,7 @@ void List::sort()
     std::vector<Mesh*> meshes;
     for (std::vector<Node*>::iterator n = list.begin(), end = list.end(); n != end; ++n)
     {
-		const Object::Type type = (*n)->getType();
+        const Object::Type type = (*n)->getType();
         if (type == Object::NODE)
         {
             nodes.push_back((*n));
@@ -169,7 +169,7 @@ void List::render(glm::mat4 scaling)
     const bool reflection = isReflection();
     for (std::vector<Node*>::iterator n = list.begin(), end = list.end(); n != end; ++n)
     {
-		Node* node = (*n);
+        Node* node = (*n);
         const glm::mat4 renderMatrix = cameraMat * node->getFinalMatrix();
         if (reflection && node->getName() == "plane")
         {

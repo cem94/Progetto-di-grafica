@@ -26,7 +26,7 @@ Texture::Texture(std::string textureName)
         return;
     }
     this->setName(textureName);
-	//TODO:: potrebbe causare problemi.
+    //TODO:: potrebbe causare problemi.
     textureId = getId();
     glGenTextures(1, &textureId);
     std::string texturePath = "../resources/";

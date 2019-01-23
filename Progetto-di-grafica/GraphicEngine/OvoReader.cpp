@@ -342,7 +342,7 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
                     position += sizeof(unsigned short) * 4;
                 }
             }
-            
+
             float* meshVertices = new float[vertices * 3];
             float* meshTextures = new float[vertices * 2];
             float* meshNormals = new float[vertices * 3];
@@ -416,7 +416,7 @@ std::vector<Node *> OvoReader::readOVOfile(const char *name)
             mesh->setNumberOfFaces(faces);
             mesh->setCapacity(children);
 
-			//TODO:: rinominare in modo coerente (meshVertices, meshNormals, meshTextures, indices, vertices)
+            //TODO:: rinominare in modo coerente (meshVertices, meshNormals, meshTextures, indices, vertices)
             mesh->generateVAO(meshVertices, meshNormals, meshTextures, indices, vertices);
             objects.push_back(mesh);
         }
